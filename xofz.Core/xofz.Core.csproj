@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5143497A-FADF-4E55-9168-B5EF936E0FBD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>xofz</RootNamespace>
+    <AssemblyName>xofz.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\AI\DefaultTreeOrderer.cs" />
+    <Compile Include="Framework\AI\FundamentalAi.cs" />
+    <Compile Include="Framework\AI\HashCodeSettingTreeOrderer.cs" />
+    <Compile Include="Framework\AI\MutableHashCode.cs" />
+    <Compile Include="Framework\AI\OptimalTreeOrderer.cs" />
+    <Compile Include="Framework\AI\RealAi.cs" />
+    <Compile Include="Framework\AI\ReverseTreeOrderer.cs" />
+    <Compile Include="Framework\AI\SkippingTreeOrderer.cs" />
+    <Compile Include="Framework\AI\Tree.cs" />
+    <Compile Include="Framework\AI\TreeOrderer.cs" />
+    <Compile Include="Framework\All.cs" />
+    <Compile Include="Apps\Connector\Framework\Reader.cs" />
+    <Compile Include="Apps\Connector\Presenters\ConnectionPresenter.cs" />
+    <Compile Include="Apps\Connector\UI\ConnectionUi.cs" />
+    <Compile Include="Apps\ImageProjector\Framework\ImageReader.cs" />
+    <Compile Include="Apps\ImageProjector\Presenters\ImagesPresenter.cs" />
+    <Compile Include="Apps\ImageProjector\UI\ImagesUi2D.cs" />
+    <Compile Include="Apps\ImageProjector\UI\ImagesUi3D.cs" />
+    <Compile Include="Apps\ImageProjector\UI\ImagesUi4D.cs" />
+    <Compile Include="Apps\ImageRotator\Configuration\Bootstrapper.cs" />
+    <Compile Include="Apps\ImageRotator\Framework\ImageReader.cs" />
+    <Compile Include="Apps\ImageRotator\Presenters\ImagesPresenter.cs" />
+    <Compile Include="Apps\ImageRotator\UI\ImagesUi.cs" />
+    <Compile Include="Apps\ImageSplicer\Framework\ImageReader.cs" />
+    <Compile Include="Apps\ImageSplicer\Presenters\ImagesPresenter.cs" />
+    <Compile Include="Apps\ImageSplicer\UI\ImagesUi.cs" />
+    <Compile Include="Framework\Computation\Emanator.cs" />
+    <Compile Include="Framework\Computation\FactorialComputer.cs" />
+    <Compile Include="Framework\Computation\Imploder.cs" />
+    <Compile Include="Framework\Computation\PrimeGenerator.cs" />
+    <Compile Include="Framework\Computation\PrimeTester.cs" />
+    <Compile Include="Framework\Computation\Shifter.cs" />
+    <Compile Include="Framework\Computation\ShiftRegister.cs" />
+    <Compile Include="Framework\Conditionality\Evaluator.cs" />
+    <Compile Include="Framework\Implementation\TextFileLog.cs" />
+    <Compile Include="Framework\Log.cs" />
+    <Compile Include="Framework\LogEntry.cs" />
+    <Compile Include="Framework\LogEditor.cs" />
+    <Compile Include="Framework\LogHelpers.cs" />
+    <Compile Include="Framework\Illumination\ArrayFiller.cs" />
+    <Compile Include="Framework\Impossibility\InfiniteLoopTester.cs" />
+    <Compile Include="Framework\Martyr\FreedomHolder.cs" />
+    <Compile Include="Framework\Martyr\Martyr.cs" />
+    <Compile Include="Framework\Martyr\PrescientInvoker.cs" />
+    <Compile Include="Framework\Nightfall.cs" />
+    <Compile Include="Framework\Transformation\Translator.cs" />
+    <Compile Include="Presentation\LoginPresenter.cs" />
+    <Compile Include="Presentation\LogPresenter.cs" />
+    <Compile Include="Presentation\MainPresenter.cs" />
+    <Compile Include="Presentation\ShutdownPresenter.cs" />
+    <Compile Include="StringHelpers.cs" />
+    <Compile Include="Framework\Theory\Agent.cs" />
+    <Compile Include="Framework\Theory\Functoid.cs" />
+    <Compile Include="Framework\Thunking\EightBitThunker.cs" />
+    <Compile Include="Framework\Thunking\FourBitThunker.cs" />
+    <Compile Include="Framework\Thunking\Thunker.cs" />
+    <Compile Include="Framework\Thunking\TwoBitThunker.cs" />
+    <Compile Include="Framework\Erudition\Absolution.cs" />
+    <Compile Include="Framework\Erudition\Judgement.cs" />
+    <Compile Include="Framework\Erudition\Learner.cs" />
+    <Compile Include="Framework\Erudition\LiberatedObject.cs" />
+    <Compile Include="Framework\Erudition\Parser.cs" />
+    <Compile Include="Framework\Erudition\Reflection.cs" />
+    <Compile Include="Framework\AccessController.cs" />
+    <Compile Include="Framework\AccessLevel.cs" />
+    <Compile Include="Framework\Implementation\BinaryFileLoader.cs" />
+    <Compile Include="Framework\Implementation\BinaryFileSaver.cs" />
+    <Compile Include="Framework\Implementation\SoapFileSaver.cs" />
+    <Compile Include="Framework\Implementation\TextFileLoader.cs" />
+    <Compile Include="Framework\Implementation\XmlFileSaver.cs" />
+    <Compile Include="Framework\Internal\CallbackOptions.cs" />
+    <Compile Include="Framework\Internal\NativeMethods.cs" />
+    <Compile Include="Framework\Internal\TimerCallback.cs" />
+    <Compile Include="Framework\Loader.cs" />
+    <Compile Include="Framework\Saver.cs" />
+    <Compile Include="Framework\Timer.cs" />
+    <Compile Include="Framework\Illumination\ActionIlluminatedObject.cs" />
+    <Compile Include="Framework\Illumination\AnimatedIlluminatedObject.cs" />
+    <Compile Include="Framework\Illumination\FuncActionIlluminatedObject.cs" />
+    <Compile Include="Framework\Illumination\FuncIlluminatedObject.cs" />
+    <Compile Include="Framework\Illumination\GatedIlluminatedObject.cs" />
+    <Compile Include="Framework\Illumination\IlluminatedObject.cs" />
+    <Compile Include="Framework\Illumination\Illuminator.cs" />
+    <Compile Include="Framework\Illumination\ListIlluminatedObject.cs" />
+    <Compile Include="Framework\Illumination\MaterializedEnumerableIlluminatedObject.cs" />
+    <Compile Include="Framework\Illumination\MemberFieldIlluminatedObject.cs" />
+    <Compile Include="Framework\Illumination\StringIlluminatedObject.cs" />
+    <Compile Include="Framework\Illumination\TcpIlluminatedObject.cs" />
+    <Compile Include="Presentation\EventRaiser.cs" />
+    <Compile Include="Presentation\NamedPresenter.cs" />
+    <Compile Include="Presentation\Navigator.cs" />
+    <Compile Include="Presentation\Presenter.cs" />
+    <Compile Include="Random.cs" />
+    <Compile Include="Startup\Command.cs" />
+    <Compile Include="Startup\CommandExecutor.cs" />
+    <Compile Include="Framework\Transformation\EnumerableConnector.cs" />
+    <Compile Include="Framework\Transformation\EnumerableDecorator.cs" />
+    <Compile Include="Framework\Transformation\EnumerableIntersector.cs" />
+    <Compile Include="Framework\Transformation\EnumerableProjector.cs" />
+    <Compile Include="Framework\Transformation\EnumerableRepeater.cs" />
+    <Compile Include="Framework\Transformation\EnumerableRotator.cs" />
+    <Compile Include="Framework\Materialization\ActionMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\ArrayMaterializedEnumerable.cs" />
+    <Compile Include="Beholder.cs" />
+    <Compile Include="Framework\Materialization\Internal\ConcurrentBagMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\FuncMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\HashSetMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\KeyValuePairMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\LazyMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\LinkedListMaterializedEnumerable.cs" />
+    <Compile Include="MaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\Materializer.cs" />
+    <Compile Include="Framework\Materialization\OrderedMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\ValueKeyPairMaterializedEnumerable.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Framework\Materialization\QueueMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\SingleMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\SixMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\StackMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\StringMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Transformation\EnumerableSplicer.cs" />
+    <Compile Include="Framework\Transformation\EnumerableSplitter.cs" />
+    <Compile Include="UI\Forms\ControlExtensions.cs" />
+    <Compile Include="UI\Forms\ControlUi.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FormLoginUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FormLoginUi.designer.cs">
+      <DependentUpon>FormLoginUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FormsMessenger.cs" />
+    <Compile Include="UI\Forms\FormUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Internal\CenterWinDialog.cs" />
+    <Compile Include="UI\Forms\UserControlToggleUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlToggleUi.designer.cs">
+      <DependentUpon>UserControlToggleUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\LabeledUi.cs" />
+    <Compile Include="UI\LoginUi.cs" />
+    <Compile Include="UI\LogUi.cs" />
+    <Compile Include="UI\MainUi.cs" />
+    <Compile Include="UI\Messenger.cs" />
+    <Compile Include="UI\PopupUi.cs" />
+    <Compile Include="UI\Response.cs" />
+    <Compile Include="UI\ShellUi.cs" />
+    <Compile Include="UI\SplitUi.cs" />
+    <Compile Include="UI\ToggleUi.cs" />
+    <Compile Include="UI\Ui.cs" />
+    <Compile Include="UI\UiHelpers.cs" />
+    <Compile Include="UI\WPF\Internal\DispatcherSynchronizeInvoke.cs" />
+    <Compile Include="UI\WPF\PageUi.cs" />
+    <Compile Include="UI\WPF\UserControlUi.cs" />
+    <Compile Include="UI\WPF\WindowUi.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="version.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\Forms\FormLoginUi.resx">
+      <DependentUpon>FormLoginUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UserControlToggleUi.resx">
+      <DependentUpon>UserControlToggleUi.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
