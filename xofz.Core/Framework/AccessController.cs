@@ -80,6 +80,7 @@
                 this.setCurrentAccessLevel(p[password]);
                 var t = this.timer;
                 t.AutoReset = false;
+                t.Stop();
                 t.Start(loginDurationInMs);
             }
             else
