@@ -18,7 +18,7 @@
 
         AutoResetEvent Ui.WriteFinished => this.writeFinished;
 
-        public MarshalByRefObject Referrer => null;
+        MarshalByRefObject Ui.Referrer => null;
 
         void Ui.AssertStability()
         {

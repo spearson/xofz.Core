@@ -13,7 +13,7 @@
             ShellUi shell,
             Reader reader, 
             EnumerableConnector connector)
-            :base(ui, shell)
+            : base(ui, shell)
         {
             this.ui = ui;
             this.reader = reader;
@@ -22,7 +22,8 @@
 
         public void Start(string location)
         {
-            this.ui.Connection = this.connector.Connect(this.reader.Read(location));
+            this.ui.Connection = this.connector.Connect(
+                this.reader.Read(location));
             base.Start();
         }
 

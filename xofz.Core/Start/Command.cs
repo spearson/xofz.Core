@@ -1,4 +1,4 @@
-﻿namespace xofz.Startup
+﻿namespace xofz.Start
 {
     public abstract class Command
     {

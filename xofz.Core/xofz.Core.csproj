@@ -156,8 +156,8 @@
     <Compile Include="Presentation\Navigator.cs" />
     <Compile Include="Presentation\Presenter.cs" />
     <Compile Include="Random.cs" />
-    <Compile Include="Startup\Command.cs" />
-    <Compile Include="Startup\CommandExecutor.cs" />
+    <Compile Include="Start\Command.cs" />
+    <Compile Include="Start\CommandExecutor.cs" />
     <Compile Include="Framework\Transformation\EnumerableConnector.cs" />
     <Compile Include="Framework\Transformation\EnumerableDecorator.cs" />
     <Compile Include="Framework\Transformation\EnumerableIntersector.cs" />
