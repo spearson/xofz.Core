@@ -7,6 +7,7 @@
     {
         public static void Write(Ui ui, Action writer)
         {
+            ui.WriteFinished.Reset();
             if (ui.Root.InvokeRequired)
             {
                 ui.Root.BeginInvoke((Action)(() =>
