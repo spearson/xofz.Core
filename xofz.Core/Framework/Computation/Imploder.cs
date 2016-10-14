@@ -1,5 +1,6 @@
 ﻿namespace xofz.Framework.Computation
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
 
@@ -40,9 +41,12 @@
             {
                 bool even = l.Count % 2 == 0;
                 var middle = l.Count / 2;
-                l.RemoveAt(rightOverLeft
+                var index = rightOverLeft
                     ? middle - (even ? 1 : 0)
-                    : middle + (even ? 0 : 1));
+                    : middle + (even ? 0 : 1);
+                var target = l[index];
+                l.RemoveAt(index);
+                (target as IDisposable)?.Dispose();
             }
         }
 
