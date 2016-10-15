@@ -22,11 +22,11 @@
                     continue;
                 }
 
-                return Liken(
+                return this.Liken(
                     factory,
                     new LinkedListMaterializedEnumerable<Action<T>>(
                         acts.Except(new[] { act })),
-                        limiter);
+                    limiter);
             }
 
             return actee;

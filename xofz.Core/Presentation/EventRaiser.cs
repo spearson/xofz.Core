@@ -1,11 +1,17 @@
 ﻿namespace xofz.Presentation
 {
+    using System;
+    using System.Reflection;
+
     public class EventRaiser
     {
         public virtual void Raise(object eventHolder, string eventName, params object[] args)
         {
-            var e = eventHolder.GetType().GetEvent(eventName);
-            e.GetRaiseMethod().Invoke(eventHolder, args);
+            ((Delegate)eventHolder
+                .GetType()
+                .GetField(eventName, BindingFlags.Instance | BindingFlags.NonPublic)?
+                .GetValue(eventHolder))?
+                .DynamicInvoke(args);
         }
     }
 }
