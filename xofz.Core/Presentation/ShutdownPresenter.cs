@@ -15,6 +15,11 @@
             this.cleanup = cleanup;
         }
 
+        public void Setup(Navigator navigator)
+        {
+            navigator.RegisterPresenter(this);
+        }
+
         public override void Start()
         {
             UiHelpers.Write(this.mainUi, () => this.cleanup());
