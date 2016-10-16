@@ -96,6 +96,7 @@
     <Compile Include="Framework\Computation\PrimeTester.cs" />
     <Compile Include="Framework\Computation\Shifter.cs" />
     <Compile Include="Framework\Computation\ShiftRegister.cs" />
+    <Compile Include="Framework\Computation\VarianceComputer.cs" />
     <Compile Include="Framework\Conditionality\Evaluator.cs" />
     <Compile Include="Framework\Erudition\Likening.cs" />
     <Compile Include="Framework\Implementation\TextFileLog.cs" />
