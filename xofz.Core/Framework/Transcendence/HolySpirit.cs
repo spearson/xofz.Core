@@ -19,7 +19,6 @@
             var original = vc.Compute(actor => { }, i);
             foreach (var act in l)
             {
-                act(i);
                 if (BigInteger.Abs(original - vc.Compute(act, i)) < minimum)
                 {
                     ll.AddLast(act);
