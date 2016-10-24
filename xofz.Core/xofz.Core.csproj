@@ -99,6 +99,7 @@
     <Compile Include="Framework\Computation\ShiftRegister.cs" />
     <Compile Include="Framework\Computation\VarianceComputer.cs" />
     <Compile Include="Framework\Conditionality\Evaluator.cs" />
+    <Compile Include="Framework\Erudition\Darkener.cs" />
     <Compile Include="Framework\Erudition\Likening.cs" />
     <Compile Include="Framework\Implementation\TextFileLog.cs" />
     <Compile Include="Framework\Log.cs" />
