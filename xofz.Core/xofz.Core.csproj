@@ -119,6 +119,9 @@
     <Compile Include="Presentation\LogPresenter.cs" />
     <Compile Include="Presentation\MainPresenter.cs" />
     <Compile Include="Presentation\ShutdownPresenter.cs" />
+    <Compile Include="Start\Commands\SetupLoginCommand.cs" />
+    <Compile Include="Start\Commands\SetupMainCommand.cs" />
+    <Compile Include="Start\Commands\SetupShutdownCommand.cs" />
     <Compile Include="StringHelpers.cs" />
     <Compile Include="Framework\Theory\Agent.cs" />
     <Compile Include="Framework\Theory\Functoid.cs" />
@@ -245,6 +248,7 @@
       <DependentUpon>UserControlToggleUi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
