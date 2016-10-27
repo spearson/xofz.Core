@@ -16,7 +16,9 @@
                 return null;
             }
 
-            return numberToRemove >= s.Length ? string.Empty : s.Substring(0, s.Length - numberToRemove);
+            return numberToRemove >= s.Length
+                ? string.Empty
+                : s.Substring(0, s.Length - numberToRemove);
         }
     }
 }

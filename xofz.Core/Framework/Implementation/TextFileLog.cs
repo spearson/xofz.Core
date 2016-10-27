@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
+    using System.Linq;
     using System.Threading;
     using Materialization;
 
@@ -51,11 +52,13 @@
         public MaterializedEnumerable<LogEntry> ReadEntries(DateTime oldestTimestamp)
         {
             var ll = new LinkedList<LogEntry>();
-            foreach (var entry in this.ReadEntries())
+            foreach (var entry in 
+                this.ReadEntries()
+                    .OrderByDescending(e => e.Timestamp))
             {
                 if (entry.Timestamp < oldestTimestamp)
                 {
-                    break;
+                    continue;
                 }
 
                 ll.AddLast(entry);
