@@ -11,12 +11,12 @@
         {
             this.operate = operate;
             this.rng = rng;
-            randomness = int.MaxValue; // todo: expand!
+            this.randomness = int.MaxValue; // todo: expand!
         }
 
         public virtual Tuple<BigInteger, T> Act(T actee)
         {
-            var randomNumber = this.rng.Next(randomness);
+            var randomNumber = this.rng.Next(this.randomness);
             this.operate(randomNumber, actee);
 
             return Tuple.Create(randomNumber, actee);
