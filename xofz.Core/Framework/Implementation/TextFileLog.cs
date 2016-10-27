@@ -58,7 +58,7 @@
             {
                 if (entry.Timestamp < oldestTimestamp)
                 {
-                    continue;
+                    break;
                 }
 
                 ll.AddLast(entry);
