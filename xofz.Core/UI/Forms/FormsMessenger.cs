@@ -5,7 +5,7 @@
 
     public sealed class FormsMessenger : Messenger
     {
-        public object Subscriber { get; set; }
+        public Ui Subscriber { get; set; }
 
         Response Messenger.Question(string question)
         {

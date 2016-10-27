@@ -2,7 +2,7 @@
 {
     public interface Messenger
     {
-        object Subscriber { get; set; }
+        Ui Subscriber { get; set; }
 
         Response Question(string question);
 
