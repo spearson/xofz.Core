@@ -89,6 +89,7 @@
     <Compile Include="Apps\ImageSplicer\Framework\ImageReader.cs" />
     <Compile Include="Apps\ImageSplicer\Presenters\ImagesPresenter.cs" />
     <Compile Include="Apps\ImageSplicer\UI\ImagesUi.cs" />
+    <Compile Include="Framework\Computation\BigPow.cs" />
     <Compile Include="Framework\Computation\Emanator.cs" />
     <Compile Include="Framework\Computation\FactorialComputer.cs" />
     <Compile Include="Framework\Computation\Imploder.cs" />
