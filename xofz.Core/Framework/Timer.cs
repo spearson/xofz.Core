@@ -11,7 +11,6 @@ namespace xofz.Framework
     using xofz.Framework.Internal;
     using TimerCallback = xofz.Framework.Internal.TimerCallback;
 
-
     public class Timer : IDisposable
     {
         public Timer()
@@ -46,6 +45,7 @@ namespace xofz.Framework
             set
             {
                 this.priority = value;
+                this.threadPrioritySet = false;
             }
         }
 
