@@ -8,6 +8,13 @@
     {
         public SetupShutdownCommand(
             Ui mainUi,
+            Navigator navigator)
+            : this(mainUi, navigator, () => { })
+        {
+        }
+
+        public SetupShutdownCommand(
+            Ui mainUi,
             Navigator navigator,
             Action cleanup)
         {
