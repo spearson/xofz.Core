@@ -93,6 +93,7 @@
     <Compile Include="Framework\Computation\Emanator.cs" />
     <Compile Include="Framework\Computation\FactorialComputer.cs" />
     <Compile Include="Framework\Computation\Imploder.cs" />
+    <Compile Include="Framework\Computation\MultiPow.cs" />
     <Compile Include="Framework\Computation\Permutator.cs" />
     <Compile Include="Framework\Computation\PrimeGenerator.cs" />
     <Compile Include="Framework\Computation\PrimeTester.cs" />
