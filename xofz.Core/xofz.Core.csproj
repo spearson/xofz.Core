@@ -115,6 +115,7 @@
     <Compile Include="Framework\Martyr\PrescientInvoker.cs" />
     <Compile Include="Framework\Nightfall.cs" />
     <Compile Include="Framework\Transcendence\HolySpirit.cs" />
+    <Compile Include="Framework\Transformation\Innovator.cs" />
     <Compile Include="Framework\Transformation\Striker.cs" />
     <Compile Include="Framework\Transformation\Translator.cs" />
     <Compile Include="Presentation\LoginPresenter.cs" />
