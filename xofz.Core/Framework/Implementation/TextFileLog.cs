@@ -79,7 +79,7 @@
         public void AddEntry(LogEntry entry)
         {
             var lines = new LinkedList<string>();
-            lines.AddLast(entry.Timestamp.ToString("yyyy MMMM dd hh:mm.ss"));
+            lines.AddLast(entry.Timestamp.ToString("yyyy MMMM dd hh:mm.ss tt"));
             lines.AddLast(entry.Type);
             foreach (var line in entry.Content)
             {
