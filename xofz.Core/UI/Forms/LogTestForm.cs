@@ -1,6 +1,5 @@
 ﻿namespace xofz.UI.Forms
 {
-    using System;
     using System.Windows.Forms;
     using xofz.Framework;
     using xofz.Framework.Implementation;

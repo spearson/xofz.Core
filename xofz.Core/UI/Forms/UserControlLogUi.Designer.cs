@@ -35,10 +35,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.entriesGrid = new System.Windows.Forms.DataGridView();
+            this.addKey = new System.Windows.Forms.Button();
             this.timestampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addKey = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.entriesGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,6 +83,7 @@
             this.entriesGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.entriesGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -100,41 +101,19 @@
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.entriesGrid.DefaultCellStyle = dataGridViewCellStyle2;
             this.entriesGrid.Location = new System.Drawing.Point(0, 175);
             this.entriesGrid.Margin = new System.Windows.Forms.Padding(0);
             this.entriesGrid.Name = "entriesGrid";
             this.entriesGrid.ReadOnly = true;
             this.entriesGrid.RowHeadersVisible = false;
+            this.entriesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.entriesGrid.Size = new System.Drawing.Size(600, 225);
             this.entriesGrid.TabIndex = 4;
-            // 
-            // timestampColumn
-            // 
-            this.timestampColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.timestampColumn.HeaderText = "Timestamp";
-            this.timestampColumn.Name = "timestampColumn";
-            this.timestampColumn.ReadOnly = true;
-            this.timestampColumn.Width = 121;
-            // 
-            // typeColumn
-            // 
-            this.typeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.typeColumn.HeaderText = "Type";
-            this.typeColumn.Name = "typeColumn";
-            this.typeColumn.ReadOnly = true;
-            this.typeColumn.Width = 72;
-            // 
-            // contentColumn
-            // 
-            this.contentColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.contentColumn.HeaderText = "Content";
-            this.contentColumn.Name = "contentColumn";
-            this.contentColumn.ReadOnly = true;
-            this.contentColumn.Width = 98;
             // 
             // addKey
             // 
@@ -148,6 +127,29 @@
             this.addKey.Text = "Add Entry";
             this.addKey.UseVisualStyleBackColor = true;
             this.addKey.Click += new System.EventHandler(this.addKey_Click);
+            // 
+            // timestampColumn
+            // 
+            this.timestampColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.timestampColumn.HeaderText = "Timestamp";
+            this.timestampColumn.Name = "timestampColumn";
+            this.timestampColumn.ReadOnly = true;
+            this.timestampColumn.Width = 165;
+            // 
+            // typeColumn
+            // 
+            this.typeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.typeColumn.HeaderText = "Type";
+            this.typeColumn.Name = "typeColumn";
+            this.typeColumn.ReadOnly = true;
+            this.typeColumn.Width = 135;
+            // 
+            // contentColumn
+            // 
+            this.contentColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.contentColumn.HeaderText = "Content";
+            this.contentColumn.Name = "contentColumn";
+            this.contentColumn.ReadOnly = true;
             // 
             // UserControlLogUi
             // 
@@ -173,9 +175,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView entriesGrid;
+        private System.Windows.Forms.Button addKey;
         private System.Windows.Forms.DataGridViewTextBoxColumn timestampColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contentColumn;
-        private System.Windows.Forms.Button addKey;
     }
 }
