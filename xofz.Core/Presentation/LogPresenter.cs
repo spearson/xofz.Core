@@ -50,6 +50,7 @@
             this.timer.Elapsed += this.timer_Elapsed;
             this.timer.Start(1000);
             new Thread(this.timer_Elapsed).Start();
+            this.navigator.RegisterPresenter(this);
         }
 
         private void ui_DateChanged()

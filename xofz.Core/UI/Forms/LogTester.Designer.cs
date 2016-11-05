@@ -1,6 +1,6 @@
 ﻿namespace xofz.UI.Forms
 {
-    partial class LogTestForm
+    partial class LogTester
     {
         /// <summary>
         /// Required designer variable.
@@ -28,29 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.logUi = new xofz.UI.Forms.UserControlLogUi();
+            this.screenPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // logUi
+            // screenPanel
             // 
-            this.logUi.Location = new System.Drawing.Point(12, 12);
-            this.logUi.Name = "logUi";
-            this.logUi.Size = new System.Drawing.Size(860, 603);
-            this.logUi.TabIndex = 0;
+            this.screenPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.screenPanel.Location = new System.Drawing.Point(0, 0);
+            this.screenPanel.Name = "screenPanel";
+            this.screenPanel.Size = new System.Drawing.Size(784, 661);
+            this.screenPanel.TabIndex = 0;
             // 
-            // LogTestForm
+            // LogTester
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(884, 661);
-            this.Controls.Add(this.logUi);
-            this.Name = "LogTestForm";
-            this.Text = "LogTestForm";
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(784, 661);
+            this.Controls.Add(this.screenPanel);
+            this.Name = "LogTester";
+            this.Text = "LogTester";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private UserControlLogUi logUi;
+        private System.Windows.Forms.Panel screenPanel;
     }
 }

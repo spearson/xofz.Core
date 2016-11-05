@@ -221,10 +221,13 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\Internal\CenterWinDialog.cs" />
-    <Compile Include="UI\Forms\LogTestForm.cs" />
-    <Compile Include="UI\Forms\LogTestForm.Designer.cs">
-      <DependentUpon>LogTestForm.cs</DependentUpon>
+    <Compile Include="UI\Forms\LogTester.cs">
+      <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\Forms\LogTester.Designer.cs">
+      <DependentUpon>LogTester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\LogTesterEntry.cs" />
     <Compile Include="UI\Forms\UserControlLogUi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -270,8 +273,8 @@
     <EmbeddedResource Include="UI\Forms\FormLoginUi.resx">
       <DependentUpon>FormLoginUi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\LogTestForm.resx">
-      <DependentUpon>LogTestForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\LogTester.resx">
+      <DependentUpon>LogTester.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\UserControlLogUi.resx">
       <DependentUpon>UserControlLogUi.cs</DependentUpon>

@@ -35,10 +35,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.entriesGrid = new System.Windows.Forms.DataGridView();
-            this.addKey = new System.Windows.Forms.Button();
             this.timestampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addKey = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.entriesGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,19 +115,6 @@
             this.entriesGrid.Size = new System.Drawing.Size(600, 225);
             this.entriesGrid.TabIndex = 4;
             // 
-            // addKey
-            // 
-            this.addKey.AutoSize = true;
-            this.addKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.addKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addKey.Location = new System.Drawing.Point(255, 142);
-            this.addKey.Name = "addKey";
-            this.addKey.Size = new System.Drawing.Size(89, 30);
-            this.addKey.TabIndex = 5;
-            this.addKey.Text = "Add Entry";
-            this.addKey.UseVisualStyleBackColor = true;
-            this.addKey.Click += new System.EventHandler(this.addKey_Click);
-            // 
             // timestampColumn
             // 
             this.timestampColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -150,6 +137,25 @@
             this.contentColumn.HeaderText = "Content";
             this.contentColumn.Name = "contentColumn";
             this.contentColumn.ReadOnly = true;
+            // 
+            // addKey
+            // 
+            this.addKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.addKey.AutoSize = true;
+            this.addKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.addKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.addKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.addKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addKey.Location = new System.Drawing.Point(227, 143);
+            this.addKey.Margin = new System.Windows.Forms.Padding(0);
+            this.addKey.Name = "addKey";
+            this.addKey.Size = new System.Drawing.Size(100, 32);
+            this.addKey.TabIndex = 5;
+            this.addKey.Text = "Add Entry";
+            this.addKey.UseVisualStyleBackColor = true;
+            this.addKey.Click += new System.EventHandler(this.addKey_Click);
             // 
             // UserControlLogUi
             // 
