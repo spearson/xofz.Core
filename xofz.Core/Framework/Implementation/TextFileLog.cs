@@ -23,7 +23,6 @@
             {
                 yield break;
             }
-
             using (var reader = File.OpenText(this.filePath))
             {
                 while (!reader.EndOfStream)
@@ -36,10 +35,21 @@
                     var type = reader.ReadLine();
                     var content = new LinkedList<string>();
                     string contentLine;
+                    readContent:
                     while ((contentLine = reader.ReadLine()) != string.Empty
                            && contentLine != null)
                     {
                         content.AddLast(contentLine);
+                    }
+
+                    if (contentLine == string.Empty)
+                    {
+                        if (!string.IsNullOrEmpty(contentLine = reader.ReadLine()))
+                        {
+                            content.AddLast(string.Empty);
+                            content.AddLast(contentLine);
+                            goto readContent;
+                        }
                     }
 
                     DateTime timestamp;
