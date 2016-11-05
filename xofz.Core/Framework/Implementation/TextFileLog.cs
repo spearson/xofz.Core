@@ -19,6 +19,11 @@
 
         public IEnumerable<LogEntry> ReadEntries()
         {
+            if (!File.Exists(this.filePath))
+            {
+                yield break;
+            }
+
             using (var reader = File.OpenText(this.filePath))
             {
                 while (!reader.EndOfStream)
