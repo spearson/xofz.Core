@@ -24,27 +24,32 @@
                 while (!reader.EndOfStream)
                 {
                     string timestampString;
-                    while((timestampString = reader.ReadLine()) == string.Empty)
+                    while ((timestampString = reader.ReadLine()) == string.Empty)
                     {
                     }
 
                     var type = reader.ReadLine();
                     var content = new LinkedList<string>();
                     string contentLine;
-                    while((contentLine = reader.ReadLine()) != string.Empty)
+                    while ((contentLine = reader.ReadLine()) != string.Empty
+                           && contentLine != null)
                     {
                         content.AddLast(contentLine);
                     }
 
-                    var timestamp = DateTime.Parse(
-                        timestampString, 
-                        CultureInfo.CurrentCulture);
-
-                    yield return new LogEntry(
-                        timestamp, 
-                        type,
-                        new LinkedListMaterializedEnumerable<string>(content));
-
+                    DateTime timestamp;
+                    if (DateTime.TryParseExact(
+                        timestampString,
+                        this.timestampFormat,
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.AllowWhiteSpaces,
+                        out timestamp))
+                    {
+                        yield return new LogEntry(
+                            timestamp,
+                            type,
+                            new LinkedListMaterializedEnumerable<string>(content));
+                    }
                 }
             }
         }
@@ -79,7 +84,7 @@
         public void AddEntry(LogEntry entry)
         {
             var lines = new LinkedList<string>();
-            lines.AddLast(entry.Timestamp.ToString("yyyy MMMM dd hh:mm.ss"));
+            lines.AddLast(entry.Timestamp.ToString(this.timestampFormat));
             lines.AddLast(entry.Type);
             foreach (var line in entry.Content)
             {
@@ -95,5 +100,6 @@
         }
 
         private readonly string filePath;
+        private readonly string timestampFormat = "yyyy MMMM dd hh:mm.ss tt";
     }
 }

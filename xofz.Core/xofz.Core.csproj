@@ -213,6 +213,16 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\Internal\CenterWinDialog.cs" />
+    <Compile Include="UI\Forms\LogTestForm.cs" />
+    <Compile Include="UI\Forms\LogTestForm.Designer.cs">
+      <DependentUpon>LogTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlLogUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlLogUi.Designer.cs">
+      <DependentUpon>UserControlLogUi.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\UserControlToggleUi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -247,6 +257,12 @@
   <ItemGroup>
     <EmbeddedResource Include="UI\Forms\FormLoginUi.resx">
       <DependentUpon>FormLoginUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\LogTestForm.resx">
+      <DependentUpon>LogTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UserControlLogUi.resx">
+      <DependentUpon>UserControlLogUi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\UserControlToggleUi.resx">
       <DependentUpon>UserControlToggleUi.cs</DependentUpon>

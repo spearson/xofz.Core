@@ -1,12 +1,17 @@
 ﻿namespace xofz.UI
 {
     using System;
-    using System.Collections.Generic;
 
     public interface LogUi : Ui
     {
+        event Action StartDateChanged;
+
+        event Action EndDateChanged;
+
         MaterializedEnumerable<Tuple<string, string, string>> Entries { get; set; }
 
-        string Location { get; set; }
+        DateTime StartDate { get; set; }
+
+        DateTime EndDate { get; set; }
     }
 }
