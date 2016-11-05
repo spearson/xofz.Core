@@ -38,6 +38,7 @@
             this.timestampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addKey = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.entriesGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -135,9 +136,23 @@
             this.contentColumn.ReadOnly = true;
             this.contentColumn.Width = 98;
             // 
+            // addKey
+            // 
+            this.addKey.AutoSize = true;
+            this.addKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.addKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addKey.Location = new System.Drawing.Point(255, 142);
+            this.addKey.Name = "addKey";
+            this.addKey.Size = new System.Drawing.Size(89, 30);
+            this.addKey.TabIndex = 5;
+            this.addKey.Text = "Add Entry";
+            this.addKey.UseVisualStyleBackColor = true;
+            this.addKey.Click += new System.EventHandler(this.addKey_Click);
+            // 
             // UserControlLogUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.addKey);
             this.Controls.Add(this.entriesGrid);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -161,5 +176,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn timestampColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contentColumn;
+        private System.Windows.Forms.Button addKey;
     }
 }

@@ -19,6 +19,8 @@
 
         public event Action EndDateChanged;
 
+        public event Action AddKeyTapped;
+
         MaterializedEnumerable<Tuple<string, string, string>> LogUi.Entries
         {
             get
@@ -26,11 +28,17 @@
                 var ll = new LinkedList<Tuple<string, string, string>>();
                 foreach (DataGridViewRow row in this.entriesGrid.Rows)
                 {
-                    ll.AddLast(
+                    var timestamp = row.Cells[0].Value?.ToString();
+                    var type = row.Cells[1].Value?.ToString();
+                    var content = row.Cells[2].Value?.ToString();
+                    if (timestamp != null && type != null)
+                    {
+                        ll.AddLast(
                         Tuple.Create(
-                            row.Cells[0].Value.ToString(),
-                            row.Cells[1].Value.ToString(),
-                            row.Cells[2].Value.ToString()));
+                            timestamp,
+                            type,
+                            content));
+                    }
                 }
 
                 return new LinkedListMaterializedEnumerable<
@@ -70,6 +78,13 @@
             }
         }
 
+        bool LogUi.AddKeyVisible
+        {
+            get { return this.addKey.Visible; }
+
+            set { this.addKey.Visible = value; }
+        }
+
         private void startDatePicker_DateSelected(object sender, DateRangeEventArgs e)
         {
             new Thread(() => this.StartDateChanged?.Invoke()).Start();
@@ -78,6 +93,11 @@
         private void endDatePicker_DateSelected(object sender, DateRangeEventArgs e)
         {
             new Thread(() => this.EndDateChanged?.Invoke()).Start();
+        }
+
+        private void addKey_Click(object sender, EventArgs e)
+        {
+            new Thread(() => this.AddKeyTapped?.Invoke()).Start();
         }
     }
 }

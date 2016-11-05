@@ -119,6 +119,7 @@
     <Compile Include="Framework\Transformation\Innovator.cs" />
     <Compile Include="Framework\Transformation\Striker.cs" />
     <Compile Include="Framework\Transformation\Translator.cs" />
+    <Compile Include="Presentation\LogEditorPresenter.cs" />
     <Compile Include="Presentation\LoginPresenter.cs" />
     <Compile Include="Presentation\LogPresenter.cs" />
     <Compile Include="Presentation\MainPresenter.cs" />
@@ -202,6 +203,12 @@
     <Compile Include="UI\Forms\ControlUi.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Forms\FormLogEditorUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FormLogEditorUi.Designer.cs">
+      <DependentUpon>FormLogEditorUi.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\FormLoginUi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +240,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\LabeledUi.cs" />
+    <Compile Include="UI\LogEditorUi.cs" />
     <Compile Include="UI\LoginUi.cs" />
     <Compile Include="UI\LogUi.cs" />
     <Compile Include="UI\MainUi.cs" />
@@ -255,6 +263,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UI\Forms\FormLogEditorUi.resx">
+      <DependentUpon>FormLogEditorUi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FormLoginUi.resx">
       <DependentUpon>FormLoginUi.cs</DependentUpon>
     </EmbeddedResource>

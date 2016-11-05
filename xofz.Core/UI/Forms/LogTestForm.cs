@@ -2,6 +2,7 @@
 {
     using System;
     using System.Windows.Forms;
+    using xofz.Framework;
     using xofz.Framework.Implementation;
     using xofz.Presentation;
 
@@ -22,19 +23,26 @@
             this.InitializeComponent();
             var log = new TextFileLog("Test log.txt");
 
-            for (var i = 0; i < 100; ++i)
-            {
-                log.AddEntry("Test entry", new[] { Guid.NewGuid().ToString() });
-            }
-
+            var n = new Navigator();
             new LogPresenter(
                 this.logUi,
                 this,
-                log).Setup();
+                log,
+                new xofz.Framework.Timer(),
+                new AccessController(new[] {"1111"}),
+                n).Setup();
+
+            this.editorUi = new FormLogEditorUi();
+            new LogEditorPresenter(
+                this.editorUi,
+                log)
+                .Setup(n);
         }
 
         public void SwitchUi(Ui newUi)
         {
         }
+
+        private LogEditorUi editorUi;
     }
 }
