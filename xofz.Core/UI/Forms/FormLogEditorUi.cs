@@ -20,6 +20,7 @@
         void PopupUi.Display()
         {
             this.Visible = true;
+            this.contentTextBox.Focus();
         }
 
         public event Action AddKeyTapped;
