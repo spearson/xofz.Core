@@ -124,6 +124,7 @@
     <Compile Include="Presentation\LogPresenter.cs" />
     <Compile Include="Presentation\MainPresenter.cs" />
     <Compile Include="Presentation\ShutdownPresenter.cs" />
+    <Compile Include="Start\Commands\SetupLogCommand.cs" />
     <Compile Include="Start\Commands\SetupLoginCommand.cs" />
     <Compile Include="Start\Commands\SetupMainCommand.cs" />
     <Compile Include="Start\Commands\SetupShutdownCommand.cs" />
