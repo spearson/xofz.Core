@@ -16,9 +16,9 @@
       CodeLanguage="CS" 
       OutputFile="$(ProjectName)\Properties\AssemblyInfo.cs"
       AssemblyTitle="$(ProjectName)" 
-      AssemblyCompany="Care Controls"
-      AssemblyProduct="Core"
-      AssemblyCopyright="Copyright (c) Care Controls Inc."
+      AssemblyCompany="X of Z"
+      AssemblyProduct="X of Z Core"
+      AssemblyCopyright="Copyright (c) Sam Pearson"
       ComVisible="false"
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(Version)" />
