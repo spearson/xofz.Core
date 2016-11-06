@@ -24,7 +24,7 @@
                     shell,
                     ac,
                     n,
-                    new FormLogEditorUi()));
+                    new FormLogEditorUi(shell)));
             n.Present<LogPresenter>();
             Application.Run(shell);
         }

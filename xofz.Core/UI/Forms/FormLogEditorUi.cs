@@ -9,8 +9,9 @@
 
     public partial class FormLogEditorUi : FormUi, LogEditorUi
     {
-        public FormLogEditorUi()
+        public FormLogEditorUi(Form shell)
         {
+            this.shell = shell;
             this.InitializeComponent();
             this.FormClosing += this.this_FormClosing;
 
@@ -19,6 +20,7 @@
 
         void PopupUi.Display()
         {
+            this.Location = this.shell.Location;
             this.Visible = true;
             this.contentTextBox.Focus();
         }
@@ -117,5 +119,7 @@
         {
             new Thread(() => this.AddKeyTapped?.Invoke()).Start();
         }
+
+        private readonly Form shell;
     }
 }
