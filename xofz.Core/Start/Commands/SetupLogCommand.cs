@@ -23,9 +23,9 @@
             this.filePath = filePath;
         }
 
-        public Log Log => this.log;
+        public virtual Log Log => this.log;
 
-        public LogEditor Editor => this.editor;
+        public virtual LogEditor Editor => this.editor;
 
         public override void Execute()
         {
