@@ -28,13 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.customTypeTextBox = new System.Windows.Forms.TextBox();
             this.contentTextBox = new System.Windows.Forms.TextBox();
             this.entryTypeComboBox = new System.Windows.Forms.ComboBox();
             this.addKey = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.customTypeTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
+            // 
+            // customTypeTextBox
+            // 
+            this.customTypeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customTypeTextBox.Location = new System.Drawing.Point(280, 13);
+            this.customTypeTextBox.Name = "customTypeTextBox";
+            this.customTypeTextBox.Size = new System.Drawing.Size(186, 26);
+            this.customTypeTextBox.TabIndex = 1;
             // 
             // contentTextBox
             // 
@@ -43,7 +51,7 @@
             this.contentTextBox.Name = "contentTextBox";
             this.contentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.contentTextBox.Size = new System.Drawing.Size(493, 150);
-            this.contentTextBox.TabIndex = 9;
+            this.contentTextBox.TabIndex = 2;
             // 
             // entryTypeComboBox
             // 
@@ -57,7 +65,7 @@
             this.entryTypeComboBox.Location = new System.Drawing.Point(79, 13);
             this.entryTypeComboBox.Name = "entryTypeComboBox";
             this.entryTypeComboBox.Size = new System.Drawing.Size(195, 28);
-            this.entryTypeComboBox.TabIndex = 8;
+            this.entryTypeComboBox.TabIndex = 0;
             this.entryTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.entryTypeComboBox_SelectedIndexChanged);
             // 
             // addKey
@@ -70,7 +78,7 @@
             this.addKey.Location = new System.Drawing.Point(472, 11);
             this.addKey.Name = "addKey";
             this.addKey.Size = new System.Drawing.Size(100, 32);
-            this.addKey.TabIndex = 7;
+            this.addKey.TabIndex = 3;
             this.addKey.Text = "Add Entry";
             this.addKey.UseVisualStyleBackColor = true;
             this.addKey.Click += new System.EventHandler(this.addKey_Click);
@@ -92,14 +100,6 @@
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Entry Type:";
-            // 
-            // customTypeTextBox
-            // 
-            this.customTypeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customTypeTextBox.Location = new System.Drawing.Point(280, 13);
-            this.customTypeTextBox.Name = "customTypeTextBox";
-            this.customTypeTextBox.Size = new System.Drawing.Size(186, 26);
-            this.customTypeTextBox.TabIndex = 10;
             // 
             // FormLogEditorUi
             // 
