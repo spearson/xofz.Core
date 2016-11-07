@@ -23,6 +23,7 @@
             {
                 yield break;
             }
+
             using (var reader = File.OpenText(this.filePath))
             {
                 while (!reader.EndOfStream)

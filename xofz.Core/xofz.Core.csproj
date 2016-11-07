@@ -102,6 +102,7 @@
     <Compile Include="Framework\Theory\DirectedGraph.cs" />
     <Compile Include="Framework\Transcendence\HolySpirit.cs" />
     <Compile Include="Framework\Transformation\Innovator.cs" />
+    <Compile Include="Framework\Transformation\Reorderer.cs" />
     <Compile Include="Framework\Transformation\Striker.cs" />
     <Compile Include="Framework\Transformation\Translator.cs" />
     <Compile Include="Presentation\LogEditorPresenter.cs" />
