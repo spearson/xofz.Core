@@ -49,6 +49,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -88,6 +89,7 @@
     <Compile Include="Framework\Conditionality\Evaluator.cs" />
     <Compile Include="Framework\Erudition\Darkener.cs" />
     <Compile Include="Framework\Erudition\Likening.cs" />
+    <Compile Include="Framework\Erudition\Slicer.cs" />
     <Compile Include="Framework\Implementation\TextFileLog.cs" />
     <Compile Include="Framework\Log.cs" />
     <Compile Include="Framework\LogEntry.cs" />
