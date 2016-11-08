@@ -103,6 +103,7 @@
     <Compile Include="Framework\Nightfall.cs" />
     <Compile Include="Framework\Theory\DirectedGraph.cs" />
     <Compile Include="Framework\Transcendence\HolySpirit.cs" />
+    <Compile Include="Framework\Transformation\EnumerableSlicer.cs" />
     <Compile Include="Framework\Transformation\Innovator.cs" />
     <Compile Include="Framework\Transformation\Reorderer.cs" />
     <Compile Include="Framework\Transformation\Striker.cs" />
