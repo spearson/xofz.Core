@@ -101,6 +101,7 @@
     <Compile Include="Framework\Martyr\Martyr.cs" />
     <Compile Include="Framework\Martyr\PrescientInvoker.cs" />
     <Compile Include="Framework\Nightfall.cs" />
+    <Compile Include="Framework\Theory\BinaryTranslator.cs" />
     <Compile Include="Framework\Theory\DirectedGraph.cs" />
     <Compile Include="Framework\Transcendence\HolySpirit.cs" />
     <Compile Include="Framework\Transformation\EnumerableSlicer.cs" />
