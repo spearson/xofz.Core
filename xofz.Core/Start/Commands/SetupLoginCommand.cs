@@ -10,24 +10,29 @@
         public SetupLoginCommand(
             LoginUi ui,
             AccessController accessController,
-            Navigator navigator)
+            Navigator navigator,
+            int loginDurationMinutes = 15)
         {
             this.ui = ui;
             this.accessController = accessController;
             this.navigator = navigator;
+            this.loginDurationMinutes = loginDurationMinutes;
         }
 
         public override void Execute()
         {
             new LoginPresenter(
-                    this.ui,
-                    new xofz.Framework.Timer(),
-                    this.accessController)
-                .Setup(this.navigator);
+                this.ui,
+                new xofz.Framework.Timer(),
+                this.accessController)
+                .Setup(
+                    this.navigator,
+                    this.loginDurationMinutes);
         }
 
         private readonly LoginUi ui;
         private readonly AccessController accessController;
         private readonly Navigator navigator;
+        private readonly int loginDurationMinutes;
     }
 }

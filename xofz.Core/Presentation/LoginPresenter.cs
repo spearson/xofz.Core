@@ -8,7 +8,10 @@
 
     public class LoginPresenter : Presenter, IDisposable
     {
-        public LoginPresenter(LoginUi ui, Timer timer, AccessController accessController)
+        public LoginPresenter(
+            LoginUi ui, 
+            Timer timer, 
+            AccessController accessController)
             : base(ui, null)
         {
             this.ui = ui;
@@ -17,13 +20,16 @@
             this.timerHandlerFinished = new ManualResetEvent(true);
         }
 
-        public virtual void Setup(Navigator navigator)
+        public virtual void Setup(
+            Navigator navigator, 
+            int loginDurationMinutes)
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
             {
                 return;
             }
 
+            this.loginDurationMinutes = loginDurationMinutes;
             this.timer.Elapsed += this.timer_Elapsed;
             this.ui.LoginKeyTapped += this.ui_LoginKeyTapped;
             this.ui.CancelKeyTapped += this.Stop;
@@ -96,11 +102,12 @@
             var elapsed = this.elapsedSeconds + 1;
             this.setElapsedSeconds(elapsed);
             var currentAccessLevel = this.accessController.CurrentAccessLevel;
+            var duration = this.loginDurationMinutes * 60;
             UiHelpers.Write(this.ui, () => this.ui.TimeRemaining = currentAccessLevel > AccessLevel.None
-                ? TimeSpan.FromSeconds(loginDuration - elapsed).ToString()
+                ? TimeSpan.FromSeconds(duration - elapsed).ToString()
                 : "Not logged in");
 
-            if (elapsed != loginDuration)
+            if (elapsed != duration)
             {
                 this.timerHandlerFinished.Set();
                 return;
@@ -113,8 +120,8 @@
             this.timerHandlerFinished.Set();
         }
 
-        private const int loginDuration = 15 * 60;
         private int setupIf1;
+        private int loginDurationMinutes;
         private long elapsedSeconds;
         private string oldPassword;
         private readonly LoginUi ui;
