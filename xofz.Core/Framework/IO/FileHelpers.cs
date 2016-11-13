@@ -9,16 +9,7 @@
     {
         public static IEnumerable<bool> ReadAllBits(string filePath)
         {
-            var bytes = new LinkedList<byte>();
-            using (var reader = File.OpenRead(filePath))
-            {
-                while (reader.Position < reader.Length)
-                {
-                    bytes.AddLast((byte)reader.ReadByte());
-                }
-            }
-
-            return new BinaryTranslator().GetBits(bytes);
+            return new BinaryTranslator().GetBits(File.ReadAllBytes(filePath));
         }
 
         public static void WriteAllBits(string filePath, IEnumerable<bool> bits)

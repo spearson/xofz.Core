@@ -39,7 +39,7 @@
 
         public virtual string ReadString(IEnumerable<bool> bits, Encoding encoding)
         {
-            return encoding.GetString(this.GetBytes(bits.ToArray()).ToArray());
+            return encoding.GetString(this.GetBytes(bits).ToArray());
         }
 
         public virtual IEnumerable<byte> GetBytes(IEnumerable<bool> bits)
