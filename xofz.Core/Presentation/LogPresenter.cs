@@ -27,7 +27,7 @@
             this.navigator = navigator;
         }
 
-        public void Setup(AccessLevel editLevel = AccessLevel.None)
+        public void Setup(AccessLevel editLevel)
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
             {

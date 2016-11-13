@@ -13,7 +13,8 @@
             AccessController accessController,
             Navigator navigator,
             LogEditorUi editorUi,
-            string filePath = @"Log.log")
+            string filePath = @"Log.log",
+            AccessLevel editLevel = AccessLevel.None)
         {
             this.ui = ui;
             this.shell = shell;
@@ -21,6 +22,7 @@
             this.navigator = navigator;
             this.editorUi = editorUi;
             this.filePath = filePath;
+            this.editLevel = editLevel;
         }
 
         public virtual Log Log => this.log;
@@ -41,7 +43,8 @@
                 new xofz.Framework.Timer(),
                 this.accessController,
                 n)
-                .Setup();
+                .Setup(
+                    this.editLevel);
 
             new LogEditorPresenter(
                 this.editorUi,
@@ -67,5 +70,6 @@
         private readonly Navigator navigator;
         private readonly LogEditorUi editorUi;
         private readonly string filePath;
+        private readonly AccessLevel editLevel;
     }
 }
