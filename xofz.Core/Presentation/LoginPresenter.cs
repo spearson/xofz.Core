@@ -65,7 +65,7 @@
         private void ui_BackspaceKeyTapped()
         {
             UiHelpers.Write(this.ui,
-                () => this.ui.CurrentPassword = StringHelpers.RemoveFromEnd(this.ui.CurrentPassword, 1));
+                () => this.ui.CurrentPassword = StringHelpers.RemoveEndChars(this.ui.CurrentPassword, 1));
         }
 
         private void ui_LoginKeyTapped()

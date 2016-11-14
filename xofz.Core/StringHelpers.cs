@@ -9,16 +9,18 @@
             return (T)Enum.Parse(typeof(T), s);
         }
 
-        public static string RemoveFromEnd(string s, int numberToRemove)
+        public static string RemoveEndChars(string s, int count)
         {
             if (s == null)
             {
                 return null;
             }
 
-            return numberToRemove >= s.Length
+            return count >= s.Length
                 ? string.Empty
-                : s.Substring(0, s.Length - numberToRemove);
+                : s.Substring(
+                    0, 
+                    s.Length - count);
         }
     }
 }
