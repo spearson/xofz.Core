@@ -14,7 +14,7 @@
 
         public event Action<ToggleUi> Tapped;
 
-        string LabeledUi.Label
+        public string Label
         {
             get { return this.key.Text; }
 
