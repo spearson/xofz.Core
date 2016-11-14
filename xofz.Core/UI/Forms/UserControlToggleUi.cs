@@ -14,7 +14,7 @@
 
         public event Action<ToggleUi> Tapped;
 
-        public string Label
+        string LabeledUi.Label
         {
             get { return this.key.Text; }
 
@@ -23,6 +23,13 @@
                 this.key.Text = value;
                 this.Visible = true;
             }
+        }
+
+        bool ToggleUi.Visible
+        {
+            get { return this.Visible; }
+
+            set { this.Visible = value; }
         }
 
         bool ToggleUi.Toggled

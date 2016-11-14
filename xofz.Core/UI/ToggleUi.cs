@@ -7,5 +7,7 @@
         event Action<ToggleUi> Tapped;
 
         bool Toggled { get; set; }
+
+        bool Visible { get; set; }
     }
 }
