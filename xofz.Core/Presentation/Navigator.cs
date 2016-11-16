@@ -87,7 +87,8 @@
             }
         }
 
-        public virtual TUi GetUi<TPresenter, TUi>(string name = null) where TPresenter : Presenter
+        public virtual TUi GetUi<TPresenter, TUi>(string name = null)
+            where TPresenter : Presenter
         {
             var matchingPresenters = this.presenters.Where(p => p is TPresenter);
             if (name == null)
@@ -114,7 +115,10 @@
 
         private TUi getUi<TUi>(object presenter)
         {
-            return (TUi)presenter.GetType().GetField("ui", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(presenter);
+            return (TUi)presenter
+                .GetType()
+                .GetField("ui", BindingFlags.Instance | BindingFlags.NonPublic)
+                ?.GetValue(presenter);
         }
 
         private readonly List<Presenter> presenters;

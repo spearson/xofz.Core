@@ -18,7 +18,7 @@
                 return default(T);
             }
 
-            if (returnArray)
+            if (this.returnArray)
             {
                 return (T)(object)File.ReadAllLines(location, this.encoding);
             }
