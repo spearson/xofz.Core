@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface MainUi : ShellUi
+    public interface MainUi : Ui
     {
         event Action ShutdownRequested;
     }
