@@ -10,8 +10,9 @@
 
         public virtual IEnumerable<T> Trap(IEnumerable<T> source)
         {
-            this.setTrapper(new LinkedList<T>());
-            var t = this.trapper;
+            var t = new LinkedList<T>();
+            this.setTrapper(t);
+
             foreach (var item in source)
             {
                 t.AddLast(item);
