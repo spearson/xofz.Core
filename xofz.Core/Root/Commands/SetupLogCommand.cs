@@ -1,4 +1,4 @@
-﻿namespace xofz.Start.Commands
+﻿namespace xofz.Root.Commands
 {
     using xofz.Framework;
     using xofz.Framework.Implementation;

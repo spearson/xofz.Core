@@ -1,8 +1,8 @@
-﻿namespace xofz.Start.Commands
+﻿namespace xofz.Root.Commands
 {
     using System;
-    using Presentation;
-    using UI;
+    using xofz.Presentation;
+    using xofz.UI;
 
     public class SetupShutdownCommand : Command
     {

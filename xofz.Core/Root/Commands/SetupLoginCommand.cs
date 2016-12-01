@@ -1,8 +1,7 @@
-﻿namespace xofz.Start.Commands
+﻿namespace xofz.Root.Commands
 {
     using xofz.Framework;
     using xofz.Presentation;
-    using xofz.Start;
     using xofz.UI;
 
     public class SetupLoginCommand : Command

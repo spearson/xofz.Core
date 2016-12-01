@@ -1,4 +1,4 @@
-﻿namespace xofz.Start
+﻿namespace xofz.Root
 {
     using System.Collections.Generic;
     using System.Linq;
