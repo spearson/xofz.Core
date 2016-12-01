@@ -107,6 +107,7 @@
     <Compile Include="Framework\Theory\SafeInvoker.cs" />
     <Compile Include="Framework\Transcendence\HolySpirit.cs" />
     <Compile Include="Framework\Theory\ActionableTransaction.cs" />
+    <Compile Include="Framework\Transformation\EnumerableDisplacer.cs" />
     <Compile Include="Framework\Transformation\EnumerablePicker.cs" />
     <Compile Include="Framework\Transformation\EnumerableSkipper.cs" />
     <Compile Include="Framework\Transformation\EnumerableSlicer.cs" />
