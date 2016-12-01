@@ -121,10 +121,10 @@
     <Compile Include="Presentation\LogPresenter.cs" />
     <Compile Include="Presentation\MainPresenter.cs" />
     <Compile Include="Presentation\ShutdownPresenter.cs" />
-    <Compile Include="Start\Commands\SetupLogCommand.cs" />
-    <Compile Include="Start\Commands\SetupLoginCommand.cs" />
-    <Compile Include="Start\Commands\SetupMainCommand.cs" />
-    <Compile Include="Start\Commands\SetupShutdownCommand.cs" />
+    <Compile Include="Root\Commands\SetupLogCommand.cs" />
+    <Compile Include="Root\Commands\SetupLoginCommand.cs" />
+    <Compile Include="Root\Commands\SetupMainCommand.cs" />
+    <Compile Include="Root\Commands\SetupShutdownCommand.cs" />
     <Compile Include="StringHelpers.cs" />
     <Compile Include="Framework\Theory\Agent.cs" />
     <Compile Include="Framework\Theory\Functoid.cs" />
@@ -168,8 +168,8 @@
     <Compile Include="Presentation\Navigator.cs" />
     <Compile Include="Presentation\Presenter.cs" />
     <Compile Include="Random.cs" />
-    <Compile Include="Start\Command.cs" />
-    <Compile Include="Start\CommandExecutor.cs" />
+    <Compile Include="Root\Command.cs" />
+    <Compile Include="Root\CommandExecutor.cs" />
     <Compile Include="Framework\Transformation\EnumerableConnector.cs" />
     <Compile Include="Framework\Transformation\EnumerableDecorator.cs" />
     <Compile Include="Framework\Transformation\EnumerableIntersector.cs" />
