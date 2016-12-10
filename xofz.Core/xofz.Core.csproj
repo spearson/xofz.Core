@@ -112,6 +112,7 @@
     <Compile Include="Framework\Transformation\EnumerableFrontBackLoader.cs" />
     <Compile Include="Framework\Transformation\EnumerableHeartbeater.cs" />
     <Compile Include="Framework\Transformation\EnumerableInjector.cs" />
+    <Compile Include="Framework\Transformation\EnumerableInterceptor.cs" />
     <Compile Include="Framework\Transformation\EnumerablePicker.cs" />
     <Compile Include="Framework\Transformation\EnumerableSkipper.cs" />
     <Compile Include="Framework\Transformation\EnumerableSlicer.cs" />
