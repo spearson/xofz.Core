@@ -122,6 +122,7 @@
     <Compile Include="Framework\Transformation\EnumerableTrapper.cs" />
     <Compile Include="Framework\Transformation\Innovator.cs" />
     <Compile Include="Framework\Transformation\Reorderer.cs" />
+    <Compile Include="Framework\Transformation\EnumerableSelector.cs" />
     <Compile Include="Framework\Transformation\Striker.cs" />
     <Compile Include="Framework\Transformation\Translator.cs" />
     <Compile Include="Presentation\LogEditorPresenter.cs" />
