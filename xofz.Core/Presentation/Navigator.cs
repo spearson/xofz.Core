@@ -87,13 +87,17 @@
             }
         }
 
-        public virtual TUi GetUi<TPresenter, TUi>(string name = null)
+        public virtual TUi GetUi<TPresenter, TUi>(
+            string presenterName = null,
+            string fieldName = "ui")
             where TPresenter : Presenter
         {
             var matchingPresenters = this.presenters.Where(p => p is TPresenter);
-            if (name == null)
+            if (presenterName == null)
             {
-                return this.getUi<TUi>(matchingPresenters.First());
+                return this.getUi<TUi>(
+                    matchingPresenters.First(),
+                    fieldName);
             }
 
             foreach (var p in matchingPresenters)
@@ -104,20 +108,22 @@
                 }
 
                 var np = (NamedPresenter)p;
-                if (np.Name == name)
+                if (np.Name == presenterName)
                 {
-                    return this.getUi<TUi>(np);
+                    return this.getUi<TUi>(
+                        np,
+                        fieldName);
                 }
             }
 
             return default(TUi);
         }
 
-        private TUi getUi<TUi>(object presenter)
+        private TUi getUi<TUi>(object presenter, string fieldName)
         {
             return (TUi)presenter
                 .GetType()
-                .GetField("ui", BindingFlags.Instance | BindingFlags.NonPublic)
+                .GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic)
                 ?.GetValue(presenter);
         }
 
