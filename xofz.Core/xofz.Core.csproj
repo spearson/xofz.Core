@@ -116,6 +116,7 @@
     <Compile Include="Framework\Transformation\EnumerableInjector.cs" />
     <Compile Include="Framework\Transformation\EnumerableInterceptor.cs" />
     <Compile Include="Framework\Transformation\EnumerablePicker.cs" />
+    <Compile Include="Framework\Transformation\EnumerableRaker.cs" />
     <Compile Include="Framework\Transformation\EnumerableSkipper.cs" />
     <Compile Include="Framework\Transformation\EnumerableSlicer.cs" />
     <Compile Include="Framework\Transformation\EnumerableSpreader.cs" />
