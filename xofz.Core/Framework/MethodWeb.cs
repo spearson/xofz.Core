@@ -8,39 +8,84 @@
     {
         public MethodWeb()
         {
-            this.dependencies = new List<object>();
+            this.dependencies = new List<Tuple<object, string>>();
         }
 
-        public virtual void RegisterDependency(object dependency)
+        public virtual void RegisterDependency(
+            object dependency, 
+            string name = null)
         {
-            this.dependencies.Add(dependency);
+            this.dependencies.Add(
+                Tuple.Create(dependency, name));
         }
 
-        public virtual U Run<T, U>(Func<T, U> method)
+        public virtual void Subscribe<T>(
+            string eventName, 
+            Action act, 
+            string dependencyName = null)
         {
-            var dependency = this.dependencies.FirstOrDefault(d => d is T);
+            var dependency = this.dependencies
+                .Where(tuple => tuple.Item1 is T)
+                .FirstOrDefault(tuple => tuple.Item2 == dependencyName);
+            if (dependency == null)
+            {
+                return;
+            }
+
+            var e = dependency.GetType().GetEvent(eventName);
+            e.AddEventHandler(this, act);
+        }
+
+        public virtual void Unsubscribe<T>(
+            string eventName, 
+            Action act,
+            string dependencyName = null)
+        {
+            var dependency = this.dependencies
+                .Where(tuple => tuple.Item1 is T)
+                .FirstOrDefault(tuple => tuple.Item2 == dependencyName);
+            if (dependency == null)
+            {
+                return;
+            }
+
+            var e = dependency.GetType().GetEvent(eventName);
+            e.RemoveEventHandler(this, act);
+        }
+
+        public virtual U Run<T, U>(
+            Func<T, U> method,
+            string dependencyName = null)
+        {
+            var dependency = this.dependencies
+                .Where(tuple => tuple.Item1 is T)
+                .FirstOrDefault(tuple => tuple.Item2 == dependencyName);
             if (dependency == null)
             {
                 return default(U);
             }
 
-            return method((T)dependency);
+            return method((T)dependency.Item1);
         }
 
-        public virtual T Run<T>(Action<T> method)
+        public virtual T Run<T>(
+            Action<T> method,
+            string dependencyName = null)
         {
-            var dependency = this.dependencies.FirstOrDefault(d => d is T);
+            var dependency = this.dependencies
+                .Where(tuple => tuple.Item1 is T)
+                .FirstOrDefault(tuple => tuple.Item2 == dependencyName);
             if (dependency == null)
             {
                 return default(T);
             }
 
-            var t = (T)dependency;
+            var t = (T)dependency.Item1;
             method(t);
 
             return t;
         }
 
-        private readonly List<object> dependencies;
+        private readonly List<Tuple<object, string>> dependencies;
     }
 }
