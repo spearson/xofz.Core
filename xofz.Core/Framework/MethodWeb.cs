@@ -32,8 +32,12 @@
                 return;
             }
 
-            var e = dependency.GetType().GetEvent(eventName);
-            e.AddEventHandler(this, act);
+            var e = dependency.Item1
+                .GetType()
+                .GetEvent(eventName);
+            e.AddEventHandler(
+                dependency.Item1,
+                act);
         }
 
         public virtual void Unsubscribe<T>(
@@ -49,8 +53,12 @@
                 return;
             }
 
-            var e = dependency.GetType().GetEvent(eventName);
-            e.RemoveEventHandler(this, act);
+            var e = dependency.Item1
+                .GetType()
+                .GetEvent(eventName);
+            e.RemoveEventHandler(
+                dependency.Item1, 
+                act);
         }
 
         public virtual U Run<T, U>(
