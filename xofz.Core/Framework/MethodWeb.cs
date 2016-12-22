@@ -21,7 +21,29 @@
 
         public virtual void Subscribe<T>(
             string eventName, 
-            Action act, 
+            Action eventHandler, 
+            string dependencyName = null)
+        {
+            this.subscribeInternal<T>(
+                eventName,
+                eventHandler,
+                dependencyName);
+        }
+
+        public virtual void Subscribe<T, U>(
+            string eventName,
+            Action<U> eventHandler,
+            string dependencyName = null)
+        {
+            this.subscribeInternal<T>(
+                eventName,
+                eventHandler,
+                dependencyName);
+        }
+
+        private void subscribeInternal<T>(
+            string eventName,
+            Delegate eventHandler,
             string dependencyName = null)
         {
             var dependency = this.dependencies
@@ -37,12 +59,34 @@
                 .GetEvent(eventName);
             e.AddEventHandler(
                 dependency.Item1,
-                act);
+                eventHandler);
         }
 
         public virtual void Unsubscribe<T>(
             string eventName, 
-            Action act,
+            Action eventHandler,
+            string dependencyName = null)
+        {
+            this.unsubscribeInternal<T>(
+                eventName,
+                eventHandler,
+                dependencyName);
+        }
+
+        public virtual void Unsubscribe<T, U>(
+            string eventName,
+            Action<U> eventHandler,
+            string dependencyName = null)
+        {
+            this.unsubscribeInternal<T>(
+                eventName,
+                eventHandler,
+                dependencyName);
+        }
+
+        private void unsubscribeInternal<T>(
+            string eventName,
+            Delegate eventHandler,
             string dependencyName = null)
         {
             var dependency = this.dependencies
@@ -57,8 +101,8 @@
                 .GetType()
                 .GetEvent(eventName);
             e.RemoveEventHandler(
-                dependency.Item1, 
-                act);
+                dependency.Item1,
+                eventHandler);
         }
 
         public virtual U Run<T, U>(
