@@ -1,5 +1,6 @@
 ﻿namespace xofz.Root.Commands
 {
+    using xofz.Framework;
     using xofz.Presentation;
     using xofz.UI;
 
@@ -7,21 +8,21 @@
     {
         public SetupMainCommand(
             MainUi ui,
-            Navigator navigator)
+            MethodWeb web)
         {
             this.ui = ui;
-            this.navigator = navigator;
+            this.web = web;
         }
 
         public override void Execute()
         {
             new MainPresenter(
-                    this.ui,
-                    this.navigator)
+                this.ui,
+                this.web)
                 .Setup();
         }
 
         private readonly MainUi ui;
-        private readonly Navigator navigator;
+        private readonly MethodWeb web;
     }
 }

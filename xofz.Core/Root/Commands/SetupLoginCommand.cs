@@ -8,30 +8,36 @@
     {
         public SetupLoginCommand(
             LoginUi ui,
-            AccessController accessController,
-            Navigator navigator,
+            MethodWeb web,
             int loginDurationMinutes = 15)
         {
             this.ui = ui;
-            this.accessController = accessController;
-            this.navigator = navigator;
+            this.web = web;
             this.loginDurationMinutes = loginDurationMinutes;
         }
 
         public override void Execute()
         {
+            this.registerDependencies();
             new LoginPresenter(
                 this.ui,
-                new xofz.Framework.Timer(),
-                this.accessController)
+                this.web)
                 .Setup(
-                    this.navigator,
                     this.loginDurationMinutes);
         }
 
+        private void registerDependencies()
+        {
+            var w = this.web;
+            w.RegisterDependency(
+                this.ui);
+            w.RegisterDependency(
+                new xofz.Framework.Timer(),
+                "LoginTimer");
+        }
+
         private readonly LoginUi ui;
-        private readonly AccessController accessController;
-        private readonly Navigator navigator;
+        private readonly MethodWeb web;
         private readonly int loginDurationMinutes;
     }
 }

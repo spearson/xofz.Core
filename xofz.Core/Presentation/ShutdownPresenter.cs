@@ -3,21 +3,24 @@
     using System;
     using System.Diagnostics;
     using UI;
+    using xofz.Framework;
 
     public sealed class ShutdownPresenter : Presenter
     {
         public ShutdownPresenter(
             Ui mainUi, 
-            Action cleanup) 
+            Action cleanup,
+            MethodWeb web) 
             : base(mainUi, null)
         {
             this.mainUi = mainUi;
             this.cleanup = cleanup;
+            this.web = web;
         }
 
-        public void Setup(Navigator navigator)
+        public void Setup()
         {
-            navigator.RegisterPresenter(this);
+            this.web.Run<Navigator>(n => n.RegisterPresenter(this));
         }
 
         public override void Start()
@@ -29,5 +32,6 @@
 
         private readonly Ui mainUi;
         private readonly Action cleanup;
+        private readonly MethodWeb web;
     }
 }

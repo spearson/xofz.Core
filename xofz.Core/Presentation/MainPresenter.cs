@@ -1,17 +1,18 @@
 ﻿namespace xofz.Presentation
 {
     using System.Threading;
+    using xofz.Framework;
     using xofz.UI;
 
     public sealed class MainPresenter : Presenter
     {
         public MainPresenter(
             MainUi ui, 
-            Navigator navigator) 
+            MethodWeb web) 
             : base(ui, null)
         {
             this.ui = ui;
-            this.navigator = navigator;
+            this.web = web;
         }
 
         public void Setup()
@@ -24,13 +25,17 @@
             this.ui.ShutdownRequested += this.ui_ShutdownRequested;
         }
 
+        public override void Start()
+        {
+        }
+
         private void ui_ShutdownRequested()
         {
-            this.navigator.Present<ShutdownPresenter>();
+            this.web.Run<Navigator>(n => n.Present<ShutdownPresenter>());
         }
 
         private int setupIf1;
         private readonly MainUi ui;
-        private readonly Navigator navigator;
+        private readonly MethodWeb web;
     }
 }

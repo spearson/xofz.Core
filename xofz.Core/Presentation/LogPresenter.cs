@@ -14,17 +14,11 @@
         public LogPresenter(
             LogUi ui, 
             ShellUi shell,
-            Log log,
-            xofz.Framework.Timer timer,
-            AccessController accessController,
-            Navigator navigator)
+            MethodWeb web)
             : base(ui, shell)
         {
             this.ui = ui;
-            this.log = log;
-            this.timer = timer;
-            this.accessController = accessController;
-            this.navigator = navigator;
+            this.web = web;
         }
 
         public void Setup(AccessLevel editLevel)
@@ -46,11 +40,20 @@
             });
             
             new Thread(this.ui_DateChanged).Start();
-            this.log.EntryWritten += this.log_EntryWritten;
-            this.timer.Elapsed += this.timer_Elapsed;
-            this.timer.Start(1000);
+            this.web.Subscribe<Log, LogEntry>(
+                "EntryWritten", 
+                this.log_EntryWritten);
             new Thread(this.timer_Elapsed).Start();
-            this.navigator.RegisterPresenter(this);
+
+            this.web.Subscribe<xofz.Framework.Timer>(
+                "Elapsed",
+                this.timer_Elapsed,
+                "LogTimer");
+            this.web.Run<xofz.Framework.Timer>(
+                t => t.Start(1000),
+                "LogTimer");
+
+            this.web.Run<Navigator>(n => n.RegisterPresenter(this));
         }
 
         private void ui_DateChanged()
@@ -58,13 +61,14 @@
             var startDate = UiHelpers.Read(this.ui, () => this.ui.StartDate);
             var endDate = UiHelpers.Read(this.ui, () => this.ui.EndDate);
 
-            var entries = this.log
-                .ReadEntries()
-                .Where(e =>
-                    e.Timestamp >= startDate
-                    && e.Timestamp < endDate.AddDays(1))
-                .OrderByDescending(e => e.Timestamp)
-                .ToList();
+            var entries = this.web.Run<Log, List<LogEntry>>(
+                l => l.ReadEntries()
+                    .Where(e =>
+                        e.Timestamp >= startDate
+                        && e.Timestamp < endDate.AddDays(1))
+                    .OrderByDescending(e => e.Timestamp)
+                    .ToList());
+
             var uiEntries = new LinkedListMaterializedEnumerable<
                 Tuple<string, string, string>>(
                 entries.Select(this.createTuple));
@@ -99,21 +103,21 @@
 
         private void ui_AddKeyTapped()
         {
-            this.navigator.PresentFluidly<LogEditorPresenter>();
+            this.web.Run<Navigator>(
+                n => n.PresentFluidly<LogEditorPresenter>());
         }
 
         private void timer_Elapsed()
         {
-            var visible = this.accessController.CurrentAccessLevel >= this.editLevel;
+            var cal = this.web.Run<AccessController, AccessLevel>(
+                ac => ac.CurrentAccessLevel);
+            var visible = cal >= this.editLevel;
             UiHelpers.Write(this.ui, () => this.ui.AddKeyVisible = visible);
         }
 
         private int setupIf1;
         private AccessLevel editLevel;
         private readonly LogUi ui;
-        private readonly Log log;
-        private readonly xofz.Framework.Timer timer;
-        private readonly AccessController accessController;
-        private readonly Navigator navigator;
+        private readonly MethodWeb web;
     }
 }

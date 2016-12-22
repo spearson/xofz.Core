@@ -10,65 +10,51 @@
         public SetupLogCommand(
             LogUi ui,
             ShellUi shell,
-            AccessController accessController,
-            Navigator navigator,
             LogEditorUi editorUi,
+            MethodWeb web,
             string filePath = @"Log.log",
             AccessLevel editLevel = AccessLevel.None)
         {
             this.ui = ui;
             this.shell = shell;
-            this.accessController = accessController;
-            this.navigator = navigator;
             this.editorUi = editorUi;
+            this.web = web;
             this.filePath = filePath;
             this.editLevel = editLevel;
         }
 
-        public virtual Log Log => this.log;
-
-        public virtual LogEditor Editor => this.editor;
-
         public override void Execute()
         {
-            var l = new TextFileLog(this.filePath);
-            this.setLog(l);
-            this.setEditor(l);
-            var n = this.navigator;
+            this.registerDependencies();
 
+            var w = this.web;
             new LogPresenter(
                 this.ui,
                 this.shell,
-                l,
-                new xofz.Framework.Timer(),
-                this.accessController,
-                n)
+                w)
                 .Setup(
                     this.editLevel);
 
             new LogEditorPresenter(
                 this.editorUi,
-                l)
-                .Setup(n);
+                w)
+                .Setup();
         }
 
-        private void setLog(Log log)
+        private void registerDependencies()
         {
-            this.log = log;
+            var w = this.web;
+            w.RegisterDependency(
+                new TextFileLog(this.filePath));
+            w.RegisterDependency(
+                new xofz.Framework.Timer(),
+                "LogTimer");
         }
 
-        private void setEditor(LogEditor editor)
-        {
-            this.editor = editor;
-        }
-
-        private Log log;
-        private LogEditor editor;
         private readonly LogUi ui;
         private readonly ShellUi shell;
-        private readonly AccessController accessController;
-        private readonly Navigator navigator;
         private readonly LogEditorUi editorUi;
+        private readonly MethodWeb web;
         private readonly string filePath;
         private readonly AccessLevel editLevel;
     }

@@ -10,14 +10,14 @@
     {
         public LogEditorPresenter(
             LogEditorUi ui, 
-            LogEditor editor) 
+            MethodWeb web) 
             : base(ui, null)
         {
             this.ui = ui;
-            this.editor = editor;
+            this.web = web;
         }
 
-        public void Setup(Navigator navigator)
+        public void Setup()
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
             {
@@ -33,7 +33,7 @@
                 this.ui.SelectedType = "Information";
             });
 
-            navigator.RegisterPresenter(this);
+            this.web.Run<Navigator>(n => n.RegisterPresenter(this));
         }
 
         public override void Start()
@@ -59,9 +59,9 @@
                 ? UiHelpers.Read(this.ui, () => this.ui.CustomType)
                 : UiHelpers.Read(this.ui, () => this.ui.SelectedType);
 
-            this.editor.AddEntry(
+            this.web.Run<LogEditor>(le => le.AddEntry(
                 type,
-                UiHelpers.Read(this.ui, () => this.ui.Content));
+                UiHelpers.Read(this.ui, () => this.ui.Content)));
 
             UiHelpers.Write(this.ui, () =>
             {
@@ -73,6 +73,6 @@
 
         private int setupIf1;
         private readonly LogEditorUi ui;
-        private readonly LogEditor editor;
+        private readonly MethodWeb web;
     }
 }

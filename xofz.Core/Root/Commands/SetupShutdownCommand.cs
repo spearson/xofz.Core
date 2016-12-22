@@ -1,6 +1,7 @@
 ﻿namespace xofz.Root.Commands
 {
     using System;
+    using xofz.Framework;
     using xofz.Presentation;
     using xofz.UI;
 
@@ -8,32 +9,32 @@
     {
         public SetupShutdownCommand(
             Ui mainUi,
-            Navigator navigator)
-            : this(mainUi, navigator, () => { })
+            MethodWeb web)
+            : this(mainUi, () => { }, web)
         {
         }
 
         public SetupShutdownCommand(
             Ui mainUi,
-            Navigator navigator,
-            Action cleanup)
+            Action cleanup,
+            MethodWeb web)
         {
             this.mainUi = mainUi;
-            this.navigator = navigator;
             this.cleanup = cleanup;
+            this.web = web;
         }
 
         public override void Execute()
         {
             new ShutdownPresenter(
                 this.mainUi,
-                this.cleanup)
-                .Setup(
-                    this.navigator);
+                this.cleanup,
+                this.web)
+                .Setup();
         }
 
         private readonly Ui mainUi;
-        private readonly Navigator navigator;
         private readonly Action cleanup;
+        private readonly MethodWeb web;
     }
 }

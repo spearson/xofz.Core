@@ -14,18 +14,18 @@
             Application.SetCompatibleTextRenderingDefault(false);
 
             var e = new CommandExecutor();
-            var n = new Navigator();
             var ac = new AccessController(new[] { "1111" });
             var shell = new LogTester();
+            var w = new MethodWeb();
+            w.RegisterDependency(new Navigator());
 
             e.Execute(
                 new SetupLogCommand(
                     new UserControlLogUi(),
                     shell,
-                    ac,
-                    n,
-                    new FormLogEditorUi(shell)));
-            n.Present<LogPresenter>();
+                    new FormLogEditorUi(shell),
+                    w));
+            w.Run<Navigator>(n => n.Present<LogPresenter>());
             Application.Run(shell);
         }
     }

@@ -9,19 +9,16 @@
     public class LoginPresenter : Presenter, IDisposable
     {
         public LoginPresenter(
-            LoginUi ui, 
-            Timer timer, 
-            AccessController accessController)
+            LoginUi ui,
+            MethodWeb web)
             : base(ui, null)
         {
             this.ui = ui;
-            this.timer = timer;
-            this.accessController = accessController;
+            this.web = web;
             this.timerHandlerFinished = new ManualResetEvent(true);
         }
 
         public virtual void Setup(
-            Navigator navigator, 
             int loginDurationMinutes)
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
@@ -30,14 +27,18 @@
             }
 
             this.loginDurationMinutes = loginDurationMinutes;
-            this.timer.Elapsed += this.timer_Elapsed;
+
             this.ui.LoginKeyTapped += this.ui_LoginKeyTapped;
             this.ui.CancelKeyTapped += this.Stop;
             this.ui.BackspaceKeyTapped += this.ui_BackspaceKeyTapped;
             UiHelpers.Write(this.ui, () => this.ui.TimeRemaining = "Not logged in");
-            navigator.RegisterPresenter(this);
 
-            this.timer.Start(1000);
+            this.web.Subscribe<Timer>(
+                "Elapsed",
+                this.timer_Elapsed,
+                "LoginTimer");
+            this.web.Run<Navigator>(n => n.RegisterPresenter(this));
+            this.web.Run<Timer>(t => t.Start(1000), "LoginTimer");
         }
 
         public override void Start()
@@ -58,7 +59,7 @@
 
         public void Dispose()
         {
-            this.timer.Stop();
+            this.web.Run<Timer>(t => t.Stop(), "LoginTimer");
             this.timerHandlerFinished.WaitOne();
         }
 
@@ -70,10 +71,14 @@
 
         private void ui_LoginKeyTapped()
         {
-            var password = UiHelpers.Read(this.ui, () => this.ui.CurrentPassword);
-            var ac = this.accessController;
-            ac.InputPassword(password);
-            if (ac.CurrentAccessLevel == AccessLevel.None)
+            var password = UiHelpers.Read(
+                this.ui, () => this.ui.CurrentPassword);
+            this.web.Run<AccessController>(
+                ac => ac.InputPassword(password));
+            var cal = this.web.Run<AccessController, AccessLevel>(
+                ac => ac.CurrentAccessLevel);
+
+            if (cal == AccessLevel.None)
             {
                 // show login failed message
                 this.setOldPassword(string.Empty);
@@ -82,7 +87,7 @@
 
             this.setOldPassword(password);
             this.setElapsedSeconds(0);
-            
+
             this.Stop();
         }
 
@@ -101,11 +106,13 @@
             this.timerHandlerFinished.Reset();
             var elapsed = this.elapsedSeconds + 1;
             this.setElapsedSeconds(elapsed);
-            var currentAccessLevel = this.accessController.CurrentAccessLevel;
+            var cal = this.web.Run<AccessController, AccessLevel>(
+                ac => ac.CurrentAccessLevel);
             var duration = this.loginDurationMinutes * 60;
-            UiHelpers.Write(this.ui, () => this.ui.TimeRemaining = currentAccessLevel > AccessLevel.None
-                ? TimeSpan.FromSeconds(duration - elapsed).ToString()
-                : "Not logged in");
+            UiHelpers.Write(this.ui,
+                () => this.ui.TimeRemaining = cal > AccessLevel.None
+                    ? TimeSpan.FromSeconds(duration - elapsed).ToString()
+                    : "Not logged in");
 
             if (elapsed != duration)
             {
@@ -125,8 +132,7 @@
         private long elapsedSeconds;
         private string oldPassword;
         private readonly LoginUi ui;
-        private readonly Timer timer;
-        private readonly AccessController accessController;
+        private readonly MethodWeb web;
         private readonly ManualResetEvent timerHandlerFinished;
     }
 }
