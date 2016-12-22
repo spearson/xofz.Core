@@ -1,8 +1,11 @@
-﻿namespace xofz.Framework
+﻿using System;
+
+namespace xofz.Framework
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using xofz.Presentation;
 
     public class MethodWeb
     {
@@ -121,7 +124,7 @@
         }
 
         public virtual T Run<T>(
-            Action<T> method,
+            Action<T> method = null,
             string dependencyName = null)
         {
             var dependency = this.dependencies
@@ -133,7 +136,7 @@
             }
 
             var t = (T)dependency.Item1;
-            method(t);
+            method?.Invoke(t);
 
             return t;
         }
