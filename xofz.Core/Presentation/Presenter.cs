@@ -7,7 +7,6 @@
         public Presenter(Ui ui, ShellUi shell)
         {
             this.ui = ui;
-            this.ui?.AssertStability();
             this.shell = shell;
         }
 
