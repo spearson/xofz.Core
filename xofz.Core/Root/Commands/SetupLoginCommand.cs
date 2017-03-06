@@ -30,8 +30,6 @@
         {
             var w = this.web;
             w.RegisterDependency(
-                this.ui);
-            w.RegisterDependency(
                 new xofz.Framework.Timer(),
                 "LoginTimer");
         }
