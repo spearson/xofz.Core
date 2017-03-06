@@ -205,7 +205,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Framework\Materialization\QueueMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\SingleMaterializedEnumerable.cs" />
-    <Compile Include="Framework\Materialization\SixMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\StackMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\StringMaterializedEnumerable.cs" />
     <Compile Include="Framework\Transformation\EnumerableSplicer.cs" />
