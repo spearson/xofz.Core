@@ -9,10 +9,12 @@
     {
         public CompositeUi()
         {
-            this.uis = new List<Tuple<Ui, object>>(8192);
+            this.uis = new List<Tuple<Ui, object, string>>(0x10000);
         }
 
-        public virtual TUi ReadUi<TUi, TPresenter>(string name = null)
+        public virtual TUi ReadUi<TUi, TPresenter>(
+            string presenterName = null,
+            string uiName = null)
             where TUi : Ui
         {
             var matches = this.uis.Where(ui => ui.Item1 is TUi).ToList();
@@ -21,29 +23,47 @@
                 return default(TUi);
             }
 
-            if (name == null)
+            if (presenterName == null)
             {
-                return (TUi)matches.First().Item1;
+                var match = matches.FirstOrDefault(
+                    tuple => tuple.Item3 == uiName);
+                if (match == null)
+                {
+                    return default(TUi);
+                }
+
+                return (TUi)match.Item1;
             }
 
-            var namedMatch = matches.FirstOrDefault(
+            var namedMatches = matches.Where(
                 t => t.Item2 is NamedPresenter &&
-                     ((NamedPresenter)t.Item2).Name == name);
-            if (namedMatch == null)
+                     ((NamedPresenter)t.Item2).Name == presenterName)
+                     .ToList();
+            if (namedMatches.Count == 0)
             {
                 return default(TUi);
             }
 
-            return (TUi)namedMatch.Item1;
+            var uiMatch = namedMatches.FirstOrDefault(
+                nm => nm.Item3 == uiName);
+            if (uiMatch == null)
+            {
+                return default(TUi);
+            }
+
+            return (TUi)uiMatch.Item1;
         }
 
         public virtual TResult Read<TUi, TResult>(
             object presenter,
-            Func<TUi, TResult> read)
+            Func<TUi, TResult> read,
+            string uiName = null)
             where TUi : Ui
         {
             var match = this.uis.FirstOrDefault(
-                tuple => tuple.Item2 == presenter && tuple.Item1 is TUi);
+                tuple => tuple.Item2 == presenter 
+                && tuple.Item1 is TUi
+                && tuple.Item3 == uiName);
             var matchAsUi = (TUi)match?.Item1;
             return matchAsUi != null 
                 ? UiHelpers.Read(matchAsUi, () => read(matchAsUi)) 
@@ -60,19 +80,22 @@
 
         public virtual TUi Write<TUi>(
             object presenter, 
-            Action<TUi> write) 
+            Action<TUi> write,
+            string uiName = null) 
             where TUi : Ui
         {
             var match = this.uis.FirstOrDefault(
-                tuple => tuple.Item2 == presenter && tuple.Item1 is TUi);
+                tuple => tuple.Item2 == presenter 
+                && tuple.Item1 is TUi
+                && tuple.Item3 == uiName);
             var matchAsUi = (TUi)match?.Item1;
-            if (matchAsUi != null)
+            if (matchAsUi == null)
             {
-                UiHelpers.Write(matchAsUi, () => write(matchAsUi));
-                return matchAsUi;
+                return default(TUi);
             }
 
-            return default(TUi);
+            UiHelpers.Write(matchAsUi, () => write(matchAsUi));
+            return matchAsUi;
         }
 
         public virtual void Write<TUi>(
@@ -83,11 +106,18 @@
             UiHelpers.Write(ui, () => write(ui));
         }
 
-        public virtual void Register(Ui ui, object presenter)
+        public virtual void Register(
+            Ui ui, 
+            object presenter,
+            string uiName = null)
         {
-            this.uis.Add(Tuple.Create(ui, presenter));
+            this.uis.Add(
+                Tuple.Create(
+                    ui, 
+                    presenter,
+                    uiName));
         }
 
-        private readonly IList<Tuple<Ui, object>> uis;
+        private readonly IList<Tuple<Ui, object, string>> uis;
     }
 }
