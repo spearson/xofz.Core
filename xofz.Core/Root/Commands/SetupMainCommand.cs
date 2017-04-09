@@ -8,21 +8,25 @@
     {
         public SetupMainCommand(
             MainUi ui,
-            MethodWeb web)
+            MethodWeb web,
+            AccessLevel shutdownLevel = AccessLevel.None)
         {
             this.ui = ui;
             this.web = web;
+            this.shutdownLevel = shutdownLevel;
         }
 
         public override void Execute()
         {
             new MainPresenter(
-                this.ui,
-                this.web)
-                .Setup();
+                    this.ui,
+                    this.web)
+                .Setup(
+                    this.shutdownLevel);
         }
 
         private readonly MainUi ui;
         private readonly MethodWeb web;
+        private readonly AccessLevel shutdownLevel;
     }
 }

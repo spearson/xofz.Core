@@ -15,13 +15,14 @@
             this.web = web;
         }
 
-        public void Setup()
+        public void Setup(AccessLevel shutdownLevel)
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
             {
                 return;
             }
 
+            this.shutdownLevel = shutdownLevel;
             this.ui.ShutdownRequested += this.ui_ShutdownRequested;
         }
 
@@ -31,10 +32,22 @@
 
         private void ui_ShutdownRequested()
         {
-            this.web.Run<Navigator>(n => n.Present<ShutdownPresenter>());
+            var w = this.web;
+            var cal = w.Run<AccessController, AccessLevel>(
+                ac => ac.CurrentAccessLevel);
+
+            if (cal >= this.shutdownLevel)
+            {
+                w.Run<Navigator>(n => n.Present<ShutdownPresenter>());
+            }
+            else
+            {
+                w.Run<Navigator>(n => n.PresentFluidly<LoginPresenter>());
+            }
         }
 
         private int setupIf1;
+        private AccessLevel shutdownLevel;
         private readonly MainUi ui;
         private readonly MethodWeb web;
     }
