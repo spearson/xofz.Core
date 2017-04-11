@@ -22,6 +22,8 @@
                     yield return e.Current;
                 }
             }
+
+            e.Dispose();
         }
     }
 }

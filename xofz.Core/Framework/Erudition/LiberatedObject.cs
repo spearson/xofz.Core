@@ -19,7 +19,7 @@
 
         public virtual int DependencyCount => this.dependencies.Count;
 
-        public virtual dynamic this[int index] => (dynamic)this.dependencies[index];
+        public virtual dynamic this[int index] => this.dependencies[index];
 
         public virtual T GetDependency<T>()
         {

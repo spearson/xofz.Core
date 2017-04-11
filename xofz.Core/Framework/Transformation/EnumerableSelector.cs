@@ -16,6 +16,9 @@
                     yield return e1.Current;
                 }
             }
+
+            e1.Dispose();
+            e2.Dispose();
         }
     }
 }

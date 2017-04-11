@@ -19,12 +19,14 @@
                 evaluation = enumerator.Current();
                 if (!evaluation)
                 {
+                    enumerator.Dispose();
                     return false;
                 }
 
                 ++counter;
             }
 
+            enumerator.Dispose();
             return true;
         }
 
@@ -42,12 +44,14 @@
                 evaluation = enumerator.Current(actor);
                 if (!evaluation)
                 {
+                    enumerator.Dispose();
                     return false;
                 }
 
                 ++counter;
             }
 
+            enumerator.Dispose();
             return true;
         }
     }

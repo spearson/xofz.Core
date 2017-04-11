@@ -13,26 +13,22 @@
 
         public virtual BigInteger Compute(params BigInteger[] powers)
         {
-            var bp = this.bigPow;
-            BigInteger result = 1;
-            for (var i = powers.Length - 1; i > 0; --i)
-            {
-                result = bp.Compute(powers[i - 1], powers[i]);
-                powers[i - 1] = result;
-            }
-
-            return result;
+            return this.computeInternal(powers);
         }
 
         public virtual BigInteger Compute(IEnumerable<BigInteger> powers)
         {
+            return this.computeInternal(new List<BigInteger>(powers));
+        }
+
+        private BigInteger computeInternal(IList<BigInteger> powers)
+        {
             var bp = this.bigPow;
-            var l = new List<BigInteger>(powers);
             BigInteger result = 1;
-            for (var i = l.Count - 1; i > 0; --i)
+            for (var i = powers.Count - 1; i > 0; --i)
             {
-                result = bp.Compute(l[i - 1], l[i]);
-                l[i - 1] = result;
+                result = bp.Compute(powers[i - 1], powers[i]);
+                powers[i - 1] = result;
             }
 
             return result;

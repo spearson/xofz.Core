@@ -40,6 +40,7 @@
                 generalArray[i] = array[i];
             }
 
+            enumerator.Dispose();
             return generalArray;
         }
     }

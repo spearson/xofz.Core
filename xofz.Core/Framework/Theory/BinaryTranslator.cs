@@ -50,6 +50,7 @@
             {
                 if (!e.MoveNext())
                 {
+                    e.Dispose();
                     break;
                 }
 

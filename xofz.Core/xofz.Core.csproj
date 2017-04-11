@@ -116,6 +116,8 @@
     <Compile Include="Framework\Transformation\EnumerableHeartbeater.cs" />
     <Compile Include="Framework\Transformation\EnumerableInjector.cs" />
     <Compile Include="Framework\Transformation\EnumerableInterceptor.cs" />
+    <Compile Include="Framework\Transformation\EnumerableJoiner.cs" />
+    <Compile Include="Framework\Transformation\EnumerableKicker.cs" />
     <Compile Include="Framework\Transformation\EnumerablePicker.cs" />
     <Compile Include="Framework\Transformation\EnumerableRaker.cs" />
     <Compile Include="Framework\Transformation\EnumerableSkipper.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Framework\Transformation\EnumerableStriker.cs" />
     <Compile Include="Framework\Transformation\EnumerableTargeter.cs" />
     <Compile Include="Framework\Transformation\EnumerableTrapper.cs" />
+    <Compile Include="Framework\Transformation\EnumerableTriggerer.cs" />
     <Compile Include="Framework\Transformation\Innovator.cs" />
     <Compile Include="Framework\Transformation\Reorderer.cs" />
     <Compile Include="Framework\Transformation\EnumerableSelector.cs" />
