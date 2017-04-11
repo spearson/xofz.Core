@@ -53,7 +53,7 @@
             var e3 = source3.GetEnumerator();
             var e4 = source4.GetEnumerator();
 
-            while (e1.MoveNext() && e2.MoveNext() && e3.MoveNext())
+            while (e1.MoveNext() && e2.MoveNext() && e3.MoveNext() && e4.MoveNext())
             {
                 yield return Tuple.Create(
                     e1.Current, 
