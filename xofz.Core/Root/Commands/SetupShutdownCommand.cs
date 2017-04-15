@@ -27,9 +27,9 @@
         public override void Execute()
         {
             new ShutdownPresenter(
-                this.mainUi,
-                this.cleanup,
-                this.web)
+                    this.mainUi,
+                    this.cleanup,
+                    this.web)
                 .Setup();
         }
 

@@ -29,15 +29,15 @@
 
             var w = this.web;
             new LogPresenter(
-                this.ui,
-                this.shell,
-                w)
+                    this.ui,
+                    this.shell,
+                    w)
                 .Setup(
                     this.editLevel);
 
             new LogEditorPresenter(
-                this.editorUi,
-                w)
+                    this.editorUi,
+                    w)
                 .Setup();
         }
 

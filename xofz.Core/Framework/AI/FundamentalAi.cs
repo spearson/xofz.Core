@@ -23,6 +23,7 @@
                 linkedList.AddLast(value);
             }
 
+            actionEnumerator.Dispose();
             return new LinkedListMaterializedEnumerable<T>(linkedList);
         }
 

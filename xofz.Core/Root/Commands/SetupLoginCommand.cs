@@ -20,8 +20,8 @@
         {
             this.registerDependencies();
             new LoginPresenter(
-                this.ui,
-                this.web)
+                    this.ui,
+                    this.web)
                 .Setup(
                     this.loginDurationMinutes);
         }

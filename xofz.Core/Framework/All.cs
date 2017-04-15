@@ -4,7 +4,10 @@
 
     public class All<T>
     {
-        public All(EnumerableSplicer splicer, Beholder<T> beholder, Nightfall nightfall)
+        public All(
+            EnumerableSplicer splicer,
+            Beholder<T> beholder,
+            Nightfall nightfall)
         {
             this.Splicer = splicer;
             this.Beholder = beholder;

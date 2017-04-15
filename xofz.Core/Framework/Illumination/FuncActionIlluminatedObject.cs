@@ -4,7 +4,8 @@
 
     public sealed class FuncActionIlluminatedObject<T> : IlluminatedObject
     {
-        public FuncActionIlluminatedObject(Func<T> func, Action<T> action) : base(new object[] { func, action })
+        public FuncActionIlluminatedObject(Func<T> func, Action<T> action) 
+            : base(new object[] { func, action })
         {
             this.func = func;
             this.action = action;

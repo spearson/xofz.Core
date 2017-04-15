@@ -40,6 +40,7 @@
                 }
             }
 
+            enumerator.Dispose();
             return new LinkedListMaterializedEnumerable<Action<T>>(ll);
         }
 
@@ -66,6 +67,8 @@
             {
                 t.Join();
             }
+
+            enumerator.Dispose();
         }
 
         private readonly Tree<Action<T>> computations;
