@@ -25,6 +25,8 @@
 
             this.shutdownLevel = shutdownLevel;
             this.ui.ShutdownRequested += this.ui_ShutdownRequested;
+            var w = this.web;
+            w.Run<Navigator>(n => n.RegisterPresenter(this));
         }
 
         public override void Start()
