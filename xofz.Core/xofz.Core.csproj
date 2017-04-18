@@ -263,6 +263,7 @@
     <Compile Include="UI\LogUi.cs" />
     <Compile Include="UI\MainUi.cs" />
     <Compile Include="UI\Messenger.cs" />
+    <Compile Include="UI\MinimizableUi.cs" />
     <Compile Include="UI\PopupUi.cs" />
     <Compile Include="UI\Response.cs" />
     <Compile Include="UI\ShellUi.cs" />

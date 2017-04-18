@@ -18,7 +18,7 @@
                     result = MessageBox.Show(
                         subscriber,
                         question,
-                        "?",
+                        @"?",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question);
                 }
@@ -27,7 +27,7 @@
             {
                 result = MessageBox.Show(
                     question,
-                    "?",
+                    @"?",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
             }

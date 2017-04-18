@@ -7,7 +7,7 @@
     {
         public CommandExecutor()
         {
-            this.executedCommands = new List<Command>(0x100);
+            this.executedCommands = new List<Command>(0x1000);
         }
 
         public virtual T Get<T>() where T : Command

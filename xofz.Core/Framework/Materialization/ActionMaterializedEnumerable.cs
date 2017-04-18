@@ -25,6 +25,8 @@
                 yield return item;
                 enumerator.MoveNext();
             }
+
+            enumerator.Dispose();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -48,6 +50,8 @@
                 enumerator.MoveNext();
                 ++counter;
             }
+
+            enumerator.Dispose();
         }
 
         private readonly IEnumerable<Action<T>> source;

@@ -16,6 +16,9 @@
             {
                 yield return strike(te.Current, ke.Current);
             }
+
+            te.Dispose();
+            ke.Dispose();
         }
 
         public virtual IEnumerable<K> Strike<T, K>(
@@ -29,6 +32,9 @@
             {
                 yield return strike(te.Current, ke.Current);
             }
+
+            te.Dispose();
+            ke.Dispose();
         }
     }
 }

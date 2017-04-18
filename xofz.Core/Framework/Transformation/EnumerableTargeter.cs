@@ -47,6 +47,8 @@
                 }
             }
 
+            e.Dispose();
+
             // if target not found, return the last radius number of items
             return new LinkedListMaterializedEnumerable<T>(l);
         }

@@ -15,7 +15,8 @@
             this.web = web;
         }
 
-        public void Setup(AccessLevel shutdownLevel = AccessLevel.None)
+        public void Setup(
+            AccessLevel shutdownLevel = AccessLevel.None)
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
             {

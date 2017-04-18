@@ -35,6 +35,8 @@
             {
                 yield return enumerator.Current;
             }
+
+            enumerator.Dispose();
         }
     }
 }
