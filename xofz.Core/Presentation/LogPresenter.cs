@@ -21,7 +21,7 @@
             this.web = web;
         }
 
-        public void Setup(AccessLevel editLevel)
+        public void Setup(AccessLevel editLevel, bool resetOnStart = false)
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
             {
@@ -29,14 +29,14 @@
             }
 
             this.editLevel = editLevel;
+            this.resetOnStart = resetOnStart;
             this.ui.StartDateChanged += this.ui_DateChanged;
             this.ui.EndDateChanged += this.ui_DateChanged;
             this.ui.AddKeyTapped += this.ui_AddKeyTapped;
+            this.resetDates();
             UiHelpers.Write(this.ui, () =>
             {
                 this.ui.AddKeyVisible = false;
-                this.ui.StartDate = DateTime.Today.Subtract(TimeSpan.FromDays(7));
-                this.ui.EndDate = DateTime.Today;
             });
             
             new Thread(this.ui_DateChanged).Start();
@@ -54,6 +54,32 @@
                 "LogTimer");
 
             this.web.Run<Navigator>(n => n.RegisterPresenter(this));
+        }
+
+        public override void Start()
+        {
+            if (Interlocked.Read(ref this.setupIf1) == 0)
+            {
+                return;
+            }
+
+            if (this.resetOnStart)
+            {
+                this.resetDates();
+            }
+
+            base.Start();
+        }
+
+        private void resetDates()
+        {
+            var today = DateTime.Today;
+            var lastWeek = today.Subtract(TimeSpan.FromDays(7));
+            UiHelpers.Write(this.ui, () =>
+            {
+                this.ui.StartDate = lastWeek;
+                this.ui.EndDate = today;
+            });
         }
 
         private void ui_DateChanged()
@@ -115,7 +141,8 @@
             UiHelpers.Write(this.ui, () => this.ui.AddKeyVisible = visible);
         }
 
-        private int setupIf1;
+        private long setupIf1;
+        private bool resetOnStart;
         private AccessLevel editLevel;
         private readonly LogUi ui;
         private readonly MethodWeb web;
