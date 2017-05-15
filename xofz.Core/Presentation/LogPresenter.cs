@@ -39,7 +39,6 @@
                 this.ui.AddKeyVisible = false;
             });
             
-            new Thread(this.ui_DateChanged).Start();
             this.web.Subscribe<Log, LogEntry>(
                 "EntryWritten", 
                 this.log_EntryWritten);

@@ -85,19 +85,19 @@
             set { this.addKey.Visible = value; }
         }
 
-        private void startDatePicker_DateSelected(object sender, DateRangeEventArgs e)
+        private void addKey_Click(object sender, EventArgs e)
+        {
+            new Thread(() => this.AddKeyTapped?.Invoke()).Start();
+        }
+
+        private void startDatePicker_DateChanged(object sender, DateRangeEventArgs e)
         {
             new Thread(() => this.StartDateChanged?.Invoke()).Start();
         }
 
-        private void endDatePicker_DateSelected(object sender, DateRangeEventArgs e)
+        private void endDatePicker_DateChanged(object sender, DateRangeEventArgs e)
         {
             new Thread(() => this.EndDateChanged?.Invoke()).Start();
-        }
-
-        private void addKey_Click(object sender, EventArgs e)
-        {
-            new Thread(() => this.AddKeyTapped?.Invoke()).Start();
         }
     }
 }
