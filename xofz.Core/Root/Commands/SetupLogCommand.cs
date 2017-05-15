@@ -13,7 +13,8 @@
             LogEditorUi editorUi,
             MethodWeb web,
             string filePath = @"Log.log",
-            AccessLevel editLevel = AccessLevel.None)
+            AccessLevel editLevel = AccessLevel.None,
+            bool resetOnStart = false)
         {
             this.ui = ui;
             this.shell = shell;
@@ -21,6 +22,7 @@
             this.web = web;
             this.filePath = filePath;
             this.editLevel = editLevel;
+            this.resetOnStart = resetOnStart;
         }
 
         public override void Execute()
@@ -33,7 +35,8 @@
                     this.shell,
                     w)
                 .Setup(
-                    this.editLevel);
+                    this.editLevel,
+                    this.resetOnStart);
 
             new LogEditorPresenter(
                     this.editorUi,
@@ -57,5 +60,6 @@
         private readonly MethodWeb web;
         private readonly string filePath;
         private readonly AccessLevel editLevel;
+        private readonly bool resetOnStart;
     }
 }
