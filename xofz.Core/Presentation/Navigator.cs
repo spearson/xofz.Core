@@ -47,13 +47,13 @@
                     continue;
                 }
 
+                foreach (var p in this.presenters)
+                {
+                    p.Stop();
+                }
+
                 new Thread(() =>
                 {
-                    foreach (var p in this.presenters)
-                    {
-                        p.Stop();
-                    }
-
                     presenter.Start();
                 }).Start();
                 
