@@ -136,6 +136,7 @@
     <Compile Include="Presentation\LoginPresenter.cs" />
     <Compile Include="Presentation\LogPresenter.cs" />
     <Compile Include="Presentation\MainPresenter.cs" />
+    <Compile Include="Presentation\PopupNamedPresenter.cs" />
     <Compile Include="Presentation\PopupPresenter.cs" />
     <Compile Include="Presentation\ShutdownPresenter.cs" />
     <Compile Include="Root\Commands\SetupLogCommand.cs" />
