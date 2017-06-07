@@ -180,7 +180,7 @@
     <Compile Include="Framework\Illumination\MemberFieldIlluminatedObject.cs" />
     <Compile Include="Framework\Illumination\StringIlluminatedObject.cs" />
     <Compile Include="Framework\Illumination\TcpIlluminatedObject.cs" />
-    <Compile Include="Presentation\EventRaiser.cs" />
+    <Compile Include="Framework\EventRaiser.cs" />
     <Compile Include="Presentation\NamedPresenter.cs" />
     <Compile Include="Presentation\Navigator.cs" />
     <Compile Include="Presentation\Presenter.cs" />

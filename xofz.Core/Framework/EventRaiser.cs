@@ -1,4 +1,4 @@
-﻿namespace xofz.Presentation
+﻿namespace xofz.Framework
 {
     using System;
     using System.Reflection;

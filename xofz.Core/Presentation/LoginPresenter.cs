@@ -52,8 +52,11 @@
 
         public override void Stop()
         {
-            UiHelpers.Write(this.ui, () => this.ui.CurrentPassword = this.oldPassword);
-            UiHelpers.Write(this.ui, () => this.ui.Hide());
+            UiHelpers.Write(this.ui, () =>
+            {
+                this.ui.CurrentPassword = this.oldPassword;
+                this.ui.Hide();
+            });
             this.ui.WriteFinished.WaitOne();
         }
 
