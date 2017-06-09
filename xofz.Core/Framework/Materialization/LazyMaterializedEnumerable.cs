@@ -8,12 +8,13 @@
     public sealed class LazyMaterializedEnumerable<T> : MaterializedEnumerable<T>
     {
         public LazyMaterializedEnumerable(IEnumerable<T> source)
+            : this(source, new LinkedListMaterializer())
         {
-            this.source = source;
-            this.materializer = new Materializer();
         }
 
-        public LazyMaterializedEnumerable(IEnumerable<T> source, Materializer materializer)
+        public LazyMaterializedEnumerable(
+            IEnumerable<T> source, 
+            Materializer materializer)
         {
             this.source = source;
             this.materializer = materializer;

@@ -101,6 +101,12 @@
     <Compile Include="Framework\Martyr\FreedomHolder.cs" />
     <Compile Include="Framework\Martyr\Martyr.cs" />
     <Compile Include="Framework\Martyr\PrescientInvoker.cs" />
+    <Compile Include="Framework\Materialization\ArrayMaterializer.cs" />
+    <Compile Include="Framework\Materialization\HashSetMaterializer.cs" />
+    <Compile Include="Framework\Materialization\LinkedListMaterializer.cs" />
+    <Compile Include="Framework\Materialization\OrderedMaterializer.cs" />
+    <Compile Include="Framework\Materialization\QueueMaterializer.cs" />
+    <Compile Include="Framework\Materialization\StackMaterializer.cs" />
     <Compile Include="Framework\MethodWeb.cs" />
     <Compile Include="Framework\Nightfall.cs" />
     <Compile Include="Framework\Theory\BinaryTranslator.cs" />
@@ -132,6 +138,7 @@
     <Compile Include="Framework\Transformation\EnumerableSelector.cs" />
     <Compile Include="Framework\Transformation\Striker.cs" />
     <Compile Include="Framework\Transformation\Translator.cs" />
+    <Compile Include="Materializer.cs" />
     <Compile Include="Presentation\LogEditorPresenter.cs" />
     <Compile Include="Presentation\LoginPresenter.cs" />
     <Compile Include="Presentation\LogPresenter.cs" />
@@ -204,7 +211,6 @@
     <Compile Include="Framework\Materialization\LazyMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\LinkedListMaterializedEnumerable.cs" />
     <Compile Include="MaterializedEnumerable.cs" />
-    <Compile Include="Framework\Materialization\Materializer.cs" />
     <Compile Include="Framework\Materialization\OrderedMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ValueKeyPairMaterializedEnumerable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
