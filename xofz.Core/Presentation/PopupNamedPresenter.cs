@@ -11,8 +11,6 @@
             this.ui = ui;
         }
 
-        public override string Name { get; set; }
-
         public override void Start()
         {
             UiHelpers.Write(this.ui, () => this.ui.Display());
