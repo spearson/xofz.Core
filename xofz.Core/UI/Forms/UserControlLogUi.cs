@@ -4,12 +4,13 @@
     using System.Collections.Generic;
     using System.Threading;
     using System.Windows.Forms;
-    using xofz.Framework.Materialization;
 
     public partial class UserControlLogUi : UserControlUi, LogUi
     {
-        public UserControlLogUi()
+        public UserControlLogUi(Materializer materializer)
         {
+            this.materializer = materializer;
+
             this.InitializeComponent();
 
             var h = this.Handle;
@@ -41,8 +42,7 @@
                     }
                 }
 
-                return new LinkedListMaterializedEnumerable<
-                    Tuple<string, string, string>>(ll);
+                return this.materializer.Materialize(ll);
             }
 
             set
@@ -58,7 +58,7 @@
 
         DateTime LogUi.StartDate
         {
-            get { return this.startDatePicker.SelectionStart; }
+            get => this.startDatePicker.SelectionStart;
 
             set
             {
@@ -69,7 +69,7 @@
 
         DateTime LogUi.EndDate
         {
-            get { return this.endDatePicker.SelectionStart; }
+            get => this.endDatePicker.SelectionStart;
 
             set
             {
@@ -80,9 +80,9 @@
 
         bool LogUi.AddKeyVisible
         {
-            get { return this.addKey.Visible; }
+            get => this.addKey.Visible;
 
-            set { this.addKey.Visible = value; }
+            set => this.addKey.Visible = value;
         }
 
         private void addKey_Click(object sender, EventArgs e)
@@ -99,5 +99,7 @@
         {
             new Thread(() => this.EndDateChanged?.Invoke()).Start();
         }
+
+        private readonly Materializer materializer;
     }
 }
