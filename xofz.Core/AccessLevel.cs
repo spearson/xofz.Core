@@ -1,4 +1,4 @@
-﻿namespace xofz.Framework
+﻿namespace xofz
 {
     public enum AccessLevel
     {

@@ -24,16 +24,28 @@
 
         string LoginUi.CurrentPassword
         {
-            get { return this.passwordTextBox.Text; }
+            get => this.passwordTextBox.Text;
 
-            set { this.passwordTextBox.Text = value; }
+            set => this.passwordTextBox.Text = value;
         }
 
         public string TimeRemaining
         {
-            get { return this.timeRemainingLabel.Text; }
+            get => this.timeRemainingLabel.Text;
 
-            set { this.timeRemainingLabel.Text = value; }
+            set => this.timeRemainingLabel.Text = value;
+        }
+
+        AccessLevel LoginUi.CurrentAccessLevel
+        {
+            get => this.currentAccessLevel;
+
+            set
+            {
+                this.currentAccessLevel = value;
+                this.Text = @"Log In [Current Access Level: "
+                            + value + @"]";
+            }
         }
 
         void LoginUi.Display()
@@ -94,6 +106,7 @@
         }
 
         private bool firstNumKeyPressed;
+        private AccessLevel currentAccessLevel;
         private readonly Form shell;
     }
 }

@@ -14,6 +14,8 @@
 
         string TimeRemaining { get; set; }
 
+        AccessLevel CurrentAccessLevel { get; set; }
+
         void Display();
 
         void Hide();

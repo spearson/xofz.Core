@@ -113,9 +113,13 @@
                 ac => ac.CurrentAccessLevel);
             var duration = this.loginDurationMinutes * 60;
             UiHelpers.Write(this.ui,
-                () => this.ui.TimeRemaining = cal > AccessLevel.None
-                    ? TimeSpan.FromSeconds(duration - elapsed).ToString()
-                    : "Not logged in");
+                () =>
+                {
+                    this.ui.CurrentAccessLevel = cal;
+                    this.ui.TimeRemaining = cal > AccessLevel.None
+                        ? TimeSpan.FromSeconds(duration - elapsed).ToString()
+                        : "Not logged in";
+                });
 
             if (elapsed != duration)
             {
