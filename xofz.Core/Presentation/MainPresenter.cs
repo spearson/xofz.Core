@@ -45,7 +45,16 @@
             }
             else
             {
-                w.Run<Navigator>(n => n.PresentFluidly<LoginPresenter>());
+                w.Run<Navigator>(n => n.LoginFluidly());
+                cal = w.Run<AccessController, AccessLevel>(
+                    ac => ac.CurrentAccessLevel);
+                if (cal > AccessLevel.None)
+                {
+                    new Thread(() => w.Run<EventRaiser>(
+                        er => er.Raise(
+                            this.ui,
+                            "ShutdownRequested"))).Start();
+                }
             }
         }
 
