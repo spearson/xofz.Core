@@ -4,11 +4,13 @@
     using System.Linq;
     using System.Reflection;
     using System.Threading;
+    using xofz.Framework;
 
     public class Navigator
     {
-        public Navigator()
+        public Navigator(MethodWeb web)
         {
+            this.web = web;
             this.presenters = new List<Presenter>();
         }
 
@@ -87,6 +89,18 @@
             }
         }
 
+        public virtual void LoginFluidly()
+        {
+            var w = this.web;
+            w.Run<LatchHolder>(
+                latch => latch.Latch.Reset(),
+                "LoginLatch");
+            this.PresentFluidly<LoginPresenter>();
+            w.Run<LatchHolder>(
+                latch => latch.Latch.WaitOne(),
+                "LoginLatch");
+        }
+
         public virtual TUi GetUi<TPresenter, TUi>(
             string presenterName = null,
             string fieldName = "ui")
@@ -134,5 +148,6 @@
         }
 
         private readonly List<Presenter> presenters;
+        private readonly MethodWeb web;
     }
 }

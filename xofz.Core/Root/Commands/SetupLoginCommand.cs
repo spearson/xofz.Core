@@ -1,5 +1,6 @@
 ﻿namespace xofz.Root.Commands
 {
+    using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
     using xofz.UI;
@@ -32,6 +33,12 @@
             w.RegisterDependency(
                 new xofz.Framework.Timer(),
                 "LoginTimer");
+            w.RegisterDependency(
+                new LatchHolder
+                {
+                    Latch = new ManualResetEvent(true)
+                },
+                "LoginLatch");
         }
 
         private readonly LoginUi ui;

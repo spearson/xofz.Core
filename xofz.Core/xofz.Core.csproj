@@ -93,6 +93,7 @@
     <Compile Include="Framework\Erudition\Slicer.cs" />
     <Compile Include="Framework\Implementation\TextFileLog.cs" />
     <Compile Include="Framework\IO\FileHelpers.cs" />
+    <Compile Include="Framework\LatchHolder.cs" />
     <Compile Include="Framework\Log.cs" />
     <Compile Include="Framework\LogEntry.cs" />
     <Compile Include="Framework\LogEditor.cs" />
