@@ -45,6 +45,8 @@
                 this.currentAccessLevel = value;
                 this.Text = @"Log In [Current Access Level: "
                             + value + @"]";
+                this.levelLabel.Text = value.ToString();
+                this.levelLabel.BackColor = this.determineColorForLevel(value);
             }
         }
 
@@ -60,6 +62,21 @@
         void LoginUi.Hide()
         {
             this.Visible = false;
+        }
+
+        private Color determineColorForLevel(AccessLevel level)
+        {
+            switch (level)
+            {
+                case AccessLevel.None:
+                    return SystemColors.Control;
+                case AccessLevel.Level1:
+                    return Color.Tan;
+                case AccessLevel.Level2:
+                    return SystemColors.ActiveCaption;
+                default:
+                    return SystemColors.ActiveCaption;
+            }
         }
 
         private void loginKey_Click(object sender, EventArgs e)

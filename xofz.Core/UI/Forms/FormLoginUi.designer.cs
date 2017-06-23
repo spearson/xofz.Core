@@ -46,6 +46,7 @@
             this.cancelKey = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.timeRemainingLabel = new System.Windows.Forms.Label();
+            this.levelLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -74,7 +75,7 @@
             this.loginKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.loginKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loginKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginKey.Location = new System.Drawing.Point(186, 126);
+            this.loginKey.Location = new System.Drawing.Point(186, 172);
             this.loginKey.Name = "loginKey";
             this.loginKey.Size = new System.Drawing.Size(168, 40);
             this.loginKey.TabIndex = 2;
@@ -240,7 +241,7 @@
             this.backspaceKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backspaceKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.backspaceKey.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.backspaceKey.Location = new System.Drawing.Point(186, 80);
+            this.backspaceKey.Location = new System.Drawing.Point(186, 126);
             this.backspaceKey.Name = "backspaceKey";
             this.backspaceKey.Size = new System.Drawing.Size(83, 40);
             this.backspaceKey.TabIndex = 41;
@@ -255,7 +256,7 @@
             this.clearKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearKey.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.clearKey.Location = new System.Drawing.Point(275, 80);
+            this.clearKey.Location = new System.Drawing.Point(273, 126);
             this.clearKey.Name = "clearKey";
             this.clearKey.Size = new System.Drawing.Size(81, 40);
             this.clearKey.TabIndex = 42;
@@ -270,7 +271,7 @@
             this.cancelKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.cancelKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelKey.Location = new System.Drawing.Point(186, 172);
+            this.cancelKey.Location = new System.Drawing.Point(186, 218);
             this.cancelKey.Name = "cancelKey";
             this.cancelKey.Size = new System.Drawing.Size(168, 40);
             this.cancelKey.TabIndex = 53;
@@ -298,11 +299,23 @@
             this.timeRemainingLabel.TabIndex = 55;
             this.timeRemainingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // levelLabel
+            // 
+            this.levelLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.levelLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.levelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.levelLabel.Location = new System.Drawing.Point(186, 80);
+            this.levelLabel.Name = "levelLabel";
+            this.levelLabel.Size = new System.Drawing.Size(168, 40);
+            this.levelLabel.TabIndex = 56;
+            this.levelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormLoginUi
             // 
             this.AcceptButton = this.loginKey;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(368, 274);
+            this.Controls.Add(this.levelLabel);
             this.Controls.Add(this.timeRemainingLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cancelKey);
@@ -353,5 +366,6 @@
         private System.Windows.Forms.Button cancelKey;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label timeRemainingLabel;
+        private System.Windows.Forms.Label levelLabel;
     }
 }
