@@ -269,6 +269,7 @@
     <Compile Include="UI\PopupUi.cs" />
     <Compile Include="UI\Response.cs" />
     <Compile Include="UI\ShellUi.cs" />
+    <Compile Include="UI\ShowableUi.cs" />
     <Compile Include="UI\SplitUi.cs" />
     <Compile Include="UI\ToggleUi.cs" />
     <Compile Include="UI\Ui.cs" />
