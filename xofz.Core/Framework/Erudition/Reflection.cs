@@ -13,7 +13,6 @@
 
         public virtual IEnumerable<T> Reflect(Action<T> learn)
         {
-            // ReSharper disable once GenericEnumeratorNotDisposed
             var enumerator = this.collection.GetEnumerator();
             while (enumerator.MoveNext())
             {
@@ -24,6 +23,8 @@
                 yield return tuple.Item1;
                 yield return tuple.Item2;
             }
+
+            enumerator.Dispose();
         }
 
         private Func<T> createFactory(T item1, T item2)

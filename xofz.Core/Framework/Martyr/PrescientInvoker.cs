@@ -12,11 +12,16 @@
             this.freedomHolder = freedomHolder;
         }
 
-        public virtual T PreInvoke<T>(Action<T> act, params object[] dependencies) where T : class, IDisposable
+        public virtual T PreInvoke<T>(
+            Action<T> act, 
+            params object[] dependencies) 
+            where T : class, IDisposable
         {
             var actor = this.illuminator.Illumine<T>(dependencies);
             act(actor);
-            this.freedomHolder.Surge(new ArrayMaterializedEnumerable<IDisposable>(new IDisposable[] { actor }));
+            this.freedomHolder.Surge(
+                new ArrayMaterializedEnumerable<IDisposable>(
+                    new IDisposable[] { actor }));
             return actor;
         }
 

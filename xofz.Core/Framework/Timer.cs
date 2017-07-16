@@ -24,23 +24,14 @@ namespace xofz.Framework
 
         public virtual bool AutoReset
         {
-            get
-            {
-                return this.autoReset;
-            }
+            get => this.autoReset;
 
-            set
-            {
-                this.autoReset = value;
-            }
+            set => this.autoReset = value;
         }
 
         public virtual ThreadPriority Priority
         {
-            get
-            {
-                return this.priority;
-            }
+            get => this.priority;
 
             set
             {

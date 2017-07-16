@@ -81,15 +81,9 @@
 
         public virtual T Value
         {
-            get
-            {
-                return this.value;
-            }
+            get => this.value;
 
-            set
-            {
-                this.value = value;
-            }
+            set => this.value = value;
         }
 
         public virtual MaterializedEnumerable<TreeNode<T>> Nodes

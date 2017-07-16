@@ -6,6 +6,11 @@
 
     public class Permutator
     {
+        public Permutator()
+            : this(new EnumerableRotator())
+        {
+        }
+
         public Permutator(EnumerableRotator rotator)
         {
             this.rotator = rotator;

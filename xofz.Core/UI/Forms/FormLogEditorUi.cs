@@ -5,13 +5,16 @@
     using System.Linq;
     using System.Threading;
     using System.Windows.Forms;
-    using xofz.Framework.Materialization;
 
     public partial class FormLogEditorUi : FormUi, LogEditorUi
     {
-        public FormLogEditorUi(Form shell)
+        public FormLogEditorUi(
+            Form shell,
+            Materializer materializer)
         {
             this.shell = shell;
+            this.materializer = materializer;
+
             this.InitializeComponent();
             this.FormClosing += this.this_FormClosing;
 
@@ -29,7 +32,7 @@
 
         public event Action TypeChanged;
 
-        public MaterializedEnumerable<string> Types
+        MaterializedEnumerable<string> LogEditorUi.Types
         {
             get
             {
@@ -39,7 +42,7 @@
                     ll.AddLast(item);
                 }
 
-                return new LinkedListMaterializedEnumerable<string>(ll);
+                return this.materializer.Materialize(ll);
             }
 
             set
@@ -54,23 +57,23 @@
 
         string LogEditorUi.SelectedType
         {
-            get { return this.entryTypeComboBox.Text; }
+            get => this.entryTypeComboBox.Text;
 
-            set { this.entryTypeComboBox.Text = value; }
+            set => this.entryTypeComboBox.Text = value;
         }
 
         string LogEditorUi.CustomType
         {
-            get { return this.customTypeTextBox.Text; }
+            get => this.customTypeTextBox.Text;
 
-            set { this.customTypeTextBox.Text = value; }
+            set => this.customTypeTextBox.Text = value;
         }
 
         bool LogEditorUi.CustomTypeVisible
         {
-            get { return this.customTypeTextBox.Visible; }
+            get => this.customTypeTextBox.Visible;
 
-            set { this.customTypeTextBox.Visible = value; }
+            set => this.customTypeTextBox.Visible = value;
         }
 
         public MaterializedEnumerable<string> Content
@@ -80,7 +83,8 @@
                 var ctb = this.contentTextBox;
                 if (ctb.Lines == null)
                 {
-                    return new LinkedListMaterializedEnumerable<string>();
+                    return this.materializer.Materialize(
+                        new LinkedList<string>());
                 }
 
                 var ll = new LinkedList<string>();
@@ -89,7 +93,7 @@
                     ll.AddLast(line);
                 }
 
-                return new LinkedListMaterializedEnumerable<string>(ll);
+                return this.materializer.Materialize(ll);
             }
 
             set
@@ -121,5 +125,6 @@
         }
 
         private readonly Form shell;
+        private readonly Materializer materializer;
     }
 }

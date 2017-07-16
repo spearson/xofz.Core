@@ -11,9 +11,9 @@
 
         public T this[int index]
         {
-            get { return this.list[index]; }
+            get => this.list[index];
 
-            set { this.list[index] = value; }
+            set => this.list[index] = value;
         }
 
         private readonly IList<T> list;
