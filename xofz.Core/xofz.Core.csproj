@@ -75,6 +75,7 @@
     <Compile Include="Framework\AI\Tree.cs" />
     <Compile Include="Framework\AI\TreeOrderer.cs" />
     <Compile Include="Framework\All.cs" />
+    <Compile Include="Framework\BlockProcessor.cs" />
     <Compile Include="Framework\CollectionHolder.cs" />
     <Compile Include="Framework\Computation\BigPow.cs" />
     <Compile Include="Framework\Computation\Emanator.cs" />
