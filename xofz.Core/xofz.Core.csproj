@@ -9,9 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>xofz</RootNamespace>
     <AssemblyName>xofz.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,7 +60,6 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Serialization" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -169,10 +168,7 @@
     <Compile Include="Framework\AccessController.cs" />
     <Compile Include="AccessLevel.cs" />
     <Compile Include="Framework\Implementation\BinaryFileLoader.cs" />
-    <Compile Include="Framework\Implementation\BinaryFileSaver.cs" />
-    <Compile Include="Framework\Implementation\SoapFileSaver.cs" />
     <Compile Include="Framework\Implementation\TextFileLoader.cs" />
-    <Compile Include="Framework\Implementation\XmlFileSaver.cs" />
     <Compile Include="Framework\Internal\CallbackOptions.cs" />
     <Compile Include="Framework\Internal\NativeMethods.cs" />
     <Compile Include="Framework\Internal\TimerCallback.cs" />
@@ -190,7 +186,6 @@
     <Compile Include="Framework\Illumination\MaterializedEnumerableIlluminatedObject.cs" />
     <Compile Include="Framework\Illumination\MemberFieldIlluminatedObject.cs" />
     <Compile Include="Framework\Illumination\StringIlluminatedObject.cs" />
-    <Compile Include="Framework\Illumination\TcpIlluminatedObject.cs" />
     <Compile Include="Framework\EventRaiser.cs" />
     <Compile Include="Presentation\NamedPresenter.cs" />
     <Compile Include="Presentation\Navigator.cs" />

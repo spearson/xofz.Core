@@ -17,7 +17,7 @@
             this.dependencies = dependencies;
         }
 
-        public virtual int DependencyCount => this.dependencies.Count;
+        public virtual int DependencyCount => this.dependencies.Length;
 
         public virtual dynamic this[int index] => this.dependencies[index];
 
@@ -30,15 +30,18 @@
         {
             this.setDependencies(
                 this.rotator.Rotate(
-                    this.dependencies, 1, shiftRight).ToList());
+                        this.dependencies,
+                        1,
+                        shiftRight)
+                    .ToArray());
         }
 
-        private void setDependencies(IReadOnlyList<object> dependencies)
+        private void setDependencies(object[] dependencies)
         {
             this.dependencies = dependencies;
         }
 
-        private IReadOnlyList<object> dependencies;
+        private object[] dependencies;
         private readonly EnumerableRotator rotator;
     }
 }

@@ -2,11 +2,11 @@
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
 
     public sealed class OrderedMaterializedEnumerable<T> : MaterializedEnumerable<T>
     {
-        public OrderedMaterializedEnumerable(IReadOnlyList<T> list)
+        // todo: possibly convert to a full-fledged ListMaterializedEnumerable
+        public OrderedMaterializedEnumerable(IList<T> list)
         {
             this.list = list;
         }
@@ -40,6 +40,6 @@
             }
         }
 
-        private readonly IReadOnlyList<T> list;
+        private readonly IList<T> list;
     }
 }
