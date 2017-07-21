@@ -1,7 +1,6 @@
 ﻿namespace xofz.UI
 {
     using System;
-    using System.Windows.Forms;
 
     public static class UiHelpers
     {
@@ -27,7 +26,7 @@
             var value = default(T);
             if (ui.Root.InvokeRequired)
             {
-                ui.Root.Invoke((MethodInvoker)(() => value = valueReader()), new object[0]);
+                ui.Root.Invoke((Action)(() => value = valueReader()), new object[0]);
                 return value;
             }
 
