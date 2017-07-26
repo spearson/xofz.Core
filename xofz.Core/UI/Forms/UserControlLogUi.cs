@@ -22,10 +22,6 @@
 
         public event Action AddKeyTapped;
 
-        public event Action DownKeyTapped;
-
-        public event Action UpKeyTapped;
-
         MaterializedEnumerable<Tuple<string, string, string>> LogUi.Entries
         {
             get
