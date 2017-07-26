@@ -22,6 +22,10 @@
 
         public event Action AddKeyTapped;
 
+        public event Action DownKeyTapped;
+
+        public event Action UpKeyTapped;
+
         MaterializedEnumerable<Tuple<string, string, string>> LogUi.Entries
         {
             get
@@ -98,6 +102,18 @@
         private void endDatePicker_DateChanged(object sender, DateRangeEventArgs e)
         {
             new Thread(() => this.EndDateChanged?.Invoke()).Start();
+        }
+
+        private void downKey_Click(object sender, EventArgs e)
+        {
+            this.entriesGrid.Focus();
+            SendKeys.Send("{PGDN}");
+        }
+
+        private void upKey_Click(object sender, EventArgs e)
+        {
+            this.entriesGrid.Focus();
+            SendKeys.Send("{PGUP}");
         }
 
         private readonly Materializer materializer;

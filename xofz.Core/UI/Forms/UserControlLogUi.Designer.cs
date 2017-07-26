@@ -39,6 +39,8 @@
             this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addKey = new System.Windows.Forms.Button();
+            this.downKey = new System.Windows.Forms.Button();
+            this.upKey = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.entriesGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -157,9 +159,49 @@
             this.addKey.UseVisualStyleBackColor = true;
             this.addKey.Click += new System.EventHandler(this.addKey_Click);
             // 
+            // downKey
+            // 
+            this.downKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.downKey.AutoSize = true;
+            this.downKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.downKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.downKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.downKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.downKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.downKey.Location = new System.Drawing.Point(277, 77);
+            this.downKey.Margin = new System.Windows.Forms.Padding(0);
+            this.downKey.Name = "downKey";
+            this.downKey.Size = new System.Drawing.Size(50, 54);
+            this.downKey.TabIndex = 6;
+            this.downKey.Text = "↓";
+            this.downKey.UseVisualStyleBackColor = true;
+            this.downKey.Click += new System.EventHandler(this.downKey_Click);
+            // 
+            // upKey
+            // 
+            this.upKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.upKey.AutoSize = true;
+            this.upKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.upKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.upKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.upKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.upKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.upKey.Location = new System.Drawing.Point(277, 13);
+            this.upKey.Margin = new System.Windows.Forms.Padding(0);
+            this.upKey.Name = "upKey";
+            this.upKey.Size = new System.Drawing.Size(50, 54);
+            this.upKey.TabIndex = 7;
+            this.upKey.Text = "↑";
+            this.upKey.UseVisualStyleBackColor = true;
+            this.upKey.Click += new System.EventHandler(this.upKey_Click);
+            // 
             // UserControlLogUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.upKey);
+            this.Controls.Add(this.downKey);
             this.Controls.Add(this.addKey);
             this.Controls.Add(this.entriesGrid);
             this.Controls.Add(this.label2);
@@ -185,5 +227,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn timestampColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contentColumn;
+        private System.Windows.Forms.Button downKey;
+        private System.Windows.Forms.Button upKey;
     }
 }

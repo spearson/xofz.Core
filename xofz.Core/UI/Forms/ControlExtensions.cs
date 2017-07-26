@@ -11,6 +11,11 @@
                 return;
             }
 
+            if (container == null)
+            {
+                return;
+            }
+
             if (container.Controls.Count == 1 && control.Equals(
                 container.Controls[0]))
             {
