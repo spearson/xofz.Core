@@ -19,6 +19,7 @@
         {
             this.ui = ui;
             this.web = web;
+            this.locker = new object();
         }
 
         public void Setup(AccessLevel editLevel, bool resetOnStart = false)
@@ -108,14 +109,18 @@
                 return;
             }
 
-            var newEntries = new LinkedList<
-                Tuple<string, string, string>>(
-                UiHelpers.Read(this.ui, () => this.ui.Entries));
-            newEntries.AddFirst(this.createTuple(e));
+            lock (this.locker)
+            {
+                var newEntries = new LinkedList<
+                    Tuple<string, string, string>>(
+                    UiHelpers.Read(this.ui, () => this.ui.Entries));
+                newEntries.AddFirst(this.createTuple(e));
 
-            UiHelpers.Write(this.ui, () => this.ui.Entries =
-                new LinkedListMaterializedEnumerable<
-                    Tuple<string, string, string>>(newEntries));
+                UiHelpers.Write(this.ui, () => this.ui.Entries =
+                    new LinkedListMaterializedEnumerable<
+                        Tuple<string, string, string>>(newEntries));
+                this.ui.WriteFinished.WaitOne();
+            }
         }
 
         private Tuple<string, string, string> createTuple(LogEntry e)
@@ -145,5 +150,6 @@
         private AccessLevel editLevel;
         private readonly LogUi ui;
         private readonly MethodWeb web;
+        private readonly object locker;
     }
 }
