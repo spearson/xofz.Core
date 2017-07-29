@@ -1,5 +1,6 @@
 ﻿namespace xofz.Framework.Transformation
 {
+    using System;
     using System.Collections.Generic;
     using xofz.Framework.Materialization;
 
@@ -26,5 +27,51 @@
         }
 
         private LinkedList<T> trapper;
+    }
+
+    public class EnumerableTrapper
+    {
+        public EnumerableTrapper()
+        {
+            this.collections = new List<Tuple<
+                string, object>>(0xFF);
+        }
+
+        public virtual MaterializedEnumerable<T> ReadTrappedCollection<T>(
+            string collectionName = null)
+        {
+            foreach (var tuple in this.collections)
+            {
+                if (tuple.Item1 != collectionName)
+                {
+                    continue;
+                }
+
+                var t = tuple.Item2 as EnumerableTrapper<T>;
+                if (t == default(EnumerableTrapper<T>))
+                {
+                    continue;
+                }
+
+                return t.TrappedCollection;
+            }
+
+            return default(MaterializedEnumerable<T>);
+        }
+
+        public virtual IEnumerable<T> Trap<T>(
+            IEnumerable<T> source,
+            string collectionName = null)
+        {
+            var t = new EnumerableTrapper<T>();
+            this.collections.Add(
+                Tuple.Create(
+                    collectionName,
+                    (object)t));
+
+            return t.Trap(source);
+        }
+
+        private readonly IList<Tuple<string, object>> collections;
     }
 }

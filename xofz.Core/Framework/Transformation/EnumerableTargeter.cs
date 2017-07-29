@@ -23,34 +23,34 @@
             T target, 
             int radius)
         {
-            var l = new LinkedList<T>();
+            var ll = new LinkedList<T>();
             var e = source.GetEnumerator();
             while (e.MoveNext())
             {
-                l.AddLast(e.Current);
+                ll.AddLast(e.Current);
                 if (e.Current.Equals(target))
                 {
                     for (var i = 0; i < radius; ++i)
                     {
                         if (e.MoveNext())
                         {
-                            l.AddLast(e.Current);
+                            ll.AddLast(e.Current);
                         }
                     }
 
-                    return new LinkedListMaterializedEnumerable<T>(l);
+                    return new LinkedListMaterializedEnumerable<T>(ll);
                 }
 
-                while (l.Count > radius)
+                while (ll.Count > radius)
                 {
-                    l.RemoveFirst();
+                    ll.RemoveFirst();
                 }
             }
 
             e.Dispose();
 
             // if target not found, return the last radius number of items
-            return new LinkedListMaterializedEnumerable<T>(l);
+            return new LinkedListMaterializedEnumerable<T>(ll);
         }
     }
 }

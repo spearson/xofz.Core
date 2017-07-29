@@ -111,8 +111,7 @@
 
             lock (this.locker)
             {
-                var newEntries = new LinkedList<
-                    Tuple<string, string, string>>(
+                var newEntries = new LinkedList<Tuple<string, string, string>>(
                     UiHelpers.Read(this.ui, () => this.ui.Entries));
                 newEntries.AddFirst(this.createTuple(e));
 
