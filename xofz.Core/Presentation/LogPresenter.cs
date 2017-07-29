@@ -32,34 +32,33 @@
                 return;
             }
 
+            var w = this.web;
             this.editLevel = editLevel;
             this.resetOnStart = resetOnStart;
             this.ui.StartDateChanged += this.ui_DateChanged;
             this.ui.EndDateChanged += this.ui_DateChanged;
             this.ui.AddKeyTapped += this.ui_AddKeyTapped;
             this.ui.StatisticsKeyTapped += this.ui_StatisticsKeyTapped;
-            this.resetDates();
+            this.ui.FilterTextChanged += this.ui_FilterTextChanged;
+            this.resetDatesAndFilters();
             UiHelpers.Write(this.ui, () =>
             {
                 this.ui.AddKeyVisible = false;
                 this.ui.StatisticsKeyVisible = statisticsEnabled;
             });
             this.ui.WriteFinished.WaitOne();
-            
-            this.web.Subscribe<Log, LogEntry>(
-                "EntryWritten", 
-                this.log_EntryWritten);
+
+            w.Run<Log>(l => l.EntryWritten += this.log_EntryWritten);
             new Thread(this.timer_Elapsed).Start();
 
-            this.web.Subscribe<xofz.Framework.Timer>(
-                "Elapsed",
-                this.timer_Elapsed,
+            w.Run<xofz.Framework.Timer>(
+                t =>
+                {
+                    t.Elapsed += this.timer_Elapsed;
+                    t.Start(1000);
+                },
                 "LogTimer");
-            this.web.Run<xofz.Framework.Timer>(
-                t => t.Start(1000),
-                "LogTimer");
-
-            this.web.Run<Navigator>(n => n.RegisterPresenter(this));
+            w.Run<Navigator>(n => n.RegisterPresenter(this));
         }
 
         public override void Start()
@@ -71,13 +70,13 @@
 
             if (this.resetOnStart)
             {
-                this.resetDates();
+                this.resetDatesAndFilters();
             }
 
             base.Start();
         }
 
-        private void resetDates()
+        private void resetDatesAndFilters()
         {
             var today = DateTime.Today;
             var lastWeek = today.Subtract(TimeSpan.FromDays(6));
@@ -85,28 +84,86 @@
             {
                 this.ui.StartDate = lastWeek;
                 this.ui.EndDate = today;
+                this.ui.FilterContent = string.Empty;
+                this.ui.FilterType = string.Empty;
             });
             this.ui.WriteFinished.WaitOne();
         }
 
         private void ui_DateChanged()
         {
-            var startDate = UiHelpers.Read(this.ui, () => this.ui.StartDate);
-            var endDate = UiHelpers.Read(this.ui, () => this.ui.EndDate);
+            this.reloadEntries();
+        }
 
-            var entries = this.web.Run<Log, List<LogEntry>>(
-                l => l.ReadEntries()
-                    .Where(e =>
-                        e.Timestamp >= startDate
-                        && e.Timestamp < endDate.AddDays(1))
-                    .OrderByDescending(e => e.Timestamp)
-                    .ToList());
+        private void reloadEntries()
+        {
+            var w = this.web;
+            var start = UiHelpers.Read(this.ui, () => this.ui.StartDate);
+            var end = UiHelpers.Read(this.ui, () => this.ui.EndDate);
+            var filterContent = UiHelpers.Read(
+                this.ui, 
+                () => this.ui.FilterContent);
+            var filterType = UiHelpers.Read(
+                this.ui,
+                () => this.ui.FilterType);
+            w.Run<Log>(l =>
+            {
+                // first, begin reading all entries
+                var matchingEntries = l.ReadEntries();
 
-            var uiEntries = new LinkedListMaterializedEnumerable<
-                Tuple<string, string, string>>(
-                entries.Select(this.createTuple));
-            
-            UiHelpers.Write(this.ui, () => this.ui.Entries = uiEntries);
+                // second, get all the entries in the date range
+                matchingEntries = matchingEntries.Where(
+                    e => e.Timestamp >= start
+                         && e.Timestamp < end.AddDays(1));
+
+                // third, match on content
+                if (!string.IsNullOrWhiteSpace(filterContent))
+                {
+                    matchingEntries = matchingEntries.Where(
+                        e => e.Content.Any(s => s.ToLowerInvariant()
+                            .Contains(filterContent.ToLowerInvariant())));
+                }
+
+                // fourth, match on type
+                if (!string.IsNullOrWhiteSpace(filterType))
+                {
+                    matchingEntries = matchingEntries.Where(
+                        e => e.Type.ToLowerInvariant()
+                            .Contains(filterType.ToLowerInvariant()));
+                }
+
+                // finally, order them by newest first
+                matchingEntries = matchingEntries.OrderByDescending(
+                    e => e.Timestamp);
+
+                var uiEntries = new LinkedListMaterializedEnumerable<
+                    Tuple<string, string, string>>(
+                    matchingEntries.Select(this.createTuple));
+
+                UiHelpers.Write(
+                    this.ui, 
+                    () => this.ui.Entries = uiEntries);
+                this.ui.WriteFinished.WaitOne();
+            });
+        }
+
+        private void ui_AddKeyTapped()
+        {
+            var w = this.web;
+            w.Run<Navigator>(
+                n => n.PresentFluidly<LogEditorPresenter>());
+        }
+
+        private void ui_StatisticsKeyTapped()
+        {
+            var w = this.web;
+            w.Run<Navigator>(
+                n => n.PresentFluidly<LogStatisticsPresenter>());
+        }
+
+        private void ui_FilterTextChanged()
+        {
+            this.reloadEntries();
         }
 
         private void log_EntryWritten(LogEntry e)
@@ -135,20 +192,6 @@
                 e.Timestamp.ToString("yyyy/MM/dd HH:mm.ss", CultureInfo.CurrentCulture),
                 e.Type,
                 string.Join(Environment.NewLine, e.Content));
-        }
-
-        private void ui_AddKeyTapped()
-        {
-            var w = this.web;
-            w.Run<Navigator>(
-                n => n.PresentFluidly<LogEditorPresenter>());
-        }
-
-        private void ui_StatisticsKeyTapped()
-        {
-            var w = this.web;
-            w.Run<Navigator>(
-                n => n.PresentFluidly<LogStatisticsPresenter>());
         }
 
         private void timer_Elapsed()

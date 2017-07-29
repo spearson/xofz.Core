@@ -12,6 +12,7 @@
             this.materializer = materializer;
 
             this.InitializeComponent();
+            this.activeFilterTextBox = this.filterContentTextBox;
 
             var h = this.Handle;
         }
@@ -23,6 +24,8 @@
         public event Action AddKeyTapped;
 
         public event Action StatisticsKeyTapped;
+
+        public event Action FilterTextChanged;
 
         MaterializedEnumerable<Tuple<string, string, string>> LogUi.Entries
         {
@@ -55,6 +58,8 @@
                 {
                     eg.Rows.Add(entry.Item1, entry.Item2, entry.Item3);
                 }
+
+                this.activeFilterTextBox.Focus();
             }
         }
 
@@ -78,6 +83,20 @@
                 this.endDatePicker.SelectionStart = value;
                 this.endDatePicker.SelectionEnd = value;
             }
+        }
+
+        string LogUi.FilterContent
+        {
+            get => this.filterContentTextBox.Text;
+
+            set => this.filterContentTextBox.Text = value;
+        }
+
+        string LogUi.FilterType
+        {
+            get => this.filterTypeTextBox.Text;
+
+            set => this.filterTypeTextBox.Text = value;
         }
 
         bool LogUi.AddKeyVisible
@@ -125,6 +144,33 @@
             new Thread(() => this.StatisticsKeyTapped?.Invoke()).Start();
         }
 
+        private void filterContentTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.activeFilterTextBox = this.filterContentTextBox;
+            new Thread(() => this.FilterTextChanged?.Invoke()).Start();
+        }
+
+        private void filterTypeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.activeFilterTextBox = this.filterTypeTextBox;
+            new Thread(() => this.FilterTextChanged?.Invoke()).Start();
+        }
+
+        private void resetContentKey_Click(object sender, EventArgs e)
+        {
+            this.activeFilterTextBox = this.filterContentTextBox;
+            this.filterContentTextBox.Text = string.Empty;
+            this.filterContentTextBox.Focus();
+        }
+
+        private void resetTypeKey_Click(object sender, EventArgs e)
+        {
+            this.activeFilterTextBox = this.filterTypeTextBox;
+            this.filterTypeTextBox.Text = string.Empty;
+            this.filterTypeTextBox.Focus();
+        }
+
+        private TextBox activeFilterTextBox;
         private readonly Materializer materializer;
     }
 }

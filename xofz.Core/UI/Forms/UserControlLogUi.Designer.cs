@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.startDatePicker = new System.Windows.Forms.MonthCalendar();
             this.endDatePicker = new System.Windows.Forms.MonthCalendar();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,6 +42,12 @@
             this.downKey = new System.Windows.Forms.Button();
             this.upKey = new System.Windows.Forms.Button();
             this.statisticsKey = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.filterTypeTextBox = new System.Windows.Forms.TextBox();
+            this.filterContentTextBox = new System.Windows.Forms.TextBox();
+            this.resetContentKey = new System.Windows.Forms.Button();
+            this.resetTypeKey = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.entriesGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +56,7 @@
             this.startDatePicker.Location = new System.Drawing.Point(1, 20);
             this.startDatePicker.Margin = new System.Windows.Forms.Padding(0);
             this.startDatePicker.Name = "startDatePicker";
-            this.startDatePicker.TabIndex = 0;
+            this.startDatePicker.TabIndex = 15;
             this.startDatePicker.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.startDatePicker_DateChanged);
             // 
             // endDatePicker
@@ -59,7 +65,7 @@
             this.endDatePicker.Location = new System.Drawing.Point(373, 20);
             this.endDatePicker.Margin = new System.Windows.Forms.Padding(0);
             this.endDatePicker.Name = "endDatePicker";
-            this.endDatePicker.TabIndex = 1;
+            this.endDatePicker.TabIndex = 16;
             this.endDatePicker.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.endDatePicker_DateChanged);
             // 
             // label1
@@ -89,35 +95,35 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.entriesGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.entriesGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.entriesGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.entriesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.entriesGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.timestampColumn,
             this.typeColumn,
             this.contentColumn});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.entriesGrid.DefaultCellStyle = dataGridViewCellStyle4;
-            this.entriesGrid.Location = new System.Drawing.Point(0, 182);
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.entriesGrid.DefaultCellStyle = dataGridViewCellStyle10;
+            this.entriesGrid.Location = new System.Drawing.Point(0, 246);
             this.entriesGrid.Margin = new System.Windows.Forms.Padding(0);
             this.entriesGrid.Name = "entriesGrid";
             this.entriesGrid.ReadOnly = true;
             this.entriesGrid.RowHeadersVisible = false;
             this.entriesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.entriesGrid.Size = new System.Drawing.Size(600, 218);
+            this.entriesGrid.Size = new System.Drawing.Size(600, 254);
             this.entriesGrid.TabIndex = 4;
             // 
             // timestampColumn
@@ -219,9 +225,90 @@
             this.statisticsKey.UseVisualStyleBackColor = true;
             this.statisticsKey.Click += new System.EventHandler(this.statisticsKey_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 188);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(149, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Filter on Content:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(29, 220);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(123, 20);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Filter on Type:";
+            // 
+            // filterTypeTextBox
+            // 
+            this.filterTypeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterTypeTextBox.Location = new System.Drawing.Point(158, 217);
+            this.filterTypeTextBox.Name = "filterTypeTextBox";
+            this.filterTypeTextBox.Size = new System.Drawing.Size(204, 26);
+            this.filterTypeTextBox.TabIndex = 1;
+            this.filterTypeTextBox.TextChanged += new System.EventHandler(this.filterTypeTextBox_TextChanged);
+            // 
+            // filterContentTextBox
+            // 
+            this.filterContentTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.filterContentTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterContentTextBox.Location = new System.Drawing.Point(158, 185);
+            this.filterContentTextBox.Name = "filterContentTextBox";
+            this.filterContentTextBox.Size = new System.Drawing.Size(370, 26);
+            this.filterContentTextBox.TabIndex = 0;
+            this.filterContentTextBox.TextChanged += new System.EventHandler(this.filterContentTextBox_TextChanged);
+            // 
+            // resetContentKey
+            // 
+            this.resetContentKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.resetContentKey.AutoSize = true;
+            this.resetContentKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.resetContentKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.resetContentKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.resetContentKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetContentKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetContentKey.Location = new System.Drawing.Point(531, 182);
+            this.resetContentKey.Margin = new System.Windows.Forms.Padding(0);
+            this.resetContentKey.Name = "resetContentKey";
+            this.resetContentKey.Size = new System.Drawing.Size(69, 32);
+            this.resetContentKey.TabIndex = 13;
+            this.resetContentKey.Text = "Reset";
+            this.resetContentKey.UseVisualStyleBackColor = true;
+            this.resetContentKey.Click += new System.EventHandler(this.resetContentKey_Click);
+            // 
+            // resetTypeKey
+            // 
+            this.resetTypeKey.AutoSize = true;
+            this.resetTypeKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.resetTypeKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.resetTypeKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.resetTypeKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetTypeKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetTypeKey.Location = new System.Drawing.Point(365, 214);
+            this.resetTypeKey.Margin = new System.Windows.Forms.Padding(0);
+            this.resetTypeKey.Name = "resetTypeKey";
+            this.resetTypeKey.Size = new System.Drawing.Size(69, 32);
+            this.resetTypeKey.TabIndex = 14;
+            this.resetTypeKey.Text = "Reset";
+            this.resetTypeKey.UseVisualStyleBackColor = true;
+            this.resetTypeKey.Click += new System.EventHandler(this.resetTypeKey_Click);
+            // 
             // UserControlLogUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.resetTypeKey);
+            this.Controls.Add(this.resetContentKey);
+            this.Controls.Add(this.filterContentTextBox);
+            this.Controls.Add(this.filterTypeTextBox);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.statisticsKey);
             this.Controls.Add(this.upKey);
             this.Controls.Add(this.downKey);
@@ -232,7 +319,7 @@
             this.Controls.Add(this.endDatePicker);
             this.Controls.Add(this.startDatePicker);
             this.Name = "UserControlLogUi";
-            this.Size = new System.Drawing.Size(600, 400);
+            this.Size = new System.Drawing.Size(600, 500);
             ((System.ComponentModel.ISupportInitialize)(this.entriesGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -253,5 +340,11 @@
         private System.Windows.Forms.Button downKey;
         private System.Windows.Forms.Button upKey;
         private System.Windows.Forms.Button statisticsKey;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox filterTypeTextBox;
+        private System.Windows.Forms.TextBox filterContentTextBox;
+        private System.Windows.Forms.Button resetContentKey;
+        private System.Windows.Forms.Button resetTypeKey;
     }
 }
