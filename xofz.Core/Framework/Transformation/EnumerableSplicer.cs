@@ -6,7 +6,7 @@
 
     public class EnumerableSplicer
     {
-        public MaterializedEnumerable<T> Splice<T>(IEnumerable<T>[] sources)
+        public virtual MaterializedEnumerable<T> Splice<T>(IEnumerable<T>[] sources)
         {
             var lists = new List<T>[sources.Length];
 

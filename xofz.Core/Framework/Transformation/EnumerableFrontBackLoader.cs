@@ -4,7 +4,7 @@
 
     public class EnumerableFrontBackLoader
     {
-        public IEnumerable<T> FrontLoad<T>(IEnumerable<T> source, params T[] frontItems)
+        public virtual IEnumerable<T> FrontLoad<T>(IEnumerable<T> source, params T[] frontItems)
         {
             foreach (var frontItem in frontItems)
             {
@@ -17,7 +17,7 @@
             }
         }
 
-        public IEnumerable<T> BackLoad<T>(IEnumerable<T> source, params T[] backItems)
+        public virtual IEnumerable<T> BackLoad<T>(IEnumerable<T> source, params T[] backItems)
         {
             foreach (var item in source)
             {

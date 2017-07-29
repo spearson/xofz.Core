@@ -19,6 +19,8 @@
 
                 ++counter;
             }
+
+            enumerator.Dispose();
         }
 
         public virtual MaterializedEnumerable<T> SkipThrough<T>(IEnumerable<T> finiteSource, int skipPoint)
