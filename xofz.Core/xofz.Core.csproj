@@ -98,6 +98,7 @@
     <Compile Include="Framework\LogHelpers.cs" />
     <Compile Include="Framework\Illumination\ArrayFiller.cs" />
     <Compile Include="Framework\Impossibility\InfiniteLoopTester.cs" />
+    <Compile Include="Framework\LogStatistics.cs" />
     <Compile Include="Framework\Martyr\FreedomHolder.cs" />
     <Compile Include="Framework\Martyr\Martyr.cs" />
     <Compile Include="Framework\Martyr\PrescientInvoker.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Presentation\LogEditorPresenter.cs" />
     <Compile Include="Presentation\LoginPresenter.cs" />
     <Compile Include="Presentation\LogPresenter.cs" />
+    <Compile Include="Presentation\LogStatisticsPresenter.cs" />
     <Compile Include="Presentation\MainPresenter.cs" />
     <Compile Include="Presentation\PopupNamedPresenter.cs" />
     <Compile Include="Presentation\PopupPresenter.cs" />
@@ -233,6 +235,12 @@
     <Compile Include="UI\Forms\FormLoginUi.designer.cs">
       <DependentUpon>FormLoginUi.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\FormLogStatisticsUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FormLogStatisticsUi.Designer.cs">
+      <DependentUpon>FormLogStatisticsUi.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\FormsMessenger.cs" />
     <Compile Include="UI\Forms\FormUi.cs">
       <SubType>Form</SubType>
@@ -256,6 +264,7 @@
     <Compile Include="UI\LabeledUi.cs" />
     <Compile Include="UI\LogEditorUi.cs" />
     <Compile Include="UI\LoginUi.cs" />
+    <Compile Include="UI\LogStatisticsUi.cs" />
     <Compile Include="UI\LogUi.cs" />
     <Compile Include="UI\MainUi.cs" />
     <Compile Include="UI\Messenger.cs" />
@@ -284,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FormLoginUi.resx">
       <DependentUpon>FormLoginUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FormLogStatisticsUi.resx">
+      <DependentUpon>FormLogStatisticsUi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\UserControlLogUi.resx">
       <DependentUpon>UserControlLogUi.cs</DependentUpon>

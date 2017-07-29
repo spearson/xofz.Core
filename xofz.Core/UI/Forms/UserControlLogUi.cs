@@ -22,6 +22,8 @@
 
         public event Action AddKeyTapped;
 
+        public event Action StatisticsKeyTapped;
+
         MaterializedEnumerable<Tuple<string, string, string>> LogUi.Entries
         {
             get
@@ -85,6 +87,12 @@
             set => this.addKey.Visible = value;
         }
 
+        bool LogUi.StatisticsKeyVisible
+        {
+            get => this.statisticsKey.Visible;
+            set => this.statisticsKey.Visible = value;
+        }
+
         private void addKey_Click(object sender, EventArgs e)
         {
             new Thread(() => this.AddKeyTapped?.Invoke()).Start();
@@ -110,6 +118,11 @@
         {
             this.entriesGrid.Focus();
             SendKeys.Send("{PGUP}");
+        }
+
+        private void statisticsKey_Click(object sender, EventArgs e)
+        {
+            new Thread(() => this.StatisticsKeyTapped?.Invoke()).Start();
         }
 
         private readonly Materializer materializer;

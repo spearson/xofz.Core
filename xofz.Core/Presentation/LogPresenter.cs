@@ -22,7 +22,10 @@
             this.locker = new object();
         }
 
-        public void Setup(AccessLevel editLevel, bool resetOnStart = false)
+        public void Setup(
+            AccessLevel editLevel, 
+            bool resetOnStart = false,
+            bool statisticsEnabled = false)
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
             {
@@ -34,11 +37,14 @@
             this.ui.StartDateChanged += this.ui_DateChanged;
             this.ui.EndDateChanged += this.ui_DateChanged;
             this.ui.AddKeyTapped += this.ui_AddKeyTapped;
+            this.ui.StatisticsKeyTapped += this.ui_StatisticsKeyTapped;
             this.resetDates();
             UiHelpers.Write(this.ui, () =>
             {
                 this.ui.AddKeyVisible = false;
+                this.ui.StatisticsKeyVisible = statisticsEnabled;
             });
+            this.ui.WriteFinished.WaitOne();
             
             this.web.Subscribe<Log, LogEntry>(
                 "EntryWritten", 
@@ -74,12 +80,13 @@
         private void resetDates()
         {
             var today = DateTime.Today;
-            var lastWeek = today.Subtract(TimeSpan.FromDays(7));
+            var lastWeek = today.Subtract(TimeSpan.FromDays(6));
             UiHelpers.Write(this.ui, () =>
             {
                 this.ui.StartDate = lastWeek;
                 this.ui.EndDate = today;
             });
+            this.ui.WriteFinished.WaitOne();
         }
 
         private void ui_DateChanged()
@@ -132,13 +139,22 @@
 
         private void ui_AddKeyTapped()
         {
-            this.web.Run<Navigator>(
+            var w = this.web;
+            w.Run<Navigator>(
                 n => n.PresentFluidly<LogEditorPresenter>());
+        }
+
+        private void ui_StatisticsKeyTapped()
+        {
+            var w = this.web;
+            w.Run<Navigator>(
+                n => n.PresentFluidly<LogStatisticsPresenter>());
         }
 
         private void timer_Elapsed()
         {
-            var cal = this.web.Run<AccessController, AccessLevel>(
+            var w = this.web;
+            var cal = w.Run<AccessController, AccessLevel>(
                 ac => ac.CurrentAccessLevel);
             var visible = cal >= this.editLevel;
             UiHelpers.Write(this.ui, () => this.ui.AddKeyVisible = visible);
