@@ -48,6 +48,12 @@
             this.hideKey = new System.Windows.Forms.Button();
             this.totalEntryCountLabel = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.filterContentTextBox = new System.Windows.Forms.TextBox();
+            this.filterTypeTextBox = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.resetTypeKey = new System.Windows.Forms.Button();
+            this.resetContentKey = new System.Windows.Forms.Button();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -138,9 +144,9 @@
             this.groupBox.Controls.Add(this.label4);
             this.groupBox.Controls.Add(this.label3);
             this.groupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox.Location = new System.Drawing.Point(9, 244);
+            this.groupBox.Location = new System.Drawing.Point(12, 327);
             this.groupBox.Name = "groupBox";
-            this.groupBox.Size = new System.Drawing.Size(472, 205);
+            this.groupBox.Size = new System.Drawing.Size(466, 122);
             this.groupBox.TabIndex = 11;
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Statistics";
@@ -149,7 +155,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 54);
+            this.label3.Location = new System.Drawing.Point(6, 37);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(154, 16);
             this.label3.TabIndex = 0;
@@ -159,7 +165,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(13, 86);
+            this.label4.Location = new System.Drawing.Point(13, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(147, 16);
             this.label4.TabIndex = 1;
@@ -169,7 +175,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(7, 118);
+            this.label5.Location = new System.Drawing.Point(7, 69);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(153, 16);
             this.label5.TabIndex = 2;
@@ -179,7 +185,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(39, 150);
+            this.label6.Location = new System.Drawing.Point(39, 85);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(121, 16);
             this.label6.TabIndex = 3;
@@ -189,7 +195,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(48, 182);
+            this.label7.Location = new System.Drawing.Point(48, 101);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(112, 16);
             this.label7.TabIndex = 4;
@@ -199,7 +205,7 @@
             // 
             this.avgEntriesPerDayLabel.AutoSize = true;
             this.avgEntriesPerDayLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.avgEntriesPerDayLabel.Location = new System.Drawing.Point(166, 54);
+            this.avgEntriesPerDayLabel.Location = new System.Drawing.Point(166, 37);
             this.avgEntriesPerDayLabel.Name = "avgEntriesPerDayLabel";
             this.avgEntriesPerDayLabel.Size = new System.Drawing.Size(92, 16);
             this.avgEntriesPerDayLabel.TabIndex = 5;
@@ -209,7 +215,7 @@
             // 
             this.oldestTimestampLabel.AutoSize = true;
             this.oldestTimestampLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.oldestTimestampLabel.Location = new System.Drawing.Point(166, 86);
+            this.oldestTimestampLabel.Location = new System.Drawing.Point(166, 53);
             this.oldestTimestampLabel.Name = "oldestTimestampLabel";
             this.oldestTimestampLabel.Size = new System.Drawing.Size(92, 16);
             this.oldestTimestampLabel.TabIndex = 6;
@@ -219,7 +225,7 @@
             // 
             this.newestTimestampLabel.AutoSize = true;
             this.newestTimestampLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newestTimestampLabel.Location = new System.Drawing.Point(166, 118);
+            this.newestTimestampLabel.Location = new System.Drawing.Point(166, 69);
             this.newestTimestampLabel.Name = "newestTimestampLabel";
             this.newestTimestampLabel.Size = new System.Drawing.Size(92, 16);
             this.newestTimestampLabel.TabIndex = 7;
@@ -229,7 +235,7 @@
             // 
             this.earliestTimestampLabel.AutoSize = true;
             this.earliestTimestampLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.earliestTimestampLabel.Location = new System.Drawing.Point(166, 150);
+            this.earliestTimestampLabel.Location = new System.Drawing.Point(166, 85);
             this.earliestTimestampLabel.Name = "earliestTimestampLabel";
             this.earliestTimestampLabel.Size = new System.Drawing.Size(92, 16);
             this.earliestTimestampLabel.TabIndex = 8;
@@ -239,7 +245,7 @@
             // 
             this.latestTimestampLabel.AutoSize = true;
             this.latestTimestampLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.latestTimestampLabel.Location = new System.Drawing.Point(166, 182);
+            this.latestTimestampLabel.Location = new System.Drawing.Point(166, 101);
             this.latestTimestampLabel.Name = "latestTimestampLabel";
             this.latestTimestampLabel.Size = new System.Drawing.Size(92, 16);
             this.latestTimestampLabel.TabIndex = 9;
@@ -268,7 +274,7 @@
             // 
             this.totalEntryCountLabel.AutoSize = true;
             this.totalEntryCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalEntryCountLabel.Location = new System.Drawing.Point(166, 22);
+            this.totalEntryCountLabel.Location = new System.Drawing.Point(166, 21);
             this.totalEntryCountLabel.Name = "totalEntryCountLabel";
             this.totalEntryCountLabel.Size = new System.Drawing.Size(92, 16);
             this.totalEntryCountLabel.TabIndex = 11;
@@ -278,16 +284,93 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(51, 22);
+            this.label9.Location = new System.Drawing.Point(51, 21);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(109, 16);
             this.label9.TabIndex = 10;
             this.label9.Text = "Total entry count:";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(12, 260);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(149, 20);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Filter on Content:";
+            // 
+            // filterContentTextBox
+            // 
+            this.filterContentTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterContentTextBox.Location = new System.Drawing.Point(167, 257);
+            this.filterContentTextBox.Name = "filterContentTextBox";
+            this.filterContentTextBox.Size = new System.Drawing.Size(242, 26);
+            this.filterContentTextBox.TabIndex = 0;
+            // 
+            // filterTypeTextBox
+            // 
+            this.filterTypeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterTypeTextBox.Location = new System.Drawing.Point(167, 295);
+            this.filterTypeTextBox.Name = "filterTypeTextBox";
+            this.filterTypeTextBox.Size = new System.Drawing.Size(242, 26);
+            this.filterTypeTextBox.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(39, 298);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(123, 20);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "Filter on Type:";
+            // 
+            // resetTypeKey
+            // 
+            this.resetTypeKey.AutoSize = true;
+            this.resetTypeKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.resetTypeKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.resetTypeKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.resetTypeKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetTypeKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetTypeKey.Location = new System.Drawing.Point(412, 292);
+            this.resetTypeKey.Margin = new System.Windows.Forms.Padding(0);
+            this.resetTypeKey.Name = "resetTypeKey";
+            this.resetTypeKey.Size = new System.Drawing.Size(69, 32);
+            this.resetTypeKey.TabIndex = 17;
+            this.resetTypeKey.Text = "Reset";
+            this.resetTypeKey.UseVisualStyleBackColor = true;
+            this.resetTypeKey.Click += new System.EventHandler(this.resetTypeKey_Click);
+            // 
+            // resetContentKey
+            // 
+            this.resetContentKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.resetContentKey.AutoSize = true;
+            this.resetContentKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.resetContentKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.resetContentKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.resetContentKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetContentKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetContentKey.Location = new System.Drawing.Point(412, 254);
+            this.resetContentKey.Margin = new System.Windows.Forms.Padding(0);
+            this.resetContentKey.Name = "resetContentKey";
+            this.resetContentKey.Size = new System.Drawing.Size(69, 32);
+            this.resetContentKey.TabIndex = 18;
+            this.resetContentKey.Text = "Reset";
+            this.resetContentKey.UseVisualStyleBackColor = true;
+            this.resetContentKey.Click += new System.EventHandler(this.resetContentKey_Click);
+            // 
             // FormLogStatisticsUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(490, 461);
+            this.Controls.Add(this.resetContentKey);
+            this.Controls.Add(this.resetTypeKey);
+            this.Controls.Add(this.filterTypeTextBox);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.filterContentTextBox);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.hideKey);
             this.Controls.Add(this.groupBox);
             this.Controls.Add(this.rangeKey);
@@ -332,5 +415,11 @@
         private System.Windows.Forms.Button hideKey;
         private System.Windows.Forms.Label totalEntryCountLabel;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox filterContentTextBox;
+        private System.Windows.Forms.TextBox filterTypeTextBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button resetTypeKey;
+        private System.Windows.Forms.Button resetContentKey;
     }
 }

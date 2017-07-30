@@ -29,6 +29,8 @@
             this.ui.RangeKeyTapped += this.ui_RangeKeyTapped;
             this.ui.OverallKeyTapped += this.ui_OverallKeyTapped;
             this.ui.HideKeyTapped += this.Stop;
+            this.ui.ResetContentKeyTapped += this.ui_ResetContentKeyTapped;
+            this.ui.ResetTypeKeyTapped += this.ui_ResetTypeKeyTapped;
             this.resetDates();
 
             var w = this.web;
@@ -83,6 +85,7 @@
             w.Run<LogStatistics>(
                 stats =>
                 {
+                    this.setFilters(stats);
                     stats.ComputeRange(
                         start, end);
                     var typeInfo =
@@ -92,7 +95,7 @@
                         + this.formatDate(end);
                     UiHelpers.Write(
                         this.ui,
-                        () => this.ui.TypeInfo = typeInfo);
+                        () => this.ui.Header = typeInfo);
                     this.ui.WriteFinished.WaitOne();
                     this.showStatistics(stats, false);
                 });
@@ -104,13 +107,24 @@
             w.Run<LogStatistics>(
                 stats =>
                 {
+                    this.setFilters(stats);
                     stats.ComputeOverall();
                     UiHelpers.Write(
                         this.ui,
-                        () => this.ui.TypeInfo = "Overall");
+                        () => this.ui.Header = "Overall");
                     this.ui.WriteFinished.WaitOne();
                     this.showStatistics(stats, false);
                 });
+        }
+
+        private void setFilters(LogStatistics statistics)
+        {
+            statistics.FilterContent = UiHelpers.Read(
+                this.ui,
+                () => this.ui.FilterContent);
+            statistics.FilterType = UiHelpers.Read(
+                this.ui,
+                () => this.ui.FilterType);
         }
 
         private void showStatistics(
@@ -164,6 +178,20 @@
         {
             return timestamp.ToString(
                 @"yyyy/MM/dd HH:mm:ss");
+        }
+
+        private void ui_ResetContentKeyTapped()
+        {
+            UiHelpers.Write(
+                this.ui,
+                () => this.ui.FilterContent = null);
+        }
+
+        private void ui_ResetTypeKeyTapped()
+        {
+            UiHelpers.Write(
+                this.ui,
+                () => this.ui.FilterType = null);
         }
 
         private long setupIf1;

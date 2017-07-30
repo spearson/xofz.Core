@@ -10,11 +10,19 @@
 
         event Action HideKeyTapped;
 
+        event Action ResetContentKeyTapped;
+
+        event Action ResetTypeKeyTapped;
+
         DateTime StartDate { get; set; }
 
         DateTime EndDate { get; set; }
 
-        string TypeInfo { get; set; }
+        string FilterContent { get; set; }
+
+        string FilterType { get; set; }
+
+        string Header { get; set; }
 
         string TotalEntryCount { get; set; }
 

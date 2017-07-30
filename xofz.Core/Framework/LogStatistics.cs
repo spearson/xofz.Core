@@ -16,6 +16,10 @@
 
         public virtual double AvgEntriesPerDay { get; protected set; }
 
+        public virtual string FilterContent { get; set; }
+
+        public virtual string FilterType { get; set; }
+
         public virtual DateTime OldestTimestamp { get; protected set; }
 
         public virtual DateTime NewestTimestamp { get; protected set; }
@@ -31,7 +35,9 @@
                 {
                     var allEntries = w.Run<Materializer,
                         MaterializedEnumerable<LogEntry>>(
-                        m => m.Materialize(l.ReadEntries()),
+                        m => m.Materialize(
+                            l.ReadEntries().Where(
+                                this.passesFilters)),
                         "LogMaterializer");
                     var start = DateTime.MaxValue;
                     var end = DateTime.MinValue;
@@ -73,7 +79,8 @@
                         m => m.Materialize(l.ReadEntries()
                             .Where(
                                 e => e.Timestamp >= startDate
-                                     && e.Timestamp < endDate.AddDays(1))),
+                                     && e.Timestamp < endDate.AddDays(1))
+                            .Where(this.passesFilters)),
                         "LogMaterializer");
                     this.computeTotal(entries);
                     this.computeAvgPerDay(
@@ -97,6 +104,31 @@
             this.LatestTimestamp = ts;
             this.AvgEntriesPerDay = default(double);
             this.TotalEntryCount = 0;
+        }
+
+        private bool passesFilters(LogEntry e)
+        {
+            var fc = this.FilterContent;
+            if (!string.IsNullOrWhiteSpace(fc))
+            {
+                if (!e.Content.Any(s => s.ToLowerInvariant()
+                .Contains(fc.ToLowerInvariant())))
+                {
+                    return false;
+                }
+            }
+
+            var ft = this.FilterType;
+            if (!string.IsNullOrWhiteSpace(ft))
+            {
+                if (!e.Type.ToLowerInvariant()
+                    .Contains(ft.ToLowerInvariant()))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void computeTotal(MaterializedEnumerable<LogEntry> entries)

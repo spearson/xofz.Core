@@ -22,6 +22,10 @@
 
         public event Action HideKeyTapped;
 
+        public event Action ResetContentKeyTapped;
+
+        public event Action ResetTypeKeyTapped;
+
         DateTime LogStatisticsUi.StartDate
         {
             get => this.startDatePicker.SelectionStart;
@@ -44,7 +48,29 @@
             }
         }
 
-        string LogStatisticsUi.TypeInfo
+        string LogStatisticsUi.FilterContent
+        {
+            get => this.filterContentTextBox.Text;
+
+            set
+            {
+                this.filterContentTextBox.Text = value;
+                this.filterContentTextBox.Focus();
+            }
+        }
+
+        string LogStatisticsUi.FilterType
+        {
+            get => this.filterTypeTextBox.Text;
+
+            set
+            {
+                this.filterTypeTextBox.Text = value;
+                this.filterTypeTextBox.Focus();
+            }
+        }
+
+        string LogStatisticsUi.Header
         {
             get => this.groupBox.Text;
 
@@ -121,6 +147,16 @@
         private void hideKey_Click(object sender, EventArgs e)
         {
             new Thread(() => this.HideKeyTapped?.Invoke()).Start();
+        }
+
+        private void resetContentKey_Click(object sender, EventArgs e)
+        {
+            new Thread(() => this.ResetContentKeyTapped?.Invoke()).Start();
+        }
+
+        private void resetTypeKey_Click(object sender, EventArgs e)
+        {
+            new Thread(() => this.ResetTypeKeyTapped?.Invoke()).Start();
         }
 
         private readonly Form shell;
