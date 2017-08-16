@@ -10,6 +10,8 @@
         public UserControlToggleUi()
         {
             this.InitializeComponent();
+
+            var h = this.Handle;
         }
 
         public event Action<ToggleUi> Tapped;
