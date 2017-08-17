@@ -219,6 +219,7 @@
     <Compile Include="Framework\Transformation\EnumerableSplicer.cs" />
     <Compile Include="Framework\Transformation\EnumerableSplitter.cs" />
     <Compile Include="Presentation\CompositeUi.cs" />
+    <Compile Include="Delayer.cs" />
     <Compile Include="UI\Forms\ControlExtensions.cs" />
     <Compile Include="UI\Forms\ControlUi.cs">
       <SubType>Component</SubType>
