@@ -1,11 +1,13 @@
 ﻿namespace xofz.Internal
 {
+    using System;
     using System.Reflection;
 
     internal static class EmbeddedAssemblyLoader
     {
-        public static Assembly Load(string name)
+        public static Assembly Load(object sender, ResolveEventArgs e)
         {
+            var name = e.Name;
             if (name.EndsWith("Retargetable=Yes"))
             {
                 return Assembly.Load(new AssemblyName(name));

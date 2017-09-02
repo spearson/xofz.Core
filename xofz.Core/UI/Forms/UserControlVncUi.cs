@@ -9,7 +9,9 @@
         static UserControlVncUi()
         {
             AppDomain.CurrentDomain.AssemblyResolve
-                += (sender, e) => EmbeddedAssemblyLoader.Load(e.Name);
+                -= EmbeddedAssemblyLoader.Load;
+            AppDomain.CurrentDomain.AssemblyResolve
+                += EmbeddedAssemblyLoader.Load;
         }
 
         public UserControlVncUi()

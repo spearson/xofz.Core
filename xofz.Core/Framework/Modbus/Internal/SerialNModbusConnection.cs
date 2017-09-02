@@ -9,9 +9,12 @@
     {
         static SerialNModbusConnection()
         {
-            AppDomain.CurrentDomain.AssemblyResolve 
-                += (sender, e) => EmbeddedAssemblyLoader.Load(e.Name);
+            AppDomain.CurrentDomain.AssemblyResolve
+                -= EmbeddedAssemblyLoader.Load;
+            AppDomain.CurrentDomain.AssemblyResolve
+                += EmbeddedAssemblyLoader.Load;
         }
+
 
         public SerialNModbusConnection(
             SerialPort port, 
