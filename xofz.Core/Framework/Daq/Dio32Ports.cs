@@ -1,10 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------------------------------
-// <copyright file="Dio32Ports.cs" company="Care Controls">
-//   Copyright (c) Care Controls Inc. All rights reserved.
-// </copyright>
-// ---------------------------------------------------------------------------------------------------------------------
-
-namespace xofz.Framework.Daq
+﻿namespace xofz.Framework.Daq
 {
     using System;
 

@@ -1,10 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------------------------------
-// <copyright file="WinUsbDio32Finder.cs" company="Care Controls">
-//   Copyright (c) Care Controls Inc. All rights reserved.
-// </copyright>
-// ---------------------------------------------------------------------------------------------------------------------
-
-namespace xofz.Framework.Daq
+﻿namespace xofz.Framework.Daq
 {
     using System;
     using System.Collections.Generic;

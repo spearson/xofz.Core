@@ -83,6 +83,8 @@
     <Compile Include="Framework\Daq\Internal\StringExtensions.cs" />
     <Compile Include="Framework\Daq\WinUsbDio32.cs" />
     <Compile Include="Framework\Daq\WinUsbDio32Finder.cs" />
+    <Compile Include="Framework\EncodingHelpers.cs" />
+    <Compile Include="Framework\IniFile.cs" />
     <Compile Include="Framework\Plc\Fpx.cs" />
     <Compile Include="Framework\Plc\SerialFpx.cs" />
     <Compile Include="Framework\Plc\SerialFpxFinder.cs" />

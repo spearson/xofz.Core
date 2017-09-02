@@ -1,10 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------------------------------
-// <copyright file="SerialFpxFinder.cs" company="Care Controls">
-//   Copyright (c) Care Controls Inc. All rights reserved.
-// </copyright>
-// ---------------------------------------------------------------------------------------------------------------------
-
-namespace xofz.Framework.Plc
+﻿namespace xofz.Framework.Plc
 {
     using System;
     using System.Collections.Generic;

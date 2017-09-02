@@ -1,10 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------
-// <copyright file="Timer.cs" company="Care Controls">
-//   Copyright (c) Care Controls Inc. All rights reserved.
-// </copyright>
-// ------------------------------------------------------------------------------------------------
-
-namespace xofz.Framework
+﻿namespace xofz.Framework
 {
     using System;
     using System.Threading;

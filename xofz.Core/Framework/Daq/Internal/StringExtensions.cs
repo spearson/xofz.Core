@@ -1,10 +1,4 @@
-﻿// ----------------------------------------------------------------------------
-// <copyright file="StringExtensions.cs" company="Care Controls">
-//   Copyright (c) Care Controls Inc. All rights reserved.
-// </copyright>
-// ----------------------------------------------------------------------------
-
-namespace xofz.Framework.Daq.Internal
+﻿namespace xofz.Framework.Daq.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -20,7 +14,9 @@ namespace xofz.Framework.Daq.Internal
         {
             if (chunkSize < 1)
             {
-                throw new ArgumentException("Chunk size must be positive.", "chunkSize");
+                throw new ArgumentException(
+                    @"Chunk size must be positive.",
+                    nameof(chunkSize));
             }
 
             var chunks = new List<string>();
