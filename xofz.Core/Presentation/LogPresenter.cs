@@ -8,6 +8,7 @@
     using Framework;
     using Framework.Materialization;
     using UI;
+    using xofz.Framework.Logging;
 
     public sealed class LogPresenter : Presenter
     {

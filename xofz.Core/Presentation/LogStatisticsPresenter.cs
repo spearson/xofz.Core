@@ -4,6 +4,7 @@
     using System.Globalization;
     using System.Threading;
     using xofz.Framework;
+    using xofz.Framework.Logging;
     using xofz.UI;
 
     public sealed class LogStatisticsPresenter : PopupPresenter

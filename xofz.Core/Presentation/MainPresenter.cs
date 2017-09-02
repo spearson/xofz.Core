@@ -53,7 +53,7 @@
                     w.Run<EventRaiser>(
                         er => er.Raise(
                             this.ui,
-                            "ShutdownRequested"));
+                            nameof(this.ui.ShutdownRequested)));
                 }
             }
         }
