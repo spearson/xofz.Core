@@ -7,14 +7,13 @@
     {
         public static Assembly Load(object sender, ResolveEventArgs e)
         {
-            var name = e.Name;
-            if (name.EndsWith("Retargetable=Yes"))
+            if (e.Name.EndsWith("Retargetable=Yes"))
             {
-                return Assembly.Load(new AssemblyName(name));
+                return Assembly.Load(new AssemblyName(e.Name));
             }
 
             var container = Assembly.GetExecutingAssembly();
-            var path = new AssemblyName(name).Name + ".dll";
+            var path = new AssemblyName(e.Name).Name + ".dll";
 
             using (var stream = container.GetManifestResourceStream(path))
             {

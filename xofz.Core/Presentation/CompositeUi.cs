@@ -3,12 +3,19 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using xofz.Framework.Materialization;
     using xofz.UI;
 
     public class CompositeUi
     {
         public CompositeUi()
+            : this(new LinkedListMaterializer())
         {
+        }
+
+        public CompositeUi(Materializer materializer)
+        {
+            this.materializer = materializer;
             this.uis = new List<Tuple<Ui, object, string>>(0x10000);
         }
 
@@ -17,7 +24,8 @@
             string uiName = null)
             where TUi : Ui
         {
-            var matches = this.uis.Where(ui => ui.Item1 is TUi).ToList();
+            var matches = this.materializer.Materialize(
+                this.uis.Where(ui => ui.Item1 is TUi));
             if (matches.Count == 0)
             {
                 return default(TUi);
@@ -118,6 +126,7 @@
                     uiName));
         }
 
+        private readonly Materializer materializer;
         private readonly IList<Tuple<Ui, object, string>> uis;
     }
 }

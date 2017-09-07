@@ -79,10 +79,13 @@
         {
             var computer = new FactorialComputer();
             BigInteger factorial;
-            var sw = Stopwatch.StartNew();
+            Stopwatch sw;
+            sw = Stopwatch.StartNew();
             factorial = computer.Compute(100000);
             sw.Stop();
-            Console.WriteLine("Computing the factorial of 100,000 took " + sw.Elapsed);
+            Console.WriteLine(
+                @"Computing the factorial of 100,000 took "
+                + sw.Elapsed);
 
             Console.WriteLine(factorial);
         }
@@ -92,7 +95,8 @@
             var computer = new FactorialComputer();
             BigInteger factorial;
             const long bigNumber = 1000000;
-            var sw = Stopwatch.StartNew();
+            Stopwatch sw;
+            sw = Stopwatch.StartNew();
             factorial = computer.Compute(bigNumber);
             sw.Stop();
 

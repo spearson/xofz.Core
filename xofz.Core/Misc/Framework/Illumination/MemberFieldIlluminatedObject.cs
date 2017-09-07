@@ -14,9 +14,11 @@
         public T Get<T>(string fieldName)
         {
             // a wee bit of reflection
-            var fields = this.dependency.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
-            var field = fields.First(fi => fi.Name == fieldName);
-            return (T)field.GetValue(this.dependency);
+            var fields = this.dependency.GetType().GetFields(
+                BindingFlags.NonPublic | BindingFlags.Instance);
+            var field = fields.FirstOrDefault(
+                fi => fi.Name == fieldName);
+            return (T)field?.GetValue(this.dependency);
         }
 
         private readonly object dependency;

@@ -106,7 +106,8 @@
             string fieldName = "ui")
             where TPresenter : Presenter
         {
-            var matchingPresenters = this.presenters.Where(p => p is TPresenter)
+            var matchingPresenters = this.presenters
+                .Where(p => p is TPresenter)
                 .ToList();
             if (matchingPresenters.Count == 0)
             {

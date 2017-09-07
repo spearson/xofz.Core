@@ -4,7 +4,7 @@
     {
         public string Location { get; set; }
 
-        public int SecondaryLocation { get; set; }
+        public int? SecondaryLocation { get; set; }
 
         ushort[] Controller.ReadHoldingRegisters(
             ushort startAddress, 
@@ -12,7 +12,7 @@
         {
             using (var connection = new TcpNModbusConnection(
                 this.Location,
-                this.SecondaryLocation))
+                this.SecondaryLocation ?? 502))
             {
                 return connection.ReadHoldingRegisters(
                     startAddress, 
@@ -26,7 +26,7 @@
         {
             using (var connection = new TcpNModbusConnection(
                 this.Location,
-                this.SecondaryLocation))
+                this.SecondaryLocation ?? 502))
             {
                 return connection.ReadInputRegisters(
                     startAddress,
@@ -40,7 +40,7 @@
         {
             using (var connection = new TcpNModbusConnection(
                 this.Location,
-                this.SecondaryLocation))
+                this.SecondaryLocation ?? 502))
             {
                 return connection.ReadCoils(
                     startAddress,
@@ -54,7 +54,7 @@
         {
             using (var connection = new TcpNModbusConnection(
                 this.Location,
-                this.SecondaryLocation))
+                this.SecondaryLocation ?? 502))
             {
                 return connection.ReadInputs(
                     startAddress,
@@ -68,7 +68,7 @@
         {
             using (var connection = new TcpNModbusConnection(
                 this.Location,
-                this.SecondaryLocation))
+                this.SecondaryLocation ?? 502))
             {
                 connection.WriteSingleCoil(
                     address,
@@ -82,7 +82,7 @@
         {
             using (var connection = new TcpNModbusConnection(
                 this.Location,
-                this.SecondaryLocation))
+                this.SecondaryLocation ?? 502))
             {
                 connection.WriteMultipleCoils(
                     startAddress,
@@ -96,7 +96,7 @@
         {
             using (var connection = new TcpNModbusConnection(
                 this.Location,
-                this.SecondaryLocation))
+                this.SecondaryLocation ?? 502))
             {
                 connection.WriteSingleHoldingRegister(
                     address,
@@ -110,7 +110,7 @@
         {
             using (var connection = new TcpNModbusConnection(
                 this.Location,
-                this.SecondaryLocation))
+                this.SecondaryLocation ?? 502))
             {
                 connection.WriteMultipleHoldingRegisters(
                     startAddress,

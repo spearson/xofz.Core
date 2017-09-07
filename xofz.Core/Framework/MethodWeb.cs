@@ -19,6 +19,39 @@
                 Tuple.Create(dependency, name));
         }
 
+        public virtual T Run<T>(
+            Action<T> method = null,
+            string dependencyName = null)
+        {
+            var dependency = this.dependencies
+                .Where(tuple => tuple.Item1 is T)
+                .FirstOrDefault(tuple => tuple.Item2 == dependencyName);
+            if (dependency == null)
+            {
+                return default(T);
+            }
+
+            var t = (T)dependency.Item1;
+            method?.Invoke(t);
+
+            return t;
+        }
+
+        public virtual U Run<T, U>(
+            Func<T, U> method,
+            string dependencyName = null)
+        {
+            var dependency = this.dependencies
+                .Where(tuple => tuple.Item1 is T)
+                .FirstOrDefault(tuple => tuple.Item2 == dependencyName);
+            if (dependency == null)
+            {
+                return default(U);
+            }
+
+            return method((T)dependency.Item1);
+        }
+
         public virtual void Subscribe<T>(
             string eventName, 
             Action eventHandler, 
@@ -103,39 +136,6 @@
             e.RemoveEventHandler(
                 dependency.Item1,
                 eventHandler);
-        }
-
-        public virtual U Run<T, U>(
-            Func<T, U> method,
-            string dependencyName = null)
-        {
-            var dependency = this.dependencies
-                .Where(tuple => tuple.Item1 is T)
-                .FirstOrDefault(tuple => tuple.Item2 == dependencyName);
-            if (dependency == null)
-            {
-                return default(U);
-            }
-
-            return method((T)dependency.Item1);
-        }
-
-        public virtual T Run<T>(
-            Action<T> method = null,
-            string dependencyName = null)
-        {
-            var dependency = this.dependencies
-                .Where(tuple => tuple.Item1 is T)
-                .FirstOrDefault(tuple => tuple.Item2 == dependencyName);
-            if (dependency == null)
-            {
-                return default(T);
-            }
-
-            var t = (T)dependency.Item1;
-            method?.Invoke(t);
-
-            return t;
         }
 
         private readonly List<Tuple<object, string>> dependencies;

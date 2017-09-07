@@ -18,9 +18,10 @@
             set { }
         }
 
-        int Controller.SecondaryLocation
+        int? Controller.SecondaryLocation
         {
-            get; set;
+            get { return null; }
+            set { }
         }
 
         ushort[] Controller.ReadHoldingRegisters(

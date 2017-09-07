@@ -2,7 +2,8 @@
 {
     public sealed class StringIlluminatedObject : IlluminatedObject
     {
-        public StringIlluminatedObject(string s) : base(new object[] {s})
+        public StringIlluminatedObject(string s) 
+            : base(new object[] {s})
         {
             this.Value = s;
         }
