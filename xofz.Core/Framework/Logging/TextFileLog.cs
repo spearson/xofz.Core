@@ -6,6 +6,7 @@
     using System.IO;
     using System.Linq;
     using System.Threading;
+    using System.Windows.Media.Animation;
     using xofz.Framework.Materialization;
 
     public sealed class TextFileLog : Log, LogEditor
@@ -19,52 +20,55 @@
 
         public IEnumerable<LogEntry> ReadEntries()
         {
-            if (!File.Exists(this.filePath))
+            lock (this.locker)
             {
-                yield break;
-            }
-
-            using (var reader = File.OpenText(this.filePath))
-            {
-                while (!reader.EndOfStream)
+                if (!File.Exists(this.filePath))
                 {
-                    string timestampString;
-                    while ((timestampString = reader.ReadLine()) == string.Empty)
-                    {
-                    }
+                    yield break;
+                }
 
-                    var type = reader.ReadLine();
-                    var content = new LinkedList<string>();
-                    string contentLine;
-                    readContent:
-                    while ((contentLine = reader.ReadLine()) != string.Empty
-                           && contentLine != null)
+                using (var reader = File.OpenText(this.filePath))
+                {
+                    while (!reader.EndOfStream)
                     {
-                        content.AddLast(contentLine);
-                    }
-
-                    if (contentLine == string.Empty)
-                    {
-                        if (!string.IsNullOrEmpty(contentLine = reader.ReadLine()))
+                        string timestampString;
+                        while ((timestampString = reader.ReadLine()) == string.Empty)
                         {
-                            content.AddLast(string.Empty);
-                            content.AddLast(contentLine);
-                            goto readContent;
                         }
-                    }
 
-                    DateTime timestamp;
-                    if (DateTime.TryParseExact(
-                        timestampString,
-                        this.timestampFormat,
-                        CultureInfo.CurrentCulture,
-                        DateTimeStyles.AllowWhiteSpaces,
-                        out timestamp))
-                    {
-                        yield return new LogEntry(
-                            timestamp,
-                            type,
-                            new LinkedListMaterializedEnumerable<string>(content));
+                        var type = reader.ReadLine();
+                        var content = new LinkedList<string>();
+                        string contentLine;
+                        readContent:
+                        while ((contentLine = reader.ReadLine()) != string.Empty
+                               && contentLine != null)
+                        {
+                            content.AddLast(contentLine);
+                        }
+
+                        if (contentLine == string.Empty)
+                        {
+                            if (!string.IsNullOrEmpty(contentLine = reader.ReadLine()))
+                            {
+                                content.AddLast(string.Empty);
+                                content.AddLast(contentLine);
+                                goto readContent;
+                            }
+                        }
+
+                        DateTime timestamp;
+                        if (DateTime.TryParseExact(
+                            timestampString,
+                            this.timestampFormat,
+                            CultureInfo.CurrentCulture,
+                            DateTimeStyles.AllowWhiteSpaces,
+                            out timestamp))
+                        {
+                            yield return new LogEntry(
+                                timestamp,
+                                type,
+                                new LinkedListMaterializedEnumerable<string>(content));
+                        }
                     }
                 }
             }
@@ -111,11 +115,16 @@
             lines.AddLast(string.Empty);
             lines.AddLast(string.Empty);
 
-            File.AppendAllLines(this.filePath, lines);
+            lock (this.locker)
+            {
+                File.AppendAllLines(this.filePath, lines);
+            }
+
             new Thread(() => this.EntryWritten?.Invoke(entry)).Start();
         }
 
         private readonly string filePath;
         private readonly string timestampFormat = "yyyy MMMM dd hh:mm.ss tt";
+        private readonly object locker = new object();
     }
 }
