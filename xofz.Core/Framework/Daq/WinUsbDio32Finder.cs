@@ -13,11 +13,14 @@
         {
             var devicePaths = this.findDevicePaths();
             var dio32s = new List<Dio32>(devicePaths.Count);
-            foreach (var dio32 in devicePaths.Select(path => (Dio32)new WinUsbDio32(path)))
+            foreach (Dio32 dio32 in devicePaths.Select(
+                path => new WinUsbDio32(path)))
             {
                 try
                 {
-                    dio32.Configure(dio32.ReadOnTerminals(), Dio32Ports.A | Dio32Ports.B | Dio32Ports.C);
+                    dio32.Configure(
+                        dio32.ReadOnTerminals(), 
+                        Dio32Ports.A | Dio32Ports.B | Dio32Ports.C);
                 }
                 catch (IOException)
                 {

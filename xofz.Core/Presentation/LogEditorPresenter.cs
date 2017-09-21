@@ -30,7 +30,13 @@
             UiHelpers.Write(this.ui, () =>
             {
                 this.ui.Types = new OrderedMaterializedEnumerable<string>(
-                    new List<string> { "Information", "Warning", "Error", "Custom" });
+                    new List<string>
+                    {
+                        "Information",
+                        "Warning",
+                        "Error",
+                        "Custom"
+                    });
                 this.ui.SelectedType = "Information";
             });
 

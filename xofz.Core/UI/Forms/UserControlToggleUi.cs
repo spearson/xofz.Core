@@ -18,7 +18,7 @@
 
         public string Label
         {
-            get { return this.key.Text; }
+            get => this.key.Text;
 
             set
             {
@@ -29,16 +29,16 @@
 
         bool ToggleUi.Visible
         {
-            get { return this.Visible; }
+            get => this.Visible;
 
-            set { this.Visible = value; }
+            set => this.Visible = value;
         }
 
         bool ToggleUi.Toggled
         {
-            get { return this.key.BackColor == Color.Lime; }
+            get => this.key.BackColor == Color.Lime;
 
-            set { this.key.BackColor = value ? Color.Lime : Color.DimGray; }
+            set => this.key.BackColor = value ? Color.Lime : Color.DimGray;
         }
 
         private void key_Click(object sender, EventArgs e)
