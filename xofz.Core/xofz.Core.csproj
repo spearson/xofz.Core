@@ -50,6 +50,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedHMIDrivers">
+      <HintPath>..\Libraries\AdvancedHMI\AdvancedHMIDrivers.dll</HintPath>
+    </Reference>
+    <Reference Include="MfgControl.AdvancedHMI.Drivers">
+      <HintPath>..\Libraries\AdvancedHMI\MfgControl.AdvancedHMI.Drivers.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Modbus">
       <HintPath>..\Libraries\NModbus\Modbus.dll</HintPath>
@@ -85,7 +91,10 @@
     <Compile Include="Framework\Daq\Internal\WinUsbDio32Finder.cs" />
     <Compile Include="Framework\EncodingHelpers.cs" />
     <Compile Include="Framework\IniFile.cs" />
+    <Compile Include="Framework\Plc\AbPlc.cs" />
+    <Compile Include="Framework\Plc\AbPlcFactory.cs" />
     <Compile Include="Framework\Plc\Fpx.cs" />
+    <Compile Include="Framework\Plc\Implementation\EthernetAbPlc.cs" />
     <Compile Include="Framework\Plc\SerialFpx.cs" />
     <Compile Include="Framework\Plc\SerialFpxFinder.cs" />
     <Compile Include="Framework\Plc\StringData.cs" />
