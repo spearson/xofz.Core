@@ -15,9 +15,6 @@
             return NativeMethods.WinUsb_Free(this.handle);
         }
 
-        public override bool IsInvalid
-        {
-            get { return this.handle == IntPtr.Zero; }
-        }
+        public override bool IsInvalid => this.handle == IntPtr.Zero;
     }
 }

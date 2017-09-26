@@ -72,6 +72,7 @@
     <Compile Include="Framework\Daq\Dio32Finder.cs" />
     <Compile Include="Framework\Daq\Dio32Ports.cs" />
     <Compile Include="Framework\Daq\Dio32Terminals.cs" />
+    <Compile Include="Framework\Daq\Internal\CyUsbDio32.cs" />
     <Compile Include="Framework\Daq\Internal\DeviceFilters.cs" />
     <Compile Include="Framework\Daq\Internal\DeviceInterfaceData.cs" />
     <Compile Include="Framework\Daq\Internal\DeviceInterfaceDetailData.cs" />
@@ -80,9 +81,8 @@
     <Compile Include="Framework\Daq\Internal\FileAttributes.cs" />
     <Compile Include="Framework\Daq\Internal\NativeMethods.cs" />
     <Compile Include="Framework\Daq\Internal\SetupPacket.cs" />
-    <Compile Include="Framework\Daq\Internal\StringExtensions.cs" />
-    <Compile Include="Framework\Daq\WinUsbDio32.cs" />
-    <Compile Include="Framework\Daq\WinUsbDio32Finder.cs" />
+    <Compile Include="Framework\Daq\Internal\WinUsbDio32.cs" />
+    <Compile Include="Framework\Daq\Internal\WinUsbDio32Finder.cs" />
     <Compile Include="Framework\EncodingHelpers.cs" />
     <Compile Include="Framework\IniFile.cs" />
     <Compile Include="Framework\Plc\Fpx.cs" />
@@ -90,6 +90,7 @@
     <Compile Include="Framework\Plc\SerialFpxFinder.cs" />
     <Compile Include="Framework\Plc\StringData.cs" />
     <Compile Include="Framework\Plc\TcpFpx.cs" />
+    <Compile Include="Misc\Synchronization\MethodBuckle.cs" />
     <Compile Include="Misc\Framework\AI\DefaultTreeOrderer.cs" />
     <Compile Include="Misc\Framework\AI\FundamentalAi.cs" />
     <Compile Include="Misc\Framework\AI\HashCodeSettingTreeOrderer.cs" />

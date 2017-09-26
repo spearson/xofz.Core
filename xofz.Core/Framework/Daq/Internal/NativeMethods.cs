@@ -74,7 +74,7 @@
             [In] SetupPacket setupPacket,
             [In] ref byte buffer,
             [In] uint bufferLength,
-            [Out] [Optional] out uint lengthTransferred,
+            [Out] out uint lengthTransferred,
             [In] [Optional] IntPtr overlapped);
     }
 }
