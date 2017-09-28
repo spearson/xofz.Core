@@ -37,6 +37,114 @@
             return t;
         }
 
+        public virtual Tuple<T, U> Run<T, U>(
+            Action<T, U> method = null,
+            string dependency1Name = null,
+            string dependency2Name = null)
+        {
+            var ds = this.dependencies;
+            var dep1 = ds
+                .Where(tuple => tuple.Item1 is T)
+                .FirstOrDefault(
+                    tuple => tuple.Item2 == dependency1Name);
+            var dep2 = ds
+                .Where(tuple => tuple.Item1 is U)
+                .FirstOrDefault(
+                    tuple => tuple.Item2 == dependency2Name);
+            if (dep1 == null || dep2 == null)
+            {
+                return Tuple.Create(
+                    default(T),
+                    default(U));
+            }
+            
+            var t = (T)dep1.Item1;
+            var u = (U)dep2.Item1;
+            method?.Invoke(t, u);
+
+            return Tuple.Create(t, u);
+        }
+
+        public virtual Tuple<T, U, V> Run<T, U, V>(
+            Action<T, U, V> method = null,
+            string dependency1Name = null,
+            string dependency2Name = null,
+            string dependency3Name = null)
+        {
+            var ds = this.dependencies;
+            var dep1 = ds
+                .Where(tuple => tuple.Item1 is T)
+                .FirstOrDefault(
+                    tuple => tuple.Item2 == dependency1Name);
+            var dep2 = ds
+                .Where(tuple => tuple.Item1 is U)
+                .FirstOrDefault(
+                    tuple => tuple.Item2 == dependency2Name);
+            var dep3 = ds
+                .Where(tuple => tuple.Item1 is V)
+                .FirstOrDefault(
+                    tuple => tuple.Item2 == dependency3Name);
+            if (dep1 == null || dep2 == null || dep3 == null)
+            {
+                return Tuple.Create(
+                    default(T),
+                    default(U),
+                    default(V));
+            }
+
+            var t = (T)dep1.Item1;
+            var u = (U)dep2.Item1;
+            var v = (V)dep3.Item1;
+            method?.Invoke(t, u, v);
+
+            return Tuple.Create(t, u, v);
+        }
+
+        public virtual Tuple<T, U, V, W> Run<T, U, V, W>(
+            Action<T, U, V, W> method = null,
+            string dependency1Name = null,
+            string dependency2Name = null,
+            string dependency3Name = null,
+            string dependency4Name = null)
+        {
+            var ds = this.dependencies;
+            var dep1 = ds
+                .Where(tuple => tuple.Item1 is T)
+                .FirstOrDefault(
+                    tuple => tuple.Item2 == dependency1Name);
+            var dep2 = ds
+                .Where(tuple => tuple.Item1 is U)
+                .FirstOrDefault(
+                    tuple => tuple.Item2 == dependency2Name);
+            var dep3 = ds
+                .Where(tuple => tuple.Item1 is V)
+                .FirstOrDefault(
+                    tuple => tuple.Item2 == dependency3Name);
+            var dep4 = ds
+                .Where(tuple => tuple.Item1 is W)
+                .FirstOrDefault(
+                    tuple => tuple.Item2 == dependency4Name);
+            if (dep1 == null
+                || dep2 == null
+                || dep3 == null
+                || dep4 == null)
+            {
+                return Tuple.Create(
+                    default(T),
+                    default(U),
+                    default(V),
+                    default(W));
+            }
+
+            var t = (T)dep1.Item1;
+            var u = (U)dep2.Item1;
+            var v = (V)dep3.Item1;
+            var w = (W)dep4.Item1;
+            method?.Invoke(t, u, v, w);
+
+            return Tuple.Create(t, u, v, w);
+        }
+
         public virtual U Run<T, U>(
             Func<T, U> method,
             string dependencyName = null)
