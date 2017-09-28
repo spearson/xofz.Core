@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>xofz</RootNamespace>
     <AssemblyName>xofz.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +41,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -48,11 +51,24 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedHMIDrivers, Version=3.9.9.20, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\AdvancedHMIDrivers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MfgControl.AdvancedHMI.Drivers, Version=3.99.19.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\MfgControl.AdvancedHMI.Drivers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Modbus">
-      <HintPath>..\Libraries\NModbus\Modbus.dll</HintPath>
+    <Reference Include="Modbus, Version=1.11.0.0, Culture=neutral, PublicKeyToken=b5aba55fcbc8d946, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\Modbus.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -64,6 +80,7 @@
     <Reference Include="System.Xaml" />
     <Reference Include="VncSharp">
       <HintPath>..\Libraries\VncSharp\VncSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -85,7 +102,10 @@
     <Compile Include="Framework\Daq\Internal\WinUsbDio32Finder.cs" />
     <Compile Include="Framework\EncodingHelpers.cs" />
     <Compile Include="Framework\IniFile.cs" />
+    <Compile Include="Framework\Plc\AbPlc.cs" />
+    <Compile Include="Framework\Plc\AbPlcFactory.cs" />
     <Compile Include="Framework\Plc\Fpx.cs" />
+    <Compile Include="Framework\Plc\Implementation\EthernetAbPlc.cs" />
     <Compile Include="Framework\Plc\SerialFpx.cs" />
     <Compile Include="Framework\Plc\SerialFpxFinder.cs" />
     <Compile Include="Framework\Plc\StringData.cs" />
@@ -187,6 +207,11 @@
     <Compile Include="Presentation\PopupPresenter.cs" />
     <Compile Include="Presentation\ShutdownPresenter.cs" />
     <Compile Include="Presentation\VncPresenter.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Root\Commands\SetupLogCommand.cs" />
     <Compile Include="Root\Commands\SetupLoginCommand.cs" />
     <Compile Include="Root\Commands\SetupMainCommand.cs" />
@@ -336,11 +361,21 @@
     <Compile Include="UI\WPF\WindowUi.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\AdvancedHMIDrivers.dll" />
+    <None Include="Resources\MfgControl.AdvancedHMI.Drivers.dll" />
+    <None Include="Resources\VncSharp.dll" />
+    <None Include="Resources\log4net.dll" />
+    <None Include="Resources\Modbus.dll" />
+    <None Include="Resources\Unme.Common.dll" />
     <Content Include="version.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FormLogEditorUi.resx">
       <DependentUpon>FormLogEditorUi.cs</DependentUpon>
     </EmbeddedResource>

@@ -5,27 +5,31 @@
 
     internal static class EmbeddedAssemblyLoader
     {
+        public static readonly object GlobalLock = new object();
+
         public static Assembly Load(object sender, ResolveEventArgs e)
         {
-            if (e.Name.EndsWith("Retargetable=Yes"))
+            if (e.Name.Contains("VncSharp"))
             {
-                return Assembly.Load(new AssemblyName(e.Name));
+                return Assembly.Load(Resources.VncSharp);
             }
 
-            var container = Assembly.GetExecutingAssembly();
-            var path = new AssemblyName(e.Name).Name + ".dll";
-
-            using (var stream = container.GetManifestResourceStream(path))
+            if (e.Name.Contains("Unme"))
             {
-                if (stream == null)
-                {
-                    return null;
-                }
-
-                var bytes = new byte[stream.Length];
-                stream.Read(bytes, 0, bytes.Length);
-                return Assembly.Load(bytes);
+                return Assembly.Load(Resources.Unme_Common);
             }
+
+            if (e.Name.Contains("log4net"))
+            {
+                return Assembly.Load(Resources.log4net);
+            }
+
+            if (e.Name.Contains("Modbus"))
+            {
+                return Assembly.Load(Resources.Modbus);
+            }
+
+            return null;
         }
     }
 }

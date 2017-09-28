@@ -8,10 +8,13 @@
     {
         static UserControlVncUi()
         {
-            AppDomain.CurrentDomain.AssemblyResolve
-                -= EmbeddedAssemblyLoader.Load;
-            AppDomain.CurrentDomain.AssemblyResolve
-                += EmbeddedAssemblyLoader.Load;
+            lock (EmbeddedAssemblyLoader.GlobalLock)
+            {
+                AppDomain.CurrentDomain.AssemblyResolve
+                    -= EmbeddedAssemblyLoader.Load;
+                AppDomain.CurrentDomain.AssemblyResolve
+                    += EmbeddedAssemblyLoader.Load;
+            }
         }
 
         public UserControlVncUi()

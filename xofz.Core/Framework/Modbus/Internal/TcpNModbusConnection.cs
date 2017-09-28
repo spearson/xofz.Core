@@ -9,10 +9,13 @@
     {
         static TcpNModbusConnection()
         {
-            AppDomain.CurrentDomain.AssemblyResolve
-                -= EmbeddedAssemblyLoader.Load;
-            AppDomain.CurrentDomain.AssemblyResolve
-                += EmbeddedAssemblyLoader.Load;
+            lock (EmbeddedAssemblyLoader.GlobalLock)
+            {
+                AppDomain.CurrentDomain.AssemblyResolve
+                    -= EmbeddedAssemblyLoader.Load;
+                AppDomain.CurrentDomain.AssemblyResolve
+                    += EmbeddedAssemblyLoader.Load;
+            }
         }
 
         public TcpNModbusConnection(string ip, int port)
