@@ -90,6 +90,7 @@
     <Compile Include="Framework\Daq\Dio32Ports.cs" />
     <Compile Include="Framework\Daq\Dio32Terminals.cs" />
     <Compile Include="Framework\Daq\Internal\CyUsbDio32.cs" />
+    <Compile Include="Framework\Daq\Internal\CyUsbDio32Finder.cs" />
     <Compile Include="Framework\Daq\Internal\DeviceFilters.cs" />
     <Compile Include="Framework\Daq\Internal\DeviceInterfaceData.cs" />
     <Compile Include="Framework\Daq\Internal\DeviceInterfaceDetailData.cs" />

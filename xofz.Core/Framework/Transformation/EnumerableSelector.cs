@@ -20,5 +20,10 @@
             e1.Dispose();
             e2.Dispose();
         }
+
+        public virtual IEnumerable<T> Select<T>(IEnumerable<T> source, params bool[] selectors)
+        {
+            return this.Select(source, (IEnumerable<bool>)selectors);
+        }
     }
 }
