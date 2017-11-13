@@ -77,10 +77,10 @@
         private void ui_RangeKeyTapped()
         {
             var w = this.web;
-            var start = UiHelpers.Read(
+            var startDate = UiHelpers.Read(
                 this.ui,
                 () => this.ui.StartDate);
-            var end = UiHelpers.Read(
+            var endDate = UiHelpers.Read(
                 this.ui,
                 () => this.ui.EndDate);
             w.Run<LogStatistics>(
@@ -88,12 +88,12 @@
                 {
                     this.setFilters(stats);
                     stats.ComputeRange(
-                        start, end);
+                        startDate, endDate);
                     var typeInfo =
                         "Range: "
-                        + this.formatDate(start)
+                        + this.formatDate(startDate)
                         + " to "
-                        + this.formatDate(end);
+                        + this.formatDate(endDate);
                     UiHelpers.Write(
                         this.ui,
                         () => this.ui.Header = typeInfo);

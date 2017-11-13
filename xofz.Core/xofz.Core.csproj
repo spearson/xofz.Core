@@ -103,6 +103,8 @@
     <Compile Include="Framework\Daq\Internal\WinUsbDio32Finder.cs" />
     <Compile Include="Framework\EncodingHelpers.cs" />
     <Compile Include="Framework\IniFile.cs" />
+    <Compile Include="Framework\MainUiSettings.cs" />
+    <Compile Include="Framework\Materialization\ConcurrentDictionaryMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentQueueMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentStackMaterializedEnumerable.cs" />
     <Compile Include="Framework\Plc\AbPlc.cs" />
