@@ -18,8 +18,8 @@
         public ConcurrentDictionaryMaterializedEnumerable(
             IEnumerable<KeyValuePair<TKey, TValue>> source)
             : this(
-                  source,
-                  new LinkedListMaterializer())
+                source,
+                new LinkedListMaterializer())
         {
         }
 
@@ -57,15 +57,15 @@
         }
 
         long MaterializedEnumerable<KeyValuePair<TKey, TValue>>.Count
-            => this.dictionary?.Count ?? 0;
+            => this.dictionary.Count;
 
         public MaterializedEnumerable<TKey> Keys =>
-            this.materializer.Materialize(this.dictionary?.Keys);
+            this.materializer.Materialize(this.dictionary.Keys);
 
         public MaterializedEnumerable<TValue> Values =>
-            this.materializer.Materialize(this.dictionary?.Values);
+            this.materializer.Materialize(this.dictionary.Values);
 
-        public bool IsEmpty => this.dictionary?.IsEmpty ?? true;
+        public bool IsEmpty => this.dictionary.IsEmpty;
 
         public TValue this[TKey key] => this.dictionary[key];
 

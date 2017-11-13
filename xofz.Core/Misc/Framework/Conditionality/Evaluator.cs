@@ -13,10 +13,11 @@
             var enumerator = conditionGenerators.GetEnumerator();
             bool evaluation;
             BigInteger counter = 0;
+
             while (counter < numberToCheck)
             {
                 enumerator.MoveNext();
-                evaluation = enumerator.Current();
+                evaluation = enumerator.Current?.Invoke() ?? true;
                 if (!evaluation)
                 {
                     enumerator.Dispose();

@@ -19,7 +19,11 @@
                 var unknown1 = enumerator.Current;
                 enumerator.MoveNext();
                 var unknown2 = enumerator.Current;
-                var tuple = this.absolution.Absolve(this.createFactory(unknown1, unknown2), learn);
+                var tuple = this.absolution.Absolve(
+                    this.createFactory(
+                        unknown1,
+                        unknown2),
+                    learn);
                 yield return tuple.Item1;
                 yield return tuple.Item2;
             }

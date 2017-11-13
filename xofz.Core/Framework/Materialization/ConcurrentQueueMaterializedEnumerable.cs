@@ -8,16 +8,17 @@
         : MaterializedEnumerable<T>
     {
         public ConcurrentQueueMaterializedEnumerable()
+            : this(new ConcurrentQueue<T>())
         {
-            this.queue = new ConcurrentQueue<T>();
         }
 
         public ConcurrentQueueMaterializedEnumerable(IEnumerable<T> source)
+            : this(new ConcurrentQueue<T>(source))
         {
-            this.queue = new ConcurrentQueue<T>(source);
         }
 
-        public ConcurrentQueueMaterializedEnumerable(ConcurrentQueue<T> queue)
+        public ConcurrentQueueMaterializedEnumerable(
+            ConcurrentQueue<T> queue)
         {
             this.queue = queue;
         }
