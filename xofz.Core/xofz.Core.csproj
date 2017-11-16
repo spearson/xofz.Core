@@ -109,6 +109,7 @@
     <Compile Include="Framework\Materialization\ConcurrentStackMaterializedEnumerable.cs" />
     <Compile Include="Framework\Plc\AbPlc.cs" />
     <Compile Include="Framework\Plc\AbPlcFactory.cs" />
+    <Compile Include="Framework\Plc\DF1ReadErrorHandler.cs" />
     <Compile Include="Framework\Plc\Fpx.cs" />
     <Compile Include="Framework\Plc\Implementation\EthernetAbPlc.cs" />
     <Compile Include="Framework\Plc\SerialFpx.cs" />
