@@ -56,7 +56,7 @@
 
                     UiHelpers.Write(
                         this.ui,
-                        () => this.ui.Disconnect());
+                        this.ui.Disconnect);
                     this.ui.WriteFinished.WaitOne();
                     Interlocked.CompareExchange(
                         ref this.connectedIf1,

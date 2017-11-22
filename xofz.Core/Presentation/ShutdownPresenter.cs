@@ -31,7 +31,7 @@
 
         public override void Start()
         {
-            UiHelpers.Write(this.mainUi, () => this.cleanup());
+            UiHelpers.Write(this.mainUi, this.cleanup);
             this.mainUi.WriteFinished.WaitOne();
             Process.GetCurrentProcess().Kill();
         }
