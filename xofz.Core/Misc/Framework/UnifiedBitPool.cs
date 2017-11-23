@@ -94,7 +94,7 @@
             if (newPool.Count(b => b) != this.onBitCount)
             {
                 throw new InvalidOperationException(
-                    "shifter delegate must retain current on bit count.");
+                    "delegate must retain current on bit count.");
             }
 
             this.currentPool = newPool;

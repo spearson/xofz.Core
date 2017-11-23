@@ -116,6 +116,7 @@
     <Compile Include="Framework\Plc\SerialFpxFinder.cs" />
     <Compile Include="Framework\Plc\StringData.cs" />
     <Compile Include="Framework\Plc\TcpFpx.cs" />
+    <Compile Include="Framework\Transformation\Accumulator.cs" />
     <Compile Include="Misc\Framework\UnifiedBitPool.cs" />
     <Compile Include="Misc\Synchronization\MethodBuckle.cs" />
     <Compile Include="Misc\Framework\AI\DefaultTreeOrderer.cs" />
