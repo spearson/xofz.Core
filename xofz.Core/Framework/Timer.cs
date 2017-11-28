@@ -77,8 +77,8 @@
             {
                 this.changeThreadPriority();
             }
-            
-            new Thread(() => this.Elapsed?.Invoke()).Start();
+
+            this.Elapsed?.Invoke();
         }
 
         private void changeThreadPriority()
