@@ -48,7 +48,7 @@
                 IntPtr.Zero,
                 (uint)intervalInMs,
                 (uint)intervalInMs,
-                CallbackOptions.ExecuteInTimerThread);
+                CallbackOptions.QueueToWorkerThread);
         }
 
         public virtual void Stop()
