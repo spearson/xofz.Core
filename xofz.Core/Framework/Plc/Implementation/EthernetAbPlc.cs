@@ -25,6 +25,8 @@
             };
         }
 
+        public string Location => this.driver.IPAddress;
+
         string AbPlc.Read(string address)
         {
             return this.driver.Read(address);
