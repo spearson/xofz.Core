@@ -69,18 +69,52 @@
                 return;
             }
 
+            Interlocked.CompareExchange(ref this.startedIf1, 1, 0);
+
             if (this.resetOnStart)
             {
                 this.resetDatesAndFilters();
             }
+            else
+            {
+                if (Interlocked.CompareExchange(
+                    ref this.refreshOnStartIf1, 0, 1) == 1)
+                {
+                    this.reloadEntries();
+                }
+            }
 
             base.Start();
+        }
+
+        public override void Stop()
+        {
+            Interlocked.CompareExchange(ref this.startedIf1, 0, 1);
         }
 
         private void resetDatesAndFilters()
         {
             var today = DateTime.Today;
             var lastWeek = today.Subtract(TimeSpan.FromDays(6));
+            if (UiHelpers.Read(this.ui, () => this.ui.StartDate)
+                == lastWeek
+                && UiHelpers.Read(this.ui, () => this.ui.EndDate)
+                == today
+                && UiHelpers.Read(this.ui, () => this.ui.FilterContent)
+                == string.Empty
+                && UiHelpers.Read(this.ui, () => this.ui.FilterType)
+                == string.Empty)
+            {
+                if (Interlocked.CompareExchange(
+                        ref this.refreshOnStartIf1, 0, 1) == 1)
+                {
+                    this.reloadEntries();
+                }
+                return;
+            }
+
+            Interlocked.CompareExchange(
+                ref this.refreshOnStartIf1, 0, 1);
             UiHelpers.Write(this.ui, () =>
             {
                 this.ui.StartDate = lastWeek;
@@ -174,6 +208,12 @@
                 return;
             }
 
+            if (Interlocked.Read(ref this.startedIf1) == 0)
+            {
+                Interlocked.CompareExchange(ref this.refreshOnStartIf1, 1, 0);
+                return;
+            }
+
             lock (this.locker)
             {
                 var newEntries = new LinkedList<Tuple<string, string, string>>(
@@ -204,7 +244,7 @@
             UiHelpers.Write(this.ui, () => this.ui.AddKeyVisible = visible);
         }
 
-        private long setupIf1;
+        private long setupIf1, startedIf1, refreshOnStartIf1;
         private bool resetOnStart;
         private AccessLevel editLevel;
         private readonly LogUi ui;
