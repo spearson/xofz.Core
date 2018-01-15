@@ -7,7 +7,7 @@
     using xofz.Framework.Logging;
     using xofz.UI;
 
-    public sealed class LogStatisticsPresenter : PopupPresenter
+    public sealed class LogStatisticsPresenter : PopupNamedPresenter
     {
         public LogStatisticsPresenter(
             LogStatisticsUi ui, 
@@ -71,7 +71,8 @@
                     stats.Reset();
                     this.showStatistics(
                         stats, true);
-                });
+                },
+                this.Name);
         }
 
         private void ui_RangeKeyTapped()
@@ -99,7 +100,8 @@
                         () => this.ui.Header = typeInfo);
                     this.ui.WriteFinished.WaitOne();
                     this.showStatistics(stats, false);
-                });
+                },
+                this.Name);
         }
 
         private void ui_OverallKeyTapped()
@@ -115,7 +117,8 @@
                         () => this.ui.Header = "Overall");
                     this.ui.WriteFinished.WaitOne();
                     this.showStatistics(stats, false);
-                });
+                },
+                this.Name);
         }
 
         private void setFilters(LogStatistics statistics)

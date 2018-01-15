@@ -7,7 +7,7 @@
     using xofz.Framework.Materialization;
     using xofz.UI;
 
-    public sealed class LogEditorPresenter : Presenter
+    public sealed class LogEditorPresenter : NamedPresenter
     {
         public LogEditorPresenter(
             LogEditorUi ui, 
@@ -67,8 +67,9 @@
                 : UiHelpers.Read(this.ui, () => this.ui.SelectedType);
 
             this.web.Run<LogEditor>(le => le.AddEntry(
-                type,
-                UiHelpers.Read(this.ui, () => this.ui.Content)));
+                    type,
+                    UiHelpers.Read(this.ui, () => this.ui.Content)),
+                this.Name);
 
             UiHelpers.Write(this.ui, () =>
             {

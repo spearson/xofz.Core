@@ -10,7 +10,7 @@
     using UI;
     using xofz.Framework.Logging;
 
-    public sealed class LogPresenter : Presenter
+    public sealed class LogPresenter : NamedPresenter
     {
         public LogPresenter(
             LogUi ui, 
@@ -49,7 +49,9 @@
             });
             this.ui.WriteFinished.WaitOne();
 
-            w.Run<Log>(l => l.EntryWritten += this.log_EntryWritten);
+            w.Run<Log>(
+                l => l.EntryWritten += this.log_EntryWritten,
+                this.Name);
             new Thread(this.timer_Elapsed).Start();
 
             w.Run<xofz.Framework.Timer>(
@@ -142,44 +144,45 @@
                 this.ui,
                 () => this.ui.FilterType);
             w.Run<Log>(l =>
-            {
-                // first, begin reading all entries
-                var matchingEntries = l.ReadEntries();
-
-                // second, get all the entries in the date range
-                matchingEntries = matchingEntries.Where(
-                    e => e.Timestamp >= start
-                         && e.Timestamp < end.AddDays(1));
-
-                // third, match on content
-                if (!string.IsNullOrWhiteSpace(filterContent))
                 {
+                    // first, begin reading all entries
+                    var matchingEntries = l.ReadEntries();
+
+                    // second, get all the entries in the date range
                     matchingEntries = matchingEntries.Where(
-                        e => e.Content.Any(s => s.ToLowerInvariant()
-                            .Contains(filterContent.ToLowerInvariant())));
-                }
+                        e => e.Timestamp >= start
+                             && e.Timestamp < end.AddDays(1));
 
-                // fourth, match on type
-                if (!string.IsNullOrWhiteSpace(filterType))
-                {
-                    matchingEntries = matchingEntries.Where(
-                        e => e.Type.ToLowerInvariant()
-                            .Contains(filterType.ToLowerInvariant()));
-                }
+                    // third, match on content
+                    if (!string.IsNullOrWhiteSpace(filterContent))
+                    {
+                        matchingEntries = matchingEntries.Where(
+                            e => e.Content.Any(s => s.ToLowerInvariant()
+                                .Contains(filterContent.ToLowerInvariant())));
+                    }
 
-                // finally, order them by newest first
-                matchingEntries = matchingEntries.OrderByDescending(
-                    e => e.Timestamp);
+                    // fourth, match on type
+                    if (!string.IsNullOrWhiteSpace(filterType))
+                    {
+                        matchingEntries = matchingEntries.Where(
+                            e => e.Type.ToLowerInvariant()
+                                .Contains(filterType.ToLowerInvariant()));
+                    }
 
-                var uiEntries = new LinkedListMaterializedEnumerable<
-                    Tuple<string, string, string>>(
-                    matchingEntries.Select(this.createTuple));
+                    // finally, order them by newest first
+                    matchingEntries = matchingEntries.OrderByDescending(
+                        e => e.Timestamp);
 
-                UiHelpers.Write(
-                    this.ui, 
-                    () => this.ui.Entries = uiEntries);
-                this.ui.WriteFinished.WaitOne();
-            });
+                    var uiEntries = new LinkedListMaterializedEnumerable<
+                        Tuple<string, string, string>>(
+                        matchingEntries.Select(this.createTuple));
+
+                    UiHelpers.Write(
+                        this.ui,
+                        () => this.ui.Entries = uiEntries);
+                    this.ui.WriteFinished.WaitOne();
+                },
+                this.Name);
         }
 
         private void ui_AddKeyTapped()
