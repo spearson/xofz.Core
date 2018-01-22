@@ -12,6 +12,7 @@
             this.callback = this.ticked;
             this.autoReset = true;
             this.priority = ThreadPriority.Normal;
+            this.locker = new object();
         }
 
         public virtual event Action Elapsed;
@@ -36,29 +37,41 @@
 
         public virtual void Start(int intervalInMs)
         {
-            if (Interlocked.CompareExchange(ref this.startedIf1, 1, 0) == 1)
+            lock (this.locker)
             {
-                return;
-            }
+                if (this.started)
+                {
+                    return;
+                }
 
-            NativeMethods.CreateTimerQueueTimer(
-                out this.handle,
-                IntPtr.Zero,
-                this.callback,
-                IntPtr.Zero,
-                (uint)intervalInMs,
-                (uint)intervalInMs,
-                CallbackOptions.QueueToWorkerThread);
+                NativeMethods.CreateTimerQueueTimer(
+                    out this.handle,
+                    IntPtr.Zero,
+                    this.callback,
+                    IntPtr.Zero,
+                    (uint)intervalInMs,
+                    (uint)intervalInMs,
+                    CallbackOptions.QueueToWorkerThread);
+                this.started = true;
+            }
         }
 
         public virtual void Stop()
         {
-            if (Interlocked.CompareExchange(ref this.startedIf1, 0, 1) == 0)
+            lock (this.locker)
             {
-                return;
-            }
+                if (!this.started)
+                {
+                    return;
+                }
 
-            NativeMethods.DeleteTimerQueueTimer(IntPtr.Zero, this.handle, IntPtr.Zero);
+                NativeMethods.DeleteTimerQueueTimer(
+                    IntPtr.Zero, 
+                    this.handle, 
+                    IntPtr.Zero);
+                this.started = false;
+            }
+            
         }
 
         public virtual void Dispose()
@@ -88,10 +101,11 @@
         }
 
         private bool threadPrioritySet;
-        private int startedIf1;
+        private bool started;
         private IntPtr handle;
         private volatile bool autoReset;
         private ThreadPriority priority;
         private readonly TimerCallback callback;
+        private readonly object locker;
     }
 }
