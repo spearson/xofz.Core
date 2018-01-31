@@ -6,9 +6,33 @@
 
     public class MethodWeb
     {
+        public static MethodWeb Default
+        {
+            get
+            {
+                lock (defaultLocker)
+                {
+                    if (@default == default(MethodWeb))
+                    {
+                        new MethodWeb();
+                    }
+                }
+
+                return @default;
+            }
+
+            private set => @default = value;
+        }
+
+        public static void SetDefault(Func<MethodWeb> defaultCreator)
+        {
+            Default = defaultCreator();
+        }
+
         public MethodWeb()
         {
             this.dependencies = new List<Tuple<object, string>>();
+            Default = this;
         }
 
         public virtual void RegisterDependency(
@@ -247,5 +271,7 @@
         }
 
         private readonly List<Tuple<object, string>> dependencies;
+        private static MethodWeb @default;
+        private static object defaultLocker = new object();
     }
 }
