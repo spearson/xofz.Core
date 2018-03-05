@@ -5,7 +5,7 @@
     using System.IO;
     using System.Linq;
 
-    // todo: clean up!
+    // todo: stop using this absolute trash code
     public class IniFile
     {
         public IniFile(string location)

@@ -14,6 +14,8 @@
                 {
                     if (@default == default(MethodWeb))
                     {
+                        // ReSharper disable once ObjectCreationAsStatement
+                        // check the constructor
                         new MethodWeb();
                     }
                 }
@@ -272,6 +274,6 @@
 
         private readonly List<Tuple<object, string>> dependencies;
         private static MethodWeb @default;
-        private static object defaultLocker = new object();
+        private static readonly object defaultLocker = new object();
     }
 }

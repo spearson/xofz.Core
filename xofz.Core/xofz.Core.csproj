@@ -103,11 +103,13 @@
     <Compile Include="Framework\Daq\Internal\WinUsbDio32Finder.cs" />
     <Compile Include="Framework\EncodingHelpers.cs" />
     <Compile Include="Framework\IniFile.cs" />
+    <Compile Include="Framework\IniReaderWriter.cs" />
     <Compile Include="Framework\MainUiSettings.cs" />
     <Compile Include="Framework\Materialization\ConcurrentDictionaryMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentQueueMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentStackMaterializedEnumerable.cs" />
     <Compile Include="Framework\MethodInjector.cs" />
+    <Compile Include="Framework\MethodWebManager.cs" />
     <Compile Include="Framework\Plc\AbPlc.cs" />
     <Compile Include="Framework\Plc\AbPlcFactory.cs" />
     <Compile Include="Framework\Plc\DF1ReadErrorHandler.cs" />
