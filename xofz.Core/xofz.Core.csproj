@@ -85,6 +85,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumHelpers.cs" />
     <Compile Include="Framework\Daq\Dio32.cs" />
     <Compile Include="Framework\Daq\Dio32Finder.cs" />
     <Compile Include="Framework\Daq\Dio32Ports.cs" />

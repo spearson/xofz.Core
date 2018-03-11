@@ -7,7 +7,6 @@
     using System.Text;
     using xofz.Framework.Materialization;
 
-    // todo: clean up!
     public class IniReaderWriter
     {
         public IniReaderWriter(string filePath)
