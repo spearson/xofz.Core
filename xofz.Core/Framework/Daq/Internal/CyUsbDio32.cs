@@ -1,8 +1,6 @@
 ﻿namespace xofz.Framework.Daq.Internal
 {
     using System;
-    using System.IO;
-    using System.Linq;
 
     internal sealed class CyUsbDio32 : Dio32
     {
@@ -120,7 +118,7 @@
 
             NativeMethods.DIO_Configure(
                 this.deviceIndex,
-                1,
+                0,
                 ref outMask,
                 ref data);
         }

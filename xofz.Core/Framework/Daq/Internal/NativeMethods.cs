@@ -10,27 +10,27 @@
         public const uint diOnly = 0xFFFFFFFD;
 
         // cyusb
-        [DllImport("AIOUSB.dll")]
+        [DllImport("AIOUSB.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint GetDeviceByEEPROMByte(byte data);
 
-        [DllImport("AIOUSB.dll")]
+        [DllImport("AIOUSB.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint DIO_Configure(
             uint deviceIndex,
             byte tristate,
             ref byte outMask,
             ref uint data);
 
-        [DllImport("AIOUSB.dll")]
+        [DllImport("AIOUSB.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint DIO_ReadAll(
             uint deviceIndex, 
             out uint data);
 
-        [DllImport("AIOUSB.dll")]
+        [DllImport("AIOUSB.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint GetDeviceSerialNumber(
             uint deviceIndex,
             out ulong serialNumber);
 
-        [DllImport("AIOUSB.dll")]
+        [DllImport("AIOUSB.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint DIO_WriteAll(
             uint deviceIndex,
             ref uint data);
