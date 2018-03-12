@@ -15,6 +15,24 @@
         }
 
         public SetupShutdownCommand(
+            MethodWeb web)
+            : this(() => { }, web)
+        {
+        }
+
+        public SetupShutdownCommand(
+            Action cleanup,
+            MethodWeb web)
+            : this(
+                default(Ui),
+                cleanup,
+                web)
+        {
+            this.cleanup = cleanup;
+            this.web = web;
+        }
+
+        public SetupShutdownCommand(
             Ui mainUi,
             Action cleanup,
             MethodWeb web)

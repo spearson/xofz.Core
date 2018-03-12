@@ -19,6 +19,16 @@
             this.web = web;
         }
 
+        public ShutdownPresenter(
+            Action cleanup,
+            MethodWeb web)
+            : base(null, null)
+        {
+            this.mainUi = default(Ui);
+            this.cleanup = cleanup;
+            this.web = web;
+        }
+
         public void Setup()
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
@@ -31,8 +41,17 @@
 
         public override void Start()
         {
-            UiHelpers.Write(this.mainUi, this.cleanup);
-            this.mainUi.WriteFinished.WaitOne();
+            var mUi = this.mainUi;
+            var c = this.cleanup;
+            if (mUi != default(Ui))
+            {
+                UiHelpers.Write(mUi, c);
+                mUi.WriteFinished.WaitOne();
+                Process.GetCurrentProcess().Kill();
+                return;
+            }
+
+            c();
             Process.GetCurrentProcess().Kill();
         }
 
