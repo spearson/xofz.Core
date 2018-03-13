@@ -47,7 +47,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.timeRemainingLabel = new System.Windows.Forms.Label();
             this.levelLabel = new System.Windows.Forms.Label();
-            this.logOutKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -68,6 +67,7 @@
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(168, 38);
             this.passwordTextBox.TabIndex = 1;
+            this.passwordTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.passwordTextBox_KeyPress);
             // 
             // loginKey
             // 
@@ -78,7 +78,7 @@
             this.loginKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginKey.Location = new System.Drawing.Point(186, 172);
             this.loginKey.Name = "loginKey";
-            this.loginKey.Size = new System.Drawing.Size(168, 40);
+            this.loginKey.Size = new System.Drawing.Size(170, 40);
             this.loginKey.TabIndex = 2;
             this.loginKey.Text = "Log In";
             this.loginKey.UseVisualStyleBackColor = true;
@@ -257,7 +257,7 @@
             this.clearKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearKey.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.clearKey.Location = new System.Drawing.Point(273, 126);
+            this.clearKey.Location = new System.Drawing.Point(275, 126);
             this.clearKey.Name = "clearKey";
             this.clearKey.Size = new System.Drawing.Size(81, 40);
             this.clearKey.TabIndex = 42;
@@ -274,7 +274,7 @@
             this.cancelKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelKey.Location = new System.Drawing.Point(186, 218);
             this.cancelKey.Name = "cancelKey";
-            this.cancelKey.Size = new System.Drawing.Size(168, 40);
+            this.cancelKey.Size = new System.Drawing.Size(170, 40);
             this.cancelKey.TabIndex = 53;
             this.cancelKey.Text = "Cancel";
             this.cancelKey.UseVisualStyleBackColor = true;
@@ -294,7 +294,7 @@
             // 
             this.timeRemainingLabel.BackColor = System.Drawing.Color.PapayaWhip;
             this.timeRemainingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeRemainingLabel.Location = new System.Drawing.Point(186, 36);
+            this.timeRemainingLabel.Location = new System.Drawing.Point(188, 36);
             this.timeRemainingLabel.Name = "timeRemainingLabel";
             this.timeRemainingLabel.Size = new System.Drawing.Size(168, 38);
             this.timeRemainingLabel.TabIndex = 55;
@@ -311,27 +311,11 @@
             this.levelLabel.TabIndex = 56;
             this.levelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // logOutKey
-            // 
-            this.logOutKey.AutoSize = true;
-            this.logOutKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
-            this.logOutKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.logOutKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.logOutKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logOutKey.Location = new System.Drawing.Point(186, 279);
-            this.logOutKey.Name = "logOutKey";
-            this.logOutKey.Size = new System.Drawing.Size(168, 40);
-            this.logOutKey.TabIndex = 57;
-            this.logOutKey.Text = "Log Out";
-            this.logOutKey.UseVisualStyleBackColor = true;
-            this.logOutKey.Click += new System.EventHandler(this.logOutKey_Click);
-            // 
             // FormLoginUi
             // 
             this.AcceptButton = this.loginKey;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(368, 331);
-            this.Controls.Add(this.logOutKey);
+            this.ClientSize = new System.Drawing.Size(368, 270);
             this.Controls.Add(this.levelLabel);
             this.Controls.Add(this.timeRemainingLabel);
             this.Controls.Add(this.label2);
@@ -384,6 +368,5 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label timeRemainingLabel;
         private System.Windows.Forms.Label levelLabel;
-        private System.Windows.Forms.Button logOutKey;
     }
 }

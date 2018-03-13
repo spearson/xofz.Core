@@ -31,12 +31,10 @@
             this.ui.LoginKeyTapped += this.ui_LoginKeyTapped;
             this.ui.CancelKeyTapped += this.Stop;
             this.ui.BackspaceKeyTapped += this.ui_BackspaceKeyTapped;
-            this.ui.LogOutKeyTapped += this.ui_LogOutKeyTapped;
             UiHelpers.Write(
                 this.ui,
                 () =>
                 {
-                    this.ui.LogOutKeyEnabled = false;
                     this.ui.TimeRemaining = "Not logged in";
                 });
 
@@ -78,16 +76,10 @@
         private void ui_BackspaceKeyTapped()
         {
             UiHelpers.Write(this.ui,
-                () => this.ui.CurrentPassword = StringHelpers.RemoveEndChars(this.ui.CurrentPassword, 1));
-        }
-
-        private void ui_LogOutKeyTapped()
-        {
-            var w = this.web;
-            w.Run<AccessController>(
-                ac => ac.InputPassword(null));
-            this.setOldPassword(null);
-            this.Stop();
+                () => this.ui.CurrentPassword
+                    = StringHelpers.RemoveEndChars(
+                        this.ui.CurrentPassword,
+                        1));
         }
 
         private void ui_LoginKeyTapped()
@@ -148,7 +140,6 @@
                         this.ui.TimeRemaining = cal > AccessLevel.None
                             ? TimeSpan.FromSeconds(duration - elapsed).ToString()
                             : "Not logged in";
-                        this.ui.LogOutKeyEnabled = cal > AccessLevel.None;
                     });
             });
 

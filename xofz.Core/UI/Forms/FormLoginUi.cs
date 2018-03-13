@@ -22,7 +22,6 @@
         public event Action LoginKeyTapped;
 
         public event Action CancelKeyTapped;
-        public event Action LogOutKeyTapped;
 
         string LoginUi.CurrentPassword
         {
@@ -36,13 +35,6 @@
             get => this.timeRemainingLabel.Text;
 
             set => this.timeRemainingLabel.Text = value;
-        }
-
-        bool LoginUi.LogOutKeyEnabled
-        {
-            get => this.logOutKey.Enabled;
-
-            set => this.logOutKey.Enabled = value;
         }
 
         AccessLevel LoginUi.CurrentAccessLevel
@@ -131,9 +123,9 @@
             new Thread(() => this.CancelKeyTapped?.Invoke()).Start();
         }
 
-        private void logOutKey_Click(object sender, EventArgs e)
+        private void passwordTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            new Thread(() => this.LogOutKeyTapped?.Invoke()).Start();
+            this.firstNumKeyPressed = true;
         }
 
         private bool firstNumKeyPressed;
