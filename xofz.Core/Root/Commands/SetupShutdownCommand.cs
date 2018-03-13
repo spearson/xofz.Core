@@ -23,13 +23,8 @@
         public SetupShutdownCommand(
             Action cleanup,
             MethodWeb web)
-            : this(
-                default(Ui),
-                cleanup,
-                web)
+            : this(default(Ui), cleanup, web)
         {
-            this.cleanup = cleanup;
-            this.web = web;
         }
 
         public SetupShutdownCommand(

@@ -19,6 +19,23 @@
             this.presenters.Add(presenter);
         }
 
+        public virtual bool IsRegistered<T>() 
+            where T : Presenter
+        {
+            return this.presenters
+                .OfType<T>()
+                .Any();
+        }
+
+        public virtual bool IsRegistered<T>(string name) 
+            where T : NamedPresenter
+        {
+            return this.presenters
+                .OfType<T>()
+                .Any(np => np.Name == name);
+
+        }
+
         public virtual void Present<T>() where T : Presenter
         {
             var presenter = this.presenters.FirstOrDefault(p => p is T);
@@ -39,7 +56,8 @@
 
         }
 
-        public virtual void Present<T>(string name) where T : NamedPresenter
+        public virtual void Present<T>(string name) 
+            where T : NamedPresenter
         {
             var matchingPresenters = this.presenters.Where(p => p is T).Cast<T>();
             foreach (var presenter in matchingPresenters)
@@ -63,7 +81,8 @@
             }
         }
 
-        public virtual void PresentFluidly<T>() where T : Presenter
+        public virtual void PresentFluidly<T>() 
+            where T : Presenter
         {
             var presenter = this.presenters.FirstOrDefault(p => p is T);
             if (presenter == null)
@@ -74,7 +93,8 @@
             new Thread(() => presenter.Start()).Start();
         }
 
-        public virtual void PresentFluidly<T>(string name) where T : NamedPresenter
+        public virtual void PresentFluidly<T>(string name) 
+            where T : NamedPresenter
         {
             var matchingPresenters = this.presenters.Where(p => p is T).Cast<T>();
             foreach (var presenter in matchingPresenters)

@@ -47,6 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.timeRemainingLabel = new System.Windows.Forms.Label();
             this.levelLabel = new System.Windows.Forms.Label();
+            this.logOutKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -74,7 +75,7 @@
             this.loginKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.loginKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.loginKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loginKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginKey.Location = new System.Drawing.Point(186, 172);
             this.loginKey.Name = "loginKey";
             this.loginKey.Size = new System.Drawing.Size(168, 40);
@@ -310,11 +311,27 @@
             this.levelLabel.TabIndex = 56;
             this.levelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // logOutKey
+            // 
+            this.logOutKey.AutoSize = true;
+            this.logOutKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.logOutKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.logOutKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logOutKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logOutKey.Location = new System.Drawing.Point(186, 279);
+            this.logOutKey.Name = "logOutKey";
+            this.logOutKey.Size = new System.Drawing.Size(168, 40);
+            this.logOutKey.TabIndex = 57;
+            this.logOutKey.Text = "Log Out";
+            this.logOutKey.UseVisualStyleBackColor = true;
+            this.logOutKey.Click += new System.EventHandler(this.logOutKey_Click);
+            // 
             // FormLoginUi
             // 
             this.AcceptButton = this.loginKey;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(368, 274);
+            this.ClientSize = new System.Drawing.Size(368, 331);
+            this.Controls.Add(this.logOutKey);
             this.Controls.Add(this.levelLabel);
             this.Controls.Add(this.timeRemainingLabel);
             this.Controls.Add(this.label2);
@@ -367,5 +384,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label timeRemainingLabel;
         private System.Windows.Forms.Label levelLabel;
+        private System.Windows.Forms.Button logOutKey;
     }
 }

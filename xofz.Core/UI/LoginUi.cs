@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface LoginUi : Ui
+    public interface LoginUi : PopupUi
     {
         event Action BackspaceKeyTapped;
 
@@ -10,14 +10,14 @@
 
         event Action CancelKeyTapped;
 
+        event Action LogOutKeyTapped;
+
+        AccessLevel CurrentAccessLevel { get; set; }
+
         string CurrentPassword { get; set; }
 
         string TimeRemaining { get; set; }
 
-        AccessLevel CurrentAccessLevel { get; set; }
-
-        void Display();
-
-        void Hide();
+        bool LogOutKeyEnabled { get; set; }
     }
 }

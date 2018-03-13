@@ -6,7 +6,8 @@
     using System.Windows.Forms;
     using xofz.UI;
 
-    public partial class FormLoginUi : FormUi, LoginUi
+    public partial class FormLoginUi 
+        : FormUi, LoginUi
     {
         public FormLoginUi(Form shell)
         {
@@ -21,6 +22,7 @@
         public event Action LoginKeyTapped;
 
         public event Action CancelKeyTapped;
+        public event Action LogOutKeyTapped;
 
         string LoginUi.CurrentPassword
         {
@@ -34,6 +36,13 @@
             get => this.timeRemainingLabel.Text;
 
             set => this.timeRemainingLabel.Text = value;
+        }
+
+        bool LoginUi.LogOutKeyEnabled
+        {
+            get => this.logOutKey.Enabled;
+
+            set => this.logOutKey.Enabled = value;
         }
 
         AccessLevel LoginUi.CurrentAccessLevel
@@ -50,7 +59,7 @@
             }
         }
 
-        void LoginUi.Display()
+        void PopupUi.Display()
         {
             this.Location = new Point(this.shell.Location.X, this.shell.Location.Y);
             this.Visible = true;
@@ -59,7 +68,7 @@
             this.firstNumKeyPressed = false;
         }
 
-        void LoginUi.Hide()
+        void PopupUi.Hide()
         {
             this.Visible = false;
         }
@@ -120,6 +129,11 @@
         {
             e.Cancel = true;
             new Thread(() => this.CancelKeyTapped?.Invoke()).Start();
+        }
+
+        private void logOutKey_Click(object sender, EventArgs e)
+        {
+            new Thread(() => this.LogOutKeyTapped?.Invoke()).Start();
         }
 
         private bool firstNumKeyPressed;

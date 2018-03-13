@@ -4,9 +4,8 @@
     using System.Threading;
     using xofz.Framework;
     using xofz.UI;
-    using Timer = xofz.Framework.Timer;
 
-    public class LoginPresenter : Presenter, IDisposable
+    public class LoginPresenter : Presenter
     {
         public LoginPresenter(
             LoginUi ui,
@@ -28,17 +27,26 @@
 
             this.loginDurationMinutes = loginDurationMinutes;
 
+            var w = this.web;
             this.ui.LoginKeyTapped += this.ui_LoginKeyTapped;
             this.ui.CancelKeyTapped += this.Stop;
             this.ui.BackspaceKeyTapped += this.ui_BackspaceKeyTapped;
-            UiHelpers.Write(this.ui, () => this.ui.TimeRemaining = "Not logged in");
+            this.ui.LogOutKeyTapped += this.ui_LogOutKeyTapped;
+            UiHelpers.Write(
+                this.ui,
+                () =>
+                {
+                    this.ui.LogOutKeyEnabled = false;
+                    this.ui.TimeRemaining = "Not logged in";
+                });
 
-            this.web.Subscribe<Timer>(
-                "Elapsed",
-                this.timer_Elapsed,
+            w.Run<xofz.Framework.Timer, Navigator>((t, n) =>
+                {
+                    t.Elapsed += this.timer_Elapsed;
+                    t.Start(1000);
+                    n.RegisterPresenter(this);
+                },
                 "LoginTimer");
-            this.web.Run<Navigator>(n => n.RegisterPresenter(this));
-            this.web.Run<Timer>(t => t.Start(1000), "LoginTimer");
         }
 
         public override void Start()
@@ -55,7 +63,6 @@
         public override void Stop()
         {
             var w = this.web;
-
             UiHelpers.Write(this.ui, () =>
             {
                 this.ui.CurrentPassword = this.oldPassword;
@@ -68,23 +75,27 @@
                 "LoginLatch");
         }
 
-        public void Dispose()
-        {
-            this.web.Run<Timer>(t => t.Stop(), "LoginTimer");
-            this.timerHandlerFinished.WaitOne();
-        }
-
         private void ui_BackspaceKeyTapped()
         {
             UiHelpers.Write(this.ui,
                 () => this.ui.CurrentPassword = StringHelpers.RemoveEndChars(this.ui.CurrentPassword, 1));
         }
 
+        private void ui_LogOutKeyTapped()
+        {
+            var w = this.web;
+            w.Run<AccessController>(
+                ac => ac.InputPassword(null));
+            this.setOldPassword(null);
+            this.Stop();
+        }
+
         private void ui_LoginKeyTapped()
         {
             var password = UiHelpers.Read(
                 this.ui, () => this.ui.CurrentPassword);
-            this.web.Run<AccessController>(
+            var w = this.web;
+            w.Run<AccessController>(
                 ac => ac.InputPassword(password));
             var cal = this.web.Run<AccessController, AccessLevel>(
                 ac => ac.CurrentAccessLevel);
@@ -92,7 +103,13 @@
             if (cal == AccessLevel.None)
             {
                 // show login failed message
-                this.setOldPassword(string.Empty);
+                this.setOldPassword(null);
+                w.Run<xofz.Framework.Timer, EventRaiser>(
+                    (t, er) =>
+                    {
+                        er.Raise(t, nameof(t.Elapsed));
+                    },
+                    "LoginTimer");
                 return;
             }
 
@@ -114,32 +131,40 @@
 
         private void timer_Elapsed()
         {
-            this.timerHandlerFinished.Reset();
+            var h = this.timerHandlerFinished;
+            h.Reset();
             var elapsed = this.elapsedSeconds + 1;
             this.setElapsedSeconds(elapsed);
-            var cal = this.web.Run<AccessController, AccessLevel>(
-                ac => ac.CurrentAccessLevel);
-            var duration = this.loginDurationMinutes * 60;
-            UiHelpers.Write(this.ui,
-                () =>
-                {
-                    this.ui.CurrentAccessLevel = cal;
-                    this.ui.TimeRemaining = cal > AccessLevel.None
-                        ? TimeSpan.FromSeconds(duration - elapsed).ToString()
-                        : "Not logged in";
-                });
+            var w = this.web;
+            long duration = 0;
+            w.Run<AccessController>(ac =>
+            {
+                var cal = ac.CurrentAccessLevel;
+                duration = this.loginDurationMinutes * 60;
+                UiHelpers.Write(this.ui,
+                    () =>
+                    {
+                        this.ui.CurrentAccessLevel = cal;
+                        this.ui.TimeRemaining = cal > AccessLevel.None
+                            ? TimeSpan.FromSeconds(duration - elapsed).ToString()
+                            : "Not logged in";
+                        this.ui.LogOutKeyEnabled = cal > AccessLevel.None;
+                    });
+            });
 
             if (elapsed != duration)
             {
-                this.timerHandlerFinished.Set();
+                h.Set();
                 return;
             }
 
-            UiHelpers.Write(this.ui, () => this.ui.CurrentPassword = string.Empty);
+            UiHelpers.Write(
+                this.ui,
+                () => this.ui.CurrentPassword = null);
             this.ui.WriteFinished.WaitOne();
-            this.setOldPassword(string.Empty);
+            this.setOldPassword(null);
             this.setElapsedSeconds(0);
-            this.timerHandlerFinished.Set();
+            h.Set();
         }
 
         private int setupIf1;
