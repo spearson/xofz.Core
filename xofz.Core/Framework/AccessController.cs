@@ -75,6 +75,13 @@
         public virtual void InputPassword(string password, int loginDurationInMs)
         {
             var p = this.passwords;
+            if (password == null)
+            {
+                this.setCurrentAccessLevel(
+                    AccessLevel.None);
+                return;
+            }
+            
             if (p.ContainsKey(password))
             {
                 this.setCurrentAccessLevel(p[password]);
@@ -85,7 +92,8 @@
             }
             else
             {
-                this.setCurrentAccessLevel(AccessLevel.None);
+                this.setCurrentAccessLevel(
+                    AccessLevel.None);
             }
         }
 
