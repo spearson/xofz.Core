@@ -8,6 +8,7 @@
         public Timer()
         {
             this.autoReset = true;
+            this.callback = this.ticked;
             this.locker = new object();
         }
 
@@ -37,7 +38,7 @@
                 NativeMethods.CreateTimerQueueTimer(
                     out this.handle,
                     IntPtr.Zero,
-                    this.ticked,
+                    this.callback,
                     IntPtr.Zero,
                     (uint)intervalMilliseconds,
                     (uint)intervalMilliseconds,
@@ -82,6 +83,7 @@
         private bool started;
         private IntPtr handle;
         private volatile bool autoReset;
+        private readonly TimerCallback callback;
         private readonly object locker;
     }
 }

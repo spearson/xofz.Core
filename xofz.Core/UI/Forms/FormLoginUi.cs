@@ -54,10 +54,10 @@
         void PopupUi.Display()
         {
             this.Location = new Point(this.shell.Location.X, this.shell.Location.Y);
-            this.Visible = true;
             this.passwordTextBox.Focus();
             this.passwordTextBox.SelectAll();
             this.firstNumKeyPressed = false;
+            this.Visible = true;
         }
 
         void PopupUi.Hide()

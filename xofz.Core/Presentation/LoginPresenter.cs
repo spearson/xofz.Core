@@ -59,7 +59,7 @@
         {
             var w = this.web;
             this.currentPassword = UiHelpers.Read(
-                this.ui, 
+                this.ui,
                 () => this.ui.CurrentPassword);
             UiHelpers.Write(this.ui, this.ui.Display);
             this.ui.WriteFinished.WaitOne();
@@ -68,9 +68,10 @@
         public override void Stop()
         {
             var w = this.web;
+            var cp = this.currentPassword;
             UiHelpers.Write(this.ui, () =>
             {
-                this.ui.CurrentPassword = this.currentPassword;
+                this.ui.CurrentPassword = cp;
                 this.ui.Hide();
             });
             this.ui.WriteFinished.WaitOne();
@@ -97,28 +98,31 @@
             var password = UiHelpers.Read(
                 this.ui, () => this.ui.CurrentPassword);
             var w = this.web;
-            AccessLevel cal = AccessLevel.None;
+            var newCal = AccessLevel.None;
             w.Run<AccessController>(
                 ac =>
                 {
+                    var previousCal = ac.CurrentAccessLevel;
                     ac.InputPassword(
                         password,
                         this.loginDuration);
-                    cal = ac.CurrentAccessLevel;
+                    newCal = ac.CurrentAccessLevel;
+                    if (previousCal == newCal)
+                    {
+                        w.Run<xofz.Framework.Timer, EventRaiser>(
+                            (t, er) =>
+                            {
+                                er.Raise(t, nameof(t.Elapsed));
+                            },
+                            "LoginTimer");
+                    }
                 });
 
-            if (cal == AccessLevel.None)
+            if (newCal > AccessLevel.None)
             {
-                w.Run<xofz.Framework.Timer, EventRaiser>(
-                    (t, er) =>
-                    {
-                        er.Raise(t, nameof(t.Elapsed));
-                    },
-                    "LoginTimer");
-                return;
+                this.setCurrentPassword(password);
             }
 
-            this.setCurrentPassword(password);
             this.Stop();
         }
 
@@ -155,7 +159,7 @@
                 {
                     timeRemaining = "Not logged in";
                 }
-               
+
                 var noAccess = cal == AccessLevel.None;
                 if (noAccess)
                 {
@@ -168,7 +172,6 @@
                         this.ui.CurrentAccessLevel = cal;
                         this.ui.TimeRemaining = timeRemaining;
                     });
-                this.ui.WriteFinished.WaitOne();
             });
 
             h.Set();
