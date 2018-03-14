@@ -15,5 +15,7 @@
         string CurrentPassword { get; set; }
 
         string TimeRemaining { get; set; }
+
+        void FocusPassword();
     }
 }

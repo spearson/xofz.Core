@@ -90,7 +90,11 @@
                 cPw,
                 1);
             UiHelpers.Write(this.ui,
-                () => this.ui.CurrentPassword = newPw);
+                () =>
+                {
+                    this.ui.CurrentPassword = newPw;
+                    this.ui.FocusPassword();
+                });
         }
 
         private void ui_LoginKeyTapped()
@@ -122,7 +126,12 @@
             {
                 this.setCurrentPassword(password);
                 this.Stop();
+                return;
             }
+
+            UiHelpers.Write(
+                this.ui,
+                () => this.ui.FocusPassword());
         }
 
         private void setCurrentPassword(string oldPassword)

@@ -30,11 +30,18 @@
             set => this.passwordTextBox.Text = value;
         }
 
-        public string TimeRemaining
+        string LoginUi.TimeRemaining
         {
             get => this.timeRemainingLabel.Text;
 
             set => this.timeRemainingLabel.Text = value;
+        }
+
+        void LoginUi.FocusPassword()
+        {
+            var ptb = this.passwordTextBox;
+            ptb.Focus();
+            ptb.Select(ptb.Text.Length, 0);
         }
 
         AccessLevel LoginUi.CurrentAccessLevel
@@ -54,10 +61,16 @@
         void PopupUi.Display()
         {
             this.Location = new Point(this.shell.Location.X, this.shell.Location.Y);
-            this.passwordTextBox.Focus();
-            this.passwordTextBox.SelectAll();
-            this.firstNumKeyPressed = false;
             this.Visible = true;
+            var ptb = this.passwordTextBox;
+            ptb.Focus();
+            ptb.SelectAll();
+            if (string.IsNullOrEmpty(ptb.Text))
+            {
+                ptb.Focus();
+            }
+
+            this.firstNumKeyPressed = false;
         }
 
         void PopupUi.Hide()
@@ -88,23 +101,26 @@
         private void numKey_Click(object sender, EventArgs e)
         {
             var key = (Button)sender;
+            var ptb = this.passwordTextBox;
             if (!this.firstNumKeyPressed)
             {
-                this.passwordTextBox.Text = key.Text;
+                ptb.Text = key.Text;
                 this.firstNumKeyPressed = true;
             }
             else
             {
-                this.passwordTextBox.Text += key.Text;
+                ptb.Text += key.Text;
             }
 
-            this.passwordTextBox.Focus();
-            this.passwordTextBox.Select(this.passwordTextBox.Text.Length, 0);
+            LoginUi ui = this;
+            ui.FocusPassword();
         }
 
         private void clearKey_Click(object sender, EventArgs e)
         {
             this.passwordTextBox.Text = null;
+            LoginUi ui = this;
+            ui.FocusPassword();
         }
 
         private void backspaceKey_Click(object sender, EventArgs e)
