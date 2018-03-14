@@ -1,17 +1,13 @@
 ﻿namespace xofz.Framework
 {
     using System;
-    using System.Threading;
     using xofz.Framework.Internal;
-    using TimerCallback = xofz.Framework.Internal.TimerCallback;
 
     public class Timer : IDisposable
     {
         public Timer()
         {
-            this.callback = this.ticked;
             this.autoReset = true;
-            this.priority = ThreadPriority.Normal;
             this.locker = new object();
         }
 
@@ -24,18 +20,12 @@
             set => this.autoReset = value;
         }
 
-        public virtual ThreadPriority Priority
+        public virtual void Start(TimeSpan interval)
         {
-            get => this.priority;
-
-            set
-            {
-                this.priority = value;
-                this.threadPrioritySet = false;
-            }
+            this.Start((long)interval.TotalMilliseconds);
         }
 
-        public virtual void Start(int intervalInMs)
+        public virtual void Start(long intervalMilliseconds)
         {
             lock (this.locker)
             {
@@ -47,10 +37,10 @@
                 NativeMethods.CreateTimerQueueTimer(
                     out this.handle,
                     IntPtr.Zero,
-                    this.callback,
+                    this.ticked,
                     IntPtr.Zero,
-                    (uint)intervalInMs,
-                    (uint)intervalInMs,
+                    (uint)intervalMilliseconds,
+                    (uint)intervalMilliseconds,
                     CallbackOptions.QueueToWorkerThread);
                 this.started = true;
             }
@@ -86,26 +76,12 @@
                 this.Stop();
             }
 
-            if (!this.threadPrioritySet)
-            {
-                this.changeThreadPriority();
-            }
-
             this.Elapsed?.Invoke();
         }
-
-        private void changeThreadPriority()
-        {
-            Thread.CurrentThread.Priority = this.Priority;
-            this.threadPrioritySet = true;
-        }
-
-        private bool threadPrioritySet;
+        
         private bool started;
         private IntPtr handle;
         private volatile bool autoReset;
-        private ThreadPriority priority;
-        private readonly TimerCallback callback;
         private readonly object locker;
     }
 }

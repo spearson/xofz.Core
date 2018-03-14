@@ -104,7 +104,7 @@
 
         private void clearKey_Click(object sender, EventArgs e)
         {
-            this.passwordTextBox.Text = string.Empty;
+            this.passwordTextBox.Text = null;
         }
 
         private void backspaceKey_Click(object sender, EventArgs e)

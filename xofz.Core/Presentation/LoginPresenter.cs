@@ -1,6 +1,7 @@
 ﻿namespace xofz.Presentation
 {
     using System;
+    using System.Text;
     using System.Threading;
     using xofz.Framework;
     using xofz.UI;
@@ -18,15 +19,14 @@
         }
 
         public virtual void Setup(
-            int loginDurationMinutes)
+            TimeSpan loginDuration)
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
             {
                 return;
             }
 
-            this.loginDurationMinutes = loginDurationMinutes;
-
+            this.loginDuration = loginDuration;
             var w = this.web;
             this.ui.LoginKeyTapped += this.ui_LoginKeyTapped;
             this.ui.CancelKeyTapped += this.Stop;
@@ -38,6 +38,14 @@
                     this.ui.TimeRemaining = "Not logged in";
                 });
 
+            w.Run<AccessController>(ac =>
+            {
+                var cal = ac.CurrentAccessLevel;
+                UiHelpers.Write(
+                    this.ui,
+                    () => this.ui.CurrentAccessLevel = cal);
+                ac.AccessLevelChanged += this.accessLevelChanged;
+            });
             w.Run<xofz.Framework.Timer, Navigator>((t, n) =>
                 {
                     t.Elapsed += this.timer_Elapsed;
@@ -50,11 +58,10 @@
         public override void Start()
         {
             var w = this.web;
-            this.oldPassword = UiHelpers.Read(this.ui, () => this.ui.CurrentPassword);
-            UiHelpers.Write(this.ui, () =>
-            {
-                this.ui.Display();
-            });
+            this.currentPassword = UiHelpers.Read(
+                this.ui, 
+                () => this.ui.CurrentPassword);
+            UiHelpers.Write(this.ui, this.ui.Display);
             this.ui.WriteFinished.WaitOne();
         }
 
@@ -63,7 +70,7 @@
             var w = this.web;
             UiHelpers.Write(this.ui, () =>
             {
-                this.ui.CurrentPassword = this.oldPassword;
+                this.ui.CurrentPassword = this.currentPassword;
                 this.ui.Hide();
             });
             this.ui.WriteFinished.WaitOne();
@@ -75,11 +82,14 @@
 
         private void ui_BackspaceKeyTapped()
         {
+            var cPw = UiHelpers.Read(
+                this.ui,
+                () => this.ui.CurrentPassword);
+            var newPw = StringHelpers.RemoveEndChars(
+                cPw,
+                1);
             UiHelpers.Write(this.ui,
-                () => this.ui.CurrentPassword
-                    = StringHelpers.RemoveEndChars(
-                        this.ui.CurrentPassword,
-                        1));
+                () => this.ui.CurrentPassword = newPw);
         }
 
         private void ui_LoginKeyTapped()
@@ -87,15 +97,18 @@
             var password = UiHelpers.Read(
                 this.ui, () => this.ui.CurrentPassword);
             var w = this.web;
+            AccessLevel cal = AccessLevel.None;
             w.Run<AccessController>(
-                ac => ac.InputPassword(password));
-            var cal = this.web.Run<AccessController, AccessLevel>(
-                ac => ac.CurrentAccessLevel);
+                ac =>
+                {
+                    ac.InputPassword(
+                        password,
+                        this.loginDuration);
+                    cal = ac.CurrentAccessLevel;
+                });
 
             if (cal == AccessLevel.None)
             {
-                // show login failed message
-                this.setOldPassword(null);
                 w.Run<xofz.Framework.Timer, EventRaiser>(
                     (t, er) =>
                     {
@@ -105,63 +118,85 @@
                 return;
             }
 
-            this.setOldPassword(password);
-            this.setElapsedSeconds(0);
-
+            this.setCurrentPassword(password);
             this.Stop();
         }
 
-        private void setElapsedSeconds(long elapsedSeconds)
+        private void setCurrentPassword(string oldPassword)
         {
-            this.elapsedSeconds = elapsedSeconds;
-        }
-
-        private void setOldPassword(string oldPassword)
-        {
-            this.oldPassword = oldPassword;
+            this.currentPassword = oldPassword;
         }
 
         private void timer_Elapsed()
         {
             var h = this.timerHandlerFinished;
             h.Reset();
-            var elapsed = this.elapsedSeconds + 1;
-            this.setElapsedSeconds(elapsed);
+
             var w = this.web;
-            long duration = 0;
             w.Run<AccessController>(ac =>
             {
                 var cal = ac.CurrentAccessLevel;
-                duration = this.loginDurationMinutes * 60;
+                string timeRemaining;
+                if (cal > AccessLevel.None)
+                {
+                    var tr = ac.TimeRemaining;
+                    var sb = new StringBuilder();
+                    sb.Append(
+                        (int)tr.TotalHours);
+                    sb.Append(':');
+                    sb.Append(tr.Minutes);
+                    sb.Append(':');
+                    sb.Append(tr.Seconds);
+                    sb.Append('.');
+                    sb.Append(tr.Milliseconds);
+                    timeRemaining = sb.ToString();
+                }
+                else
+                {
+                    timeRemaining = "Not logged in";
+                }
+               
+                var noAccess = cal == AccessLevel.None;
+                if (noAccess)
+                {
+                    this.setCurrentPassword(null);
+                }
+
                 UiHelpers.Write(this.ui,
                     () =>
                     {
                         this.ui.CurrentAccessLevel = cal;
-                        this.ui.TimeRemaining = cal > AccessLevel.None
-                            ? TimeSpan.FromSeconds(duration - elapsed).ToString()
-                            : "Not logged in";
+                        this.ui.TimeRemaining = timeRemaining;
                     });
+                this.ui.WriteFinished.WaitOne();
             });
 
-            if (elapsed != duration)
-            {
-                h.Set();
-                return;
-            }
-
-            UiHelpers.Write(
-                this.ui,
-                () => this.ui.CurrentPassword = null);
-            this.ui.WriteFinished.WaitOne();
-            this.setOldPassword(null);
-            this.setElapsedSeconds(0);
             h.Set();
         }
 
+        private void accessLevelChanged(AccessLevel newAccessLevel)
+        {
+            var w = this.web;
+            if (newAccessLevel == AccessLevel.None)
+            {
+                UiHelpers.Write(
+                    this.ui,
+                    () => this.ui.CurrentPassword = null);
+            }
+
+            w.Run<xofz.Framework.Timer, EventRaiser>(
+                (t, er) =>
+                {
+                    er.Raise(
+                        t,
+                        nameof(t.Elapsed));
+                },
+                "LoginTimer");
+        }
+
         private int setupIf1;
-        private int loginDurationMinutes;
-        private long elapsedSeconds;
-        private string oldPassword;
+        private string currentPassword;
+        private TimeSpan loginDuration;
         private readonly LoginUi ui;
         private readonly MethodWeb web;
         private readonly ManualResetEvent timerHandlerFinished;

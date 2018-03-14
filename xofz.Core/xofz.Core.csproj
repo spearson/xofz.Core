@@ -105,6 +105,7 @@
     <Compile Include="Framework\EncodingHelpers.cs" />
     <Compile Include="Framework\IniFile.cs" />
     <Compile Include="Framework\IniReaderWriter.cs" />
+    <Compile Include="Framework\Internal\TimerCallback.cs" />
     <Compile Include="Framework\MainUiSettings.cs" />
     <Compile Include="Framework\Materialization\ConcurrentDictionaryMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentQueueMaterializedEnumerable.cs" />
@@ -248,7 +249,6 @@
     <Compile Include="Misc\Framework\Implementation\TextFileLoader.cs" />
     <Compile Include="Framework\Internal\CallbackOptions.cs" />
     <Compile Include="Framework\Internal\NativeMethods.cs" />
-    <Compile Include="Framework\Internal\TimerCallback.cs" />
     <Compile Include="Misc\Framework\Loader.cs" />
     <Compile Include="Misc\Framework\Saver.cs" />
     <Compile Include="Framework\Timer.cs" />
