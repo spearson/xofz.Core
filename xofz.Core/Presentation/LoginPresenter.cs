@@ -121,9 +121,8 @@
             if (newCal > AccessLevel.None)
             {
                 this.setCurrentPassword(password);
+                this.Stop();
             }
-
-            this.Stop();
         }
 
         private void setCurrentPassword(string oldPassword)
