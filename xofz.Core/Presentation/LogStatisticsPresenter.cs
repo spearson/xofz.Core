@@ -59,15 +59,11 @@
                 {
                     var logUi = n.GetUi<LogPresenter, LogUi>(
                         this.Name);
-/*                    if (logUi == default(LogUi))
+                    if (logUi == default(LogUi))
                     {
                         return;
-                    }*/
+                    }
 
-                    UiHelpers.Write(
-                        m.Subscriber,
-                        () => m.Inform("Got the log ui..."));
-                    m.Subscriber.WriteFinished.WaitOne();
                     fc = UiHelpers.Read(
                         logUi,
                         () => logUi.FilterContent);
@@ -75,10 +71,6 @@
                         this.ui,
                         () => this.ui.FilterContent = fc);
                     this.ui.WriteFinished.WaitOne();
-                    UiHelpers.Write(
-                        m.Subscriber,
-                        () => m.Inform("Set the fc of \"" + fc + "\""));
-                    m.Subscriber.WriteFinished.WaitOne();
                 });
             }
         }
