@@ -1,5 +1,6 @@
 ﻿namespace xofz.Root.Commands
 {
+    using System;
     using xofz.Framework;
     using xofz.Framework.Logging;
     using xofz.Framework.Materialization;
@@ -14,16 +15,20 @@
             LogEditorUi editorUi,
             MethodWeb web,
             string filePath = @"Log.log",
+            AccessLevel clearLevel = AccessLevel.None,
             AccessLevel editLevel = AccessLevel.None,
-            bool resetOnStart = false)
+            bool resetOnStart = false,
+            Func<string> computeBackupLocation = default(Func<string>))
         {
             this.ui = ui;
             this.shell = shell;
             this.editorUi = editorUi;
             this.web = web;
             this.filePath = filePath;
+            this.clearLevel = clearLevel;
             this.editLevel = editLevel;
             this.resetOnStart = resetOnStart;
+            this.computeBackupLocation = computeBackupLocation;
             this.statisticsEnabled = false;
         }
 
@@ -34,8 +39,10 @@
             LogStatisticsUi statisticsUi,
             MethodWeb web,
             string filePath = @"Log.log",
+            AccessLevel clearLevel = AccessLevel.None,
             AccessLevel editLevel = AccessLevel.None,
-            bool resetOnStart = false)
+            bool resetOnStart = false,
+            Func<string> computeBackupLocation = default(Func<string>))
         {
             this.ui = ui;
             this.shell = shell;
@@ -44,7 +51,9 @@
             this.web = web;
             this.filePath = filePath;
             this.editLevel = editLevel;
+            this.clearLevel = clearLevel;
             this.resetOnStart = resetOnStart;
+            this.computeBackupLocation = computeBackupLocation;
             this.statisticsEnabled = true;
         }
 
@@ -60,6 +69,8 @@
                     w)
                 .Setup(
                     this.editLevel,
+                    this.clearLevel,
+                    this.computeBackupLocation,
                     ros,
                     se);
 
@@ -83,9 +94,6 @@
             w.RegisterDependency(
                 new TextFileLog(this.filePath));
             w.RegisterDependency(
-                new xofz.Framework.Timer(),
-                "LogTimer");
-            w.RegisterDependency(
                 new LinkedListMaterializer(),
                 "LogMaterializer");
             if (this.statisticsEnabled)
@@ -102,7 +110,9 @@
         private readonly MethodWeb web;
         private readonly string filePath;
         private readonly AccessLevel editLevel;
+        private readonly AccessLevel clearLevel;
         private readonly bool resetOnStart;
+        private readonly Func<string> computeBackupLocation;
         private readonly bool statisticsEnabled;
     }
 }

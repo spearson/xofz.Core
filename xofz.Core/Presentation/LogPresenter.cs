@@ -24,7 +24,9 @@
         }
 
         public void Setup(
-            AccessLevel editLevel, 
+            AccessLevel editLevel,
+            AccessLevel clearLevel,
+            Func<string> computeBackupLocation = default(Func<string>),
             bool resetOnStart = false,
             bool statisticsEnabled = false)
         {
@@ -35,32 +37,31 @@
 
             var w = this.web;
             this.editLevel = editLevel;
+            this.clearLevel = clearLevel;
+            this.computeBackupLocation = computeBackupLocation;
             this.resetOnStart = resetOnStart;
             this.ui.StartDateChanged += this.ui_DateChanged;
             this.ui.EndDateChanged += this.ui_DateChanged;
             this.ui.AddKeyTapped += this.ui_AddKeyTapped;
+            this.ui.ClearKeyTapped += this.ui_ClearKeyTapped;
             this.ui.StatisticsKeyTapped += this.ui_StatisticsKeyTapped;
             this.ui.FilterTextChanged += this.ui_FilterTextChanged;
             this.resetDatesAndFilters();
+            var addKeyVisible = editLevel == AccessLevel.None;
+            var clearKeyVisible = clearLevel == AccessLevel.None;
             UiHelpers.Write(this.ui, () =>
             {
-                this.ui.AddKeyVisible = false;
+                this.ui.AddKeyVisible = addKeyVisible;
                 this.ui.StatisticsKeyVisible = statisticsEnabled;
+                this.ui.ClearKeyVisible = clearKeyVisible;
             });
             this.ui.WriteFinished.WaitOne();
 
             w.Run<Log>(
                 l => l.EntryWritten += this.log_EntryWritten,
                 this.Name);
-            new Thread(this.timer_Elapsed).Start();
-
-            w.Run<xofz.Framework.Timer>(
-                t =>
-                {
-                    t.Elapsed += this.timer_Elapsed;
-                    t.Start(1000);
-                },
-                "LogTimer");
+            w.Run<AccessController>(ac =>
+                ac.AccessLevelChanged += this.accessLevelChanged);
             w.Run<Navigator>(n => n.RegisterPresenter(this));
         }
 
@@ -72,6 +73,7 @@
             }
 
             Interlocked.CompareExchange(ref this.startedIf1, 1, 0);
+            base.Start();
 
             if (this.resetOnStart)
             {
@@ -85,8 +87,6 @@
                     this.reloadEntries();
                 }
             }
-
-            base.Start();
         }
 
         public override void Stop()
@@ -189,14 +189,74 @@
         {
             var w = this.web;
             w.Run<Navigator>(
-                n => n.PresentFluidly<LogEditorPresenter>());
+                n => n.PresentFluidly<LogEditorPresenter>(
+                    this.Name));
+        }
+
+        private void ui_ClearKeyTapped()
+        {
+            var w = this.web;
+            var response = Response.No;
+            var cbl = this.computeBackupLocation;
+            w.Run<Messenger>(m =>
+            {
+                if (cbl == default(Func<string>))
+                {
+                    response = UiHelpers.Read(
+                        m.Subscriber,
+                        () => m.Question(
+                            "Really clear the log? "
+                            + "A backup will not be created."));
+                    return;
+                }
+
+                response = UiHelpers.Read(
+                    m.Subscriber,
+                    () => m.Question(
+                        "Clear log? "
+                        + "A backup will be created."));
+            });
+
+            if (response != Response.Yes)
+            {
+                return;
+            }
+
+            w.Run<LogEditor>(le =>
+                {
+                    if (cbl != default(Func<string>))
+                    {
+                        var bl = cbl();
+                        le.Clear(bl);
+                        this.reloadEntries();
+                        le.AddEntry(
+                            "Information",
+                            new[]
+                            {
+                                "The log was cleared.  A backup "
+                                + "was created at " + bl + "."
+                            });
+                        return;
+                    }
+
+                    le.Clear();
+                    this.reloadEntries();
+                    le.AddEntry(
+                        "Information",
+                        new[]
+                        {
+                            "The log was cleared."
+                        });
+                },
+                this.Name);
         }
 
         private void ui_StatisticsKeyTapped()
         {
             var w = this.web;
             w.Run<Navigator>(
-                n => n.PresentFluidly<LogStatisticsPresenter>());
+                n => n.PresentFluidly<LogStatisticsPresenter>(
+                    this.Name));
         }
 
         private void ui_FilterTextChanged()
@@ -238,18 +298,23 @@
                 string.Join(Environment.NewLine, e.Content));
         }
 
-        private void timer_Elapsed()
+        private void accessLevelChanged(AccessLevel newAccessLevel)
         {
-            var w = this.web;
-            var cal = w.Run<AccessController, AccessLevel>(
-                ac => ac.CurrentAccessLevel);
-            var visible = cal >= this.editLevel;
-            UiHelpers.Write(this.ui, () => this.ui.AddKeyVisible = visible);
+            var addVisible = newAccessLevel >= this.editLevel;
+            UiHelpers.Write(
+                this.ui,
+                () => this.ui.AddKeyVisible = addVisible);
+
+            var clearVisible = newAccessLevel >= this.clearLevel;
+            UiHelpers.Write(
+                this.ui,
+                () => this.ui.ClearKeyVisible = clearVisible);
         }
 
         private long setupIf1, startedIf1, refreshOnStartIf1;
         private bool resetOnStart;
-        private AccessLevel editLevel;
+        private AccessLevel editLevel, clearLevel;
+        private Func<string> computeBackupLocation;
         private readonly LogUi ui;
         private readonly MethodWeb web;
         private readonly object locker;

@@ -45,12 +45,42 @@
                 return;
             }
 
+            base.Start();
             if (this.resetOnStart)
             {
                 this.resetDates();
             }
 
-            base.Start();
+            var w = this.web;
+            var fc = UiHelpers.Read(this.ui, () => this.ui.FilterContent);
+            if (string.IsNullOrEmpty(fc))
+            {
+                w.Run<Navigator, Messenger>((n, m) =>
+                {
+                    var logUi = n.GetUi<LogPresenter, LogUi>(
+                        this.Name);
+/*                    if (logUi == default(LogUi))
+                    {
+                        return;
+                    }*/
+
+                    UiHelpers.Write(
+                        m.Subscriber,
+                        () => m.Inform("Got the log ui..."));
+                    m.Subscriber.WriteFinished.WaitOne();
+                    fc = UiHelpers.Read(
+                        logUi,
+                        () => logUi.FilterContent);
+                    UiHelpers.Write(
+                        this.ui,
+                        () => this.ui.FilterContent = fc);
+                    this.ui.WriteFinished.WaitOne();
+                    UiHelpers.Write(
+                        m.Subscriber,
+                        () => m.Inform("Set the fc of \"" + fc + "\""));
+                    m.Subscriber.WriteFinished.WaitOne();
+                });
+            }
         }
 
         private void resetDates()

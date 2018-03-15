@@ -6,7 +6,6 @@
     using System.IO;
     using System.Linq;
     using System.Threading;
-    using System.Windows.Media.Animation;
     using xofz.Framework.Materialization;
 
     public sealed class TextFileLog : Log, LogEditor
@@ -92,16 +91,17 @@
             return new LinkedListMaterializedEnumerable<LogEntry>(ll);
         }
 
-        public void AddEntry(string type, IEnumerable<string> content)
+        void LogEditor.AddEntry(string type, IEnumerable<string> content)
         {
-            this.AddEntry(
+            LogEditor editor = this;
+            editor.AddEntry(
                 new LogEntry(
                     type,
                     new LinkedListMaterializedEnumerable<string>(
                         content)));
         }
 
-        public void AddEntry(LogEntry entry)
+        void LogEditor.AddEntry(LogEntry entry)
         {
             var lines = new LinkedList<string>();
             lines.AddLast(entry.Timestamp.ToString(this.timestampFormat));
@@ -121,6 +121,31 @@
             }
 
             new Thread(() => this.EntryWritten?.Invoke(entry)).Start();
+        }
+
+        void LogEditor.Clear()
+        {
+            lock (this.locker)
+            {
+                if (File.Exists(this.filePath))
+                {
+                    File.Delete(this.filePath);
+                }
+            }
+        }
+
+        void LogEditor.Clear(string backupLocation)
+        {
+            lock (this.locker)
+            {
+                if (!File.Exists(this.filePath))
+                {
+                    return;
+                }
+
+                File.Copy(this.filePath, backupLocation);
+                File.Delete(this.filePath);
+            }
         }
 
         private readonly string filePath;

@@ -5,7 +5,8 @@
     using System.Threading;
     using System.Windows.Forms;
 
-    public partial class UserControlLogUi : UserControlUi, LogUi
+    public partial class UserControlLogUi 
+        : UserControlUi, LogUi
     {
         public UserControlLogUi(Materializer materializer)
         {
@@ -22,6 +23,8 @@
         public event Action EndDateChanged;
 
         public event Action AddKeyTapped;
+
+        public event Action ClearKeyTapped;
 
         public event Action StatisticsKeyTapped;
 
@@ -106,6 +109,13 @@
             set => this.addKey.Visible = value;
         }
 
+        bool LogUi.ClearKeyVisible
+        {
+            get => this.clearKey.Visible;
+
+            set => this.clearKey.Visible = value;
+        }
+
         bool LogUi.StatisticsKeyVisible
         {
             get => this.statisticsKey.Visible;
@@ -115,6 +125,11 @@
         private void addKey_Click(object sender, EventArgs e)
         {
             new Thread(() => this.AddKeyTapped?.Invoke()).Start();
+        }
+
+        private void clearKey_Click(object sender, EventArgs e)
+        {
+            new Thread(() => this.ClearKeyTapped?.Invoke()).Start();
         }
 
         private void startDatePicker_DateChanged(object sender, DateRangeEventArgs e)

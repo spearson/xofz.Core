@@ -10,6 +10,8 @@
 
         event Action AddKeyTapped;
 
+        event Action ClearKeyTapped;
+
         event Action StatisticsKeyTapped;
 
         event Action FilterTextChanged;
@@ -25,6 +27,8 @@
         string FilterType { get; set; }
 
         bool AddKeyVisible { get; set; }
+
+        bool ClearKeyVisible { get; set; }
 
         bool StatisticsKeyVisible { get; set; }
     }
