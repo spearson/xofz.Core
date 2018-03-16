@@ -31,14 +31,11 @@
         public virtual void ComputeOverall()
         {
             var w = this.web;
-            w.Run<Log>(l =>
+            w.Run<Log, Materializer>((l, m) =>
                 {
-                    var allEntries = w.Run<Materializer,
-                        MaterializedEnumerable<LogEntry>>(
-                        m => m.Materialize(
-                            l.ReadEntries().Where(
-                                this.passesFilters)),
-                        "LogMaterializer");
+                    var allEntries = m.Materialize(l
+                            .ReadEntries()
+                            .Where(this.passesFilters));
                     var start = DateTime.MaxValue;
                     var end = DateTime.MinValue;
                     foreach (var entry in allEntries)
@@ -64,7 +61,8 @@
                     this.computeEarliestTimestamp(allEntries);
                     this.computeLatestTimestamp(allEntries);
                 },
-                this.LogName);
+                this.LogName,
+                "LogMaterializer");
         }
 
         public virtual void ComputeRange(
@@ -72,16 +70,14 @@
             DateTime endDate)
         {
             var w = this.web;
-            w.Run<Log>(l =>
+            w.Run<Log, Materializer>(
+                (l, m) =>
                 {
-                    var entries = w.Run<Materializer,
-                        MaterializedEnumerable<LogEntry>>(
-                        m => m.Materialize(l.ReadEntries()
-                            .Where(
-                                e => e.Timestamp >= startDate
-                                     && e.Timestamp < endDate.AddDays(1))
-                            .Where(this.passesFilters)),
-                        "LogMaterializer");
+                    var entries = m.Materialize(l
+                        .ReadEntries()
+                        .Where(e => e.Timestamp >= startDate
+                                    && e.Timestamp < endDate.AddDays(1))
+                        .Where(this.passesFilters));
                     this.computeTotal(entries);
                     this.computeAvgPerDay(
                         entries.Count,
@@ -92,7 +88,8 @@
                     this.computeEarliestTimestamp(entries);
                     this.computeLatestTimestamp(entries);
                 },
-                this.LogName);
+                this.LogName,
+                "LogMaterializer");
         }
 
         public virtual void Reset()

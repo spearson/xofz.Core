@@ -34,10 +34,12 @@
         private void ui_ShutdownRequested()
         {
             var w = this.web;
-            var cal = w.Run<AccessController, AccessLevel>(
-                ac => ac.CurrentAccessLevel);
+            var cal = AccessLevel.None;
             var shutdownLevel = AccessLevel.None;
-            w.Run<MainUiSettings>(s => shutdownLevel = s.ShutdownLevel);
+            w.Run<AccessController>(
+                ac => cal = ac.CurrentAccessLevel);
+            w.Run<MainUiSettings>(
+                s => shutdownLevel = s.ShutdownLevel);
 
             if (cal >= shutdownLevel)
             {

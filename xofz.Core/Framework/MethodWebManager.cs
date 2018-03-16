@@ -18,7 +18,14 @@
 
         public virtual void AddWeb(MethodWeb web, string name = @"Default")
         {
-            var namedWeb = this.webs
+            if (web == null)
+            {
+                throw new InvalidOperationException(
+                    "Cannot add a null web.");
+            }
+
+            var ws = this.webs;
+            var namedWeb = ws
                 .FirstOrDefault(nmwh => ReferenceEquals(web, nmwh.Web));
             if (namedWeb != default(NamedMethodWebHolder))
             {
@@ -27,7 +34,7 @@
                     + namedWeb.Name);
             }
 
-            if (this.webs
+            if (ws
                 .Select(nmwh => nmwh.Name)
                 .Contains(name))
             {
@@ -35,7 +42,7 @@
                     "Name \"" + name + "\" is already taken.");
             }
 
-            this.webs.AddLast(
+            ws.AddLast(
                 new NamedMethodWebHolder
                 {
                     Web = web,
@@ -82,7 +89,9 @@
                 nwmh => nwmh.Name == webName);
             if (w == default(NamedMethodWebHolder))
             {
-                return default(Tuple<T, U>);
+                return Tuple.Create(
+                    default(T), 
+                    default(U));
             }
 
             return w.Web.Run(
@@ -102,7 +111,10 @@
                 nwmh => nwmh.Name == webName);
             if (w == default(NamedMethodWebHolder))
             {
-                return default(Tuple<T, U, V>);
+                return Tuple.Create(
+                    default(T),
+                    default(U),
+                    default(V));
             }
 
             return w.Web.Run(
@@ -124,7 +136,11 @@
                 nwmh => nwmh.Name == webName);
             if (w == default(NamedMethodWebHolder))
             {
-                return default(Tuple<T, U, V, W>);
+                return Tuple.Create(
+                    default(T),
+                    default(U),
+                    default(V),
+                    default(W));
             }
 
             return w.Web.Run(
