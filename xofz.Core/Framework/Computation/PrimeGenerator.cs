@@ -38,15 +38,17 @@
 
         private long collectPrime()
         {
-            this.currentSet.AddLast(this.currentSet.Last.Value + 2);
-            while (!this.tester.RelativelyPrime(this.currentSet, true))
+            var cs = this.currentSet;
+            var t = this.tester;
+            cs.AddLast(cs.Last.Value + 2);
+            while (!t.RelativelyPrime(cs, true))
             {
-                var node = this.currentSet.Last;
-                this.currentSet.RemoveLast();
-                this.currentSet.AddLast(node.Value + 2);
+                var node = cs.Last;
+                cs.RemoveLast();
+                cs.AddLast(node.Value + 2);
             }
 
-            return this.currentSet.Last.Value;
+            return cs.Last.Value;
         }
 
         private readonly LinkedList<long> currentSet;

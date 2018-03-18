@@ -40,10 +40,16 @@
                     continue;
                 }
 
-                var dependency = w.Run<T>(
-                    t => { },
+                var dependencyExists = false;
+                var dependency = default(T);
+                w.Run<T>(
+                    t =>
+                    {
+                        dependency = t;
+                        dependencyExists = true;
+                    },
                     dependencyName);
-                if (dependency.Equals(default(T)))
+                if (!dependencyExists)
                 {
                     continue;
                 }

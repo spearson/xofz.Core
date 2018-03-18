@@ -106,6 +106,8 @@
     <Compile Include="Framework\IniFile.cs" />
     <Compile Include="Framework\IniReaderWriter.cs" />
     <Compile Include="Framework\Internal\TimerCallback.cs" />
+    <Compile Include="Framework\Logging\EventLogLog.cs" />
+    <Compile Include="Framework\Logging\LogFactory.cs" />
     <Compile Include="Framework\MainUiSettings.cs" />
     <Compile Include="Framework\Materialization\ConcurrentDictionaryMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentQueueMaterializedEnumerable.cs" />

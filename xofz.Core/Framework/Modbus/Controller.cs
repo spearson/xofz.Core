@@ -1,12 +1,10 @@
 ﻿namespace xofz.Framework.Modbus
 {
-    using System;
-
     public interface Controller
     {
         string Location { get; set; }
 
-        Nullable<int> SecondaryLocation { get; set; }
+        int? SecondaryLocation { get; set; }
 
         ushort[] ReadHoldingRegisters(
             ushort startAddress, 

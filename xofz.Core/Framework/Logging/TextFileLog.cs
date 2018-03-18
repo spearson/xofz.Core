@@ -17,7 +17,7 @@
         
         public event Action<LogEntry> EntryWritten;
 
-        public IEnumerable<LogEntry> ReadEntries()
+        IEnumerable<LogEntry> Log.ReadEntries()
         {
             lock (this.locker)
             {
@@ -73,12 +73,14 @@
             }
         }
 
-        public MaterializedEnumerable<LogEntry> ReadEntries(DateTime oldestTimestamp)
+        MaterializedEnumerable<LogEntry> Log.ReadEntries(
+            DateTime oldestTimestamp)
         {
+            Log log = this;
             var ll = new LinkedList<LogEntry>();
-            foreach (var entry in 
-                this.ReadEntries()
-                    .OrderByDescending(e => e.Timestamp))
+            foreach (var entry in log
+                .ReadEntries()
+                .OrderByDescending(e => e.Timestamp))
             {
                 if (entry.Timestamp < oldestTimestamp)
                 {

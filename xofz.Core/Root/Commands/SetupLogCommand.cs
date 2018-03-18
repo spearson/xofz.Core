@@ -92,7 +92,8 @@
         {
             var w = this.web;
             w.RegisterDependency(
-                new TextFileLog(this.filePath));
+                new TextFileLog(
+                    this.filePath));
             w.RegisterDependency(
                 new LinkedListMaterializer(),
                 "LogMaterializer");
