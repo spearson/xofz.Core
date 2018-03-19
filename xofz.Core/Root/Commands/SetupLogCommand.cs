@@ -14,6 +14,58 @@
             ShellUi shell,
             LogEditorUi editorUi,
             MethodWeb web,
+            string logName,
+            string sourceName,
+            AccessLevel clearLevel = AccessLevel.None,
+            AccessLevel editLevel = AccessLevel.None,
+            bool resetOnStart = false)
+        {
+            this.ui = ui;
+            this.shell = shell;
+            this.editorUi = editorUi;
+            this.web = web;
+            this.logName = logName;
+            this.sourceName = sourceName;
+            this.filePath = null;
+            this.clearLevel = clearLevel;
+            this.editLevel = editLevel;
+            this.resetOnStart = resetOnStart;
+            this.computeBackupLocation = default(
+                Func<string>);
+        }
+
+        public SetupLogCommand(
+            LogUi ui,
+            ShellUi shell,
+            LogEditorUi editorUi,
+            LogStatisticsUi statisticsUi,
+            MethodWeb web,
+            string logName,
+            string sourceName,
+            AccessLevel clearLevel = AccessLevel.None,
+            AccessLevel editLevel = AccessLevel.None,
+            bool resetOnStart = false)
+        {
+            this.ui = ui;
+            this.shell = shell;
+            this.editorUi = editorUi;
+            this.statisticsUi = statisticsUi;
+            this.web = web;
+            this.logName = logName;
+            this.sourceName = sourceName;
+            this.filePath = null;
+            this.clearLevel = clearLevel;
+            this.editLevel = editLevel;
+            this.resetOnStart = resetOnStart;
+            this.computeBackupLocation = default(
+                Func<string>);
+        }
+
+        public SetupLogCommand(
+            LogUi ui,
+            ShellUi shell,
+            LogEditorUi editorUi,
+            MethodWeb web,
             string filePath = @"Log.log",
             AccessLevel clearLevel = AccessLevel.None,
             AccessLevel editLevel = AccessLevel.None,
@@ -91,9 +143,21 @@
         private void registerDependencies()
         {
             var w = this.web;
+            var ln = this.logName;
+            if (ln == null)
+            {
+                w.RegisterDependency(
+                    new TextFileLog(
+                        this.filePath));
+                goto finish;
+            }
+
             w.RegisterDependency(
-                new TextFileLog(
-                    this.filePath));
+                new EventLogLog(
+                    ln,
+                    this.sourceName));
+
+            finish:
             w.RegisterDependency(
                 new LinkedListMaterializer(),
                 "LogMaterializer");
@@ -110,6 +174,8 @@
         private readonly LogStatisticsUi statisticsUi;
         private readonly MethodWeb web;
         private readonly string filePath;
+        private readonly string logName;
+        private readonly string sourceName;
         private readonly AccessLevel editLevel;
         private readonly AccessLevel clearLevel;
         private readonly bool resetOnStart;
