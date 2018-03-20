@@ -2,40 +2,38 @@
 {
     public interface Fpx
     {
-        int ReadTimeout { get; set; }
-
         string Location { get; }
 
-        bool ReadBit(string address);
+        int SecondaryLocation { get; }
 
-        void WriteBit(string address, bool value);
+        void Read(string address, out bool bit);
 
-        short ReadShortRegister(string address);
+        void Read(string address, out short register);
 
-        ushort ReadUShortRegister(string address);
+        void Read(string address, out ushort register);
 
-        int ReadIntRegister(string address);
+        void Read(string address, out int register);
 
-        uint ReadUIntRegister(string address);
+        void Read(string address, out uint register);
 
-        float ReadFloatRegister(string address);
+        void Read(string address, out float real);
 
-        StringData ReadString(string startAddress);
+        void Read(string startAddress, out StringRegister register);
 
-        void WriteRegister(string address, short value);
+        void Write(string address, bool bit);
 
-        void WriteRegister(string address, ushort value);
+        void Write(string address, short register);
 
-        void WriteRegister(string address, int value);
+        void Write(string address, ushort register);
 
-        void WriteRegister(string address, uint value);
+        void Write(string address, int register);
 
-        void WriteRegister(string address, float value);
+        void Write(string address, uint register);
 
-        void WriteString(string startAddress, string value);
+        void Write(string address, float real);
 
-        string Do(string command);
+        void Write(string startAddress, string s);
 
-        void Disconnect();
+        string Request(string command);
     }
 }

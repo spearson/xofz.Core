@@ -118,11 +118,11 @@
     <Compile Include="Framework\Plc\AbPlcFactory.cs" />
     <Compile Include="Framework\Plc\DF1ReadErrorHandler.cs" />
     <Compile Include="Framework\Plc\Fpx.cs" />
+    <Compile Include="Framework\Plc\FpxFinder.cs" />
     <Compile Include="Framework\Plc\Implementation\EthernetAbPlc.cs" />
-    <Compile Include="Framework\Plc\SerialFpx.cs" />
-    <Compile Include="Framework\Plc\SerialFpxFinder.cs" />
-    <Compile Include="Framework\Plc\StringData.cs" />
-    <Compile Include="Framework\Plc\TcpFpx.cs" />
+    <Compile Include="Framework\Plc\Implementation\SerialFpx.cs" />
+    <Compile Include="Framework\Plc\Implementation\TcpFpx.cs" />
+    <Compile Include="Framework\Plc\StringRegister.cs" />
     <Compile Include="Framework\Transformation\Accumulator.cs" />
     <Compile Include="Misc\Framework\UnifiedBitPool.cs" />
     <Compile Include="Misc\Synchronization\MethodBuckle.cs" />
