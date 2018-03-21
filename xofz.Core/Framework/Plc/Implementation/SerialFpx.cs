@@ -2,8 +2,6 @@
 {
     using System;
     using System.IO.Ports;
-    using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Text;
 
     internal sealed class SerialFpx : Fpx

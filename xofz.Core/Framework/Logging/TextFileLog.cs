@@ -5,7 +5,6 @@
     using System.Globalization;
     using System.IO;
     using System.Linq;
-    using System.Threading;
     using xofz.Framework.Materialization;
 
     public sealed class TextFileLog : Log, LogEditor
@@ -122,7 +121,7 @@
                 File.AppendAllLines(this.filePath, lines);
             }
 
-            new Thread(() => this.EntryWritten?.Invoke(entry)).Start();
+            this.EntryWritten?.Invoke(entry);
         }
 
         void LogEditor.Clear()
