@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-    using System.Threading;
     using xofz.Framework.Materialization;
 
     public sealed class EventLogLog
@@ -93,8 +92,7 @@
                     Environment.NewLine,
                     entry.Content),
                 getEventLogEntryType(entry.Type));
-            new Thread(() => this.EntryWritten?.Invoke(entry))
-                .Start();
+            this.EntryWritten?.Invoke(entry);
         }
 
         private static EventLogEntryType getEventLogEntryType(string type)
