@@ -2,7 +2,9 @@
 {
     public interface Dio32
     {
-        string DeviceLocation { get; }
+        string Location { get; }
+
+        byte SecondaryLocation { get; }
 
         string ReadSerialNumber();
 

@@ -12,7 +12,9 @@
             this.locker = new object();
         }
 
-        string Dio32.DeviceLocation => this.devicePath;
+        string Dio32.Location => this.devicePath;
+
+        byte Dio32.SecondaryLocation => 0;
 
         string Dio32.ReadSerialNumber()
         {

@@ -1,6 +1,5 @@
 ﻿namespace xofz.Framework.Daq.Internal
 {
-    using System;
     using System.Collections.Generic;
     using xofz.Framework.Materialization;
 
@@ -16,7 +15,7 @@
             if (index < 0xFFFFFFFF)
             {
                 dio32s.AddLast(
-                    new CyUsbDio32(index));
+                    new CyUsbDio32(index, eePromByte));
             }
 
             eePromByte = 0;
@@ -25,7 +24,7 @@
             if (index < 0xFFFFFFFF)
             {
                 dio32s.AddLast(
-                    new CyUsbDio32(index));
+                    new CyUsbDio32(index, eePromByte));
             }
             
             for (eePromByte = 1; eePromByte < 0xFF; ++eePromByte)
@@ -38,8 +37,7 @@
                 }
 
                 dio32s.AddLast(
-                    new CyUsbDio32(
-                        index));
+                    new CyUsbDio32(index, eePromByte));
             }
 
             return new LinkedListMaterializedEnumerable<Dio32>(

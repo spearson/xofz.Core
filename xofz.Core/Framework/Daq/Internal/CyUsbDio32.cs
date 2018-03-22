@@ -4,13 +4,21 @@
 
     internal sealed class CyUsbDio32 : Dio32
     {
-        public CyUsbDio32(uint deviceIndex)
+        public CyUsbDio32(
+            uint deviceIndex,
+            byte eePromByte)
         {
             this.deviceIndex = deviceIndex;
+            this.eePromByte = eePromByte;
         }
 
-        string Dio32.DeviceLocation 
-            => this.deviceIndex.ToString();
+        string Dio32.Location
+            => "0x" + this.deviceIndex
+                   .ToString("X")
+                   .PadLeft(8, '0');
+
+        byte Dio32.SecondaryLocation
+            => this.eePromByte;
 
         string Dio32.ReadSerialNumber()
         {
@@ -247,5 +255,6 @@
         }
 
         private readonly uint deviceIndex;
+        private readonly byte eePromByte;
     }
 }
