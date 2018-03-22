@@ -153,14 +153,22 @@
                 {
                     var tr = ac.TimeRemaining;
                     var sb = new StringBuilder();
-                    sb.Append(
-                        (int)tr.TotalHours);
-                    sb.Append(':');
-                    sb.Append(tr.Minutes);
-                    sb.Append(':');
-                    sb.Append(tr.Seconds);
-                    sb.Append('.');
-                    sb.Append(tr.Milliseconds);
+                    sb.Append((int)tr.TotalHours)
+                        .Append(':')
+                        .Append(tr
+                            .Minutes
+                            .ToString()
+                            .PadLeft(2, '0'))
+                        .Append(':')
+                        .Append(tr
+                            .Seconds
+                            .ToString()
+                            .PadLeft(2, '0'))
+                        .Append('.')
+                        .Append(tr
+                            .Milliseconds
+                            .ToString()
+                            .PadLeft(3, '0'));
                     timeRemaining = sb.ToString();
                 }
                 else

@@ -293,7 +293,9 @@
         private Tuple<string, string, string> createTuple(LogEntry e)
         {
             return Tuple.Create(
-                e.Timestamp.ToString("yyyy/MM/dd HH:mm.ss", CultureInfo.CurrentCulture),
+                e.Timestamp.ToString(
+                    "yyyy/MM/dd HH:mm.ss.fffffff",
+                    CultureInfo.CurrentCulture),
                 e.Type,
                 string.Join(Environment.NewLine, e.Content));
         }

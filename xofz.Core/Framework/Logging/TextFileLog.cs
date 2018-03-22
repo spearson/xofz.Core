@@ -57,6 +57,20 @@
                         DateTime timestamp;
                         if (DateTime.TryParseExact(
                             timestampString,
+                            this.newTimestampFormat,
+                            CultureInfo.CurrentCulture,
+                            DateTimeStyles.AllowWhiteSpaces,
+                            out timestamp))
+                        {
+                            yield return new LogEntry(
+                                timestamp,
+                                type,
+                                new LinkedListMaterializedEnumerable<string>(content));
+                            continue;
+                        }
+
+                        if (DateTime.TryParseExact(
+                            timestampString,
                             this.timestampFormat,
                             CultureInfo.CurrentCulture,
                             DateTimeStyles.AllowWhiteSpaces,
@@ -105,7 +119,7 @@
         void LogEditor.AddEntry(LogEntry entry)
         {
             var lines = new LinkedList<string>();
-            lines.AddLast(entry.Timestamp.ToString(this.timestampFormat));
+            lines.AddLast(entry.Timestamp.ToString(this.newTimestampFormat));
             lines.AddLast(entry.Type);
             foreach (var line in entry.Content)
             {
@@ -151,6 +165,7 @@
 
         private readonly string filePath;
         private readonly string timestampFormat = "yyyy MMMM dd hh:mm.ss tt";
+        private readonly string newTimestampFormat = "yyyy MMMM dd hh:mm:ss.fffffff tt";
         private readonly object locker = new object();
     }
 }
