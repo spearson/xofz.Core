@@ -10,6 +10,11 @@
         public const uint diOnly = 0xFFFFFFFD;
 
         // cyusb
+        [DllImport("AIOUSB.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ClearDevices();
+
+        [DllImport("AIOUSB.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern uint GetDevices();
 
         [DllImport("AIOUSB.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint GetDeviceByEEPROMByte(byte data);

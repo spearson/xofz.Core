@@ -7,43 +7,62 @@
     {
         public MaterializedEnumerable<Dio32> Find()
         {
+            NativeMethods.ClearDevices();
+
+            uint deviceIndex;
             var dio32s = new LinkedList<Dio32>();
-
-            // check for defaults at 0xFF and 0x00
-            byte eePromByte = 0xFF;
-            var index = NativeMethods.GetDeviceByEEPROMByte(
-                eePromByte);
-            if (index < 0xFFFFFFFF)
+            byte eePromByte;
+            for (eePromByte = 0; eePromByte < 0xFF; ++eePromByte)
             {
-                dio32s.AddLast(
-                    new CyUsbDio32(index, eePromByte));
-            }
-
-            eePromByte = 0;
-            index = NativeMethods.GetDeviceByEEPROMByte(
-                eePromByte);
-            if (index < 0xFFFFFFFF)
-            {
-                dio32s.AddLast(
-                    new CyUsbDio32(index, eePromByte));
-            }
-            
-            for (eePromByte = 1; eePromByte < 0xFF; ++eePromByte)
-            {
-                index = NativeMethods.GetDeviceByEEPROMByte(
+                deviceIndex = NativeMethods.GetDeviceByEEPROMByte(
                     eePromByte);
 
-                if (index == 0xFFFFFFFF)
+                if (deviceIndex < 0xFFFFFFFF)
                 {
-                    continue;
+                    dio32s.AddLast(new CyUsbDio32(
+                        deviceIndex, eePromByte));
                 }
+            }
 
-                dio32s.AddLast(
-                    new CyUsbDio32(index, eePromByte));
+            // test at 0xFF
+            deviceIndex = NativeMethods.GetDeviceByEEPROMByte(
+                eePromByte);
+            if (deviceIndex < 0xFFFFFFFF)
+            {
+                dio32s.AddLast(new CyUsbDio32(
+                    deviceIndex, eePromByte));
+            }
+
+            if (dio32s.Count == 0)
+            {
+                this.searchUsingGetDevicesFunction(dio32s);
             }
 
             return new LinkedListMaterializedEnumerable<Dio32>(
                 dio32s);
+        }
+
+        private void searchUsingGetDevicesFunction(LinkedList<Dio32> ll)
+        {
+            var bitMask = NativeMethods.GetDevices();
+            for (var currentIndex = 0; currentIndex < 32; ++currentIndex)
+            {
+                if ((bitMask >> currentIndex) % 2 != 1)
+                {
+                    continue;
+                }
+
+                if (currentIndex == 0)
+                {
+                    ll.AddLast(new CyUsbDio32(
+                        0, 0));
+                    continue;
+                }
+
+                var deviceIndex = (uint)1 << currentIndex;
+                ll.AddLast(new CyUsbDio32(
+                    deviceIndex, 0));
+            }
         }
 
         public MaterializedEnumerable<Dio32> FindWithOutputs(

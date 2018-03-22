@@ -1,6 +1,7 @@
 ﻿namespace xofz.Framework.Daq.Internal
 {
     using System;
+    using System.ComponentModel;
     using System.IO;
 
     internal sealed class CyUsbDio32 : Dio32
@@ -29,9 +30,12 @@
                 out serialNumber);
             if (errorCode > 0)
             {
+                var errorMessage = new Win32Exception((int)errorCode).Message;
                 throw new IOException(
                     "Error reading serial number.  Error code: "
-                    + errorCode);
+                    + errorCode
+                    + Environment.NewLine
+                    + errorMessage);
             }
 
             var hex = serialNumber.ToString("x");
@@ -51,10 +55,14 @@
                 out data);
             if (errorCode > 0)
             {
+                var errorMessage = new Win32Exception((int)errorCode).Message;
                 throw new IOException(
                     "Error reading on terminals.  Error code: "
-                    + errorCode);
+                    + errorCode
+                    + Environment.NewLine
+                    + errorMessage);
             }
+
             var onTerminals = Dio32Terminals.None;
             for (byte i = 0; i < 32; ++i)
             {
@@ -96,9 +104,12 @@
                 ref data);
             if (errorCode > 0)
             {
+                var errorMessage = new Win32Exception((int)errorCode).Message;
                 throw new IOException(
                     "Error writing to DAQ.  Error code: "
-                    + errorCode);
+                    + errorCode
+                    + Environment.NewLine
+                    + errorMessage);
             }
         }
 
@@ -152,9 +163,12 @@
 
             if (errorCode > 0)
             {
+                var errorMessage = new Win32Exception((int)errorCode).Message;
                 throw new IOException(
                     "Error configuring DAQ.  Error code: "
-                    + errorCode);
+                    + errorCode
+                    + Environment.NewLine
+                    + errorMessage);
             }
         }
 
