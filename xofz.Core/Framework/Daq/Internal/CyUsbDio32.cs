@@ -1,6 +1,7 @@
 ﻿namespace xofz.Framework.Daq.Internal
 {
     using System;
+    using System.IO;
 
     internal sealed class CyUsbDio32 : Dio32
     {
@@ -23,9 +24,16 @@
         string Dio32.ReadSerialNumber()
         {
             ulong serialNumber;
-            NativeMethods.GetDeviceSerialNumber(
+            var errorCode = NativeMethods.GetDeviceSerialNumber(
                 this.deviceIndex,
                 out serialNumber);
+            if (errorCode > 0)
+            {
+                throw new IOException(
+                    "Error reading serial number.  Error code: "
+                    + errorCode);
+            }
+
             var hex = serialNumber.ToString("x");
 
             return string.Join(
@@ -38,9 +46,15 @@
         Dio32Terminals Dio32.ReadOnTerminals()
         {
             uint data;
-            NativeMethods.DIO_ReadAll(
+            var errorCode = NativeMethods.DIO_ReadAll(
                 this.deviceIndex,
                 out data);
+            if (errorCode > 0)
+            {
+                throw new IOException(
+                    "Error reading on terminals.  Error code: "
+                    + errorCode);
+            }
             var onTerminals = Dio32Terminals.None;
             for (byte i = 0; i < 32; ++i)
             {
@@ -77,9 +91,15 @@
                 ++onTerminalCounter;
             }
 
-            NativeMethods.DIO_WriteAll(
+            var errorCode = NativeMethods.DIO_WriteAll(
                 this.deviceIndex,
                 ref data);
+            if (errorCode > 0)
+            {
+                throw new IOException(
+                    "Error writing to DAQ.  Error code: "
+                    + errorCode);
+            }
         }
 
         void Dio32.Configure(Dio32Terminals onTerminals, Dio32Ports outputs)
@@ -124,11 +144,18 @@
                 ++onTerminalCounter;
             }
 
-            NativeMethods.DIO_Configure(
+            var errorCode = NativeMethods.DIO_Configure(
                 this.deviceIndex,
                 0,
                 ref outMask,
                 ref data);
+
+            if (errorCode > 0)
+            {
+                throw new IOException(
+                    "Error configuring DAQ.  Error code: "
+                    + errorCode);
+            }
         }
 
         private static Dio32Terminals getTerminalFromIndex(byte index)

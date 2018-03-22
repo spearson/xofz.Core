@@ -8,6 +8,7 @@
         public MaterializedEnumerable<Dio32> Find()
         {
             var dio32s = new LinkedList<Dio32>();
+
             // check for defaults at 0xFF and 0x00
             byte eePromByte = 0xFF;
             var index = NativeMethods.GetDeviceByEEPROMByte(
@@ -31,6 +32,7 @@
             {
                 index = NativeMethods.GetDeviceByEEPROMByte(
                     eePromByte);
+
                 if (index == 0xFFFFFFFF)
                 {
                     continue;
