@@ -23,6 +23,8 @@
             this.locker = new object();
         }
 
+        public override string Name { get; set; }
+
         public void Setup(
             AccessLevel editLevel,
             AccessLevel clearLevel,
@@ -129,7 +131,14 @@
 
         private void ui_DateChanged()
         {
-            this.reloadEntries();
+            if (Interlocked.Read(ref this.startedIf1) == 1)
+            {
+                this.reloadEntries();
+                return;
+            }
+
+            Interlocked.CompareExchange(
+                ref this.refreshOnStartIf1, 1, 0);
         }
 
         private void reloadEntries()
