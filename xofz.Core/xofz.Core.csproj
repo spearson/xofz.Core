@@ -103,7 +103,6 @@
     <Compile Include="Framework\Daq\Internal\WinUsbDio32.cs" />
     <Compile Include="Framework\Daq\Internal\WinUsbDio32Finder.cs" />
     <Compile Include="Framework\EncodingHelpers.cs" />
-    <Compile Include="Framework\IniFile.cs" />
     <Compile Include="Framework\IniReaderWriter.cs" />
     <Compile Include="Framework\Internal\TimerCallback.cs" />
     <Compile Include="Framework\Logging\EventLogLog.cs" />
@@ -398,6 +397,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FormLogStatisticsUi.resx">
       <DependentUpon>FormLogStatisticsUi.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\UserControlLogUi.resx">
       <DependentUpon>UserControlLogUi.cs</DependentUpon>

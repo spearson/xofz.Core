@@ -68,14 +68,9 @@
             }
 
             var targetLine = default(string);
-            foreach (var line in lines)
+            foreach (var line in lines
+                .Skip(targetHeader.LineNumber))
             {
-                var index = Array.IndexOf(lines, line);
-                if (index < targetHeader.LineNumber)
-                {
-                    continue;
-                }
-
                 if (line.Contains(key))
                 {
                     targetLine = line;
