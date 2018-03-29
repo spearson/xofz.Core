@@ -7,7 +7,7 @@
         event Action Minimized;
 
         event Action Restored;
-        
+
         void Minimize();
 
         void Restore();

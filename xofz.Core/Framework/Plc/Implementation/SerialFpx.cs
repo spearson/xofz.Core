@@ -111,7 +111,7 @@
                 !address.StartsWith("SV"))
             {
                 throw new InvalidOperationException(
-                    "The address for a short register must start with "
+                    "The address for a ushort register must start with "
                     + "either DT, EV, or SV");
             }
 
@@ -184,7 +184,7 @@
             if (!address.StartsWith("DDT"))
             {
                 throw new InvalidOperationException(
-                    "The address for an int register must start with DDT.");
+                    "The address for a uint register must start with DDT.");
             }
 
             short location;
@@ -207,7 +207,7 @@
             if (!address.StartsWith("DDT"))
             {
                 throw new InvalidOperationException(
-                    "The address for an int register must start with DDT.");
+                    "The address for a real register must start with DDT.");
             }
 
             short location;
