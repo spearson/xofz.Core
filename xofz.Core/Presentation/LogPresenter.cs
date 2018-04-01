@@ -78,9 +78,14 @@
             Interlocked.CompareExchange(ref this.startedIf1, 1, 0);
             base.Start();
 
-            if (Interlocked.Read(
-                    ref this.startedFirstTimeIf1) == 0
-                || this.resetOnStart)
+            if (Interlocked.CompareExchange(
+                    ref this.startedFirstTimeIf1, 1, 0) == 0)
+            {
+                this.reloadEntries();
+                return;
+            }
+
+            if (this.resetOnStart)
             {
                 this.resetDatesAndFilters();
                 goto finish;
@@ -90,6 +95,7 @@
                     ref this.refreshOnStartIf1, 0, 1) == 1)
             {
                 this.reloadEntries();
+                return;
             }
 
             finish:
@@ -118,10 +124,8 @@
                 && UiHelpers.Read(this.ui, () => this.ui.FilterType)
                 == string.Empty)
             {
-                if (started && Interlocked.CompareExchange(
-                        ref this.startedFirstTimeIf1,
-                        1,
-                        0) == 1)
+                if (started && Interlocked.Read(
+                        ref this.startedFirstTimeIf1) == 1)
                 {
                     needsReload = false;
                 }
