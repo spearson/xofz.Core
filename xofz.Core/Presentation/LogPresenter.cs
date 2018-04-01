@@ -21,6 +21,7 @@
             this.ui = ui;
             this.web = web;
             this.locker = new object();
+            this.entriesToAddOnRefresh = new List<LogEntry>(0x100);
         }
 
         public override string Name { get; set; }
@@ -86,9 +87,11 @@
                 if (Interlocked.CompareExchange(
                     ref this.refreshOnStartIf1, 0, 1) == 1)
                 {
-                    this.reloadEntries();
+                    this.insertNewEntries();
                 }
             }
+
+            this.entriesToAddOnRefresh.Clear();
         }
 
         public override void Stop()
@@ -139,6 +142,20 @@
 
             Interlocked.CompareExchange(
                 ref this.refreshOnStartIf1, 1, 0);
+        }
+
+        public void insertNewEntries()
+        {
+            var etoar = this.entriesToAddOnRefresh;
+            foreach (var entry in etoar)
+            {
+                var tuple = this.createTuple(entry);
+                UiHelpers.Write(
+                    this.ui,
+                    () => this.ui.AddToTop(
+                        tuple));
+                this.ui.WriteFinished.WaitOne();
+            }
         }
 
         private void reloadEntries()
@@ -283,6 +300,8 @@
             if (Interlocked.Read(ref this.startedIf1) == 0)
             {
                 Interlocked.CompareExchange(ref this.refreshOnStartIf1, 1, 0);
+                this.entriesToAddOnRefresh.Add(e);
+
                 return;
             }
 
@@ -291,10 +310,10 @@
                 var newEntries = new LinkedList<Tuple<string, string, string>>(
                     UiHelpers.Read(this.ui, () => this.ui.Entries));
                 newEntries.AddFirst(this.createTuple(e));
+                var llme = new LinkedListMaterializedEnumerable<
+                    Tuple<string, string, string>>(newEntries);
 
-                UiHelpers.Write(this.ui, () => this.ui.Entries =
-                    new LinkedListMaterializedEnumerable<
-                        Tuple<string, string, string>>(newEntries));
+                UiHelpers.Write(this.ui, () => this.ui.Entries = llme);
                 this.ui.WriteFinished.WaitOne();
             }
         }
@@ -322,6 +341,7 @@
                 () => this.ui.ClearKeyVisible = clearVisible);
         }
 
+        private List<LogEntry> entriesToAddOnRefresh;
         private long setupIf1, startedIf1, refreshOnStartIf1;
         private bool resetOnStart;
         private AccessLevel editLevel, clearLevel;

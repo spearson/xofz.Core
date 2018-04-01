@@ -101,6 +101,7 @@
         string LogStatisticsUi.NewestTimestamp
         {
             get => this.newestTimestampLabel.Text;
+
             set => this.newestTimestampLabel.Text = value;
         }
 

@@ -122,6 +122,15 @@
             set => this.statisticsKey.Visible = value;
         }
 
+        void LogUi.AddToTop(
+            Tuple<string, string, string> entry)
+        {
+            this.entriesGrid.Rows.Insert(0,
+                entry.Item1,
+                entry.Item2,
+                entry.Item3);
+        }
+
         private void addKey_Click(object sender, EventArgs e)
         {
             new Thread(() => this.AddKeyTapped?.Invoke()).Start();
