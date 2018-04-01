@@ -38,6 +38,7 @@
                 return;
             }
 
+            this.resetDatesAndFilters();
             var w = this.web;
             this.editLevel = editLevel;
             this.clearLevel = clearLevel;
@@ -49,7 +50,6 @@
             this.ui.ClearKeyTapped += this.ui_ClearKeyTapped;
             this.ui.StatisticsKeyTapped += this.ui_StatisticsKeyTapped;
             this.ui.FilterTextChanged += this.ui_FilterTextChanged;
-            this.resetDatesAndFilters();
             var addKeyVisible = editLevel == AccessLevel.None;
             var clearKeyVisible = clearLevel == AccessLevel.None;
             UiHelpers.Write(this.ui, () =>
@@ -78,19 +78,22 @@
             Interlocked.CompareExchange(ref this.startedIf1, 1, 0);
             base.Start();
 
-            if (this.resetOnStart)
+            if (Interlocked.Read(
+                    ref this.startedFirstTimeIf1) == 0
+                || this.resetOnStart)
             {
                 this.resetDatesAndFilters();
-            }
-            else
-            {
-                if (Interlocked.CompareExchange(
-                    ref this.refreshOnStartIf1, 0, 1) == 1)
-                {
-                    this.insertNewEntries();
-                }
+                goto finish;
             }
 
+            if (Interlocked.CompareExchange(
+                    ref this.refreshOnStartIf1, 0, 1) == 1)
+            {
+                this.reloadEntries();
+            }
+
+            finish:
+            this.insertNewEntries();
             this.entriesToAddOnRefresh.Clear();
         }
 
@@ -101,8 +104,11 @@
 
         private void resetDatesAndFilters()
         {
+            var w = this.web;
             var today = DateTime.Today;
             var lastWeek = today.Subtract(TimeSpan.FromDays(6));
+            var needsReload = true;
+            var started = Interlocked.Read(ref this.startedIf1) == 1;
             if (UiHelpers.Read(this.ui, () => this.ui.StartDate)
                 == lastWeek
                 && UiHelpers.Read(this.ui, () => this.ui.EndDate)
@@ -112,12 +118,13 @@
                 && UiHelpers.Read(this.ui, () => this.ui.FilterType)
                 == string.Empty)
             {
-                if (Interlocked.CompareExchange(
-                        ref this.refreshOnStartIf1, 0, 1) == 1)
+                if (started && Interlocked.CompareExchange(
+                        ref this.startedFirstTimeIf1,
+                        1,
+                        0) == 1)
                 {
-                    this.reloadEntries();
+                    needsReload = false;
                 }
-                return;
             }
 
             Interlocked.CompareExchange(
@@ -126,10 +133,17 @@
             {
                 this.ui.StartDate = lastWeek;
                 this.ui.EndDate = today;
-                this.ui.FilterContent = string.Empty;
                 this.ui.FilterType = string.Empty;
+                this.ui.FilterContent = string.Empty;
             });
             this.ui.WriteFinished.WaitOne();
+
+            if (started && needsReload)
+            {
+                w.Run<EventRaiser>(er => er.Raise(
+                    this.ui,
+                    nameof(this.ui.StartDateChanged)));
+            }
         }
 
         private void ui_DateChanged()
@@ -209,6 +223,47 @@
                     this.ui.WriteFinished.WaitOne();
                 },
                 this.Name);
+        }
+
+        private bool passesDatesAndFilters(LogEntry e)
+        {
+            var startDate = UiHelpers.Read(
+                this.ui,
+                () => this.ui.StartDate);
+            var endDate = UiHelpers.Read(
+                this.ui,
+                () => this.ui.EndDate);
+            if (e.Timestamp < startDate)
+            {
+                return false;
+            }
+
+            if (e.Timestamp > endDate.AddDays(1))
+            {
+                return false;
+            }
+
+            var filterType = UiHelpers.Read(
+                this.ui,
+                () => this.ui.FilterType);
+            if (!(e.Type?.Contains(filterType)
+                  ?? false))
+            {
+                return false;
+            }
+
+            var filterContent = UiHelpers.Read(
+                this.ui,
+                () => this.ui.FilterContent);
+            if (e.Content?.All(
+                    s => !s.ToLowerInvariant().Contains(
+                        filterContent.ToLowerInvariant()))
+                ?? true)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private void ui_AddKeyTapped()
@@ -299,22 +354,20 @@
 
             if (Interlocked.Read(ref this.startedIf1) == 0)
             {
-                Interlocked.CompareExchange(ref this.refreshOnStartIf1, 1, 0);
-                this.entriesToAddOnRefresh.Add(e);
+                if (this.passesDatesAndFilters(e))
+                {
+                    this.entriesToAddOnRefresh.Add(e);
+                }
 
                 return;
             }
 
-            lock (this.locker)
+            if (this.passesDatesAndFilters(e))
             {
-                var newEntries = new LinkedList<Tuple<string, string, string>>(
-                    UiHelpers.Read(this.ui, () => this.ui.Entries));
-                newEntries.AddFirst(this.createTuple(e));
-                var llme = new LinkedListMaterializedEnumerable<
-                    Tuple<string, string, string>>(newEntries);
-
-                UiHelpers.Write(this.ui, () => this.ui.Entries = llme);
-                this.ui.WriteFinished.WaitOne();
+                var tuple = this.createTuple(e);
+                UiHelpers.Write(
+                    this.ui,
+                    () => this.ui.AddToTop(tuple));
             }
         }
 
@@ -341,13 +394,17 @@
                 () => this.ui.ClearKeyVisible = clearVisible);
         }
 
-        private List<LogEntry> entriesToAddOnRefresh;
-        private long setupIf1, startedIf1, refreshOnStartIf1;
+        private long 
+            setupIf1, 
+            startedIf1, 
+            refreshOnStartIf1,
+            startedFirstTimeIf1;
         private bool resetOnStart;
         private AccessLevel editLevel, clearLevel;
         private Func<string> computeBackupLocation;
         private readonly LogUi ui;
         private readonly MethodWeb web;
+        private readonly List<LogEntry> entriesToAddOnRefresh;
         private readonly object locker;
     }
 }

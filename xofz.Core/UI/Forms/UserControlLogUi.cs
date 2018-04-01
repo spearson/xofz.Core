@@ -141,12 +141,12 @@
             new Thread(() => this.ClearKeyTapped?.Invoke()).Start();
         }
 
-        private void startDatePicker_DateChanged(object sender, DateRangeEventArgs e)
+        private void startDatePicker_DateSelected(object sender, DateRangeEventArgs e)
         {
             new Thread(() => this.StartDateChanged?.Invoke()).Start();
         }
 
-        private void endDatePicker_DateChanged(object sender, DateRangeEventArgs e)
+        private void endDatePicker_DateSelected(object sender, DateRangeEventArgs e)
         {
             new Thread(() => this.EndDateChanged?.Invoke()).Start();
         }
