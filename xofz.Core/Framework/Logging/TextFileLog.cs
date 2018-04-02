@@ -106,6 +106,8 @@
             return new LinkedListMaterializedEnumerable<LogEntry>(ll);
         }
 
+        public event Action Cleared;
+
         void LogEditor.AddEntry(string type, IEnumerable<string> content)
         {
             LogEditor editor = this;
@@ -147,6 +149,8 @@
                     File.Delete(this.filePath);
                 }
             }
+
+            this.Cleared?.Invoke();
         }
 
         void LogEditor.Clear(string backupLocation)
@@ -161,6 +165,8 @@
                 File.Copy(this.filePath, backupLocation);
                 File.Delete(this.filePath);
             }
+
+            this.Cleared?.Invoke();
         }
 
         private readonly string filePath;

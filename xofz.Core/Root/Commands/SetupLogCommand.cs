@@ -18,7 +18,8 @@
             string sourceName,
             AccessLevel clearLevel = AccessLevel.None,
             AccessLevel editLevel = AccessLevel.None,
-            bool resetOnStart = false)
+            bool resetOnStart = false,
+            Func<string> computeBackupLocation = default(Func<string>))
         {
             this.ui = ui;
             this.shell = shell;
@@ -30,8 +31,7 @@
             this.clearLevel = clearLevel;
             this.editLevel = editLevel;
             this.resetOnStart = resetOnStart;
-            this.computeBackupLocation = default(
-                Func<string>);
+            this.computeBackupLocation = computeBackupLocation;
         }
 
         public SetupLogCommand(
@@ -59,6 +59,33 @@
             this.resetOnStart = resetOnStart;
             this.computeBackupLocation = default(
                 Func<string>);
+        }
+
+        public SetupLogCommand(
+            LogUi ui,
+            ShellUi shell,
+            LogEditorUi editorUi,
+            LogStatisticsUi statisticsUi,
+            MethodWeb web,
+            string logName,
+            string sourceName,
+            AccessLevel clearLevel = AccessLevel.None,
+            AccessLevel editLevel = AccessLevel.None,
+            bool resetOnStart = false,
+            Func<string> computeBackupLocation = default(Func<string>))
+        {
+            this.ui = ui;
+            this.shell = shell;
+            this.editorUi = editorUi;
+            this.statisticsUi = statisticsUi;
+            this.web = web;
+            this.logName = logName;
+            this.sourceName = sourceName;
+            this.filePath = null;
+            this.clearLevel = clearLevel;
+            this.editLevel = editLevel;
+            this.resetOnStart = resetOnStart;
+            this.computeBackupLocation = computeBackupLocation;
         }
 
         public SetupLogCommand(

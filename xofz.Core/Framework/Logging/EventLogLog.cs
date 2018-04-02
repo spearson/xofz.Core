@@ -75,6 +75,8 @@
             return new LinkedListMaterializedEnumerable<LogEntry>(ll);
         }
 
+        public event Action Cleared;
+
         void LogEditor.AddEntry(string type, IEnumerable<string> content)
         {
             var entry = new LogEntry(
@@ -116,6 +118,7 @@
         void LogEditor.Clear()
         {
             this.eventLog.Clear();
+            this.Cleared?.Invoke();
         }
 
         void LogEditor.Clear(string backupLocation)
@@ -138,6 +141,7 @@
             }
 
             oldLog.Clear();
+            this.Cleared?.Invoke();
         }
 
         private readonly EventLog eventLog;

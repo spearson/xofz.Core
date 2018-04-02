@@ -20,7 +20,6 @@
         {
             this.ui = ui;
             this.web = web;
-            this.locker = new object();
             this.entriesToAddOnRefresh = new List<LogEntry>(0x100);
         }
 
@@ -312,7 +311,15 @@
                     if (cbl != default(Func<string>))
                     {
                         var bl = cbl();
-                        le.Clear(bl);
+                        try
+                        {
+                            le.Clear(bl);
+                        }
+                        catch
+                        {
+                            return;
+                        }
+                        
                         this.reloadEntries();
                         le.AddEntry(
                             "Information",
@@ -324,7 +331,15 @@
                         return;
                     }
 
-                    le.Clear();
+                    try
+                    {
+                        le.Clear();
+                    }
+                    catch
+                    {
+                        return;
+                    }
+
                     this.reloadEntries();
                     le.AddEntry(
                         "Information",
@@ -346,7 +361,14 @@
 
         private void ui_FilterTextChanged()
         {
-            this.reloadEntries();
+            if (Interlocked.Read(ref this.startedIf1) == 1)
+            {
+                this.reloadEntries();
+                return;
+            }
+
+            Interlocked.CompareExchange(
+                ref this.refreshOnStartIf1, 1, 0);
         }
 
         private void log_EntryWritten(LogEntry e)
@@ -409,6 +431,5 @@
         private readonly LogUi ui;
         private readonly MethodWeb web;
         private readonly List<LogEntry> entriesToAddOnRefresh;
-        private readonly object locker;
     }
 }
