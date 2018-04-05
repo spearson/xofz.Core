@@ -161,7 +161,7 @@
                 ref this.refreshOnStartIf1, 1, 0);
         }
 
-        public void insertNewEntries()
+        private void insertNewEntries()
         {
             var etoar = this.entriesToAddOnRefresh;
             foreach (var entry in etoar)
@@ -380,7 +380,9 @@
 
             if (Interlocked.Read(ref this.startedIf1) == 0)
             {
-                if (this.passesDatesAndFilters(e))
+                if (Interlocked.Read(
+                        ref this.startedFirstTimeIf1) == 1 &&
+                    this.passesDatesAndFilters(e))
                 {
                     this.entriesToAddOnRefresh.Add(e);
                 }
