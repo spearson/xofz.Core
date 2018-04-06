@@ -15,6 +15,12 @@
             object dependency, 
             string name = null)
         {
+            if (dependency == null)
+            {
+                throw new ArgumentNullException(
+                    nameof(dependency));
+            }
+
             this.dependencies.Add(
                 Tuple.Create(dependency, name));
         }
