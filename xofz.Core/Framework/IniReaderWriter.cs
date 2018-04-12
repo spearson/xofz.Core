@@ -68,10 +68,12 @@
             }
 
             var targetLine = default(string);
+            int endOfKey;
             foreach (var line in lines
                 .Skip(targetHeader.LineNumber))
             {
-                if (line.Contains(key))
+                endOfKey = line.IndexOf('=');
+                if (line.Substring(0, endOfKey) == key)
                 {
                     targetLine = line;
                     break;
