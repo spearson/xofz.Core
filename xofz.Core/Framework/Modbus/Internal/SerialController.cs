@@ -20,7 +20,7 @@
 
         int? Controller.SecondaryLocation
         {
-            get { return null; }
+            get => null;
             set { }
         }
 

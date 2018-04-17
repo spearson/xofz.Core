@@ -20,18 +20,18 @@ namespace xofz.Misc
         {
             var fs = this.finishedSleeping;
             fs.Reset();
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    Thread.Sleep(milliseconds);
-                    fs.Set();
-                });
             var t = new Thread(() =>
                 {
                     Thread.Sleep(milliseconds);
                     fs.Set();
                 })
                 { Priority = this.priority };
+            ThreadPool.QueueUserWorkItem(
+                state =>
+                {
+                    Thread.Sleep(milliseconds);
+                    fs.Set();
+                });
             t.Start();
             fs.WaitOne(milliseconds);
         }

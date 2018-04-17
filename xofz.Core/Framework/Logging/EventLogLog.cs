@@ -21,6 +21,8 @@
 
         public event Action<LogEntry> EntryWritten;
 
+        public event Action Cleared;
+
         IEnumerable<LogEntry> Log.ReadEntries()
         {
             foreach (EventLogEntry entry in this.eventLog.Entries)
@@ -74,8 +76,6 @@
 
             return new LinkedListMaterializedEnumerable<LogEntry>(ll);
         }
-
-        public event Action Cleared;
 
         void LogEditor.AddEntry(string type, IEnumerable<string> content)
         {

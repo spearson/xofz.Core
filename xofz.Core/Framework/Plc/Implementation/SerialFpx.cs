@@ -238,7 +238,7 @@
                 out start))
             {
                 throw new InvalidOperationException(
-                    "Could not understand start location");
+                    "Could not understand start location.");
             }
 
             var maxLength = BitConverter.ToUInt16(

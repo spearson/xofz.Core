@@ -6,8 +6,9 @@
     public static class StringHelpers
     {
         public static T ToEnum<T>(string s)
+            where T : struct
         {
-            return (T)Enum.Parse(typeof(T), s);
+            return Enum.TryParse(s, out T e) ? e : default(T);
         }
 
         public static string RemoveEndChars(string s, int count)
@@ -26,6 +27,11 @@
 
         public static IEnumerable<string> Chunks(string s, int chunkSize)
         {
+            if (s == null)
+            {
+                yield break;
+            }
+
             if (chunkSize < 1)
             {
                 yield return s;

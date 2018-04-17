@@ -69,7 +69,7 @@
             where TUi : Ui
         {
             var match = this.uis.FirstOrDefault(
-                tuple => tuple.Item2 == presenter 
+                tuple => ReferenceEquals(presenter, tuple.Item2)
                 && tuple.Item1 is TUi
                 && tuple.Item3 == uiName);
             var matchAsUi = (TUi)match?.Item1;
