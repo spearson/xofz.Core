@@ -1,4 +1,4 @@
-﻿namespace xofz.Misc.Framework.Theory
+﻿namespace xofz.Framework
 {
     using System.Collections.Generic;
     using System.Linq;

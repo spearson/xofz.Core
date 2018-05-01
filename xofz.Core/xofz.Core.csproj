@@ -105,6 +105,9 @@
     <Compile Include="Framework\EncodingHelpers.cs" />
     <Compile Include="Framework\IniReaderWriter.cs" />
     <Compile Include="Framework\Internal\TimerCallback.cs" />
+    <Compile Include="Framework\IOBitter.cs" />
+    <Compile Include="Framework\IOBitterFactory.cs" />
+    <Compile Include="Framework\IO\FileIOBitter.cs" />
     <Compile Include="Framework\Logging\EventLogLog.cs" />
     <Compile Include="Framework\Logging\LogFactory.cs" />
     <Compile Include="Framework\MainUiSettings.cs" />
@@ -135,7 +138,6 @@
     <Compile Include="Misc\Framework\AI\SkippingTreeOrderer.cs" />
     <Compile Include="Misc\Framework\AI\Tree.cs" />
     <Compile Include="Misc\Framework\AI\TreeOrderer.cs" />
-    <Compile Include="Misc\Framework\All.cs" />
     <Compile Include="Misc\Framework\BlockProcessor.cs" />
     <Compile Include="Misc\Framework\CollectionHolder.cs" />
     <Compile Include="Framework\Computation\BigPow.cs" />
@@ -154,7 +156,6 @@
     <Compile Include="Misc\Framework\Erudition\Likening.cs" />
     <Compile Include="Misc\Framework\Erudition\Slicer.cs" />
     <Compile Include="Framework\Logging\TextFileLog.cs" />
-    <Compile Include="Misc\Framework\IO\FileHelpers.cs" />
     <Compile Include="Framework\LatchHolder.cs" />
     <Compile Include="Framework\Logging\Log.cs" />
     <Compile Include="Framework\Logging\LogEntry.cs" />
@@ -180,7 +181,7 @@
     <Compile Include="Framework\Modbus\Internal\TcpNModbusConnection.cs" />
     <Compile Include="Framework\Modbus\SerialMode.cs" />
     <Compile Include="Misc\Framework\Nightfall.cs" />
-    <Compile Include="Misc\Framework\Theory\BinaryTranslator.cs" />
+    <Compile Include="Framework\BinaryTranslator.cs" />
     <Compile Include="Misc\Framework\Theory\DirectedGraph.cs" />
     <Compile Include="Misc\Framework\Theory\SafeInvoker.cs" />
     <Compile Include="Misc\Framework\Transcendence\HolySpirit.cs" />
@@ -279,7 +280,6 @@
     <Compile Include="Framework\Transformation\EnumerableRotator.cs" />
     <Compile Include="Framework\Materialization\ActionMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ArrayMaterializedEnumerable.cs" />
-    <Compile Include="Misc\Beholder.cs" />
     <Compile Include="Framework\Materialization\FuncMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\HashSetMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\KeyValuePairMaterializedEnumerable.cs" />
