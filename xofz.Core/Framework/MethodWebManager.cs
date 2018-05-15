@@ -16,7 +16,9 @@
             return this.webs.Select(nmwh => nmwh.Name);
         }
 
-        public virtual void AddWeb(MethodWeb web, string name = @"Default")
+        public virtual void AddWeb(
+            MethodWeb web, 
+            string name = @"Default")
         {
             if (web == null)
             {

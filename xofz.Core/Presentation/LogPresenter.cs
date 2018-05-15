@@ -163,8 +163,8 @@
 
         private void insertNewEntries()
         {
-            var etoar = this.entriesToAddOnRefresh;
-            foreach (var entry in etoar)
+            var etaor = this.entriesToAddOnRefresh;
+            foreach (var entry in etaor)
             {
                 var tuple = this.createTuple(entry);
                 UiHelpers.Write(

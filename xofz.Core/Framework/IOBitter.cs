@@ -4,11 +4,12 @@
 
     public interface IOBitter
     {
-        IEnumerable<bool> Read(string location);
+        string Name { get; set; }
+
+        IEnumerable<bool> Read();
 
         void Write(
             IEnumerable<bool> bits, 
-            string location,
             out bool succeeded);
     }
 }

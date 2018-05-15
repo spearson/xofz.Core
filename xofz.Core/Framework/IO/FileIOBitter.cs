@@ -7,24 +7,37 @@
 
     public sealed class FileIOBitter : IOBitter
     {
-        public FileIOBitter(MethodWeb web)
+        public FileIOBitter(
+            MethodWeb web)
         {
             this.web = web;
         }
 
-        public void Setup()
+        string IOBitter.Name { get; set; }
+
+        public void Setup(string filePath)
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
             {
                 return;
             }
 
+            IOBitter bitter = this;
             var w = this.web;
             w.RegisterDependency(
                 new BinaryTranslator());
+            w.RegisterDependency(
+                new FileIOBitterSettings(),
+                bitter.Name);
+            w.Run<FileIOBitterSettings>(
+                settings =>
+                {
+                    settings.FilePath = filePath;
+                },
+                bitter.Name);
         }
 
-        IEnumerable<bool> IOBitter.Read(string location)
+        IEnumerable<bool> IOBitter.Read()
         {
             if (Interlocked.Read(ref this.setupIf1) != 1)
             {
@@ -33,27 +46,30 @@
 
             var w = this.web;
             IEnumerable<bool> bits = Enumerable.Empty<bool>();
-            w.Run<BinaryTranslator>(bt =>
-            {
-                IEnumerable<byte> bytesToRead;
-                try
+            IOBitter bitter = this;
+            w.Run<FileIOBitterSettings, BinaryTranslator>(
+                (settings, bt) =>
                 {
-                    bytesToRead = File.ReadAllBytes(location);
-                }
-                catch
-                {
-                    return;
-                }
-                
-                bits = bt.GetBits(bytesToRead);
-            });
+                    IEnumerable<byte> bytesToRead;
+                    try
+                    {
+                        bytesToRead = File.ReadAllBytes(
+                            settings.FilePath);
+                    }
+                    catch
+                    {
+                        return;
+                    }
+
+                    bits = bt.GetBits(bytesToRead);
+                },
+                bitter.Name);
 
             return bits;
         }
 
         void IOBitter.Write(
             IEnumerable<bool> bits, 
-            string location, 
             out bool succeeded)
         {
             if (Interlocked.Read(ref this.setupIf1) != 1)
@@ -69,26 +85,28 @@
             }
 
             var w = this.web;
-            IEnumerable<byte> bytesToWrite = default(IEnumerable<byte>);
-            w.Run<BinaryTranslator>(bt =>
-            {
-                bytesToWrite = bt.GetBytes(bits);
-            });
+            var reallySucceeded = false;
+            IOBitter bitter = this;
+            w.Run<FileIOBitterSettings, BinaryTranslator>(
+                (settings, bt) =>
+                {
+                    var bytesToWrite = bt.GetBytes(bits);
+                    var array = bytesToWrite.ToArray();
+                    try
+                    {
+                        File.WriteAllBytes(
+                            settings.FilePath,
+                            array);
+                        reallySucceeded = true;
+                    }
+                    catch
+                    {
+                        reallySucceeded = false;
+                    }
+                },
+                bitter.Name);
 
-            var array = bytesToWrite.ToArray();
-            try
-            {
-                File.WriteAllBytes(
-                    location,
-                    array);
-            }
-            catch
-            {
-                succeeded = false;
-                return;
-            }
-
-            succeeded = true;
+            succeeded = reallySucceeded;
         }
 
         private long setupIf1;

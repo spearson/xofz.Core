@@ -53,7 +53,6 @@
             {
                 presenter.Start();
             }).Start();
-
         }
 
         public virtual void Present<T>(string name) 
