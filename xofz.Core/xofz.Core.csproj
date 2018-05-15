@@ -170,7 +170,6 @@
     <Compile Include="Misc\Framework\Martyr\FreedomHolder.cs" />
     <Compile Include="Misc\Framework\Martyr\Martyr.cs" />
     <Compile Include="Misc\Framework\Martyr\PrescientInvoker.cs" />
-    <Compile Include="Framework\Materialization\ArrayMaterializer.cs" />
     <Compile Include="Framework\Materialization\HashSetMaterializer.cs" />
     <Compile Include="Framework\Materialization\LinkedListMaterializer.cs" />
     <Compile Include="Framework\Materialization\OrderedMaterializer.cs" />
@@ -283,7 +282,6 @@
     <Compile Include="Framework\Transformation\EnumerableRepeater.cs" />
     <Compile Include="Framework\Transformation\EnumerableRotator.cs" />
     <Compile Include="Framework\Materialization\ActionMaterializedEnumerable.cs" />
-    <Compile Include="Framework\Materialization\ArrayMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\FuncMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\HashSetMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\KeyValuePairMaterializedEnumerable.cs" />

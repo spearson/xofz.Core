@@ -12,7 +12,7 @@
                 where T : class
             {
                 return this.Illumine<T>(
-                    new ArrayMaterializedEnumerable<object>(dependencies));
+                    new LinkedListMaterializedEnumerable<object>(dependencies));
             }
 
             public virtual T Illumine<T>(MaterializedEnumerable<object> dependencies)

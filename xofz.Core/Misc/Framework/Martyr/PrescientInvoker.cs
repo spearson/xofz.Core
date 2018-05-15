@@ -20,7 +20,7 @@
             var actor = this.illuminator.Illumine<T>(dependencies);
             act(actor);
             this.freedomHolder.Surge(
-                new ArrayMaterializedEnumerable<IDisposable>(
+                new LinkedListMaterializedEnumerable<IDisposable>(
                     new IDisposable[] { actor }));
             return actor;
         }

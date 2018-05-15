@@ -38,9 +38,9 @@
 
                 // ReSharper disable once ImpureMethodCallOnReadonlyValueField
                 this.martyr.BringToGod(disposables);
-                var array = this.illuminator.Illumine<
-                    ArrayMaterializedEnumerable<IDisposable>>(dependencies);
-                this.illuminator.Illumine<IDisposable>(array);
+                var ll = this.illuminator.Illumine<
+                    LinkedListMaterializedEnumerable<IDisposable>>(dependencies);
+                this.illuminator.Illumine<IDisposable>(ll);
             }
         }
 

@@ -3,8 +3,6 @@
     using xofz.Framework.IO;
     using xofz.Framework.Materialization;
 
-    // this class will serve a purpose when there 
-    // is more than one IOBitter implementation
     public class IOBitterFactory
     {
         public IOBitterFactory(MethodWeb web)
