@@ -62,7 +62,6 @@
                     IntPtr.Zero);
                 this.started = false;
             }
-            
         }
 
         public virtual void Dispose()

@@ -174,7 +174,10 @@
             this.currentAccessLevel = currentAccessLevel;
             if (previousLevel != currentAccessLevel)
             {
-                this.AccessLevelChanged?.Invoke(currentAccessLevel);
+                new Thread(
+                        () => this.AccessLevelChanged?
+                            .Invoke(currentAccessLevel))
+                    .Start();
             }
         }
 
