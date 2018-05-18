@@ -41,6 +41,9 @@
                     settings.ConnectTimeoutMilliseconds = 2000;
                 },
                 bitter.Name);
+            w.RegisterDependency(
+                this,
+                bitter.Name);
         }
 
         IEnumerable<bool> IOBitter.Read()

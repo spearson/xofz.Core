@@ -15,7 +15,7 @@
 
         string IOBitter.Name { get; set; }
 
-        public void Setup(string filePath)
+        public void Setup(string startFilePath)
         {
             if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
             {
@@ -32,8 +32,11 @@
             w.Run<FileIOBitterSettings>(
                 settings =>
                 {
-                    settings.FilePath = filePath;
+                    settings.FilePath = startFilePath;
                 },
+                bitter.Name);
+            w.RegisterDependency(
+                this,
                 bitter.Name);
         }
 
@@ -97,12 +100,15 @@
                         File.WriteAllBytes(
                             settings.FilePath,
                             array);
-                        reallySucceeded = true;
                     }
                     catch
                     {
                         reallySucceeded = false;
+                        goto end;
                     }
+
+                    reallySucceeded = true;
+                    end:;
                 },
                 bitter.Name);
 

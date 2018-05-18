@@ -14,13 +14,13 @@
             string filePath,
             string bitterName)
         {
-            var bitter = new FileIOBitter(
+            var fileBitter = new FileIOBitter(
                 this.web);
-            IOBitter toName = bitter;
-            toName.Name = bitterName;
-            bitter.Setup(filePath);
+            IOBitter bitter = fileBitter;
+            bitter.Name = bitterName;
+            fileBitter.Setup(filePath);
 
-            return bitter;
+            return fileBitter;
         }
 
         public virtual IOBitter NewTcpIp(
@@ -28,13 +28,13 @@
             int port,
             string bitterName)
         {
-            var bitter = new TcpIpIOBitter(
+            var tcpBitter = new TcpIpIOBitter(
                     this.web);
-            IOBitter toName = bitter;
-            toName.Name = bitterName;
-            bitter.Setup(host, port);
+            IOBitter bitter = tcpBitter;
+            bitter.Name = bitterName;
+            tcpBitter.Setup(host, port);
 
-            return bitter;
+            return tcpBitter;
         }
 
         public virtual IOBitter NewMaterializedEnumerable(

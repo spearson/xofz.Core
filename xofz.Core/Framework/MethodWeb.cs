@@ -8,7 +8,7 @@
     {
         public MethodWeb()
         {
-            this.dependencies = new List<Tuple<object, string>>();
+            this.dependencies = new LinkedList<Tuple<object, string>>();
         }
 
         public virtual void RegisterDependency(
@@ -21,7 +21,7 @@
                     nameof(dependency));
             }
 
-            this.dependencies.Add(
+            this.dependencies.AddLast(
                 Tuple.Create(dependency, name));
         }
 
@@ -162,6 +162,6 @@
             return Tuple.Create(t, u, v, w);
         }
 
-        private readonly List<Tuple<object, string>> dependencies;
+        private readonly LinkedList<Tuple<object, string>> dependencies;
     }
 }

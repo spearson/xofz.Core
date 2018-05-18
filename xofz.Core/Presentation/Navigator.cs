@@ -11,12 +11,12 @@
         public Navigator(MethodWeb web)
         {
             this.web = web;
-            this.presenters = new List<Presenter>();
+            this.presenters = new LinkedList<Presenter>();
         }
 
         public virtual void RegisterPresenter(Presenter presenter)
         {
-            this.presenters.Add(presenter);
+            this.presenters.AddLast(presenter);
         }
 
         public virtual bool IsRegistered<T>() 
@@ -38,13 +38,14 @@
 
         public virtual void Present<T>() where T : Presenter
         {
-            var presenter = this.presenters.FirstOrDefault(p => p is T);
+            var ps = this.presenters;
+            var presenter = ps.FirstOrDefault(p => p is T);
             if (presenter == null)
             {
                 return;
             }
 
-            foreach (var p in this.presenters)
+            foreach (var p in ps)
             {
                 p.Stop();
             }
@@ -58,7 +59,8 @@
         public virtual void Present<T>(string name) 
             where T : NamedPresenter
         {
-            var matchingPresenters = this.presenters.Where(p => p is T).Cast<T>();
+            var ps = this.presenters;
+            var matchingPresenters = ps.Where(p => p is T).Cast<T>();
             foreach (var presenter in matchingPresenters)
             {
                 if (presenter.Name != name)
@@ -66,7 +68,7 @@
                     continue;
                 }
 
-                foreach (var p in this.presenters)
+                foreach (var p in ps)
                 {
                     p.Stop();
                 }
@@ -125,9 +127,8 @@
             string fieldName = "ui")
             where TPresenter : Presenter
         {
-            var matchingPresenters = this.presenters
-                .Where(p => p is TPresenter)
-                .ToList();
+            var matchingPresenters = new LinkedList<Presenter>(
+                this.presenters.Where(p => p is TPresenter));
             if (matchingPresenters.Count == 0)
             {
                 return default(TUi);
@@ -136,7 +137,7 @@
             if (presenterName == null)
             {
                 return this.getUi<TUi>(
-                    matchingPresenters.First(),
+                    matchingPresenters.First.Value,
                     fieldName);
             }
 
@@ -167,7 +168,7 @@
                 ?.GetValue(presenter);
         }
 
-        private readonly List<Presenter> presenters;
+        private readonly LinkedList<Presenter> presenters;
         private readonly MethodWeb web;
     }
 }
