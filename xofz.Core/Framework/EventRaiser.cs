@@ -5,7 +5,10 @@
 
     public class EventRaiser
     {
-        public virtual void Raise(object eventHolder, string eventName, params object[] args)
+        public virtual void Raise(
+            object eventHolder, 
+            string eventName, 
+            params object[] args)
         {
             var d = (Delegate)eventHolder
                 .GetType()

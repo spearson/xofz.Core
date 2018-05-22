@@ -47,6 +47,8 @@
             this.key.Text = "Sample Label";
             this.key.UseVisualStyleBackColor = true;
             this.key.Click += new System.EventHandler(this.key_Click);
+            this.key.MouseDown += new System.Windows.Forms.MouseEventHandler(this.key_MouseDown);
+            this.key.MouseUp += new System.Windows.Forms.MouseEventHandler(this.key_MouseUp);
             // 
             // UserControlToggleUi
             // 
