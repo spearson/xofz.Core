@@ -115,6 +115,8 @@
     <Compile Include="Framework\Logging\EventLogLog.cs" />
     <Compile Include="Framework\Logging\LogFactory.cs" />
     <Compile Include="Framework\MainUiSettings.cs" />
+    <Compile Include="Framework\Materialization\ArrayMaterializedEnumerable.cs" />
+    <Compile Include="Framework\Materialization\ArrayMaterializer.cs" />
     <Compile Include="Framework\Materialization\ConcurrentDictionaryMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentQueueMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentStackMaterializedEnumerable.cs" />
