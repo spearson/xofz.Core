@@ -29,9 +29,9 @@
             return this.GetEnumerator();
         }
 
-        public void Add(T item)
+        public bool Add(T item)
         {
-            this.hashSet.Add(item);
+            return this.hashSet.Add(item);
         }
 
         public bool Remove(T item)

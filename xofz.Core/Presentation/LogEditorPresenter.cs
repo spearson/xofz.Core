@@ -45,12 +45,12 @@
 
         public override void Start()
         {
-            UiHelpers.Write(this.ui, () => this.ui.Display());
+            UiHelpers.Write(this.ui, this.ui.Display);
         }
 
         public override void Stop()
         {
-            UiHelpers.Write(this.ui, () => this.ui.Hide());
+            UiHelpers.Write(this.ui, this.ui.Hide);
         }
 
         private void ui_TypeChanged()

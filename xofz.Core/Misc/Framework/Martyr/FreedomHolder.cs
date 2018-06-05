@@ -14,6 +14,7 @@
             this.illuminator = illuminator;
             this.Name = name;
         }
+
         public virtual string Name { get; }
 
         public virtual void Surge(MaterializedEnumerable<IDisposable> disposables)

@@ -33,7 +33,7 @@
             w.Run<TcpIpIOBitterSettings>(
                 settings =>
                 {
-                    settings.ReadBufferLength = 65536;
+                    settings.ReadBufferLength = 1024 * 1024 * 7;
                     settings.IPAddressOrHostName = host;
                     settings.Port = port;
                     settings.ReadTimeoutMilliseconds = 2000;
