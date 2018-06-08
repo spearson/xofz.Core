@@ -38,7 +38,7 @@
 
   <UsingTask AssemblyFile="C:\Dropbox\Libraries\xUnit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
   <Target Name="Test" DependsOnTargets="Build">
-    <xunit Assembly="$(ProjectName).Tests\bin\Release\$(ProjectName).Tests.dll" Xml="test.xunit.dll.xml"/>
+    <xunit Assemblies="$(ProjectName).Tests\bin\Release\$(ProjectName).Tests.dll" />
   </Target>
 
 
