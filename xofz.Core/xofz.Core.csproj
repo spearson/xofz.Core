@@ -104,6 +104,7 @@
     <Compile Include="Framework\Daq\Internal\WinUsbDio32Finder.cs" />
     <Compile Include="Framework\EasterComputer.cs" />
     <Compile Include="Framework\EncodingHelpers.cs" />
+    <Compile Include="Framework\EventSubscriber.cs" />
     <Compile Include="Framework\IniReaderWriter.cs" />
     <Compile Include="Framework\Internal\TimerCallback.cs" />
     <Compile Include="Framework\IOBitter.cs" />

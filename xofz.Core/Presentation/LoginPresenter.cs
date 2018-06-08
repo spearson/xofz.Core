@@ -57,6 +57,11 @@
 
         public override void Start()
         {
+            if (Interlocked.Read(ref this.setupIf1) != 1)
+            {
+                return;
+            }
+
             var w = this.web;
             this.currentPassword = UiHelpers.Read(
                 this.ui,
@@ -67,6 +72,11 @@
 
         public override void Stop()
         {
+            if (Interlocked.Read(ref this.setupIf1) != 1)
+            {
+                return;
+            }
+
             var w = this.web;
             var cp = this.currentPassword;
             UiHelpers.Write(this.ui, () =>
@@ -213,7 +223,7 @@
                 "LoginTimer");
         }
 
-        private int setupIf1;
+        private long setupIf1;
         private string currentPassword;
         private TimeSpan loginDuration;
         private readonly LoginUi ui;

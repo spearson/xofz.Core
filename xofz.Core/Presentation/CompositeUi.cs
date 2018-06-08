@@ -93,9 +93,9 @@
             where TUi : Ui
         {
             var match = this.uis.FirstOrDefault(
-                tuple => tuple.Item2 == presenter 
-                && tuple.Item1 is TUi
-                && tuple.Item3 == uiName);
+                tuple => ReferenceEquals(tuple.Item2, presenter)
+                         && tuple.Item1 is TUi
+                         && tuple.Item3 == uiName);
             var matchAsUi = (TUi)match?.Item1;
             if (matchAsUi == null)
             {

@@ -1,4 +1,4 @@
-<Project DefaultTargets="ChangeVersion;Build;Deploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="ChangeVersion;Build;Test;Deploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   
 
   <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
@@ -32,7 +32,7 @@
 
   <UsingTask AssemblyFile="C:\Dropbox\Libraries\xUnit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
   <Target Name="Test" DependsOnTargets="Build">
-    <xunit Assembly="CareControls.Tests\bin\Release\CareControls.Tests.dll" Xml="test.xunit.dll.xml"/>
+    <xunit Assembly="$(ProjectName)\bin\Release\$(ProjectName).Tests.dll" Xml="test.xunit.dll.xml"/>
   </Target>
 
 
@@ -43,8 +43,8 @@
     <Delete Files="@(FilesToDelete)" />
     <Move SourceFiles="$(BuildDir)\version.txt" DestinationFiles="$(BuildDir)\version-$(Version).txt" />
     <ItemGroup>
-      <FilesToCopy Include="$(BuildDir)\xofz.Core.dll" />
-      <FilesToCopy Include="$(BuildDir)\xofz.Core.pdb" />
+      <FilesToCopy Include="$(BuildDir)\$(ProjectName).dll" />
+      <FilesToCopy Include="$(BuildDir)\$(ProjectName).pdb" />
       <FilesToCopy Include="$(BuildDir)\version-$(Version).txt" />
     </ItemGroup>
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="C:\Dropbox\Libraries\$(ProjectName)" />
