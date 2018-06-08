@@ -8,6 +8,7 @@
     <Version>$(BUILD_NUMBER)</Version>
     <ProjectName>xofz.Core</ProjectName>
     <BuildDir>$(ProjectName)\bin\Release</BuildDir>
+    <DeployFolder>C:\Dropbox\Libraries\$(ProjectName)</DeployFolder>
   </PropertyGroup>
 
 
@@ -15,11 +16,15 @@
     <AssemblyInfo
       CodeLanguage="CS" 
       OutputFile="$(ProjectName)\Properties\AssemblyInfo.cs"
-      AssemblyTitle="$(ProjectName)" 
+      AssemblyTitle="$(ProjectName)"
+      AssemblyDescription="Core library for building Windows desktop applications"
+      AssemblyConfiguration=""
       AssemblyCompany="X of Z"
       AssemblyProduct="X of Z Core"
-      AssemblyCopyright="Copyright (c) Sam Pearson"
+      AssemblyCopyright="Copyright (c) X of Z"
+      AssemblyTrademark=""
       ComVisible="false"
+      Guid="5143497a-fadf-4e55-9168-b5ef936e0fbd"
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(Version)" />
   </Target>
@@ -30,13 +35,14 @@
     <MSBuild Projects="$(ProjectName).sln" Targets="Build" Properties="Configuration=Release;Platform=Any CPU" />
   </Target>
 
+
   <UsingTask AssemblyFile="C:\Dropbox\Libraries\xUnit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
   <Target Name="Test" DependsOnTargets="Build">
-    <xunit Assembly="$(ProjectName)\bin\Release\$(ProjectName).Tests.dll" Xml="test.xunit.dll.xml"/>
+    <xunit Assembly="$(ProjectName).Tests\bin\Release\$(ProjectName).Tests.dll" Xml="test.xunit.dll.xml"/>
   </Target>
 
 
-  <Target Name="Deploy" DependsOnTargets="Build">
+  <Target Name="Deploy" DependsOnTargets="Test">
     <ItemGroup>
       <FilesToDelete Include="C:\Dropbox\Libraries\$(ProjectName)\*.*" />
     </ItemGroup>
@@ -47,6 +53,6 @@
       <FilesToCopy Include="$(BuildDir)\$(ProjectName).pdb" />
       <FilesToCopy Include="$(BuildDir)\version-$(Version).txt" />
     </ItemGroup>
-    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="C:\Dropbox\Libraries\$(ProjectName)" />
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(DeployFolder)" />
   </Target>
 </Project>
