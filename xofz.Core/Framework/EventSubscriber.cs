@@ -17,7 +17,7 @@
             Action handler)
         {
             publisher
-                .GetType()
+                ?.GetType()
                 .GetEvent(eventName)
                 ?.AddEventHandler(
                     publisher,
@@ -30,7 +30,7 @@
             Action<U> handler)
         {
             publisher
-                .GetType()
+                ?.GetType()
                 .GetEvent(eventName)
                 ?.AddEventHandler(
                     publisher,
@@ -43,7 +43,7 @@
             Action<U, V> handler)
         {
             publisher
-                .GetType()
+                ?.GetType()
                 .GetEvent(eventName)
                 ?.AddEventHandler(
                     publisher,
@@ -56,155 +56,63 @@
             Action<U, V, W> handler)
         {
             publisher
-                .GetType()
+                ?.GetType()
                 .GetEvent(eventName)
                 ?.AddEventHandler(
                     publisher,
                     handler);
         }
 
-        public virtual void Subscribe<T>(
-            Func<T, string> readEventName,
-            Action handler,
-            string dependencyName = null)
-        {
-            var w = this.web;
-            w.Run<T>(t =>
-                {
-                    t
-                        .GetType()
-                        .GetEvent(readEventName(t))
-                        ?.AddEventHandler(
-                            t,
-                            handler);
-                },
-                dependencyName);
-        }
-
-        public virtual void Subscribe<T, U>(
-            Func<T, string> readEventName,
-            Action<U> handler,
-            string dependencyName = null)
-        {
-            var w = this.web;
-            w.Run<T>(t =>
-                {
-                    t
-                        .GetType()
-                        .GetEvent(readEventName(t))
-                        ?.AddEventHandler(
-                            t,
-                            handler);
-                },
-                dependencyName);
-        }
-
-        public virtual void Subscribe<T, U, V>(
-            Func<T, string> readEventName,
-            Action<U, V> handler,
-            string dependencyName = null)
-        {
-            var w = this.web;
-            w.Run<T>(t =>
-                {
-                    t
-                        .GetType()
-                        .GetEvent(readEventName(t))
-                        ?.AddEventHandler(
-                            t,
-                            handler);
-                },
-                dependencyName);
-        }
-
-        public virtual void Subscribe<T, U, V, W>(
-            Func<T, string> readEventName,
-            Action<U, V, W> handler,
-            string dependencyName = null)
-        {
-            var w = this.web;
-            w.Run<T>(t =>
-                {
-                    t
-                        .GetType()
-                        .GetEvent(readEventName(t))
-                        ?.AddEventHandler(
-                            t,
-                            handler);
-                },
-                dependencyName);
-        }
-
         public virtual void Unsubscribe<T>(
-            Func<T, string> readEventName,
-            Action handler,
-            string dependencyName = null)
+            T publisher,
+            string eventName,
+            Action handler)
         {
-            var w = this.web;
-            w.Run<T>(t =>
-                {
-                    t
-                        .GetType()
-                        .GetEvent(readEventName(t))
-                        ?.RemoveEventHandler(
-                            t,
-                            handler);
-                },
-                dependencyName);
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.RemoveEventHandler(
+                    publisher,
+                    handler);
         }
 
         public virtual void Unsubscribe<T, U>(
-            Func<T, string> readEventName,
-            Action<U> handler,
-            string dependencyName = null)
+            T publisher,
+            string eventName,
+            Action<U> handler)
         {
-            var w = this.web;
-            w.Run<T>(t =>
-                {
-                    t
-                        .GetType()
-                        .GetEvent(readEventName(t))
-                        ?.RemoveEventHandler(
-                            t,
-                            handler);
-                },
-                dependencyName);
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.RemoveEventHandler(
+                    publisher,
+                    handler);
         }
 
         public virtual void Unsubscribe<T, U, V>(
-            Func<T, string> readEventName,
-            Action<U, V> handler,
-            string dependencyName = null)
+            T publisher,
+            string eventName,
+            Action<U, V> handler)
         {
-            var w = this.web;
-            w.Run<T>(t =>
-                {
-                    t
-                        .GetType()
-                        .GetEvent(readEventName(t))
-                        ?.RemoveEventHandler(
-                            t,
-                            handler);
-                },
-                dependencyName);
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.RemoveEventHandler(
+                    publisher,
+                    handler);
         }
 
         public virtual void Unsubscribe<T, U, V, W>(
-            Func<T, string> readEventName,
-            Action<U, V, W> handler,
-            string dependencyName = null)
+            T publisher,
+            string eventName,
+            Action<U, V, W> handler)
         {
-            var w = this.web;
-            w.Run<T>(t =>
-                {
-                    t
-                        .GetType()
-                        .GetEvent(readEventName(t))
-                        ?.RemoveEventHandler(
-                            t,
-                            handler);
-                },
-                dependencyName);
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.RemoveEventHandler(
+                    publisher,
+                    handler);
         }
 
         private readonly MethodWeb web;
