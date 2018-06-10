@@ -11,10 +11,23 @@
             this.web = web;
         }
 
-        public virtual void Subscribe<T>(
-            T publisher,
+        public virtual void Subscribe(
+            object publisher,
             string eventName,
             Action handler)
+        {
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.AddEventHandler(
+                    publisher,
+                    handler);
+        }
+
+        public virtual void Subscribe<T>(
+            object publisher,
+            string eventName,
+            Action<T> handler)
         {
             publisher
                 ?.GetType()
@@ -25,9 +38,9 @@
         }
 
         public virtual void Subscribe<T, U>(
-            T publisher,
+            object publisher,
             string eventName,
-            Action<U> handler)
+            Action<T, U> handler)
         {
             publisher
                 ?.GetType()
@@ -38,9 +51,9 @@
         }
 
         public virtual void Subscribe<T, U, V>(
-            T publisher,
+            object publisher,
             string eventName,
-            Action<U, V> handler)
+            Action<T, U, V> handler)
         {
             publisher
                 ?.GetType()
@@ -50,21 +63,8 @@
                     handler);
         }
 
-        public virtual void Subscribe<T, U, V, W>(
-            T publisher,
-            string eventName,
-            Action<U, V, W> handler)
-        {
-            publisher
-                ?.GetType()
-                .GetEvent(eventName)
-                ?.AddEventHandler(
-                    publisher,
-                    handler);
-        }
-
-        public virtual void Unsubscribe<T>(
-            T publisher,
+        public virtual void Unsubscribe(
+            object publisher,
             string eventName,
             Action handler)
         {
@@ -76,10 +76,23 @@
                     handler);
         }
 
-        public virtual void Unsubscribe<T, U>(
-            T publisher,
+        public virtual void Unsubscribe<T>(
+            object publisher,
             string eventName,
-            Action<U> handler)
+            Action<T> handler)
+        {
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.RemoveEventHandler(
+                    publisher,
+                    handler);
+        }
+
+        public virtual void Unsubscribe<T, U>(
+            object publisher,
+            string eventName,
+            Action<T, U> handler)
         {
             publisher
                 ?.GetType()
@@ -90,22 +103,9 @@
         }
 
         public virtual void Unsubscribe<T, U, V>(
-            T publisher,
+            object publisher,
             string eventName,
-            Action<U, V> handler)
-        {
-            publisher
-                ?.GetType()
-                .GetEvent(eventName)
-                ?.RemoveEventHandler(
-                    publisher,
-                    handler);
-        }
-
-        public virtual void Unsubscribe<T, U, V, W>(
-            T publisher,
-            string eventName,
-            Action<U, V, W> handler)
+            Action<T, U, V> handler)
         {
             publisher
                 ?.GetType()
