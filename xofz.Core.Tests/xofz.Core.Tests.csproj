@@ -44,9 +44,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="xofz.Core">
-      <HintPath>C:\Dropbox\Libraries\xofz.Core\xofz.Core.dll</HintPath>
-    </Reference>
     <Reference Include="xunit.abstractions">
       <HintPath>C:\Dropbox\Libraries\xUnit\xunit.abstractions.dll</HintPath>
     </Reference>
@@ -61,11 +58,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\EventSubscriberTests.cs" />
     <Compile Include="Presentation\LoginPresenterTests.cs" />
     <Compile Include="Presentation\NavigatorTests.cs" />
     <Compile Include="Presentation\PopupPresenterTests.cs" />
     <Compile Include="Presentation\PresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\xofz.Core\xofz.Core.csproj">
+      <Project>{5143497a-fadf-4e55-9168-b5ef936e0fbd}</Project>
+      <Name>xofz.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

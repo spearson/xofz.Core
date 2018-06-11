@@ -14,6 +14,33 @@
         public virtual void Subscribe(
             object publisher,
             string eventName,
+            EventHandler handler)
+        {
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.AddEventHandler(
+                    publisher,
+                    handler);
+        }
+
+        public virtual void Subscribe<TEventArgs>(
+            object publisher,
+            string eventName,
+            EventHandler<TEventArgs> handler)
+            where TEventArgs : EventArgs
+        {
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.AddEventHandler(
+                    publisher,
+                    handler);
+        }
+
+        public virtual void Subscribe(
+            object publisher,
+            string eventName,
             Action handler)
         {
             publisher
@@ -59,6 +86,33 @@
                 ?.GetType()
                 .GetEvent(eventName)
                 ?.AddEventHandler(
+                    publisher,
+                    handler);
+        }
+
+        public virtual void Unsubscribe(
+            object publisher,
+            string eventName,
+            EventHandler handler)
+        {
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.RemoveEventHandler(
+                    publisher,
+                    handler);
+        }
+
+        public virtual void Unsubscribe<TEventArgs>(
+            object publisher,
+            string eventName,
+            EventHandler<TEventArgs> handler)
+            where TEventArgs : EventArgs
+        {
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.RemoveEventHandler(
                     publisher,
                     handler);
         }
@@ -115,6 +169,6 @@
                     handler);
         }
 
-        private readonly MethodWeb web;
+        protected readonly MethodWeb web;
     }
 }
