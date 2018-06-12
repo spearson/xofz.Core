@@ -174,10 +174,9 @@
             this.currentAccessLevel = currentAccessLevel;
             if (previousLevel != currentAccessLevel)
             {
-                new Thread(
-                        () => this.AccessLevelChanged?
-                            .Invoke(currentAccessLevel))
-                    .Start();
+                ThreadPool.QueueUserWorkItem(
+                    o => this.AccessLevelChanged?.Invoke(
+                        currentAccessLevel));
             }
         }
 

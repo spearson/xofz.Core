@@ -108,7 +108,8 @@
 
         private void loginKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.LoginKeyTapped?.Invoke()).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.LoginKeyTapped?.Invoke());
         }
 
         private void numKey_Click(object sender, EventArgs e)
@@ -138,18 +139,21 @@
 
         private void backspaceKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.BackspaceKeyTapped?.Invoke()).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.BackspaceKeyTapped?.Invoke());
         }
 
         private void cancelKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.CancelKeyTapped?.Invoke()).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.CancelKeyTapped?.Invoke());
         }
 
         private void this_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
-            new Thread(() => this.CancelKeyTapped?.Invoke()).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.CancelKeyTapped?.Invoke());
         }
 
         private void passwordTextBox_KeyPress(object sender, KeyPressEventArgs e)

@@ -46,8 +46,8 @@
             }
             catch (Exception e)
             {
-                new Thread(() => this.ErrorConnecting?.Invoke(
-                    e.Message)).Start();
+                ThreadPool.QueueUserWorkItem(
+                    o => this.ErrorConnecting?.Invoke(e.Message));
             }
         }
 
@@ -60,7 +60,8 @@
             object sender,
             EventArgs e)
         {
-            new Thread(() => this.ConnectionLost?.Invoke()).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.ConnectionLost?.Invoke());
         }
     }
 }

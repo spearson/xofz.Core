@@ -133,22 +133,26 @@
 
         private void addKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.AddKeyTapped?.Invoke()).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.AddKeyTapped?.Invoke());
         }
 
         private void clearKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.ClearKeyTapped?.Invoke()).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.ClearKeyTapped?.Invoke());
         }
 
         private void startDatePicker_DateSelected(object sender, DateRangeEventArgs e)
         {
-            new Thread(() => this.StartDateChanged?.Invoke()).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.StartDateChanged?.Invoke());
         }
 
         private void endDatePicker_DateSelected(object sender, DateRangeEventArgs e)
         {
-            new Thread(() => this.EndDateChanged?.Invoke()).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.EndDateChanged?.Invoke());
         }
 
         private void downKey_Click(object sender, EventArgs e)
@@ -165,19 +169,24 @@
 
         private void statisticsKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.StatisticsKeyTapped?.Invoke()).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.StatisticsKeyTapped?.Invoke());
         }
 
         private void filterContentTextBox_TextChanged(object sender, EventArgs e)
         {
             this.activeFilterTextBox = this.filterContentTextBox;
-            new Thread(() => this.FilterTextChanged?.Invoke()).Start();
+
+            ThreadPool.QueueUserWorkItem(
+                o => this.FilterTextChanged?.Invoke());
         }
 
         private void filterTypeTextBox_TextChanged(object sender, EventArgs e)
         {
             this.activeFilterTextBox = this.filterTypeTextBox;
-            new Thread(() => this.FilterTextChanged?.Invoke()).Start();
+
+            ThreadPool.QueueUserWorkItem(
+                o => this.FilterTextChanged?.Invoke());
         }
 
         private void resetContentKey_Click(object sender, EventArgs e)

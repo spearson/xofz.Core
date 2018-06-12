@@ -50,10 +50,7 @@
                 p.Stop();
             }
 
-            new Thread(() =>
-            {
-                presenter.Start();
-            }).Start();
+            ThreadPool.QueueUserWorkItem(o => presenter.Start());
         }
 
         public virtual void Present<T>(string name) 
@@ -73,11 +70,7 @@
                     p.Stop();
                 }
 
-                new Thread(() =>
-                {
-                    presenter.Start();
-                }).Start();
-                
+                ThreadPool.QueueUserWorkItem(o => presenter.Start());
                 break;
             }
         }
@@ -91,7 +84,7 @@
                 return;
             }
 
-            new Thread(() => presenter.Start()).Start();
+            ThreadPool.QueueUserWorkItem(o => presenter.Start());
         }
 
         public virtual void PresentFluidly<T>(string name) 
@@ -105,7 +98,7 @@
                     continue;
                 }
 
-                new Thread(() => presenter.Start()).Start();
+                ThreadPool.QueueUserWorkItem(o => presenter.Start());
                 break;
             }
         }

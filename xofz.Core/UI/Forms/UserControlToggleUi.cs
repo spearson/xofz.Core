@@ -49,17 +49,20 @@
 
         private void key_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.Tapped?.Invoke(this)).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.Tapped?.Invoke(this));
         }
 
         private void key_MouseDown(object sender, MouseEventArgs e)
         {
-            new Thread(() => this.Pressed?.Invoke(this)).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.Pressed?.Invoke(this));
         }
 
         private void key_MouseUp(object sender, MouseEventArgs e)
         {
-            new Thread(() => this.Released?.Invoke(this)).Start();
+            ThreadPool.QueueUserWorkItem(
+                o => this.Released?.Invoke(this));
         }
     }
 }
