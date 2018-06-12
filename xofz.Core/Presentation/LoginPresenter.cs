@@ -39,11 +39,11 @@
                 subscriber.Subscribe(
                     this.ui,
                     nameof(this.ui.CancelKeyTapped),
-                    this.ui_LoginKeyTapped);
+                    this.Stop);
                 subscriber.Subscribe(
                     this.ui,
                     nameof(this.ui.BackspaceKeyTapped),
-                    this.ui_LoginKeyTapped);
+                    this.ui_BackspaceKeyTapped);
                 subscriber.Subscribe(
                     this.ui,
                     nameof(this.ui.KeyboardKeyTapped),
@@ -266,6 +266,9 @@
         {
             var w = this.web;
             w.Run<KeyboardLoader>(loader => loader.Load());
+            UiHelpers.Write(
+                this.ui,
+                () => this.ui.FocusPassword());
         }
 
         private long setupIf1;
