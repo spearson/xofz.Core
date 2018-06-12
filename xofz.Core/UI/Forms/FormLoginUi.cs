@@ -12,7 +12,9 @@
         public FormLoginUi(Form shell)
         {
             this.shell = shell;
+
             this.InitializeComponent();
+
             this.FormClosing += this.this_FormClosing;
             var h = this.Handle;
         }
@@ -22,6 +24,8 @@
         public event Action LoginKeyTapped;
 
         public event Action CancelKeyTapped;
+
+        public event Action KeyboardKeyTapped;
 
         string LoginUi.CurrentPassword
         {
@@ -35,6 +39,13 @@
             get => this.timeRemainingLabel.Text;
 
             set => this.timeRemainingLabel.Text = value;
+        }
+
+        bool LoginUi.KeyboardKeyVisible
+        {
+            get => this.keyboardKey.Visible;
+
+            set => this.keyboardKey.Visible = value;
         }
 
         void LoginUi.FocusPassword()
@@ -60,7 +71,9 @@
 
         void PopupUi.Display()
         {
-            this.Location = new Point(this.shell.Location.X, this.shell.Location.Y);
+            this.Location = new Point(
+                this.shell.Location.X, 
+                this.shell.Location.Y);
             this.Visible = true;
             var ptb = this.passwordTextBox;
             ptb.Focus();
@@ -70,7 +83,7 @@
                 ptb.Focus();
             }
 
-            this.firstNumKeyPressed = false;
+            this.firstInputKeyPressed = false;
         }
 
         void PopupUi.Hide()
@@ -102,10 +115,10 @@
         {
             var key = (Button)sender;
             var ptb = this.passwordTextBox;
-            if (!this.firstNumKeyPressed)
+            if (!this.firstInputKeyPressed)
             {
                 ptb.Text = key.Text;
-                this.firstNumKeyPressed = true;
+                this.firstInputKeyPressed = true;
             }
             else
             {
@@ -141,10 +154,16 @@
 
         private void passwordTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.firstNumKeyPressed = true;
+            this.firstInputKeyPressed = true;
         }
 
-        private bool firstNumKeyPressed;
+        private void keyboardKey_Click(object sender, EventArgs e)
+        {
+            ThreadPool.QueueUserWorkItem(
+                o => this.KeyboardKeyTapped?.Invoke());
+        }
+
+        private bool firstInputKeyPressed;
         private AccessLevel currentAccessLevel;
         private readonly Form shell;
     }

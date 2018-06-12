@@ -28,15 +28,54 @@
 
             this.loginDuration = loginDuration;
             var w = this.web;
-            this.ui.LoginKeyTapped += this.ui_LoginKeyTapped;
-            this.ui.CancelKeyTapped += this.Stop;
-            this.ui.BackspaceKeyTapped += this.ui_BackspaceKeyTapped;
+            var subscriberRegistered = false;
+            w.Run<EventSubscriber>(subscriber =>
+            {
+                subscriberRegistered = true;
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.LoginKeyTapped),
+                    this.ui_LoginKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.CancelKeyTapped),
+                    this.ui_LoginKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.BackspaceKeyTapped),
+                    this.ui_LoginKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.KeyboardKeyTapped),
+                    this.ui_KeyboardKeyTapped);
+            });
+
+            if (!subscriberRegistered)
+            {
+                this.ui.LoginKeyTapped 
+                    += this.ui_LoginKeyTapped;
+                this.ui.CancelKeyTapped 
+                    += this.Stop;
+                this.ui.BackspaceKeyTapped 
+                    += this.ui_BackspaceKeyTapped;
+                this.ui.KeyboardKeyTapped
+                    += this.ui_KeyboardKeyTapped;
+            }
+
             UiHelpers.Write(
                 this.ui,
                 () =>
                 {
                     this.ui.TimeRemaining = "Not logged in";
+                    this.ui.KeyboardKeyVisible = false;
                 });
+
+            w.Run<KeyboardLoader>(loader =>
+            {
+                UiHelpers.Write(
+                    this.ui,
+                    () => { this.ui.KeyboardKeyVisible = true; });
+            });
 
             w.Run<AccessController>(ac =>
             {
@@ -221,6 +260,12 @@
                         nameof(t.Elapsed));
                 },
                 "LoginTimer");
+        }
+
+        private void ui_KeyboardKeyTapped()
+        {
+            var w = this.web;
+            w.Run<KeyboardLoader>(loader => loader.Load());
         }
 
         private long setupIf1;

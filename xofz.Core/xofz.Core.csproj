@@ -114,6 +114,7 @@
     <Compile Include="Framework\IO\MaterializedEnumerableIOBitter.cs" />
     <Compile Include="Framework\IO\TcpIpIOBitter.cs" />
     <Compile Include="Framework\IO\TcpIpIOBitterSettings.cs" />
+    <Compile Include="Framework\KeyboardLoader.cs" />
     <Compile Include="Framework\Logging\EventLogLog.cs" />
     <Compile Include="Framework\Logging\LogFactory.cs" />
     <Compile Include="Framework\MainUiSettings.cs" />

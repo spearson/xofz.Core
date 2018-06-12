@@ -51,6 +51,8 @@
                     Latch = new ManualResetEvent(true)
                 },
                 "LoginLatch");
+            w.RegisterDependency(
+                new KeyboardLoader());
         }
 
         private readonly LoginUi ui;
