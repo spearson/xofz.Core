@@ -72,8 +72,9 @@
 
             set
             {
-                this.startDatePicker.SelectionStart = value;
-                this.startDatePicker.SelectionEnd = value;
+                var sdp = this.startDatePicker;
+                sdp.SelectionStart = value;
+                sdp.SelectionEnd = value;
             }
         }
 
@@ -83,8 +84,9 @@
 
             set
             {
-                this.endDatePicker.SelectionStart = value;
-                this.endDatePicker.SelectionEnd = value;
+                var edp = this.endDatePicker;
+                edp.SelectionStart = value;
+                edp.SelectionEnd = value;
             }
         }
 
@@ -119,6 +121,7 @@
         bool LogUi.StatisticsKeyVisible
         {
             get => this.statisticsKey.Visible;
+
             set => this.statisticsKey.Visible = value;
         }
 
@@ -158,12 +161,14 @@
         private void downKey_Click(object sender, EventArgs e)
         {
             this.entriesGrid.Focus();
+            
             SendKeys.Send("{PGDN}");
         }
 
         private void upKey_Click(object sender, EventArgs e)
         {
             this.entriesGrid.Focus();
+
             SendKeys.Send("{PGUP}");
         }
 
@@ -191,16 +196,18 @@
 
         private void resetContentKey_Click(object sender, EventArgs e)
         {
-            this.activeFilterTextBox = this.filterContentTextBox;
-            this.filterContentTextBox.Text = string.Empty;
-            this.filterContentTextBox.Focus();
+            var fctb = this.filterContentTextBox;
+            this.activeFilterTextBox = fctb;
+            fctb.Text = string.Empty;
+            fctb.Focus();
         }
 
         private void resetTypeKey_Click(object sender, EventArgs e)
         {
-            this.activeFilterTextBox = this.filterTypeTextBox;
-            this.filterTypeTextBox.Text = string.Empty;
-            this.filterTypeTextBox.Focus();
+            var fttb = this.filterTypeTextBox;
+            this.activeFilterTextBox = fttb;
+            fttb.Text = string.Empty;
+            fttb.Focus();
         }
 
         private TextBox activeFilterTextBox;
