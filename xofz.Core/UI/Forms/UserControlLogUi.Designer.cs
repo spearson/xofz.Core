@@ -29,15 +29,13 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.startDatePicker = new System.Windows.Forms.MonthCalendar();
             this.endDatePicker = new System.Windows.Forms.MonthCalendar();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.entriesGrid = new System.Windows.Forms.DataGridView();
-            this.timestampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addKey = new System.Windows.Forms.Button();
             this.downKey = new System.Windows.Forms.Button();
             this.upKey = new System.Windows.Forms.Button();
@@ -49,6 +47,9 @@
             this.resetContentKey = new System.Windows.Forms.Button();
             this.resetTypeKey = new System.Windows.Forms.Button();
             this.clearKey = new System.Windows.Forms.Button();
+            this.timestampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.entriesGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,15 +110,15 @@
             this.timestampColumn,
             this.typeColumn,
             this.contentColumn});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.entriesGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.entriesGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.entriesGrid.Location = new System.Drawing.Point(0, 246);
             this.entriesGrid.Margin = new System.Windows.Forms.Padding(0);
             this.entriesGrid.Name = "entriesGrid";
@@ -126,29 +127,6 @@
             this.entriesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.entriesGrid.Size = new System.Drawing.Size(600, 254);
             this.entriesGrid.TabIndex = 4;
-            // 
-            // timestampColumn
-            // 
-            this.timestampColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.timestampColumn.HeaderText = "Timestamp";
-            this.timestampColumn.Name = "timestampColumn";
-            this.timestampColumn.ReadOnly = true;
-            this.timestampColumn.Width = 200;
-            // 
-            // typeColumn
-            // 
-            this.typeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.typeColumn.HeaderText = "Type";
-            this.typeColumn.Name = "typeColumn";
-            this.typeColumn.ReadOnly = true;
-            this.typeColumn.Width = 135;
-            // 
-            // contentColumn
-            // 
-            this.contentColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.contentColumn.HeaderText = "Content";
-            this.contentColumn.Name = "contentColumn";
-            this.contentColumn.ReadOnly = true;
             // 
             // addKey
             // 
@@ -248,7 +226,7 @@
             // 
             // filterTypeTextBox
             // 
-            this.filterTypeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterTypeTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filterTypeTextBox.Location = new System.Drawing.Point(158, 217);
             this.filterTypeTextBox.Name = "filterTypeTextBox";
             this.filterTypeTextBox.Size = new System.Drawing.Size(204, 26);
@@ -259,7 +237,7 @@
             // 
             this.filterContentTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.filterContentTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterContentTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filterContentTextBox.Location = new System.Drawing.Point(158, 185);
             this.filterContentTextBox.Name = "filterContentTextBox";
             this.filterContentTextBox.Size = new System.Drawing.Size(370, 26);
@@ -319,6 +297,31 @@
             this.clearKey.Text = "Clear Log";
             this.clearKey.UseVisualStyleBackColor = true;
             this.clearKey.Click += new System.EventHandler(this.clearKey_Click);
+            // 
+            // timestampColumn
+            // 
+            this.timestampColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.timestampColumn.HeaderText = "Timestamp";
+            this.timestampColumn.Name = "timestampColumn";
+            this.timestampColumn.ReadOnly = true;
+            this.timestampColumn.Width = 220;
+            // 
+            // typeColumn
+            // 
+            this.typeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.typeColumn.HeaderText = "Type";
+            this.typeColumn.Name = "typeColumn";
+            this.typeColumn.ReadOnly = true;
+            this.typeColumn.Width = 135;
+            // 
+            // contentColumn
+            // 
+            this.contentColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contentColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.contentColumn.HeaderText = "Content";
+            this.contentColumn.Name = "contentColumn";
+            this.contentColumn.ReadOnly = true;
             // 
             // UserControlLogUi
             // 

@@ -5,11 +5,12 @@
 
     public sealed class FormsMessenger : Messenger
     {
-        public Ui Subscriber { get; set; }
+        Ui Messenger.Subscriber { get; set; }
 
         Response Messenger.Question(string question)
         {
-            var subscriber = this.Subscriber as Form;
+            Messenger messenger = this;
+            var subscriber = messenger.Subscriber as Form;
             DialogResult result;
             if (subscriber != null)
             {
@@ -37,7 +38,8 @@
 
         Response Messenger.QuestionWithCancel(string question)
         {
-            var subscriber = this.Subscriber as Form;
+            Messenger messenger = this;
+            var subscriber = messenger.Subscriber as Form;
             DialogResult result;
             if (subscriber != null)
             {
@@ -101,7 +103,8 @@
                     break;
             }
 
-            var subscriber = this.Subscriber as Form;
+            Messenger messenger = this;
+            var subscriber = messenger.Subscriber as Form;
             if (subscriber != null)
             {
                 using (new CenterWinDialog(subscriber))
