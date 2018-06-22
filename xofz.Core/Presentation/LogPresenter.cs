@@ -43,12 +43,6 @@
             this.clearLevel = clearLevel;
             this.computeBackupLocation = computeBackupLocation;
             this.resetOnStart = resetOnStart;
-            this.ui.StartDateChanged += this.ui_DateChanged;
-            this.ui.EndDateChanged += this.ui_DateChanged;
-            this.ui.AddKeyTapped += this.ui_AddKeyTapped;
-            this.ui.ClearKeyTapped += this.ui_ClearKeyTapped;
-            this.ui.StatisticsKeyTapped += this.ui_StatisticsKeyTapped;
-            this.ui.FilterTextChanged += this.ui_FilterTextChanged;
             var addKeyVisible = editLevel == AccessLevel.None;
             var clearKeyVisible = clearLevel == AccessLevel.None;
             UiHelpers.Write(this.ui, () =>
@@ -58,6 +52,46 @@
                 this.ui.ClearKeyVisible = clearKeyVisible;
             });
             this.ui.WriteFinished.WaitOne();
+
+            var subscriberRegistered = false;
+            w.Run<EventSubscriber>(subscriber =>
+            {
+                subscriberRegistered = true;
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.StartDateChanged),
+                    this.ui_DateChanged);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.EndDateChanged),
+                    this.ui_DateChanged);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.AddKeyTapped),
+                    this.ui_AddKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.ClearKeyTapped),
+                    this.ui_ClearKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.StatisticsKeyTapped),
+                    this.ui_StatisticsKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.FilterTextChanged),
+                    this.ui_FilterTextChanged);
+            });
+
+            if (!subscriberRegistered)
+            {
+                this.ui.StartDateChanged += this.ui_DateChanged;
+                this.ui.EndDateChanged += this.ui_DateChanged;
+                this.ui.AddKeyTapped += this.ui_AddKeyTapped;
+                this.ui.ClearKeyTapped += this.ui_ClearKeyTapped;
+                this.ui.StatisticsKeyTapped += this.ui_StatisticsKeyTapped;
+                this.ui.FilterTextChanged += this.ui_FilterTextChanged;
+            }
 
             w.Run<Log>(
                 l => l.EntryWritten += this.log_EntryWritten,

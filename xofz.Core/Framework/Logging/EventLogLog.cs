@@ -51,7 +51,7 @@
                 case EventLogEntryType.SuccessAudit:
                     return "Successful Audit";
                 case EventLogEntryType.FailureAudit:
-                    return "Audit failure";
+                    return "Audit Failure";
             }
 
             return "Information";

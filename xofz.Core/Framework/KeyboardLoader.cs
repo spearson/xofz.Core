@@ -6,11 +6,7 @@
     {
         public virtual void Load()
         {
-            new Process
-            {
-                StartInfo = new ProcessStartInfo(
-                    @"c:\windows\system32\osk.exe")
-            }.Start();
+            Process.Start("osk.exe");
         }
     }
 }

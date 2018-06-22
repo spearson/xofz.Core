@@ -14,7 +14,7 @@
 
         long MaterializedEnumerable<T>.Count => this.array.Length;
 
-        public T this[int index]
+        public T this[long index]
         {
             get => this.array[index];
 
