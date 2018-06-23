@@ -69,7 +69,7 @@
             this.Stop();
         }
 
-        private void ticked(IntPtr parameterPointer, bool unused)
+        protected virtual void ticked(IntPtr parameterPointer, bool unused)
         {
             if (!this.AutoReset)
             {
@@ -78,10 +78,10 @@
 
             this.Elapsed?.Invoke();
         }
-        
-        private bool started;
+
+        protected volatile bool autoReset;
+        protected bool started;
         private IntPtr handle;
-        private volatile bool autoReset;
         private readonly TimerCallback callback;
         private readonly object locker;
     }

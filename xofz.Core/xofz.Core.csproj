@@ -126,6 +126,8 @@
     <Compile Include="Framework\Materialization\ConcurrentStackMaterializedEnumerable.cs" />
     <Compile Include="Framework\MethodInjector.cs" />
     <Compile Include="Framework\MethodWebManager.cs" />
+    <Compile Include="Framework\Timers\LoggingTimer.cs" />
+    <Compile Include="Framework\Timers\OneOffTimer.cs" />
     <Compile Include="Framework\Plc\AbPlc.cs" />
     <Compile Include="Framework\Plc\AbPlcFactory.cs" />
     <Compile Include="Framework\Plc\DF1ReadErrorHandler.cs" />
