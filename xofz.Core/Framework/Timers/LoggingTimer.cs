@@ -73,6 +73,8 @@
             var w = this.web;
             w.Run<LogEditor>(le => { this.log(this, le); },
                 this.LogName);
+
+            base.ticked(parameter, unused);
         }
 
         private void setCurrentInterval(TimeSpan currentInterval)

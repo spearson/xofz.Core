@@ -21,7 +21,7 @@
             var enumerator = this.source.GetEnumerator();
             foreach (var item in this.items)
             {
-                enumerator.Current(item);
+                enumerator.Current?.Invoke(item);
                 yield return item;
                 enumerator.MoveNext();
             }
@@ -45,7 +45,7 @@
             long counter = 0;
             foreach (var item in this.items)
             {
-                enumerator.Current(item);
+                enumerator.Current?.Invoke(item);
                 array[counter] = item;
                 enumerator.MoveNext();
                 ++counter;

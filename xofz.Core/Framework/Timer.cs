@@ -1,7 +1,7 @@
 ﻿namespace xofz.Framework
 {
     using System;
-    using xofz.Framework.Internal;
+    using xofz.Framework.Timers.Internal;
 
     public class Timer : IDisposable
     {

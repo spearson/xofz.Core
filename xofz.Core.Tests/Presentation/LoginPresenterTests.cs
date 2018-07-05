@@ -170,7 +170,7 @@
             {
                 this.presenter.Setup(TimeSpan.FromMinutes(15));
 
-                this.ui.BackspaceKeyTapped += Raise.With<Action>();
+                this.ui.BackspaceKeyTapped += Raise.FreeForm<Action>.With();
 
                 A.CallTo(() => this.ui.CurrentPassword)
                     .MustHaveHappened();
@@ -185,7 +185,7 @@
                 var oldPw = newPw + f.Create<char>();
                 this.ui.CurrentPassword = oldPw;
 
-                this.ui.BackspaceKeyTapped += Raise.With<Action>();
+                this.ui.BackspaceKeyTapped += Raise.FreeForm<Action>.With();
 
                 Assert.Equal(newPw, this.ui.CurrentPassword);
             }
@@ -195,7 +195,7 @@
             {
                 this.presenter.Setup(TimeSpan.FromMinutes(15));
 
-                this.ui.BackspaceKeyTapped += Raise.With<Action>();
+                this.ui.BackspaceKeyTapped += Raise.FreeForm<Action>.With();
 
                 A.CallTo(() => this.ui.FocusPassword())
                     .MustHaveHappened();

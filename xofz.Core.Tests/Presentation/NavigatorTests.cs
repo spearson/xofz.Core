@@ -51,15 +51,18 @@
                 n.RegisterPresenter(p1);
                 n.RegisterPresenter(p2);
                 var e = new ManualResetEvent(false);
+                var started = false;
                 A.CallTo(() => p1.Start())
-                    .Invokes(() => e.Set());
+                    .Invokes(() =>
+                    {
+                        started = true;
+                        e.Set();
+                    });
 
                 n.Present<Presenter>();
                 e.WaitOne();
 
-                // todo: figure out why this fails
-/*                A.CallTo(() => p1.Start())
-                    .MustHaveHappened();*/
+                Assert.True(started);
             }
         }
 
@@ -96,16 +99,19 @@
                 n.RegisterPresenter(p1);
                 n.RegisterPresenter(p2);
                 var e = new ManualResetEvent(false);
+                var started = false;
                 A.CallTo(() => p1.Start())
-                    .Invokes(() => e.Set());
+                    .Invokes(() =>
+                    {
+                        started = true;
+                        e.Set();
+                    });
 
                 n.Present<NamedPresenter>(
                     p1.Name);
                 e.WaitOne();
 
-                // why are these failing?
-                /* A.CallTo(() => p1.Start())
-                    .MustHaveHappened();*/
+                Assert.True(started);
             }
         }
 
@@ -141,15 +147,18 @@
                 n.RegisterPresenter(p1);
                 n.RegisterPresenter(p2);
                 var e = new ManualResetEvent(false);
+                var started = false;
                 A.CallTo(() => p1.Start())
-                    .Invokes(() => e.Set());
+                    .Invokes(() =>
+                    {
+                        started = true;
+                        e.Set();
+                    });
 
                 n.PresentFluidly<Presenter>();
                 e.WaitOne();
 
-                // todo: figure out why this sometimes fails
-                /*A.CallTo(() => p1.Start())
-                    .MustHaveHappened();*/
+                Assert.True(started);
             }
         }
 
@@ -186,16 +195,19 @@
                 n.RegisterPresenter(p1);
                 n.RegisterPresenter(p2);
                 var e = new ManualResetEvent(false);
+                var started = false;
                 A.CallTo(() => p1.Start())
-                    .Invokes(() => e.Set());
+                    .Invokes(() =>
+                    {
+                        started = true;
+                        e.Set();
+                    });
 
                 n.PresentFluidly<NamedPresenter>(
                     p1.Name);
                 e.WaitOne();
 
-                // why fail? seems like it should work
-/*                A.CallTo(() => p1.Start())
-                    .MustHaveHappened();*/
+                Assert.True(started);
             }
         }
 

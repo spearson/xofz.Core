@@ -1,9 +1,11 @@
-﻿namespace xofz.Framework.IO
+﻿namespace xofz.Misc.Framework.IO
 {
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading;
+    using xofz.Framework;
+    using xofz.Framework.Computation;
 
     public sealed class FileIOBitter : IOBitter
     {

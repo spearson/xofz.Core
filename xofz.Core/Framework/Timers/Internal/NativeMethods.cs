@@ -1,4 +1,4 @@
-﻿namespace xofz.Framework.Internal
+﻿namespace xofz.Framework.Timers.Internal
 {
     using System;
     using System.Runtime.InteropServices;

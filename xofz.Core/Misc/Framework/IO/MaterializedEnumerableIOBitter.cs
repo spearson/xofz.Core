@@ -1,4 +1,4 @@
-﻿namespace xofz.Framework.IO
+﻿namespace xofz.Misc.Framework.IO
 {
     using System.Collections.Generic;
 

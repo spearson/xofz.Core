@@ -27,8 +27,7 @@
             this.readLines = readLines;
             this.writeLines = writeLines;
         }
-
-        // note: modifying the returned list will not change the ini file
+        
         public virtual MaterializedEnumerable<string> ReadSectionNames()
         {
             return new LinkedListMaterializedEnumerable<string>(

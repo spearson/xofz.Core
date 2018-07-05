@@ -117,8 +117,7 @@
         {
             byte outMask = 0;
             byte outputCounter = 0;
-            foreach (var output in EnumHelpers
-                .Iterate<Dio32Ports>())
+            foreach (var output in EnumHelpers.Iterate<Dio32Ports>())
             {
                 if (isNoneOrAll(output))
                 {
@@ -247,52 +246,34 @@
 
         private static bool isNonePortOrAll(Dio32Terminals terminals)
         {
-            if (terminals == Dio32Terminals.None)
+            switch (terminals)
             {
-                return true;
+                case Dio32Terminals.None:
+                    return true;
+                case Dio32Terminals.PortA:
+                    return true;
+                case Dio32Terminals.PortB:
+                    return true;
+                case Dio32Terminals.PortC:
+                    return true;
+                case Dio32Terminals.PortD:
+                    return true;
+                default:
+                    return false;
             }
-            
-            if (terminals == Dio32Terminals.PortA)
-            {
-                return true;
-            }
-
-            if (terminals == Dio32Terminals.PortB)
-            {
-                return true;
-            }
-
-            if (terminals == Dio32Terminals.PortC)
-            {
-                return true;
-            }
-
-            if (terminals == Dio32Terminals.PortD)
-            {
-                return true;
-            }
-
-            if (terminals == Dio32Terminals.All)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         private static bool isNoneOrAll(Dio32Ports ports)
         {
-            if (ports == Dio32Ports.None)
+            switch (ports)
             {
-                return true;
+                case Dio32Ports.None:
+                    return true;
+                case Dio32Ports.All:
+                    return true;
+                default:
+                    return false;
             }
-
-            if (ports == Dio32Ports.All)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         private readonly uint deviceIndex;

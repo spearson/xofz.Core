@@ -1,7 +1,8 @@
-﻿namespace xofz.Framework
+﻿namespace xofz.Misc.Framework
 {
-    using xofz.Framework.IO;
+    using xofz.Framework;
     using xofz.Framework.Materialization;
+    using xofz.Misc.Framework.IO;
 
     public class IOBitterFactory
     {
@@ -20,7 +21,7 @@
             bitter.Name = bitterName;
             fileBitter.Setup(filePath);
 
-            return fileBitter;
+            return bitter;
         }
 
         public virtual IOBitter NewTcpIp(
@@ -34,7 +35,7 @@
             bitter.Name = bitterName;
             tcpBitter.Setup(host, port);
 
-            return tcpBitter;
+            return bitter;
         }
 
         public virtual IOBitter NewMaterializedEnumerable(

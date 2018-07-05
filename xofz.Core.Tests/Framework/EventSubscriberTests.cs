@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics;
-    using FakeItEasy;
     using xofz.Framework;
     using Xunit;
 
@@ -12,8 +11,7 @@
         {
             protected Context()
             {
-                this.subscriber = new EventSubscriber(
-                    A.Fake<MethodWeb>());
+                this.subscriber = new EventSubscriber();
             }
 
             protected readonly EventSubscriber subscriber;
@@ -58,7 +56,7 @@
             private bool worked;
 
             [Fact]
-            public void Does_it_throw_if_i_fuck_up_the_handler_method_signature()
+            public void Does_it_throw_if_i_mess_up_the_handler_method_signature()
             {
                 var testEventer = new TestEventer();
                 Assert.Throws<ArgumentException>(

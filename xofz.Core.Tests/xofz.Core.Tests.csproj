@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\EventSubscriberTests.cs" />
+    <Compile Include="Framework\MethodWebTests.cs" />
     <Compile Include="Presentation\LoginPresenterTests.cs" />
     <Compile Include="Presentation\NavigatorTests.cs" />
     <Compile Include="Presentation\PopupPresenterTests.cs" />

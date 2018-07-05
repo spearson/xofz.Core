@@ -6,24 +6,60 @@
     public class EventRaiser
     {
         public virtual void Raise(
-            object eventHolder, 
-            string eventName, 
+            object eventHolder,
+            string eventName,
             params object[] args)
         {
             var d = (Delegate)eventHolder
-                .GetType()
+                ?.GetType()
                 .GetField(eventName, BindingFlags.Instance | BindingFlags.NonPublic)
                 ?.GetValue(eventHolder);
-            if (d == default(Delegate))
+            if (d != default(Delegate))
             {
-                d = (Delegate)eventHolder
-                    .GetType()
-                    .BaseType
-                    ?.GetField(eventName, BindingFlags.Instance | BindingFlags.NonPublic)
-                    ?.GetValue(eventHolder);
+                d.DynamicInvoke(args);
+                return;
             }
 
-            d?.DynamicInvoke(args);
+            this.internalRaiseBase(
+                eventHolder,
+                eventName,
+                0xFF,
+                args);
+        }
+
+        private void internalRaiseBase(
+            object eventHolder,
+            string eventName,
+            int depth,
+            params object[] args)
+        {
+            if (depth < 1)
+            {
+                return;
+            }
+
+            if (eventHolder == null)
+            {
+                return;
+            }
+
+            Type baseType = null;
+            var holderType = eventHolder.GetType();
+            for (var i = 0; i < depth; ++i)
+            {
+                baseType = baseType?.BaseType ?? holderType.BaseType;
+                var d = (Delegate)baseType
+                    ?.GetField(
+                        eventName,
+                        BindingFlags.Instance |
+                        BindingFlags.NonPublic)
+                    ?.GetValue(eventHolder);
+                if (d != default(Delegate))
+                {
+                    d.DynamicInvoke(args);
+                    return;
+                }
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace xofz.Framework
+﻿namespace xofz.Misc.Framework
 {
     using System.Collections.Generic;
 

@@ -15,7 +15,6 @@
             string logName,
             string sourceName)
         {
-
             var log = new EventLogLog(
                 logName,
                 sourceName);

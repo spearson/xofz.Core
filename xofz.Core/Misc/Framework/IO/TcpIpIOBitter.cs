@@ -1,10 +1,12 @@
-﻿namespace xofz.Framework.IO
+﻿namespace xofz.Misc.Framework.IO
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Sockets;
     using System.Threading;
+    using xofz.Framework;
+    using xofz.Framework.Computation;
 
     public sealed class TcpIpIOBitter : IOBitter
     {

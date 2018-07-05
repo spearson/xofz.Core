@@ -35,7 +35,10 @@
             this.endDatePicker = new System.Windows.Forms.MonthCalendar();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.entriesGrid = new System.Windows.Forms.DataGridView();
+            this.entriesGrid = new xofz.UI.Forms.MultiColumnSortDataGridView();
+            this.timestampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addKey = new System.Windows.Forms.Button();
             this.downKey = new System.Windows.Forms.Button();
             this.upKey = new System.Windows.Forms.Button();
@@ -47,9 +50,6 @@
             this.resetContentKey = new System.Windows.Forms.Button();
             this.resetTypeKey = new System.Windows.Forms.Button();
             this.clearKey = new System.Windows.Forms.Button();
-            this.timestampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.entriesGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,12 +121,38 @@
             this.entriesGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.entriesGrid.Location = new System.Drawing.Point(0, 246);
             this.entriesGrid.Margin = new System.Windows.Forms.Padding(0);
+            this.entriesGrid.MaxSortColumns = 0;
             this.entriesGrid.Name = "entriesGrid";
             this.entriesGrid.ReadOnly = true;
             this.entriesGrid.RowHeadersVisible = false;
             this.entriesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.entriesGrid.Size = new System.Drawing.Size(600, 254);
             this.entriesGrid.TabIndex = 4;
+            // 
+            // timestampColumn
+            // 
+            this.timestampColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.timestampColumn.HeaderText = "Timestamp";
+            this.timestampColumn.Name = "timestampColumn";
+            this.timestampColumn.ReadOnly = true;
+            this.timestampColumn.Width = 220;
+            // 
+            // typeColumn
+            // 
+            this.typeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.typeColumn.HeaderText = "Type";
+            this.typeColumn.Name = "typeColumn";
+            this.typeColumn.ReadOnly = true;
+            this.typeColumn.Width = 135;
+            // 
+            // contentColumn
+            // 
+            this.contentColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contentColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.contentColumn.HeaderText = "Content";
+            this.contentColumn.Name = "contentColumn";
+            this.contentColumn.ReadOnly = true;
             // 
             // addKey
             // 
@@ -298,31 +324,6 @@
             this.clearKey.UseVisualStyleBackColor = true;
             this.clearKey.Click += new System.EventHandler(this.clearKey_Click);
             // 
-            // timestampColumn
-            // 
-            this.timestampColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.timestampColumn.HeaderText = "Timestamp";
-            this.timestampColumn.Name = "timestampColumn";
-            this.timestampColumn.ReadOnly = true;
-            this.timestampColumn.Width = 220;
-            // 
-            // typeColumn
-            // 
-            this.typeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.typeColumn.HeaderText = "Type";
-            this.typeColumn.Name = "typeColumn";
-            this.typeColumn.ReadOnly = true;
-            this.typeColumn.Width = 135;
-            // 
-            // contentColumn
-            // 
-            this.contentColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.contentColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.contentColumn.HeaderText = "Content";
-            this.contentColumn.Name = "contentColumn";
-            this.contentColumn.ReadOnly = true;
-            // 
             // UserControlLogUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -356,7 +357,7 @@
         private System.Windows.Forms.MonthCalendar endDatePicker;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView entriesGrid;
+        private xofz.UI.Forms.MultiColumnSortDataGridView entriesGrid;
         private System.Windows.Forms.Button addKey;
         private System.Windows.Forms.Button downKey;
         private System.Windows.Forms.Button upKey;

@@ -1,8 +1,9 @@
-﻿namespace xofz.Framework
+﻿namespace xofz.Misc.Framework
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using xofz.Framework;
 
     public class MethodInjector
     {

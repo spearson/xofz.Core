@@ -86,6 +86,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumerableHelpers.cs" />
     <Compile Include="EnumHelpers.cs" />
     <Compile Include="Framework\Daq\Dio32.cs" />
     <Compile Include="Framework\Daq\Dio32Finder.cs" />
@@ -103,18 +104,18 @@
     <Compile Include="Framework\Daq\Internal\SetupPacket.cs" />
     <Compile Include="Framework\Daq\Internal\WinUsbDio32.cs" />
     <Compile Include="Framework\Daq\Internal\WinUsbDio32Finder.cs" />
-    <Compile Include="Framework\EasterComputer.cs" />
+    <Compile Include="Framework\Computation\EasterComputer.cs" />
     <Compile Include="Framework\EncodingHelpers.cs" />
     <Compile Include="Framework\EventSubscriber.cs" />
     <Compile Include="Framework\IniReaderWriter.cs" />
-    <Compile Include="Framework\Internal\TimerCallback.cs" />
-    <Compile Include="Framework\IOBitter.cs" />
-    <Compile Include="Framework\IOBitterFactory.cs" />
-    <Compile Include="Framework\IO\FileIOBitter.cs" />
-    <Compile Include="Framework\IO\FileIOBitterSettings.cs" />
-    <Compile Include="Framework\IO\MaterializedEnumerableIOBitter.cs" />
-    <Compile Include="Framework\IO\TcpIpIOBitter.cs" />
-    <Compile Include="Framework\IO\TcpIpIOBitterSettings.cs" />
+    <Compile Include="Framework\Timers\Internal\TimerCallback.cs" />
+    <Compile Include="Misc\Framework\IOBitter.cs" />
+    <Compile Include="Misc\Framework\IOBitterFactory.cs" />
+    <Compile Include="Misc\Framework\IO\FileIOBitter.cs" />
+    <Compile Include="Misc\Framework\IO\FileIOBitterSettings.cs" />
+    <Compile Include="Misc\Framework\IO\MaterializedEnumerableIOBitter.cs" />
+    <Compile Include="Misc\Framework\IO\TcpIpIOBitter.cs" />
+    <Compile Include="Misc\Framework\IO\TcpIpIOBitterSettings.cs" />
     <Compile Include="Framework\KeyboardLoader.cs" />
     <Compile Include="Framework\Logging\EventLogLog.cs" />
     <Compile Include="Framework\Logging\LogFactory.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="Framework\Materialization\ConcurrentDictionaryMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentQueueMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentStackMaterializedEnumerable.cs" />
-    <Compile Include="Framework\MethodInjector.cs" />
+    <Compile Include="Misc\Framework\MethodInjector.cs" />
     <Compile Include="Framework\MethodWebManager.cs" />
     <Compile Include="Framework\Timers\LoggingTimer.cs" />
     <Compile Include="Framework\Timers\OneOffTimer.cs" />
@@ -192,7 +193,7 @@
     <Compile Include="Framework\Modbus\Internal\TcpNModbusConnection.cs" />
     <Compile Include="Framework\Modbus\SerialMode.cs" />
     <Compile Include="Misc\Framework\Nightfall.cs" />
-    <Compile Include="Framework\BinaryTranslator.cs" />
+    <Compile Include="Framework\Computation\BinaryTranslator.cs" />
     <Compile Include="Misc\Framework\Theory\DirectedGraph.cs" />
     <Compile Include="Misc\Framework\Theory\SafeInvoker.cs" />
     <Compile Include="Misc\Framework\Transcendence\HolySpirit.cs" />
@@ -260,8 +261,8 @@
     <Compile Include="AccessLevel.cs" />
     <Compile Include="Misc\Framework\Implementation\BinaryFileLoader.cs" />
     <Compile Include="Misc\Framework\Implementation\TextFileLoader.cs" />
-    <Compile Include="Framework\Internal\CallbackOptions.cs" />
-    <Compile Include="Framework\Internal\NativeMethods.cs" />
+    <Compile Include="Framework\Timers\Internal\CallbackOptions.cs" />
+    <Compile Include="Framework\Timers\Internal\NativeMethods.cs" />
     <Compile Include="Misc\Framework\Loader.cs" />
     <Compile Include="Misc\Framework\Saver.cs" />
     <Compile Include="Framework\Timer.cs" />

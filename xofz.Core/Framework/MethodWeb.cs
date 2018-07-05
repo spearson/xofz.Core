@@ -8,7 +8,7 @@
     {
         public MethodWeb()
         {
-            this.dependencies = new LinkedList<Tuple<object, string>>();
+            this.dependencies = new LinkedList<Dependency>();
         }
 
         public virtual void RegisterDependency(
@@ -22,7 +22,11 @@
             }
 
             this.dependencies.AddLast(
-                Tuple.Create(dependency, name));
+                new Dependency
+                {
+                    Name = name,
+                    Content = dependency
+                });
         }
 
         public virtual T Run<T>(
@@ -30,19 +34,19 @@
             string dependencyName = null)
         {
             var ds = this.dependencies;
-            Tuple<object, string> dependency;
+            Dependency dependency;
             try
             {
                 dependency = ds
-                    .Where(tuple => tuple.Item1 is T)
-                    .First(tuple => tuple.Item2 == dependencyName);
+                    .Where(dep => dep.Content is T)
+                    .First(dep => dep.Name == dependencyName);
             }
             catch
             {
                 return default(T);
             }
 
-            var t = (T)dependency.Item1;
+            var t = (T)dependency.Content;
             method?.Invoke(t);
 
             return t;
@@ -54,16 +58,16 @@
             string dependency2Name = null)
         {
             var ds = this.dependencies;
-            Tuple<object, string> dep1;
-            Tuple<object, string> dep2;
+            Dependency dep1;
+            Dependency dep2;
             try
             {
                 dep1 = ds
-                    .Where(tuple => tuple.Item1 is T)
-                    .First(tuple => tuple.Item2 == dependency1Name);
+                    .Where(dep => dep.Content is T)
+                    .First(dep => dep.Name == dependency1Name);
                 dep2 = ds
-                    .Where(tuple => tuple.Item1 is U)
-                    .First(tuple => tuple.Item2 == dependency2Name);
+                    .Where(dep => dep.Content is U)
+                    .First(dep => dep.Name == dependency2Name);
             }
             catch
             {
@@ -72,8 +76,8 @@
                     default(U));
             }
            
-            var t = (T)dep1.Item1;
-            var u = (U)dep2.Item1;
+            var t = (T)dep1.Content;
+            var u = (U)dep2.Content;
             method?.Invoke(t, u);
 
             return Tuple.Create(t, u);
@@ -86,20 +90,20 @@
             string dependency3Name = null)
         {
             var ds = this.dependencies;
-            Tuple<object, string> dep1;
-            Tuple<object, string> dep2;
-            Tuple<object, string> dep3;
+            Dependency dep1;
+            Dependency dep2;
+            Dependency dep3;
             try
             {
                 dep1 = ds
-                    .Where(tuple => tuple.Item1 is T)
-                    .First(tuple => tuple.Item2 == dependency1Name);
+                    .Where(dep => dep.Content is T)
+                    .First(dep => dep.Name == dependency1Name);
                 dep2 = ds
-                    .Where(tuple => tuple.Item1 is U)
-                    .First(tuple => tuple.Item2 == dependency2Name);
+                    .Where(dep => dep.Content is U)
+                    .First(dep => dep.Name == dependency2Name);
                 dep3 = ds
-                    .Where(tuple => tuple.Item1 is V)
-                    .First(tuple => tuple.Item2 == dependency3Name);
+                    .Where(dep => dep.Content is V)
+                    .First(dep => dep.Name == dependency3Name);
             }
             catch
             {
@@ -109,9 +113,9 @@
                     default(V));
             }
 
-            var t = (T)dep1.Item1;
-            var u = (U)dep2.Item1;
-            var v = (V)dep3.Item1;
+            var t = (T)dep1.Content;
+            var u = (U)dep2.Content;
+            var v = (V)dep3.Content;
             method?.Invoke(t, u, v);
 
             return Tuple.Create(t, u, v);
@@ -125,24 +129,24 @@
             string dependency4Name = null)
         {
             var ds = this.dependencies;
-            Tuple<object, string> dep1;
-            Tuple<object, string> dep2;
-            Tuple<object, string> dep3;
-            Tuple<object, string> dep4;
+            Dependency dep1;
+            Dependency dep2;
+            Dependency dep3;
+            Dependency dep4;
             try
             {
                 dep1 = ds
-                    .Where(tuple => tuple.Item1 is T)
-                    .First(tuple => tuple.Item2 == dependency1Name);
+                    .Where(dep => dep.Content is T)
+                    .First(dep => dep.Name == dependency1Name);
                 dep2 = ds
-                    .Where(tuple => tuple.Item1 is U)
-                    .First(tuple => tuple.Item2 == dependency2Name);
+                    .Where(dep => dep.Content is U)
+                    .First(dep => dep.Name == dependency2Name);
                 dep3 = ds
-                    .Where(tuple => tuple.Item1 is V)
-                    .First(tuple => tuple.Item2 == dependency3Name);
+                    .Where(dep => dep.Content is V)
+                    .First(dep => dep.Name == dependency3Name);
                 dep4 = ds
-                    .Where(tuple => tuple.Item1 is W)
-                    .First(tuple => tuple.Item2 == dependency4Name);
+                    .Where(dep => dep.Content is W)
+                    .First(dep => dep.Name == dependency4Name);
             }
             catch
             {
@@ -153,15 +157,22 @@
                     default(W));
             }
 
-            var t = (T)dep1.Item1;
-            var u = (U)dep2.Item1;
-            var v = (V)dep3.Item1;
-            var w = (W)dep4.Item1;
+            var t = (T)dep1.Content;
+            var u = (U)dep2.Content;
+            var v = (V)dep3.Content;
+            var w = (W)dep4.Content;
             method?.Invoke(t, u, v, w);
 
             return Tuple.Create(t, u, v, w);
         }
 
-        private readonly LinkedList<Tuple<object, string>> dependencies;
+        private readonly LinkedList<Dependency> dependencies;
+
+        private class Dependency
+        {
+            public virtual string Name { get; set; }
+
+            public virtual object Content { get; set; }
+        }
     }
 }
