@@ -27,7 +27,21 @@
             }
 
             var w = this.web;
-            this.ui.ErrorConnecting += this.ui_ErrorConnecting;
+            var subscriberRegistered = false;
+            w.Run<EventSubscriber>(subscriber =>
+            {
+                subscriberRegistered = true;
+                subscriber.Subscribe<string>(
+                    this.ui,
+                    nameof(this.ui.ErrorConnecting),
+                    this.ui_ErrorConnecting);
+            });
+
+            if (!subscriberRegistered)
+            {
+                this.ui.ErrorConnecting += this.ui_ErrorConnecting;
+            }
+            
             w.Run<Navigator>(n => n.RegisterPresenter(this));
         }
 

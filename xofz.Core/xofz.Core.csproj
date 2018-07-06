@@ -109,6 +109,7 @@
     <Compile Include="Framework\EventSubscriber.cs" />
     <Compile Include="Framework\IniReaderWriter.cs" />
     <Compile Include="Framework\Timers\Internal\TimerCallback.cs" />
+    <Compile Include="Framework\VersionReader.cs" />
     <Compile Include="Misc\Framework\IOBitter.cs" />
     <Compile Include="Misc\Framework\IOBitterFactory.cs" />
     <Compile Include="Misc\Framework\IO\FileIOBitter.cs" />
@@ -330,6 +331,7 @@
     <Compile Include="UI\Forms\FormLogStatisticsUi.Designer.cs">
       <DependentUpon>FormLogStatisticsUi.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\FormsUiMessagePumper.cs" />
     <Compile Include="UI\Forms\FormsMessenger.cs" />
     <Compile Include="UI\Forms\FormUi.cs">
       <SubType>Form</SubType>
@@ -378,6 +380,7 @@
     <Compile Include="UI\ToggleUi.cs" />
     <Compile Include="UI\Ui.cs" />
     <Compile Include="UI\UiHelpers.cs" />
+    <Compile Include="UI\UiMessagePumper.cs" />
     <Compile Include="UI\VncUi.cs" />
     <Compile Include="UI\WPF\Internal\DispatcherSynchronizeInvoke.cs" />
     <Compile Include="UI\WPF\PageUi.cs" />
