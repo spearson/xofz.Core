@@ -109,7 +109,6 @@
     <Compile Include="Framework\EventSubscriber.cs" />
     <Compile Include="Framework\IniReaderWriter.cs" />
     <Compile Include="Framework\Timers\Internal\TimerCallback.cs" />
-    <Compile Include="Framework\VersionReader.cs" />
     <Compile Include="Misc\Framework\IOBitter.cs" />
     <Compile Include="Misc\Framework\IOBitterFactory.cs" />
     <Compile Include="Misc\Framework\IO\FileIOBitter.cs" />

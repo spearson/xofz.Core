@@ -16,7 +16,7 @@
         public CompositeUi(Materializer materializer)
         {
             this.materializer = materializer;
-            this.uis = new List<Tuple<Ui, object, string>>(0x10000);
+            this.uiHolders = new LinkedList<UiHolder>();
         }
 
         public virtual TUi ReadUi<TUi, TPresenter>(
@@ -24,8 +24,9 @@
             string uiName = null)
             where TUi : Ui
         {
-            var matches = this.materializer.Materialize(
-                this.uis.Where(ui => ui.Item1 is TUi));
+            var mz = this.materializer;
+            var matches = mz.Materialize(
+                this.uiHolders.Where(ui => ui.Content is TUi));
             if (matches.Count == 0)
             {
                 return default(TUi);
@@ -34,32 +35,31 @@
             if (presenterName == null)
             {
                 var match = matches.FirstOrDefault(
-                    tuple => tuple.Item3 == uiName);
+                    ui => ui.ContentName == uiName);
                 if (match == null)
                 {
                     return default(TUi);
                 }
 
-                return (TUi)match.Item1;
+                return (TUi)match.Content;
             }
 
-            var namedMatches = matches.Where(
-                t => t.Item2 is NamedPresenter &&
-                     ((NamedPresenter)t.Item2).Name == presenterName)
-                     .ToList();
+            var namedMatches = mz.Materialize(matches.Where(
+                t => t.Presenter is NamedPresenter &&
+                     ((NamedPresenter)t.Presenter).Name == presenterName));
             if (namedMatches.Count == 0)
             {
                 return default(TUi);
             }
 
             var uiMatch = namedMatches.FirstOrDefault(
-                nm => nm.Item3 == uiName);
+                nm => nm.ContentName == uiName);
             if (uiMatch == null)
             {
                 return default(TUi);
             }
 
-            return (TUi)uiMatch.Item1;
+            return (TUi)uiMatch.Content;
         }
 
         public virtual TResult Read<TUi, TResult>(
@@ -68,11 +68,11 @@
             string uiName = null)
             where TUi : Ui
         {
-            var match = this.uis.FirstOrDefault(
-                tuple => ReferenceEquals(presenter, tuple.Item2)
-                && tuple.Item1 is TUi
-                && tuple.Item3 == uiName);
-            var matchAsUi = (TUi)match?.Item1;
+            var match = this.uiHolders.FirstOrDefault(
+                tuple => ReferenceEquals(presenter, tuple.Presenter)
+                && tuple.Content is TUi
+                && tuple.ContentName == uiName);
+            var matchAsUi = (TUi)match?.Content;
             return matchAsUi != null 
                 ? UiHelpers.Read(matchAsUi, () => read(matchAsUi)) 
                 : default(TResult);
@@ -92,11 +92,11 @@
             string uiName = null) 
             where TUi : Ui
         {
-            var match = this.uis.FirstOrDefault(
-                tuple => ReferenceEquals(tuple.Item2, presenter)
-                         && tuple.Item1 is TUi
-                         && tuple.Item3 == uiName);
-            var matchAsUi = (TUi)match?.Item1;
+            var match = this.uiHolders.FirstOrDefault(
+                ui => ReferenceEquals(ui.Presenter, presenter)
+                         && ui.Content is TUi
+                         && ui.ContentName == uiName);
+            var matchAsUi = (TUi)match?.Content;
             if (matchAsUi == null)
             {
                 return default(TUi);
@@ -119,14 +119,25 @@
             object presenter,
             string uiName = null)
         {
-            this.uis.Add(
-                Tuple.Create(
-                    ui, 
-                    presenter,
-                    uiName));
+            this.uiHolders.AddLast(
+                new UiHolder
+                {
+                    Content = ui,
+                    Presenter = presenter,
+                    ContentName = uiName
+                });
         }
 
         private readonly Materializer materializer;
-        private readonly IList<Tuple<Ui, object, string>> uis;
+        private readonly LinkedList<UiHolder> uiHolders;
+
+        private class UiHolder
+        {
+            public virtual Ui Content { get; set; }
+
+            public virtual string ContentName { get; set; }
+
+            public virtual object Presenter { get; set; }
+        }
     }
 }

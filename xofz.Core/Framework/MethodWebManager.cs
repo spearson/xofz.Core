@@ -4,6 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    public class MethodWebNameConsts
+    {
+        // the variable name should be the web name
+        public const bool Default = true;
+    }
+
     public class MethodWebManager
     {
         public MethodWebManager()
@@ -18,7 +24,7 @@
 
         public virtual void AddWeb(
             MethodWeb web, 
-            string name = @"Default")
+            string name = nameof(MethodWebNameConsts.Default))
         {
             if (web == null)
             {
@@ -54,7 +60,7 @@
 
         public virtual void AccessWeb(
             Action<MethodWeb> accessor,
-            string webName)
+            string webName = nameof(MethodWebNameConsts.Default))
         {
             var w = this.webs.FirstOrDefault(
                 nwmh => nwmh.Name == webName);
@@ -67,8 +73,8 @@
         }
 
         public virtual T RunWeb<T>(
-            Action<T> engine, 
-            string webName, 
+            Action<T> engine,
+            string webName = nameof(MethodWebNameConsts.Default),
             string dependencyName = null)
         {
             var w = this.webs.FirstOrDefault(
@@ -83,7 +89,7 @@
 
         public virtual Tuple<T, U> RunWeb<T, U>(
             Action<T, U> engine,
-            string webName,
+            string webName = nameof(MethodWebNameConsts.Default),
             string dependency1Name = null,
             string dependency2Name = null)
         {
@@ -104,7 +110,7 @@
 
         public virtual Tuple<T, U, V> RunWeb<T, U, V>(
             Action<T, U, V> engine,
-            string webName,
+            string webName = nameof(MethodWebNameConsts.Default),
             string dependency1Name = null,
             string dependency2Name = null,
             string dependency3Name = null)
@@ -128,7 +134,7 @@
 
         public virtual Tuple<T, U, V, W> RunWeb<T, U, V, W>(
             Action<T, U, V, W> engine,
-            string webName,
+            string webName = nameof(MethodWebNameConsts.Default),
             string dependency1Name = null,
             string dependency2Name = null,
             string dependency3Name = null,
