@@ -14,11 +14,15 @@
             }
 
             var enumerator = source.GetEnumerator();
-            enumerator.MoveNext();
-            array[0].AddLast(enumerator.Current);
+            if (enumerator.MoveNext())
+            {
+                array[0].AddLast(enumerator.Current);
+            }
+
             var zeroFilled = true;
             while (enumerator.MoveNext())
             {
+                loop:
                 for (var i = 0; i < splits; ++i)
                 {
                     if (zeroFilled && i == 0)
@@ -28,10 +32,20 @@
 
                     zeroFilled = false;
                     array[i].AddLast(enumerator.Current);
-                    enumerator.MoveNext();
+                    if (i < splits - 1)
+                    {
+                        if (!enumerator.MoveNext())
+                        {
+                            break;
+                        }
+                    }
                 }
 
                 zeroFilled = false;
+                if (enumerator.MoveNext())
+                {
+                    goto loop;
+                }
             }
 
             var generalArray = new MaterializedEnumerable<T>[splits];
