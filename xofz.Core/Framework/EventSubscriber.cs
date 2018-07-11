@@ -7,6 +7,19 @@
         public virtual void Subscribe(
             object publisher,
             string eventName,
+            Delegate handler)
+        {
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.AddEventHandler(
+                    publisher,
+                    handler);
+        }
+
+        public virtual void Subscribe(
+            object publisher,
+            string eventName,
             EventHandler handler)
         {
             publisher
@@ -101,6 +114,19 @@
             string eventName,
             EventHandler<TEventArgs> handler)
             where TEventArgs : EventArgs
+        {
+            publisher
+                ?.GetType()
+                .GetEvent(eventName)
+                ?.RemoveEventHandler(
+                    publisher,
+                    handler);
+        }
+
+        public virtual void Unsubscribe(
+            object publisher,
+            string eventName,
+            Delegate handler)
         {
             publisher
                 ?.GetType()
