@@ -6,11 +6,6 @@
 
     public class VersionReader
     {
-        public VersionReader()
-            : this(Assembly.GetEntryAssembly())
-        {
-        }
-
         public VersionReader(
             Assembly executingAssembly)
         {
@@ -46,7 +41,7 @@
             versionBuilder.Append('.');
             versionBuilder.Append(v.Build);
             versionBuilder.Append('.');
-            versionBuilder.Append(v.MinorRevision);
+            versionBuilder.Append(v.Revision);
 
             return versionBuilder.ToString();
         }
