@@ -20,7 +20,7 @@
         {
             this.ui = ui;
             this.web = web;
-            this.entriesToAddOnRefresh = new List<LogEntry>(0x100);
+            this.entriesToAddOnRefresh = new LinkedList<LogEntry>();
         }
 
         public override string Name { get; set; }
@@ -81,6 +81,21 @@
                     this.ui,
                     nameof(this.ui.FilterTextChanged),
                     this.ui_FilterTextChanged);
+                w.Run<Log>(l =>
+                {
+                    subscriber.Subscribe<LogEntry>(
+                        l,
+                        nameof(l.EntryWritten),
+                        this.log_EntryWritten);
+                },
+                this.Name);
+                w.Run<AccessController>(ac =>
+                {
+                    subscriber.Subscribe<AccessLevel>(
+                        ac,
+                        nameof(ac.AccessLevelChanged),
+                        this.accessLevelChanged);
+                });
             });
 
             if (!subscriberRegistered)
@@ -91,13 +106,16 @@
                 this.ui.ClearKeyTapped += this.ui_ClearKeyTapped;
                 this.ui.StatisticsKeyTapped += this.ui_StatisticsKeyTapped;
                 this.ui.FilterTextChanged += this.ui_FilterTextChanged;
+                w.Run<Log>(l =>
+                    {
+                        l.EntryWritten += this.log_EntryWritten;
+                    },
+                    this.Name);
+                w.Run<AccessController>(ac =>
+                ac.AccessLevelChanged += this.accessLevelChanged);
             }
 
-            w.Run<Log>(
-                l => l.EntryWritten += this.log_EntryWritten,
-                this.Name);
-            w.Run<AccessController>(ac =>
-                ac.AccessLevelChanged += this.accessLevelChanged);
+            
             w.Run<Navigator>(n => n.RegisterPresenter(this));
         }
 
@@ -128,6 +146,7 @@
                     ref this.refreshOnStartIf1, 0, 1) == 1)
             {
                 this.reloadEntries();
+                this.entriesToAddOnRefresh.Clear();
                 return;
             }
 
@@ -466,6 +485,6 @@
         private Func<string> computeBackupLocation;
         private readonly LogUi ui;
         private readonly MethodWeb web;
-        private readonly List<LogEntry> entriesToAddOnRefresh;
+        private readonly ICollection<LogEntry> entriesToAddOnRefresh;
     }
 }
