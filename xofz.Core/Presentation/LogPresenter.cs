@@ -112,9 +112,8 @@
                     },
                     this.Name);
                 w.Run<AccessController>(ac =>
-                ac.AccessLevelChanged += this.accessLevelChanged);
+                    ac.AccessLevelChanged += this.accessLevelChanged);
             }
-
             
             w.Run<Navigator>(n => n.RegisterPresenter(this));
         }
@@ -136,21 +135,18 @@
                 return;
             }
 
-            if (this.resetOnStart)
-            {
-                this.resetDatesAndFilters();
-                goto finish;
-            }
-
             if (Interlocked.CompareExchange(
                     ref this.refreshOnStartIf1, 0, 1) == 1)
             {
                 this.reloadEntries();
-                this.entriesToAddOnRefresh.Clear();
                 return;
             }
 
-            finish:
+            if (this.resetOnStart)
+            {
+                this.resetDatesAndFilters();
+            }
+
             this.insertNewEntries();
             this.entriesToAddOnRefresh.Clear();
         }
@@ -277,6 +273,7 @@
                         this.ui,
                         () => this.ui.Entries = uiEntries);
                     this.ui.WriteFinished.WaitOne();
+                    this.entriesToAddOnRefresh.Clear();
                 },
                 this.Name);
         }
