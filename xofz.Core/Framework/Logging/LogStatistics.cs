@@ -33,9 +33,7 @@
             var w = this.web;
             w.Run<Log, Materializer>((l, m) =>
                 {
-                    var allEntries = m.Materialize(l
-                            .ReadEntries()
-                            .Where(this.passesFilters));
+                    var allEntries = m.Materialize(l.ReadEntries());
                     var start = DateTime.MaxValue;
                     var end = DateTime.MinValue;
                     foreach (var entry in allEntries)
@@ -51,15 +49,17 @@
                         }
                     }
 
-                    this.computeTotal(allEntries);
+                    var matches = m.Materialize(allEntries.Where(
+                        entry => this.passesFilters(entry)));
+                    this.computeTotal(matches);
                     this.computeAvgPerDay(
-                        allEntries.Count,
+                        matches.Count,
                         start,
                         end);
-                    this.computeOldestTimestamp(allEntries);
-                    this.computeNewestTimestamp(allEntries);
-                    this.computeEarliestTimestamp(allEntries);
-                    this.computeLatestTimestamp(allEntries);
+                    this.computeOldestTimestamp(matches);
+                    this.computeNewestTimestamp(matches);
+                    this.computeEarliestTimestamp(matches);
+                    this.computeLatestTimestamp(matches);
                 },
                 this.LogName,
                 "LogMaterializer");
@@ -73,20 +73,20 @@
             w.Run<Log, Materializer>(
                 (l, m) =>
                 {
-                    var entries = m.Materialize(l
+                    var matches = m.Materialize(l
                         .ReadEntries()
                         .Where(e => e.Timestamp >= startDate
                                     && e.Timestamp < endDate.AddDays(1))
                         .Where(this.passesFilters));
-                    this.computeTotal(entries);
+                    this.computeTotal(matches);
                     this.computeAvgPerDay(
-                        entries.Count,
+                        matches.Count,
                         startDate,
                         endDate);
-                    this.computeOldestTimestamp(entries);
-                    this.computeNewestTimestamp(entries);
-                    this.computeEarliestTimestamp(entries);
-                    this.computeLatestTimestamp(entries);
+                    this.computeOldestTimestamp(matches);
+                    this.computeNewestTimestamp(matches);
+                    this.computeEarliestTimestamp(matches);
+                    this.computeLatestTimestamp(matches);
                 },
                 this.LogName,
                 "LogMaterializer");
@@ -109,7 +109,7 @@
             if (!string.IsNullOrWhiteSpace(fc))
             {
                 if (!e.Content.Any(s => s.ToLowerInvariant()
-                .Contains(fc.ToLowerInvariant())))
+                    .Contains(fc.ToLowerInvariant())))
                 {
                     return false;
                 }
