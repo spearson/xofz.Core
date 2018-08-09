@@ -1,6 +1,7 @@
 ﻿namespace xofz.UI.Forms
 {
     using System;
+    using System.ComponentModel;
     using System.Drawing;
     using System.Threading;
     using System.Windows.Forms;
@@ -22,7 +23,7 @@
 
         public event Action<ToggleUi> Released;
 
-        public string Label
+        public virtual string Label
         {
             get => this.key.Text;
 
@@ -31,6 +32,14 @@
                 this.key.Text = value;
                 this.Visible = true;
             }
+        }
+
+        [Browsable(true)]
+        public virtual Font KeyFont
+        {
+            get => this.key.Font;
+
+            set => this.key.Font = value;
         }
 
         bool ToggleUi.Visible
