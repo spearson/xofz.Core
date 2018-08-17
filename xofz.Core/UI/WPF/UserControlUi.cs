@@ -20,6 +20,13 @@
 
         MarshalByRefObject Ui.Referrer => null;
 
+        bool Ui.Disabled
+        {
+            get => !this.IsEnabled;
+
+            set => this.IsEnabled = !value;
+        }
+
         void Ui.AssertStability()
         {
             // how to implement?
