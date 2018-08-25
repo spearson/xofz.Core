@@ -55,22 +55,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdvancedHMIDrivers, Version=3.9.9.20, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Resources\AdvancedHMIDrivers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MfgControl.AdvancedHMI.Drivers, Version=3.99.19.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Resources\MfgControl.AdvancedHMI.Drivers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Modbus, Version=1.11.0.0, Culture=neutral, PublicKeyToken=b5aba55fcbc8d946, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Resources\Modbus.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -79,37 +64,16 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
-    <Reference Include="VncSharp">
-      <HintPath>..\Libraries\VncSharp\VncSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="xofz.Core98">
+      <HintPath>H:\Dropbox\Libraries\xofz.Core98\xofz.Core98.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumerableHelpers.cs" />
-    <Compile Include="EnumHelpers.cs" />
-    <Compile Include="Framework\Daq\Dio32.cs" />
-    <Compile Include="Framework\Daq\Dio32Finder.cs" />
-    <Compile Include="Framework\Daq\Dio32Ports.cs" />
-    <Compile Include="Framework\Daq\Dio32Terminals.cs" />
-    <Compile Include="Framework\Daq\Internal\CyUsbDio32.cs" />
-    <Compile Include="Framework\Daq\Internal\CyUsbDio32Finder.cs" />
-    <Compile Include="Framework\Daq\Internal\DeviceFilters.cs" />
-    <Compile Include="Framework\Daq\Internal\DeviceInterfaceData.cs" />
-    <Compile Include="Framework\Daq\Internal\DeviceInterfaceDetailData.cs" />
-    <Compile Include="Framework\Daq\Internal\DeviceInterfaceHandle.cs" />
-    <Compile Include="Framework\Daq\Internal\DevInfoSetHandle.cs" />
-    <Compile Include="Framework\Daq\Internal\FileAttributes.cs" />
-    <Compile Include="Framework\Daq\Internal\NativeMethods.cs" />
-    <Compile Include="Framework\Daq\Internal\SetupPacket.cs" />
-    <Compile Include="Framework\Daq\Internal\WinUsbDio32.cs" />
-    <Compile Include="Framework\Daq\Internal\WinUsbDio32Finder.cs" />
     <Compile Include="Framework\Computation\EasterComputer.cs" />
-    <Compile Include="Framework\EncodingHelpers.cs" />
-    <Compile Include="Framework\EventSubscriber.cs" />
-    <Compile Include="Framework\IniReaderWriter.cs" />
     <Compile Include="Framework\Timers\Internal\TimerCallback.cs" />
-    <Compile Include="Framework\VersionReader.cs" />
+    <Compile Include="Framework\Transformation\EnumerableRotatorV2.cs" />
+    <Compile Include="Framework\VersionReaderV2.cs" />
     <Compile Include="Misc\Framework\IOBitter.cs" />
     <Compile Include="Misc\Framework\IOBitterFactory.cs" />
     <Compile Include="Misc\Framework\IO\FileIOBitter.cs" />
@@ -117,29 +81,11 @@
     <Compile Include="Misc\Framework\IO\MaterializedEnumerableIOBitter.cs" />
     <Compile Include="Misc\Framework\IO\TcpIpIOBitter.cs" />
     <Compile Include="Misc\Framework\IO\TcpIpIOBitterSettings.cs" />
-    <Compile Include="Framework\KeyboardLoader.cs" />
-    <Compile Include="Framework\Logging\EventLogLog.cs" />
-    <Compile Include="Framework\Logging\LogFactory.cs" />
-    <Compile Include="Framework\MainUiSettings.cs" />
-    <Compile Include="Framework\Materialization\ArrayMaterializedEnumerable.cs" />
-    <Compile Include="Framework\Materialization\ArrayMaterializer.cs" />
     <Compile Include="Framework\Materialization\ConcurrentDictionaryMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentQueueMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ConcurrentStackMaterializedEnumerable.cs" />
     <Compile Include="Misc\Framework\MethodInjector.cs" />
-    <Compile Include="Framework\MethodWebManager.cs" />
-    <Compile Include="Framework\Timers\LoggingTimer.cs" />
-    <Compile Include="Framework\Timers\OneOffTimer.cs" />
-    <Compile Include="Framework\Plc\AbPlc.cs" />
-    <Compile Include="Framework\Plc\AbPlcFactory.cs" />
-    <Compile Include="Framework\Plc\DF1ReadErrorHandler.cs" />
-    <Compile Include="Framework\Plc\Fpx.cs" />
-    <Compile Include="Framework\Plc\FpxFinder.cs" />
-    <Compile Include="Framework\Plc\Implementation\EthernetAbPlc.cs" />
-    <Compile Include="Framework\Plc\Implementation\SerialFpx.cs" />
-    <Compile Include="Framework\Plc\Implementation\TcpFpx.cs" />
-    <Compile Include="Framework\Plc\StringRegister.cs" />
-    <Compile Include="Framework\Transformation\Accumulator.cs" />
+    <Compile Include="Misc\Framework\Transformation\Accumulator.cs" />
     <Compile Include="Misc\Framework\UnifiedBitPool.cs" />
     <Compile Include="Misc\Synchronization\MethodBuckle.cs" />
     <Compile Include="Misc\Framework\AI\DefaultTreeOrderer.cs" />
@@ -160,8 +106,6 @@
     <Compile Include="Misc\Framework\Computation\Imploder.cs" />
     <Compile Include="Framework\Computation\MultiPow.cs" />
     <Compile Include="Misc\Framework\Computation\Permutator.cs" />
-    <Compile Include="Framework\Computation\PrimeGenerator.cs" />
-    <Compile Include="Framework\Computation\PrimeTester.cs" />
     <Compile Include="Misc\Framework\Computation\Shifter.cs" />
     <Compile Include="Misc\Framework\Computation\ShiftRegister.cs" />
     <Compile Include="Misc\Framework\Computation\VarianceComputer.cs" />
@@ -169,83 +113,21 @@
     <Compile Include="Misc\Framework\Erudition\Darkener.cs" />
     <Compile Include="Misc\Framework\Erudition\Likening.cs" />
     <Compile Include="Misc\Framework\Erudition\Slicer.cs" />
-    <Compile Include="Framework\Logging\TextFileLog.cs" />
-    <Compile Include="Framework\LatchHolder.cs" />
-    <Compile Include="Framework\Logging\Log.cs" />
-    <Compile Include="Framework\Logging\LogEntry.cs" />
-    <Compile Include="Framework\Logging\LogEditor.cs" />
-    <Compile Include="Framework\Logging\LogHelpers.cs" />
     <Compile Include="Misc\Framework\Illumination\ArrayFiller.cs" />
-    <Compile Include="Framework\Logging\LogStatistics.cs" />
     <Compile Include="Misc\Framework\Martyr\FreedomHolder.cs" />
     <Compile Include="Misc\Framework\Martyr\Martyr.cs" />
     <Compile Include="Misc\Framework\Martyr\PrescientInvoker.cs" />
     <Compile Include="Framework\Materialization\HashSetMaterializer.cs" />
-    <Compile Include="Framework\Materialization\LinkedListMaterializer.cs" />
-    <Compile Include="Framework\Materialization\OrderedMaterializer.cs" />
-    <Compile Include="Framework\Materialization\QueueMaterializer.cs" />
-    <Compile Include="Framework\Materialization\StackMaterializer.cs" />
-    <Compile Include="Framework\MethodWeb.cs" />
-    <Compile Include="Framework\Modbus\Controller.cs" />
-    <Compile Include="Framework\Modbus\ControllerFactory.cs" />
-    <Compile Include="Framework\Modbus\Internal\SerialController.cs" />
-    <Compile Include="Framework\Modbus\Internal\SerialNModbusConnection.cs" />
-    <Compile Include="Framework\Modbus\Internal\TcpController.cs" />
-    <Compile Include="Framework\Modbus\Internal\TcpNModbusConnection.cs" />
-    <Compile Include="Framework\Modbus\SerialMode.cs" />
     <Compile Include="Misc\Framework\Nightfall.cs" />
-    <Compile Include="Framework\Computation\BinaryTranslator.cs" />
     <Compile Include="Misc\Framework\Theory\DirectedGraph.cs" />
     <Compile Include="Misc\Framework\Theory\SafeInvoker.cs" />
     <Compile Include="Misc\Framework\Transcendence\HolySpirit.cs" />
     <Compile Include="Misc\Framework\Theory\ActionableTransaction.cs" />
-    <Compile Include="Framework\Transformation\EnumerableBreaker.cs" />
-    <Compile Include="Framework\Transformation\EnumerableDisperser.cs" />
-    <Compile Include="Framework\Transformation\EnumerableDisplacer.cs" />
-    <Compile Include="Framework\Transformation\EnumerableDragger.cs" />
-    <Compile Include="Framework\Transformation\EnumerableFrontBackLoader.cs" />
-    <Compile Include="Framework\Transformation\EnumerableHeartbeater.cs" />
-    <Compile Include="Framework\Transformation\EnumerableInjector.cs" />
-    <Compile Include="Framework\Transformation\EnumerableInterceptor.cs" />
-    <Compile Include="Framework\Transformation\EnumerableJoiner.cs" />
-    <Compile Include="Framework\Transformation\EnumerableKicker.cs" />
     <Compile Include="Framework\Transformation\EnumerablePicker.cs" />
-    <Compile Include="Framework\Transformation\EnumerableRaker.cs" />
-    <Compile Include="Framework\Transformation\EnumerableSkipper.cs" />
     <Compile Include="Framework\Transformation\EnumerableSlicer.cs" />
-    <Compile Include="Framework\Transformation\EnumerableSpreader.cs" />
-    <Compile Include="Framework\Transformation\EnumerableStriker.cs" />
-    <Compile Include="Framework\Transformation\EnumerableTargeter.cs" />
-    <Compile Include="Framework\Transformation\EnumerableTrapper.cs" />
-    <Compile Include="Framework\Transformation\EnumerableTriggerer.cs" />
-    <Compile Include="Framework\Transformation\Innovator.cs" />
-    <Compile Include="Framework\Transformation\Reorderer.cs" />
-    <Compile Include="Framework\Transformation\EnumerableSelector.cs" />
-    <Compile Include="Framework\Transformation\Striker.cs" />
-    <Compile Include="Framework\Transformation\Translator.cs" />
+    <Compile Include="Misc\Framework\Transformation\Innovator.cs" />
+    <Compile Include="Misc\Framework\Transformation\Reorderer.cs" />
     <Compile Include="Framework\Vnc\VncSettingsHolder.cs" />
-    <Compile Include="Internal\EmbeddedAssemblyLoader.cs" />
-    <Compile Include="Materializer.cs" />
-    <Compile Include="Presentation\LogEditorPresenter.cs" />
-    <Compile Include="Presentation\LoginPresenter.cs" />
-    <Compile Include="Presentation\LogPresenter.cs" />
-    <Compile Include="Presentation\LogStatisticsPresenter.cs" />
-    <Compile Include="Presentation\MainPresenter.cs" />
-    <Compile Include="Presentation\PopupNamedPresenter.cs" />
-    <Compile Include="Presentation\PopupPresenter.cs" />
-    <Compile Include="Presentation\ShutdownPresenter.cs" />
-    <Compile Include="Presentation\VncPresenter.cs" />
-    <Compile Include="Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Root\Commands\SetupLogCommand.cs" />
-    <Compile Include="Root\Commands\SetupLoginCommand.cs" />
-    <Compile Include="Root\Commands\SetupMainCommand.cs" />
-    <Compile Include="Root\Commands\SetupShutdownCommand.cs" />
-    <Compile Include="Root\Commands\SetupVncCommand.cs" />
-    <Compile Include="StringHelpers.cs" />
     <Compile Include="Misc\Framework\Theory\Agent.cs" />
     <Compile Include="Misc\Framework\Theory\Functoid.cs" />
     <Compile Include="Misc\Framework\Thunking\EightBitThunker.cs" />
@@ -258,15 +140,13 @@
     <Compile Include="Misc\Framework\Erudition\LiberatedObject.cs" />
     <Compile Include="Misc\Framework\Erudition\Parser.cs" />
     <Compile Include="Misc\Framework\Erudition\Reflection.cs" />
-    <Compile Include="Framework\AccessController.cs" />
-    <Compile Include="AccessLevel.cs" />
     <Compile Include="Misc\Framework\Implementation\BinaryFileLoader.cs" />
     <Compile Include="Misc\Framework\Implementation\TextFileLoader.cs" />
     <Compile Include="Framework\Timers\Internal\CallbackOptions.cs" />
     <Compile Include="Framework\Timers\Internal\NativeMethods.cs" />
     <Compile Include="Misc\Framework\Loader.cs" />
     <Compile Include="Misc\Framework\Saver.cs" />
-    <Compile Include="Framework\Timer.cs" />
+    <Compile Include="Framework\Timers\TimerQueueTimer.cs" />
     <Compile Include="Misc\Framework\Illumination\ActionIlluminatedObject.cs" />
     <Compile Include="Misc\Framework\Illumination\AnimatedIlluminatedObject.cs" />
     <Compile Include="Misc\Framework\Illumination\FuncActionIlluminatedObject.cs" />
@@ -278,158 +158,47 @@
     <Compile Include="Misc\Framework\Illumination\MaterializedEnumerableIlluminatedObject.cs" />
     <Compile Include="Misc\Framework\Illumination\MemberFieldIlluminatedObject.cs" />
     <Compile Include="Misc\Framework\Illumination\StringIlluminatedObject.cs" />
-    <Compile Include="Framework\EventRaiser.cs" />
-    <Compile Include="Presentation\NamedPresenter.cs" />
-    <Compile Include="Presentation\Navigator.cs" />
-    <Compile Include="Presentation\Presenter.cs" />
     <Compile Include="Misc\Random.cs" />
-    <Compile Include="Root\Command.cs" />
-    <Compile Include="Root\CommandExecutor.cs" />
-    <Compile Include="Framework\Transformation\EnumerableConnector.cs" />
-    <Compile Include="Framework\Transformation\EnumerableDecorator.cs" />
     <Compile Include="Framework\Transformation\EnumerableIntersector.cs" />
-    <Compile Include="Framework\Transformation\EnumerableProjector.cs" />
-    <Compile Include="Framework\Transformation\EnumerableRepeater.cs" />
-    <Compile Include="Framework\Transformation\EnumerableRotator.cs" />
     <Compile Include="Framework\Materialization\ActionMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\FuncMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\HashSetMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\KeyValuePairMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\LazyMaterializedEnumerable.cs" />
-    <Compile Include="Framework\Materialization\LinkedListMaterializedEnumerable.cs" />
-    <Compile Include="MaterializedEnumerable.cs" />
-    <Compile Include="Framework\Materialization\OrderedMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\ValueKeyPairMaterializedEnumerable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Framework\Materialization\QueueMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\SingleMaterializedEnumerable.cs" />
-    <Compile Include="Framework\Materialization\StackMaterializedEnumerable.cs" />
     <Compile Include="Framework\Materialization\StringMaterializedEnumerable.cs" />
-    <Compile Include="Framework\Transformation\EnumerableSplicer.cs" />
-    <Compile Include="Framework\Transformation\EnumerableSplitter.cs" />
     <Compile Include="Presentation\CompositeUi.cs" />
     <Compile Include="Misc\Delayer.cs" />
     <Compile Include="UI\Forms\ControlExtensions.cs" />
-    <Compile Include="UI\Forms\ControlUi.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\FormLogEditorUi.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\FormLogEditorUi.Designer.cs">
-      <DependentUpon>FormLogEditorUi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Forms\FormLoginUi.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\FormLoginUi.designer.cs">
-      <DependentUpon>FormLoginUi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Forms\FormLogStatisticsUi.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\FormLogStatisticsUi.Designer.cs">
-      <DependentUpon>FormLogStatisticsUi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Forms\FormsUiMessagePumper.cs" />
-    <Compile Include="UI\Forms\FormsMessenger.cs" />
-    <Compile Include="UI\Forms\FormUi.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\Internal\CenterWinDialog.cs" />
     <Compile Include="UI\Forms\Internal\ColumnDefinition.cs" />
     <Compile Include="UI\Forms\Internal\ColumnSorter.cs" />
-    <Compile Include="UI\Forms\Internal\SortableBindingList.cs" />
     <Compile Include="UI\Forms\MultiColumnSortDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Forms\UserControlLogUi.cs">
+    <Compile Include="UI\Forms\UserControlMultiSortLogUi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\UserControlLogUi.Designer.cs">
-      <DependentUpon>UserControlLogUi.cs</DependentUpon>
+    <Compile Include="UI\Forms\UserControlMultiSortLogUi.Designer.cs">
+      <DependentUpon>UserControlMultiSortLogUi.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\UserControlToggleUi.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\UserControlToggleUi.designer.cs">
-      <DependentUpon>UserControlToggleUi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Forms\UserControlUi.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\UserControlVncUi.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\UserControlVncUi.designer.cs">
-      <DependentUpon>UserControlVncUi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\LabeledUi.cs" />
-    <Compile Include="UI\LogEditorUi.cs" />
-    <Compile Include="UI\LoginUi.cs" />
-    <Compile Include="UI\LogStatisticsUi.cs" />
-    <Compile Include="UI\LogUi.cs" />
-    <Compile Include="UI\MainUi.cs" />
-    <Compile Include="UI\Messenger.cs" />
-    <Compile Include="UI\MinimizableUi.cs" />
-    <Compile Include="UI\PopupUi.cs" />
-    <Compile Include="UI\Response.cs" />
-    <Compile Include="UI\ShellUi.cs" />
-    <Compile Include="UI\ShowableUi.cs" />
-    <Compile Include="UI\SplitUi.cs" />
-    <Compile Include="UI\ToggleUi.cs" />
-    <Compile Include="UI\Ui.cs" />
-    <Compile Include="UI\UiHelpers.cs" />
     <Compile Include="UI\UiMessagePumper.cs" />
-    <Compile Include="UI\VncUi.cs" />
     <Compile Include="UI\WPF\Internal\DispatcherSynchronizeInvoke.cs" />
     <Compile Include="UI\WPF\PageUi.cs" />
     <Compile Include="UI\WPF\UserControlUi.cs" />
     <Compile Include="UI\WPF\WindowUi.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AdvancedHMIDrivers.dll" />
-    <None Include="Resources\MfgControl.AdvancedHMI.Drivers.dll" />
-    <None Include="Resources\VncSharp.dll" />
-    <None Include="Resources\log4net.dll" />
-    <None Include="Resources\Modbus.dll" />
-    <None Include="Resources\Unme.Common.dll" />
     <Content Include="version.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\FormLogEditorUi.resx">
-      <DependentUpon>FormLogEditorUi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\FormLoginUi.resx">
-      <DependentUpon>FormLoginUi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\FormLogStatisticsUi.resx">
-      <DependentUpon>FormLogStatisticsUi.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\UserControlLogUi.resx">
-      <DependentUpon>UserControlLogUi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\UserControlToggleUi.resx">
-      <DependentUpon>UserControlToggleUi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\UserControlVncUi.resx">
-      <DependentUpon>UserControlVncUi.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\UserControlMultiSortLogUi.resx">
+      <DependentUpon>UserControlMultiSortLogUi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterResolveReferences">
-    <ItemGroup>
-      <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.dll'">
-        <LogicalName>%(ReferenceCopyLocalPaths.DestinationSubDirectory)%(ReferenceCopyLocalPaths.Filename)%(ReferenceCopyLocalPaths.Extension)</LogicalName>
-      </EmbeddedResource>
-    </ItemGroup>
-  </Target>
 </Project>

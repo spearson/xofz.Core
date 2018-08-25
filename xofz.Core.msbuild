@@ -51,6 +51,8 @@
     <ItemGroup>
       <FilesToCopy Include="$(BuildDir)\$(ProjectName).dll" />
       <FilesToCopy Include="$(BuildDir)\$(ProjectName).pdb" />
+      <FilesToCopy Include="$(BuildDir)\xofz.Core98.dll" />
+      <FilesToCopy Include="$(BuildDir)\xofz.Core98.pdb" />
       <FilesToCopy Include="$(BuildDir)\version-$(Version).txt" />
     </ItemGroup>
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(DeployFolder)" />

@@ -16,20 +16,11 @@
 
         ISynchronizeInvoke Ui.Root => this.root;
 
-        AutoResetEvent Ui.WriteFinished => this.writeFinished;
-
-        MarshalByRefObject Ui.Referrer => null;
-
         bool Ui.Disabled
         {
             get => !this.IsEnabled;
 
             set => this.IsEnabled = !value;
-        }
-
-        void Ui.AssertStability()
-        {
-            // how do I implement this?
         }
 
         private readonly ISynchronizeInvoke root;

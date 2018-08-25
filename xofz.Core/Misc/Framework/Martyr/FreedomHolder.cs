@@ -35,7 +35,7 @@
                     }
                 }
 
-                this.Surge(new OrderedMaterializedEnumerable<IDisposable>(dToSurge));
+                this.Surge(new ListMaterializedEnumerable<IDisposable>(dToSurge));
 
                 // ReSharper disable once ImpureMethodCallOnReadonlyValueField
                 this.martyr.BringToGod(disposables);

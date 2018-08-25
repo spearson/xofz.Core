@@ -9,7 +9,9 @@
 
     public class RealAi<T>
     {
-        public RealAi(Tree<Action<T>> computations, EnumerableRotator rotator)
+        public RealAi(
+            Tree<Action<T>> computations, 
+            EnumerableRotatorV2 rotator)
         {
             this.computations = computations;
             this.rotator = rotator;
@@ -56,7 +58,7 @@
                 var ts = new LinkedList<Thread>();
                 ts.AddLast(new Thread(() => longFunction(current)));
                 ts.First.Value.Start();
-                threads = this.rotator.Rotate(ts, 1);
+                threads = this.rotator.RotateV2(ts, 1);
                 if (!enumerator.MoveNext())
                 {
                     break;
@@ -72,6 +74,6 @@
         }
 
         private readonly Tree<Action<T>> computations;
-        private readonly EnumerableRotator rotator;
+        private readonly EnumerableRotatorV2 rotator;
     }
 }

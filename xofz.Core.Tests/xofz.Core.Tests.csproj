@@ -47,6 +47,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="xofz.Core98">
+      <HintPath>..\..\..\Dropbox\Libraries\xofz.Core98\xofz.Core98.dll</HintPath>
+    </Reference>
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>H:\Dropbox\Libraries\xUnit\xunit.abstractions.dll</HintPath>
@@ -65,12 +68,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Framework\EventSubscriberTests.cs" />
-    <Compile Include="Framework\MethodWebTests.cs" />
-    <Compile Include="Presentation\LoginPresenterTests.cs" />
-    <Compile Include="Presentation\NavigatorTests.cs" />
-    <Compile Include="Presentation\PopupPresenterTests.cs" />
-    <Compile Include="Presentation\PresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,7 @@
             var list = new List<T>();
             list.AddRange(this.primaryLinkedList);
             list.AddRange(this.secondaryLinkedList);
-            this.orderedTree = new OrderedMaterializedEnumerable<T>(list);
+            this.orderedTree = new ListMaterializedEnumerable<T>(list);
         }
 
         private void checkNode(TreeNode<T> node)

@@ -7,11 +7,12 @@
     public class Permutator
     {
         public Permutator()
-            : this(new EnumerableRotator())
+            : this(new EnumerableRotatorV2())
         {
         }
 
-        public Permutator(EnumerableRotator rotator)
+        public Permutator(
+            EnumerableRotatorV2 rotator)
         {
             this.rotator = rotator;
         }
@@ -33,11 +34,11 @@
 
                 for (var k = 0; k < i; ++k)
                 {
-                    yield return r.Rotate(switched, k);
+                    yield return r.RotateV2(switched, k);
                 }
             }
         }
 
-        private readonly EnumerableRotator rotator;
+        private readonly EnumerableRotatorV2 rotator;
     }
 }
