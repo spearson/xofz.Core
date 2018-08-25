@@ -183,7 +183,6 @@
     <Compile Include="UI\Forms\UserControlMultiSortLogUi.Designer.cs">
       <DependentUpon>UserControlMultiSortLogUi.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UiMessagePumper.cs" />
     <Compile Include="UI\WPF\Internal\DispatcherSynchronizeInvoke.cs" />
     <Compile Include="UI\WPF\PageUi.cs" />
     <Compile Include="UI\WPF\UserControlUi.cs" />
