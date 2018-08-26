@@ -11,7 +11,6 @@
         public WindowUi()
         {
             this.root = new DispatcherSynchronizeInvoke(this.Dispatcher);
-            this.writeFinished = new AutoResetEvent(false);
         }
 
         ISynchronizeInvoke Ui.Root => this.root;
@@ -24,6 +23,5 @@
         }
 
         private readonly ISynchronizeInvoke root;
-        private readonly AutoResetEvent writeFinished;
     }
 }

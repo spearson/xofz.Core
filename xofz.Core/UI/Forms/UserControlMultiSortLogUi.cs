@@ -1,18 +1,14 @@
 ﻿namespace xofz.UI.Forms
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Windows.Forms;
-    using Action = xofz.Action;
 
     public partial class UserControlMultiSortLogUi 
         : UserControlUi, LogUi
     {
-        public UserControlMultiSortLogUi(Materializer materializer)
+        public UserControlMultiSortLogUi()
         {
-            this.materializer = materializer;
-
             this.InitializeComponent();
             this.activeFilterTextBox = this.filterContentTextBox;
 
@@ -35,7 +31,8 @@
         {
             get
             {
-                var ll = new LinkedList<xofz.Tuple<string, string, string>>();
+                ICollection<Tuple<string, string, string>>
+                    entriesCollection = new LinkedList<Tuple<string, string, string>>();
                 foreach (DataGridViewRow row in this.entriesGrid.Rows)
                 {
                     var timestamp = row.Cells[0].Value?.ToString();
@@ -43,15 +40,15 @@
                     var content = row.Cells[2].Value?.ToString();
                     if (timestamp != null && type != null)
                     {
-                        ll.AddLast(
-                            xofz.Tuple.Create(
-                                timestamp,
-                                type,
-                                content));
+                        entriesCollection.Add(
+                        Tuple.Create(
+                            timestamp,
+                            type,
+                            content));
                     }
                 }
 
-                return ll;
+                return entriesCollection;
             }
 
             set
@@ -67,7 +64,7 @@
             }
         }
 
-        DateTime LogUi.StartDate
+        System.DateTime LogUi.StartDate
         {
             get => this.startDatePicker.SelectionStart;
 
@@ -79,7 +76,7 @@
             }
         }
 
-        DateTime LogUi.EndDate
+        System.DateTime LogUi.EndDate
         {
             get => this.endDatePicker.SelectionStart;
 
@@ -127,7 +124,7 @@
         }
 
         void LogUi.AddToTop(
-            xofz.Tuple<string, string, string> entry)
+            Tuple<string, string, string> entry)
         {
             this.entriesGrid.Rows.Insert(0,
                 entry.Item1,
@@ -135,7 +132,7 @@
                 entry.Item3);
         }
 
-        private void addKey_Click(object sender, EventArgs e)
+        private void addKey_Click(object sender, System.EventArgs e)
         {
             var akt = this.AddKeyTapped;
             if (akt == null)
@@ -146,7 +143,7 @@
             ThreadPool.QueueUserWorkItem(o => akt.Invoke());
         }
 
-        private void clearKey_Click(object sender, EventArgs e)
+        private void clearKey_Click(object sender, System.EventArgs e)
         {
             var ckt = this.ClearKeyTapped;
             if (ckt == null)
@@ -179,21 +176,21 @@
             ThreadPool.QueueUserWorkItem(o => edc.Invoke());
         }
 
-        private void downKey_Click(object sender, EventArgs e)
+        private void downKey_Click(object sender, System.EventArgs e)
         {
             this.entriesGrid.Focus();
             
             SendKeys.Send("{PGDN}");
         }
 
-        private void upKey_Click(object sender, EventArgs e)
+        private void upKey_Click(object sender, System.EventArgs e)
         {
             this.entriesGrid.Focus();
 
             SendKeys.Send("{PGUP}");
         }
 
-        private void statisticsKey_Click(object sender, EventArgs e)
+        private void statisticsKey_Click(object sender, System.EventArgs e)
         {
             var skt = this.StatisticsKeyTapped;
             if (skt == null)
@@ -204,7 +201,7 @@
             ThreadPool.QueueUserWorkItem(o => skt.Invoke());
         }
 
-        private void filterContentTextBox_TextChanged(object sender, EventArgs e)
+        private void filterContentTextBox_TextChanged(object sender, System.EventArgs e)
         {
             this.activeFilterTextBox = this.filterContentTextBox;
             var ftc = this.FilterTextChanged;
@@ -216,7 +213,7 @@
             ThreadPool.QueueUserWorkItem(o => ftc.Invoke());
         }
 
-        private void filterTypeTextBox_TextChanged(object sender, EventArgs e)
+        private void filterTypeTextBox_TextChanged(object sender, System.EventArgs e)
         {
             this.activeFilterTextBox = this.filterTypeTextBox;
             var ftc = this.FilterTextChanged;
@@ -228,7 +225,7 @@
             ThreadPool.QueueUserWorkItem(o => ftc.Invoke());
         }
 
-        private void resetContentKey_Click(object sender, EventArgs e)
+        private void resetContentKey_Click(object sender, System.EventArgs e)
         {
             var fctb = this.filterContentTextBox;
             this.activeFilterTextBox = fctb;
@@ -236,7 +233,7 @@
             fctb.Focus();
         }
 
-        private void resetTypeKey_Click(object sender, EventArgs e)
+        private void resetTypeKey_Click(object sender, System.EventArgs e)
         {
             var fttb = this.filterTypeTextBox;
             this.activeFilterTextBox = fttb;
@@ -245,6 +242,5 @@
         }
 
         private TextBox activeFilterTextBox;
-        private readonly Materializer materializer;
     }
 }

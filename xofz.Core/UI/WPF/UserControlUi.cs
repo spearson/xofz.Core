@@ -1,8 +1,6 @@
 ﻿namespace xofz.UI.WPF
 {
-    using System;
     using System.ComponentModel;
-    using System.Threading;
     using System.Windows.Controls;
     using xofz.UI.WPF.Internal;
 
@@ -11,7 +9,6 @@
         public UserControlUi()
         {
             this.root = new DispatcherSynchronizeInvoke(this.Dispatcher);
-            this.writeFinished = new AutoResetEvent(false);
         }
 
         ISynchronizeInvoke Ui.Root => this.root;
@@ -25,6 +22,5 @@
         }
 
         private readonly ISynchronizeInvoke root;
-        private readonly AutoResetEvent writeFinished;
     }
 }

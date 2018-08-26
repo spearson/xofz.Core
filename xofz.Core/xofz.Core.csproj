@@ -180,7 +180,7 @@
     <Compile Include="UI\Forms\UserControlMultiSortLogUi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\UserControlMultiSortLogUi.Designer.cs">
+    <Compile Include="UI\Forms\UserControlMultiSortLogUi.designer.cs">
       <DependentUpon>UserControlMultiSortLogUi.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\WPF\Internal\DispatcherSynchronizeInvoke.cs" />
@@ -198,6 +198,5 @@
       <DependentUpon>UserControlMultiSortLogUi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

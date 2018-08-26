@@ -343,7 +343,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.endDatePicker);
             this.Controls.Add(this.startDatePicker);
-            this.Name = "UserControlLogUi";
+            this.Name = "UserControlMultiSortLogUi";
             this.Size = new System.Drawing.Size(600, 500);
             ((System.ComponentModel.ISupportInitialize)(this.entriesGrid)).EndInit();
             this.ResumeLayout(false);
@@ -357,7 +357,6 @@
         private System.Windows.Forms.MonthCalendar endDatePicker;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private xofz.UI.Forms.MultiColumnSortDataGridView entriesGrid;
         private System.Windows.Forms.Button addKey;
         private System.Windows.Forms.Button downKey;
         private System.Windows.Forms.Button upKey;
@@ -372,5 +371,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn timestampColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contentColumn;
+        private MultiColumnSortDataGridView entriesGrid;
     }
 }
