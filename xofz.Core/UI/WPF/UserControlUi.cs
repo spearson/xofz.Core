@@ -12,8 +12,7 @@
         }
 
         ISynchronizeInvoke Ui.Root => this.root;
-
-
+        
         bool Ui.Disabled
         {
             get => !this.IsEnabled;

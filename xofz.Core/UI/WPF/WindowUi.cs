@@ -1,8 +1,6 @@
 ﻿namespace xofz.UI.WPF
 {
-    using System;
     using System.ComponentModel;
-    using System.Threading;
     using System.Windows;
     using xofz.UI.WPF.Internal;
 

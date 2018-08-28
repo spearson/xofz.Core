@@ -9,8 +9,7 @@
             : base(executingAssembly)
         {
         }
-
-
+        
         public virtual string ReadCoreVersionV2()
         {
             var ea = Assembly.GetExecutingAssembly();
