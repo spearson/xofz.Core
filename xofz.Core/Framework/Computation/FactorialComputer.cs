@@ -1,8 +1,5 @@
 ﻿namespace xofz.Framework.Computation
 {
-    using System;
-    using System.Diagnostics;
-    using System.IO;
     using System.Numerics;
 
     public class FactorialComputer
@@ -70,38 +67,6 @@
                 ++powerOf2;
                 numberRaisedToPowerOf2 >>= 1;
             }
-        }
-    }
-
-    public class TestFactorialBig
-    {
-        public void Go()
-        {
-            var computer = new FactorialComputer();
-            BigInteger factorial;
-            Stopwatch sw;
-            sw = Stopwatch.StartNew();
-            factorial = computer.Compute(100000);
-            sw.Stop();
-            Console.WriteLine(
-                @"Computing the factorial of 100,000 took "
-                + sw.Elapsed);
-
-            Console.WriteLine(factorial);
-        }
-
-        public void GoBig()
-        {
-            var computer = new FactorialComputer();
-            BigInteger factorial;
-            const long bigNumber = 1000000;
-            Stopwatch sw;
-            sw = Stopwatch.StartNew();
-            factorial = computer.Compute(bigNumber);
-            sw.Stop();
-
-            Console.WriteLine("Computing the factorial of " + bigNumber + " took " + sw.Elapsed);
-            File.WriteAllText("Factorial of " + bigNumber + ".txt", factorial.ToString());
         }
     }
 }

@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\Computation\EasterComputer.cs" />
+    <Compile Include="Framework\Computation\LcmComputer.cs" />
     <Compile Include="Framework\Timers\Internal\TimerCallback.cs" />
     <Compile Include="Framework\Transformation\EnumerableRotatorV2.cs" />
     <Compile Include="Framework\VersionReaderV2.cs" />
