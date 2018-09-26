@@ -11,7 +11,7 @@
             this.locker = new object();
         }
 
-        public override event xofz.Action Elapsed;
+        public override event Do Elapsed;
 
         public override void Start(long intervalMilliseconds)
         {
