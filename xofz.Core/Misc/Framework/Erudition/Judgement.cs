@@ -5,14 +5,17 @@
 
     public class Judgement<T>
     {
-        public Judgement(Absolution<T> absolution)
+        public Judgement(
+            Absolution<T> absolution)
         {
             this.absolution = absolution;
         }
 
-        public virtual bool Judge(MaterializedEnumerable<T> collection, Action<T> learn)
+        public virtual bool Judge(
+            Lot<T> lot, 
+            Action<T> learn)
         {
-            var reflection = new Reflection<T>(collection, this.absolution);
+            var reflection = new Reflection<T>(lot, this.absolution);
             var hashCodes = new LinkedList<int>();
             var isKnowledge = true;
             foreach (var item in reflection.Reflect(learn))

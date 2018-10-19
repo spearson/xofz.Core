@@ -42,7 +42,8 @@
             while (counter < numberToCheck)
             {
                 enumerator.MoveNext();
-                evaluation = enumerator.Current(actor);
+                evaluation = enumerator.Current
+                    ?.Invoke(actor) ?? true;
                 if (!evaluation)
                 {
                     enumerator.Dispose();

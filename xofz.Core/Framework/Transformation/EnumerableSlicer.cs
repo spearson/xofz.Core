@@ -2,22 +2,22 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
 
     public class EnumerableSlicer
     {
-        public virtual MaterializedEnumerable<T>[] Slice<T>(
+        public virtual Lot<T>[] Slice<T>(
             IEnumerable<T> source,
-            MaterializedEnumerable<int> slicePoints)
+            Lot<int> slicePoints)
         {
             var ll = new LinkedList<T>(source);
-            var array = new MaterializedEnumerable<T>[slicePoints.Count];
+            var array = new Lot<T>[slicePoints.Count];
             var counter = 0;
             foreach (var slicePoint in slicePoints)
             {
                 var sequence = ll.Take(slicePoint);
                 array[counter] =
-                    new LinkedListMaterializedEnumerable<T>(sequence);
+                    new LinkedListLot<T>(sequence);
                 ++counter;
                 ll = new LinkedList<T>(ll.Skip(slicePoint));
             }

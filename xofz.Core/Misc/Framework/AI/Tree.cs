@@ -3,9 +3,9 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
 
-    public class Tree<T> : MaterializedEnumerable<T>
+    public class Tree<T> : Lot<T>
     {
         public Tree() : this(new TreeNode<T>())
         {
@@ -86,8 +86,8 @@
             set => this.value = value;
         }
 
-        public virtual MaterializedEnumerable<TreeNode<T>> Nodes
-            => new LinkedListMaterializedEnumerable<TreeNode<T>>(this.nodes);
+        public virtual Lot<TreeNode<T>> Nodes
+            => new LinkedListLot<TreeNode<T>>(this.nodes);
 
         public virtual void Add(TreeNode<T> node)
         {

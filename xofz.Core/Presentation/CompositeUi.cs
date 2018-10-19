@@ -3,29 +3,22 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using xofz.Framework.Materialization;
     using xofz.UI;
 
     public class CompositeUi
     {
         public CompositeUi()
-            : this(new LinkedListMaterializer())
         {
-        }
-
-        public CompositeUi(Materializer materializer)
-        {
-            this.materializer = materializer;
             this.uiHolders = new LinkedList<UiHolder>();
         }
 
         public virtual TUi ReadUi<TUi, TPresenter>(
-            string presenterName = null,
-            string uiName = null)
+            string uiName = null,
+            string presenterName = null)
             where TUi : Ui
+            where TPresenter : Presenter
         {
-            var mz = this.materializer;
-            var matches = mz.Materialize(
+            ICollection<UiHolder> matches = new LinkedList<UiHolder>(
                 this.uiHolders.Where(ui => ui.Content is TUi));
             if (matches.Count == 0)
             {
@@ -44,9 +37,10 @@
                 return (TUi)match.Content;
             }
 
-            var namedMatches = mz.Materialize(matches.Where(
-                t => t.Presenter is NamedPresenter &&
-                     ((NamedPresenter)t.Presenter).Name == presenterName));
+            ICollection<UiHolder> namedMatches = new LinkedList<UiHolder>(
+                matches.Where(t =>
+                    t.Presenter is NamedPresenter presenter &&
+                    presenter.Name == presenterName));
             if (namedMatches.Count == 0)
             {
                 return default(TUi);
@@ -63,7 +57,7 @@
         }
 
         public virtual TResult Read<TUi, TResult>(
-            object presenter,
+            Presenter presenter,
             Func<TUi, TResult> read,
             string uiName = null)
             where TUi : Ui
@@ -80,14 +74,14 @@
 
         public virtual TResult Read<TUi, TResult>(
             TUi ui,
-            Func<TUi, TResult> read)
+            Func<TResult> read)
             where TUi : Ui
         {
-            return UiHelpers.Read(ui, () => read(ui));
+            return UiHelpers.Read(ui, () => read());
         }
 
         public virtual TUi Write<TUi>(
-            object presenter, 
+            Presenter presenter, 
             Action<TUi> write,
             string uiName = null) 
             where TUi : Ui
@@ -108,18 +102,18 @@
 
         public virtual void Write<TUi>(
             TUi ui,
-            Action<TUi> write)
+            Do write)
             where TUi : Ui
         {
-            UiHelpers.Write(ui, () => write(ui));
+            UiHelpers.Write(ui, write);
         }
 
         public virtual void Register(
             Ui ui, 
-            object presenter,
+            Presenter presenter,
             string uiName = null)
         {
-            this.uiHolders.AddLast(
+            this.uiHolders.Add(
                 new UiHolder
                 {
                     Content = ui,
@@ -128,16 +122,15 @@
                 });
         }
 
-        private readonly Materializer materializer;
-        private readonly LinkedList<UiHolder> uiHolders;
+        protected readonly ICollection<UiHolder> uiHolders;
 
-        private class UiHolder
+        protected class UiHolder
         {
             public virtual Ui Content { get; set; }
 
             public virtual string ContentName { get; set; }
 
-            public virtual object Presenter { get; set; }
+            public virtual Presenter Presenter { get; set; }
         }
     }
 }

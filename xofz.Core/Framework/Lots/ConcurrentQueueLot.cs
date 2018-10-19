@@ -1,23 +1,23 @@
-﻿namespace xofz.Framework.Materialization
+﻿namespace xofz.Framework.Lots
 {
     using System.Collections;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
 
-    public sealed class ConcurrentQueueMaterializedEnumerable<T> 
-        : MaterializedEnumerable<T>
+    public sealed class ConcurrentQueueLot<T> 
+        : Lot<T>
     {
-        public ConcurrentQueueMaterializedEnumerable()
+        public ConcurrentQueueLot()
             : this(new ConcurrentQueue<T>())
         {
         }
 
-        public ConcurrentQueueMaterializedEnumerable(IEnumerable<T> source)
+        public ConcurrentQueueLot(IEnumerable<T> source)
             : this(new ConcurrentQueue<T>(source))
         {
         }
 
-        public ConcurrentQueueMaterializedEnumerable(
+        public ConcurrentQueueLot(
             ConcurrentQueue<T> queue)
         {
             this.queue = queue;

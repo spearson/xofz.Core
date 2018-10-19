@@ -11,7 +11,7 @@
             this.imploder = illuminator.Illumine<Imploder<IDisposable>>(1);
         }
 
-        public void BringToGod(MaterializedEnumerable<IDisposable> disposables)
+        public void BringToGod(Lot<IDisposable> disposables)
         {
             foreach (var disposable in disposables)
             {

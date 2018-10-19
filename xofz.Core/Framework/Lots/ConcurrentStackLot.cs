@@ -1,23 +1,25 @@
-﻿namespace xofz.Framework.Materialization
+﻿namespace xofz.Framework.Lots
 {
     using System.Collections;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
+    using xofz.Framework.Lots;
 
-    public sealed class ConcurrentStackMaterializedEnumerable<T> : MaterializedEnumerable<T>
+    public sealed class ConcurrentStackLot<T> 
+        : Lot<T>
     {
-        public ConcurrentStackMaterializedEnumerable()
+        public ConcurrentStackLot()
         {
             this.stack = new ConcurrentStack<T>();
         }
 
-        public ConcurrentStackMaterializedEnumerable(IEnumerable<T> source)
+        public ConcurrentStackLot(IEnumerable<T> source)
         {
             this.stack = new ConcurrentStack<T>(source);
         }
 
-        public ConcurrentStackMaterializedEnumerable(ConcurrentStack<T> stack)
+        public ConcurrentStackLot(ConcurrentStack<T> stack)
         {
             this.stack = stack;
         }
@@ -58,11 +60,10 @@
 
         public void PushRange(IEnumerable<T> source)
         {
-            MaterializedEnumerable<T> ll =
-                new LinkedListMaterializedEnumerable<T>(source);
-            var array = new T[ll.Count];
+            Lot<T> lot = new LinkedListLot<T>(source);
+            var array = new T[lot.Count];
             long counter = 0;
-            foreach (var item in ll)
+            foreach (var item in lot)
             {
                 array[counter] = item;
                 ++counter;
@@ -73,11 +74,11 @@
 
         public void PushRange(IEnumerable<T> source, long index, long length)
         {
-            MaterializedEnumerable<T> ll =
-                new LinkedListMaterializedEnumerable<T>(source);
+            Lot<T> lot =
+                new LinkedListLot<T>(source);
             var array = new T[length - index];
             long counter = 0;
-            foreach (var item in ll)
+            foreach (var item in lot)
             {
                 if (counter < index)
                 {

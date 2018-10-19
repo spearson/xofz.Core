@@ -1,16 +1,16 @@
-﻿namespace xofz.Framework.Materialization
+﻿namespace xofz.Framework.Lots
 {
     using System.Collections;
     using System.Collections.Generic;
 
-    public sealed class SingleMaterializedEnumerable<T> : MaterializedEnumerable<T>
+    public sealed class SingleLot<T> : Lot<T>
     {
-        public SingleMaterializedEnumerable(T item)
+        public SingleLot(T item)
         {
             this.item = item;
         }
 
-        long MaterializedEnumerable<T>.Count => 1;
+        long Lot<T>.Count => 1;
 
         public IEnumerator<T> GetEnumerator()
         {
@@ -24,6 +24,16 @@
 
         public void CopyTo(T[] array)
         {
+            if (array == null)
+            {
+                return;
+            }
+
+            if (array.Length < 1)
+            {
+                return;
+            }
+
             array[0] = this.item;
         }
 

@@ -5,9 +5,11 @@
 
     public class Reflection<T>
     {
-        public Reflection(MaterializedEnumerable<T> collection, Absolution<T> absolution)
+        public Reflection(
+            Lot<T> lot, 
+            Absolution<T> absolution)
         {
-            this.collection = collection;
+            this.collection = lot;
             this.absolution = absolution;
         }
 
@@ -43,7 +45,7 @@
         }
 
         private T currentItem;
-        private readonly MaterializedEnumerable<T> collection;
+        private readonly Lot<T> collection;
         private readonly Absolution<T> absolution;
     }
 }

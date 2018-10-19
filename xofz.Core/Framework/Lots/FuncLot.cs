@@ -1,4 +1,4 @@
-﻿namespace xofz.Framework.Materialization
+﻿namespace xofz.Framework.Lots
 {
     using System;
     using System.Collections;
@@ -6,9 +6,9 @@
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    public sealed class FuncMaterializedEnumerable<T> : MaterializedEnumerable<T>
+    public sealed class FuncLot<T> : Lot<T>
     {
-        public FuncMaterializedEnumerable(IEnumerable<Func<T>> source)
+        public FuncLot(IEnumerable<Func<T>> source)
         {
             this.source = source;
         }

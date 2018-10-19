@@ -7,7 +7,7 @@
             this.illuminator = illuminator;
         }
 
-        public virtual T[] Fill<T>(T[] array, MaterializedEnumerable<object> dependencies)
+        public virtual T[] Fill<T>(T[] array, Lot<object> dependencies)
             where T : class
         {
             for (var i = 0; i < array.Length; ++i)

@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using xofz.Framework.Materialization;
-
+    using xofz.Framework.Lots;
+    
     public class Reorderer<T>
     {
         public Reorderer(
@@ -14,7 +14,7 @@
             this.connector = connector;
         }
 
-        public virtual MaterializedEnumerable<T> Reorder(
+        public virtual Lot<T> Reorder(
             IEnumerable<T> source,
             int startIndex)
         {
@@ -24,7 +24,7 @@
                 false);
         }
 
-        public virtual MaterializedEnumerable<T> Reorder(
+        public virtual Lot<T> Reorder(
             IEnumerable<T> source,
             int startIndex,
             int take)
@@ -43,7 +43,7 @@
                 end = ll.Skip(startIndex + take);
             }
 
-            return new LinkedListMaterializedEnumerable<T>(
+            return new LinkedListLot<T>(
                 this.connector.Connect(start, next, end));
         }
 

@@ -4,7 +4,7 @@
         using System.Collections.Generic;
         using System.Linq;
         using System.Reflection;
-        using xofz.Framework.Materialization;
+        using xofz.Framework.Lots;
 
         public class Illuminator
         {
@@ -12,10 +12,10 @@
                 where T : class
             {
                 return this.Illumine<T>(
-                    new LinkedListMaterializedEnumerable<object>(dependencies));
+                    new LinkedListLot<object>(dependencies));
             }
 
-            public virtual T Illumine<T>(MaterializedEnumerable<object> dependencies)
+            public virtual T Illumine<T>(Lot<object> dependencies)
                 where T : class
             {
                 var constructors = new LinkedList<ConstructorInfo>(

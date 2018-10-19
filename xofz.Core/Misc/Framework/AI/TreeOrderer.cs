@@ -2,7 +2,7 @@
 {
     public interface TreeOrderer<T>
     {
-        MaterializedEnumerable<T> OrderedTree { get; }
+        Lot<T> OrderedTree { get; }
 
         void Order(Tree<T> tree);
     }

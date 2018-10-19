@@ -1,23 +1,23 @@
-﻿namespace xofz.Framework.Materialization
+﻿namespace xofz.Framework.Lots
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
-    public sealed class HashSetMaterializedEnumerable<T> : MaterializedEnumerable<T>
+    public sealed class HashSetLot<T> : Lot<T>
     {
-        public HashSetMaterializedEnumerable()
+        public HashSetLot()
         {
             this.hashSet = new HashSet<T>();
         }
 
-        public HashSetMaterializedEnumerable(HashSet<T> hashSet)
+        public HashSetLot(HashSet<T> hashSet)
         {
             this.hashSet = hashSet;
         }
 
-        long MaterializedEnumerable<T>.Count => this.hashSet.Count;
+        long Lot<T>.Count => this.hashSet.Count;
 
         public IEnumerator<T> GetEnumerator()
         {

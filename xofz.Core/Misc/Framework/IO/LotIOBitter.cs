@@ -2,13 +2,13 @@
 {
     using System.Collections.Generic;
 
-    public sealed class MaterializedEnumerableIOBitter : IOBitter
+    public sealed class LotIOBitter : IOBitter
     {
-        public MaterializedEnumerableIOBitter(
-            Materializer materializer,
+        public LotIOBitter(
+            Lotter lotter,
             IOBitter bitter)
         {
-            this.materializer = materializer;
+            this.lotter = lotter;
             this.bitter = bitter;
         }
 
@@ -16,7 +16,7 @@
 
         IEnumerable<bool> IOBitter.Read()
         {
-            return this.materializer.Materialize(
+            return this.lotter.Materialize(
                 this.bitter.Read());
         }
 
@@ -25,11 +25,11 @@
             out bool succeeded)
         {
             this.bitter.Write(
-                this.materializer.Materialize(bits),
+                this.lotter.Materialize(bits),
                 out succeeded);
         }
 
-        private readonly Materializer materializer;
+        private readonly Lotter lotter;
         private readonly IOBitter bitter;
     }
 }

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
 
     public class SkippingTreeOrderer<T> : TreeOrderer<T>
     {
@@ -11,7 +11,7 @@
             this.numberOfSkips = numberOfSkips;
         }
 
-        public virtual MaterializedEnumerable<T> OrderedTree => this.orderedTree;
+        public virtual Lot<T> OrderedTree => this.orderedTree;
 
         public virtual void Order(Tree<T> tree)
         {
@@ -29,10 +29,10 @@
                 ++subtractor;
             }
 
-            this.orderedTree = new LinkedListMaterializedEnumerable<T>(linkedList);
+            this.orderedTree = new LinkedListLot<T>(linkedList);
         }
 
-        private MaterializedEnumerable<T> orderedTree;
+        private Lot<T> orderedTree;
         private readonly short numberOfSkips;
     }
 }

@@ -1,11 +1,11 @@
 ﻿namespace xofz.Misc.Framework.AI
 {
     using System.Collections.Generic;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
 
     public class OptimalTreeOrderer<T> : TreeOrderer<T>
     {
-        public virtual MaterializedEnumerable<T> OrderedTree => this.orderedTree;
+        public virtual Lot<T> OrderedTree => this.orderedTree;
 
         public virtual void Order(Tree<T> tree)
         {
@@ -17,7 +17,7 @@
             var list = new List<T>();
             list.AddRange(this.primaryLinkedList);
             list.AddRange(this.secondaryLinkedList);
-            this.orderedTree = new ListMaterializedEnumerable<T>(list);
+            this.orderedTree = new ListLot<T>(list);
         }
 
         private void checkNode(TreeNode<T> node)
@@ -39,6 +39,6 @@
 
         private int depth;
         private LinkedList<T> primaryLinkedList, secondaryLinkedList;
-        private MaterializedEnumerable<T> orderedTree;
+        private Lot<T> orderedTree;
     }
 }

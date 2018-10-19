@@ -1,8 +1,8 @@
 ﻿namespace xofz.Misc.Framework
 {
     using xofz.Framework;
-    using xofz.Framework.Materialization;
-    using xofz.Misc.Framework.IO;
+    using xofz.Framework.Lotters;
+    using xofz.Misc.Framework.IO;    
 
     public class IOBitterFactory
     {
@@ -41,8 +41,8 @@
         public virtual IOBitter NewMaterializedEnumerable(
             IOBitter bitter)
         {
-            return new MaterializedEnumerableIOBitter(
-                new LinkedListMaterializer(),
+            return new LotIOBitter(
+                new LinkedListLotter(),
                 bitter);
         }
 

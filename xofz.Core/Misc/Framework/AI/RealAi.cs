@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Numerics;
     using System.Threading;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
     using xofz.Framework.Transformation;
 
     public class RealAi<T>
@@ -28,7 +28,7 @@
             return item;
         }
 
-        public MaterializedEnumerable<Action<T>> PeekComputations(BigInteger numberToPeek)
+        public Lot<Action<T>> PeekComputations(BigInteger numberToPeek)
         {
             var ll = new LinkedList<Action<T>>();
             var enumerator = this.computations.GetEnumerator();
@@ -43,14 +43,14 @@
             }
 
             enumerator.Dispose();
-            return new LinkedListMaterializedEnumerable<Action<T>>(ll);
+            return new LinkedListLot<Action<T>>(ll);
         }
 
         public virtual void DoWork(IEnumerable<T> source, Action<T> longFunction)
         {
             var enumerator = source.GetEnumerator();
             enumerator.MoveNext();
-            MaterializedEnumerable<Thread> threads = new LinkedListMaterializedEnumerable<Thread>();
+            Lot<Thread> threads = new LinkedListLot<Thread>();
             foreach (var computation in this.computations)
             {
                 var current = enumerator.Current;

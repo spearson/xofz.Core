@@ -3,18 +3,18 @@ namespace xofz.Misc.Framework
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lotters;
 
     public class CollectionHolder
     {
         public CollectionHolder()
-            : this(new LinkedListMaterializer())
+            : this(new LinkedListLotter())
         {
         }
 
-        public CollectionHolder(Materializer materializer)
+        public CollectionHolder(Lotter lotter)
         {
-            this.materializer = materializer;
+            this.lotter = lotter;
             this.collections = new List<Tuple<string, object>>(0x100);
         }
 
@@ -27,15 +27,15 @@ namespace xofz.Misc.Framework
                 Tuple.Create(name, o));
         }
 
-        public virtual MaterializedEnumerable<T> Get<T>(string name = null)
+        public virtual Lot<T> Get<T>(string name = null)
         {
             var collection = this.collections.FirstOrDefault(
                 tuple => tuple.Item1 == name
-                && tuple.Item2 is MaterializedEnumerable<T>);
+                && tuple.Item2 is Lot<T>);
 
             if (collection != null)
             {
-                return collection.Item2 as MaterializedEnumerable<T>;
+                return collection.Item2 as Lot<T>;
             }
 
             collection = this.collections.FirstOrDefault(
@@ -44,14 +44,14 @@ namespace xofz.Misc.Framework
 
             if (collection == null)
             {
-                return default(MaterializedEnumerable<T>);
+                return default(Lot<T>);
             }
 
-            return this.materializer.Materialize(
+            return this.lotter.Materialize(
                 collection.Item2 as IEnumerable<T>);
         }
 
-        private readonly Materializer materializer;
+        private readonly Lotter lotter;
         private readonly List<Tuple<string, object>> collections;
     }
 }

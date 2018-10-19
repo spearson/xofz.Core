@@ -4,7 +4,7 @@ namespace xofz.Misc.Framework.Computation
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Shifter<T> : MaterializedEnumerable<T>
+    public class Shifter<T> : Lot<T>
     {
         public Shifter(int capacity)
         {
@@ -16,7 +16,7 @@ namespace xofz.Misc.Framework.Computation
 
         public virtual int CurrentSize => this.linkedList.Count;
 
-        long MaterializedEnumerable<T>.Count => this.CurrentSize;
+        long Lot<T>.Count => this.CurrentSize;
 
         public IEnumerator<T> GetEnumerator()
         {

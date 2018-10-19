@@ -8,13 +8,13 @@
     public class Innovator
     {
         public virtual IEnumerable<T> Innovate<T>(
-            MaterializedEnumerable<T>[] collections,
+            Lot<T>[] lots,
             Func<T, BigInteger> valueChooser)
         {
             var enumerators = new LinkedList<IEnumerator<T>>();
-            for (var i = 0; i < collections.Length; ++i)
+            for (var i = 0; i < lots.Length; ++i)
             {
-                enumerators.AddLast(collections[i].GetEnumerator());
+                enumerators.AddLast(lots[i].GetEnumerator());
             }
 
             while (enumerators.First.Value.MoveNext())

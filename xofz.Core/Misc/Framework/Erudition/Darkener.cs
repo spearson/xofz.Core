@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Numerics;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
 
     public class Darkener
     {
-        public virtual MaterializedEnumerable<T> Darken<T>(
+        public virtual Lot<T> Darken<T>(
             IEnumerable<T> source, 
             BigInteger limiter)
         {
@@ -27,7 +27,7 @@
                 darkenedCollection.AddLast(item);
             }
 
-            return new LinkedListMaterializedEnumerable<T>(
+            return new LinkedListLot<T>(
                 darkenedCollection);
         }
     }

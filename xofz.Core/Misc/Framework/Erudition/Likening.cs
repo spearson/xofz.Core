@@ -2,13 +2,13 @@
 {
     using System;
     using System.Linq;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
 
     public class Likening
     {
         public virtual T Liken<T>(
             Func<T> factory, 
-            MaterializedEnumerable<Action<T>> acts,
+            Lot<Action<T>> acts,
             long limiter)
         {
             var actee = factory();
@@ -24,7 +24,7 @@
 
                 return this.Liken(
                     factory,
-                    new LinkedListMaterializedEnumerable<Action<T>>(
+                    new LinkedListLot<Action<T>>(
                         acts.Except(new[] { act })),
                     limiter);
             }

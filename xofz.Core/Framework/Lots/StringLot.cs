@@ -1,11 +1,11 @@
-﻿namespace xofz.Framework.Materialization
+﻿namespace xofz.Framework.Lots
 {
     using System.Collections;
     using System.Collections.Generic;
 
-    public sealed class StringMaterializedEnumerable : MaterializedEnumerable<char>
+    public sealed class StringLot : Lot<char>
     {
-        public StringMaterializedEnumerable(string s)
+        public StringLot(string s)
         {
             this.s = s;
         }

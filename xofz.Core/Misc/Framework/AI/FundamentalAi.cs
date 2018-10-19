@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
 
     public class FundamentalAi<T>
     {
@@ -11,7 +11,7 @@
             this.treeOrderer = treeOrderer;
         }
 
-        public virtual MaterializedEnumerable<T> Act(Tree<T> tree, IEnumerable<Action<T>> actions)
+        public virtual Lot<T> Act(Tree<T> tree, IEnumerable<Action<T>> actions)
         {
             this.treeOrderer.Order(tree);
             var actionEnumerator = actions.GetEnumerator();
@@ -19,12 +19,12 @@
             foreach (var value in this.treeOrderer.OrderedTree)
             {
                 actionEnumerator.MoveNext();
-                actionEnumerator.Current(value);
+                actionEnumerator.Current?.Invoke(value);
                 linkedList.AddLast(value);
             }
 
             actionEnumerator.Dispose();
-            return new LinkedListMaterializedEnumerable<T>(linkedList);
+            return new LinkedListLot<T>(linkedList);
         }
 
         private readonly TreeOrderer<T> treeOrderer;

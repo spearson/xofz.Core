@@ -17,7 +17,7 @@
             this.rotator = rotator;
         }
 
-        public IEnumerable<MaterializedEnumerable<T>> RequestPermutations<T>(MaterializedEnumerable<T> collection)
+        public IEnumerable<Lot<T>> RequestPermutations<T>(Lot<T> collection)
         {
             var r = this.rotator;
             for (var i = 0; i < collection.Count; ++i)

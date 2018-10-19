@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
     using xofz.Misc.Framework.Illumination;
 
     public class FreedomHolder
@@ -17,7 +17,7 @@
 
         public virtual string Name { get; }
 
-        public virtual void Surge(MaterializedEnumerable<IDisposable> disposables)
+        public virtual void Surge(Lot<IDisposable> disposables)
         {
             var dependencies = new LinkedList<List<object>>();
             foreach (var disposable in disposables)
@@ -35,12 +35,12 @@
                     }
                 }
 
-                this.Surge(new ListMaterializedEnumerable<IDisposable>(dToSurge));
+                this.Surge(new ListLot<IDisposable>(dToSurge));
 
                 // ReSharper disable once ImpureMethodCallOnReadonlyValueField
                 this.martyr.BringToGod(disposables);
                 var ll = this.illuminator.Illumine<
-                    LinkedListMaterializedEnumerable<IDisposable>>(dependencies);
+                    LinkedListLot<IDisposable>>(dependencies);
                 this.illuminator.Illumine<IDisposable>(ll);
             }
         }

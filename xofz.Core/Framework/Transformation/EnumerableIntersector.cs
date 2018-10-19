@@ -1,11 +1,11 @@
 ﻿namespace xofz.Framework.Transformation
 {
     using System.Collections.Generic;
-    using Materialization;
+    using xofz.Framework.Lots;
 
     public class EnumerableIntersector
     {
-        public virtual MaterializedEnumerable<T> Intersect<T>(IEnumerable<IEnumerable<T>> sources)
+        public virtual Lot<T> Intersect<T>(IEnumerable<IEnumerable<T>> sources)
         {
             var hashSet = new HashSet<T>();
             foreach (var source in sources)
@@ -16,7 +16,7 @@
                 }
             }
 
-            return new HashSetMaterializedEnumerable<T>(hashSet);
+            return new HashSetLot<T>(hashSet);
         }
     }
 }

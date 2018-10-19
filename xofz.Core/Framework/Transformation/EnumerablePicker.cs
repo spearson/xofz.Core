@@ -7,7 +7,7 @@
     {
         public virtual IEnumerable<T> Pick<T>(
             IEnumerable<T> source,
-            MaterializedEnumerable<BigInteger> pickPoints)
+            Lot<BigInteger> pickPoints)
         {
             BigInteger counter = 0;
             var enumerator = source.GetEnumerator();

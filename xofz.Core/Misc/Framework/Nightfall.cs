@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
 
     public class Nightfall
     {
@@ -11,7 +11,7 @@
             this.martyr = new Martyr.Martyr();
         }
 
-        public virtual MaterializedEnumerable<object> Process(MaterializedEnumerable<object> references)
+        public virtual Lot<object> Process(Lot<object> references)
         {
             var ll = new LinkedList<object>();
             var lld = new LinkedList<IDisposable>();
@@ -27,9 +27,9 @@
             }
 
             // ReSharper disable once ImpureMethodCallOnReadonlyValueField
-            this.martyr.BringToGod(new LinkedListMaterializedEnumerable<IDisposable>(lld));
+            this.martyr.BringToGod(new LinkedListLot<IDisposable>(lld));
 
-            return new LinkedListMaterializedEnumerable<object>(ll);
+            return new LinkedListLot<object>(ll);
         }
 
         private readonly Martyr.Martyr martyr;

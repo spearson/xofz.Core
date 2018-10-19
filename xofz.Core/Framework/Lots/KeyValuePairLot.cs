@@ -1,13 +1,13 @@
-﻿namespace xofz.Framework.Materialization
+﻿namespace xofz.Framework.Lots
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-
-    public sealed class KeyValuePairMaterializedEnumerable<K, V> : MaterializedEnumerable<K>
+    
+    public sealed class KeyValuePairLot<K, V> : Lot<K>
     {
-        public KeyValuePairMaterializedEnumerable(MaterializedEnumerable<KeyValuePair<K, V>> items)
+        public KeyValuePairLot(Lot<KeyValuePair<K, V>> items)
         {
             this.items = items;
         }
@@ -35,6 +35,6 @@
             Array.Copy(kvps.Select(kvp => kvp.Key).ToArray(), keyArray, kvps.Count);
         }
 
-        private readonly MaterializedEnumerable<KeyValuePair<K, V>> items;
+        private readonly Lot<KeyValuePair<K, V>> items;
     }
 }

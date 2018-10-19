@@ -2,26 +2,26 @@
 {
     using System;
     using System.Collections.Generic;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lotters;
 
     public class EnumerableRotatorV2 : EnumerableRotator
     {
         public EnumerableRotatorV2()
-            : this(new LinkedListMaterializer())
+            : this(new LinkedListLotter())
         {
         }
 
-        public EnumerableRotatorV2(Materializer materializer)
+        public EnumerableRotatorV2(Lotter lotter)
         {
-            if (materializer == null)
+            if (lotter == null)
             {
-                throw new ArgumentNullException(nameof(materializer));
+                throw new ArgumentNullException(nameof(lotter));
             }
 
-            this.materializer = materializer;
+            this.lotter = lotter;
         }
 
-        public virtual MaterializedEnumerable<T> RotateV2<T>(
+        public virtual Lot<T> RotateV2<T>(
             IEnumerable<T> source,
             int cycles,
             bool goRight = true)
@@ -30,10 +30,10 @@
                 source,
                 cycles,
                 goRight);
-            return this.materializer.Materialize(
+            return this.lotter.Materialize(
                 rotated);
         }
 
-        protected readonly Materializer materializer;
+        protected readonly Lotter lotter;
     }
 }

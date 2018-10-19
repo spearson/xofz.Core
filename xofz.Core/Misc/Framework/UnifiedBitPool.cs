@@ -4,36 +4,38 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lotters;
 
     public class UnifiedBitPool
     {
         public UnifiedBitPool(
-            MaterializedEnumerable<bool> initialPool)
-            : this(initialPool, new LinkedListMaterializer())
+            Lot<bool> initialPool)
+            : this(initialPool, new LinkedListLotter())
         {
         }
 
         public UnifiedBitPool(
-            MaterializedEnumerable<bool> initialPool,
-            Materializer materializer)
+            Lot<bool> initialPool,
+            Lotter lotter)
         {
             Debug.Assert(
-                initialPool != default(MaterializedEnumerable<bool>));
+                initialPool != default(Lot<bool>));
             this.currentPool = initialPool;
-            this.materializer = materializer;
+            this.lotter = lotter;
             this.onBitCount = initialPool.Count(b => b);
         }
 
         public UnifiedBitPool(int onBitCount)
-            : this(onBitCount, new LinkedListMaterializer())
+            : this(onBitCount, new LinkedListLotter())
         {
         }
 
-        public UnifiedBitPool(int onBitCount, Materializer materializer)
+        public UnifiedBitPool(
+            int onBitCount, 
+            Lotter lotter)
         {
             this.onBitCount = onBitCount;
-            this.materializer = materializer;
+            this.lotter = lotter;
             var max = onBitCount * 2;
             var array = new bool[max];
             for (long i = 0; i < max - 1; i += 2)
@@ -42,15 +44,15 @@
                 array[i + 1] = false;
             }
 
-            this.currentPool = materializer.Materialize(array);
+            this.currentPool = lotter.Materialize(array);
         }
 
         public virtual int OnBitCount => this.onBitCount;
 
         public virtual int PoolSize => (int)this.currentPool.Count;
 
-        public virtual void Shift(Func<MaterializedEnumerable<bool>,
-            MaterializedEnumerable<bool>> shifter)
+        public virtual void Shift(
+            Func<Lot<bool>, Lot<bool>> shifter)
         {
             this.setPool(shifter(this.currentPool));
         }
@@ -71,7 +73,7 @@
             e.Dispose();
 
             this.setPool(
-                this.materializer.Materialize(array));
+                this.lotter.Materialize(array));
         }
 
         public virtual IEnumerable<long> ReadOnBitIndexes()
@@ -89,7 +91,7 @@
             }
         }
 
-        private void setPool(MaterializedEnumerable<bool> newPool)
+        private void setPool(Lot<bool> newPool)
         {
             if (newPool.Count(b => b) != this.onBitCount)
             {
@@ -100,9 +102,9 @@
             this.currentPool = newPool;
         }
 
-        private MaterializedEnumerable<bool> currentPool;
+        private Lot<bool> currentPool;
         private readonly int onBitCount;
-        private readonly Materializer materializer;
+        private readonly Lotter lotter;
     }
 
     public class Tester

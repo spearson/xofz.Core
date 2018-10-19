@@ -3,19 +3,20 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lots;
 
     public class HashCodeSettingTreeOrderer<T> : TreeOrderer<T> where T : MutableHashCode
     {
-        public virtual MaterializedEnumerable<T> OrderedTree => this.orderedTree; 
+        public virtual Lot<T> OrderedTree => this.orderedTree; 
 
         public virtual void Order(Tree<T> tree)
         {
             this.processNodes(tree.Node);
 
             this.setOrderedTree(
-                new LinkedListMaterializedEnumerable<T>(
-                    new LinkedList<T>(tree.OrderBy(t => t.GetHashCode()))));
+                new LinkedListLot<T>(
+                    new LinkedList<T>(
+                        tree.OrderBy(t => t.GetHashCode()))));
         }
 
         private void processNodes(TreeNode<T> headNode)
@@ -33,13 +34,13 @@
             this.currentHashCode = currentHashCode;
         }
 
-        private void setOrderedTree(MaterializedEnumerable<T> orderedTree)
+        private void setOrderedTree(Lot<T> orderedTree)
         {
             this.orderedTree = orderedTree;
         }
 
         private int currentHashCode;
-        private MaterializedEnumerable<T> orderedTree;
+        private Lot<T> orderedTree;
     }
 
     public class Tester

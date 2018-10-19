@@ -3,17 +3,19 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    public sealed class MaterializedEnumerableIlluminatedObject<T> : IlluminatedObject, MaterializedEnumerable<T>
+    public sealed class LotIlluminatedObject<T> 
+        : IlluminatedObject, Lot<T>
     {
-        public MaterializedEnumerableIlluminatedObject(MaterializedEnumerable<T> collection)
-            : base(new object[] { collection })
+        public LotIlluminatedObject(
+            Lot<T> lot)
+            : base(new object[] { lot })
         {
-            this.collection = collection;
+            this.lot = lot;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return this.collection.GetEnumerator();
+            return this.lot.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -21,8 +23,8 @@
             return this.GetEnumerator();
         }
 
-        public long Count => this.collection.Count;
+        public long Count => this.lot.Count;
 
-        private readonly MaterializedEnumerable<T> collection;
+        private readonly Lot<T> lot;
     }
 }

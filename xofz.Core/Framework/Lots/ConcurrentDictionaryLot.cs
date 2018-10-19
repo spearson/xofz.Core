@@ -1,69 +1,70 @@
-﻿namespace xofz.Framework.Materialization
+﻿namespace xofz.Framework.Lots
 {
     using System;
     using System.Collections;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using xofz.Framework.Lotters;
 
-    public sealed class ConcurrentDictionaryMaterializedEnumerable<TKey, TValue>
-        : MaterializedEnumerable<KeyValuePair<TKey, TValue>>
+    public sealed class ConcurrentDictionaryLot<TKey, TValue>
+        : Lot<KeyValuePair<TKey, TValue>>
     {
-        public ConcurrentDictionaryMaterializedEnumerable()
+        public ConcurrentDictionaryLot()
             : this(
                 new ConcurrentDictionary<TKey, TValue>(),
-                new LinkedListMaterializer())
+                new LinkedListLotter())
         {
         }
 
-        public ConcurrentDictionaryMaterializedEnumerable(
+        public ConcurrentDictionaryLot(
             IEnumerable<KeyValuePair<TKey, TValue>> source)
             : this(
                 source,
-                new LinkedListMaterializer())
+                new LinkedListLotter())
         {
         }
 
-        public ConcurrentDictionaryMaterializedEnumerable(
-            Materializer materializer)
+        public ConcurrentDictionaryLot(
+            Lotter lotter)
             : this(
                 new ConcurrentDictionary<TKey, TValue>(),
-                materializer)
+                lotter)
         {
         }
 
-        public ConcurrentDictionaryMaterializedEnumerable(
+        public ConcurrentDictionaryLot(
             ConcurrentDictionary<TKey, TValue> dictionary)
             : this(
                 dictionary,
-                new LinkedListMaterializer())
+                new LinkedListLotter())
         {
         }
 
-        public ConcurrentDictionaryMaterializedEnumerable(
+        public ConcurrentDictionaryLot(
             IEnumerable<KeyValuePair<TKey, TValue>> source,
-            Materializer materializer)
+            Lotter lotter)
             : this(
                 new ConcurrentDictionary<TKey, TValue>(source),
-                materializer)
+                lotter)
         {
         }
 
-        public ConcurrentDictionaryMaterializedEnumerable(
+        public ConcurrentDictionaryLot(
             ConcurrentDictionary<TKey, TValue> dictionary,
-            Materializer materializer)
+            Lotter lotter)
         {
             this.dictionary = dictionary;
-            this.materializer = materializer;
+            this.lotter = lotter;
         }
 
-        long MaterializedEnumerable<KeyValuePair<TKey, TValue>>.Count
+        long Lot<KeyValuePair<TKey, TValue>>.Count
             => this.dictionary.Count;
 
-        public MaterializedEnumerable<TKey> Keys =>
-            this.materializer.Materialize(this.dictionary.Keys);
+        public Lot<TKey> Keys =>
+            this.lotter.Materialize(this.dictionary.Keys);
 
-        public MaterializedEnumerable<TValue> Values =>
-            this.materializer.Materialize(this.dictionary.Values);
+        public Lot<TValue> Values =>
+            this.lotter.Materialize(this.dictionary.Values);
 
         public bool IsEmpty => this.dictionary.IsEmpty;
 
@@ -147,6 +148,6 @@
         }
 
         private readonly ConcurrentDictionary<TKey, TValue> dictionary;
-        private readonly Materializer materializer;
+        private readonly Lotter lotter;
     }
 }

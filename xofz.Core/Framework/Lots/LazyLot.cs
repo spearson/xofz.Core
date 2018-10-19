@@ -1,23 +1,24 @@
-﻿namespace xofz.Framework.Materialization
+﻿namespace xofz.Framework.Lots
 {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
+    using xofz.Framework.Lotters;
 
-    public sealed class LazyMaterializedEnumerable<T> : MaterializedEnumerable<T>
+    public sealed class LazyLot<T> : Lot<T>
     {
-        public LazyMaterializedEnumerable(IEnumerable<T> source)
-            : this(source, new LinkedListMaterializer())
+        public LazyLot(IEnumerable<T> source)
+            : this(source, new LinkedListLotter())
         {
         }
 
-        public LazyMaterializedEnumerable(
+        public LazyLot(
             IEnumerable<T> source, 
-            Materializer materializer)
+            Lotter lotter)
         {
             this.source = source;
-            this.materializer = materializer;
+            this.lotter = lotter;
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -56,18 +57,18 @@
         {
             if (Interlocked.CompareExchange(ref this.materializedIf1, 1, 0) == 0)
             {
-                this.setItems(this.materializer.Materialize(this.source));
+                this.setItems(this.lotter.Materialize(this.source));
             }
         }
 
-        private void setItems(MaterializedEnumerable<T> items)
+        private void setItems(Lot<T> items)
         {
             this.items = items;
         }
 
         private int materializedIf1;
-        private MaterializedEnumerable<T> items; 
-        private readonly Materializer materializer;
+        private Lot<T> items; 
+        private readonly Lotter lotter;
         private readonly IEnumerable<T> source;
     }
 }

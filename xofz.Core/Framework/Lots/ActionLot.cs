@@ -1,20 +1,21 @@
-﻿namespace xofz.Framework.Materialization
+﻿namespace xofz.Framework.Lots
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    public sealed class ActionMaterializedEnumerable<T> : MaterializedEnumerable<T>
+    public sealed class ActionLot<T> : Lot<T>
     {
-        public ActionMaterializedEnumerable(
-            IEnumerable<Action<T>> source, MaterializedEnumerable<T> items)
+        public ActionLot(
+            IEnumerable<Action<T>> source, 
+            Lot<T> items)
         {
             this.source = source;
             this.items = items;
         }
 
-        long MaterializedEnumerable<T>.Count => this.items.Count;
+        long Lot<T>.Count => this.items.Count;
 
         public IEnumerator<T> GetEnumerator()
         {
@@ -55,6 +56,6 @@
         }
 
         private readonly IEnumerable<Action<T>> source;
-        private readonly MaterializedEnumerable<T> items;
+        private readonly Lot<T> items;
     }
 }

@@ -4,7 +4,7 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    public class Imploder<T> : MaterializedEnumerable<T>
+    public class Imploder<T> : Lot<T>
     {
         public Imploder(int capacity)
             : this(new List<T>(capacity), capacity)
@@ -19,7 +19,7 @@
 
         public virtual T this[int index] => this.list[index];
 
-        long MaterializedEnumerable<T>.Count => this.list.Count;
+        long Lot<T>.Count => this.list.Count;
 
         public virtual int CurrentCount => this.list.Count;
 
