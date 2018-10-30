@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
     
-    public sealed class KeyValuePairLot<K, V> : Lot<K>
+    public class KeyValuePairLot<K, V> : Lot<K>
     {
         public KeyValuePairLot(Lot<KeyValuePair<K, V>> items)
         {

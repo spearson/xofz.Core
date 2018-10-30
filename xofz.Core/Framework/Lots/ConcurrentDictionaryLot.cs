@@ -6,7 +6,7 @@
     using System.Collections.Generic;
     using xofz.Framework.Lotters;
 
-    public sealed class ConcurrentDictionaryLot<TKey, TValue>
+    public class ConcurrentDictionaryLot<TKey, TValue>
         : Lot<KeyValuePair<TKey, TValue>>
     {
         public ConcurrentDictionaryLot()
@@ -57,7 +57,7 @@
             this.lotter = lotter;
         }
 
-        long Lot<KeyValuePair<TKey, TValue>>.Count
+        public long Count
             => this.dictionary.Count;
 
         public Lot<TKey> Keys =>

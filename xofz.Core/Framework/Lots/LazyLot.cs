@@ -6,7 +6,7 @@
     using System.Threading;
     using xofz.Framework.Lotters;
 
-    public sealed class LazyLot<T> : Lot<T>
+    public class LazyLot<T> : Lot<T>
     {
         public LazyLot(IEnumerable<T> source)
             : this(source, new LinkedListLotter())

@@ -6,7 +6,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    public sealed class FuncLot<T> : Lot<T>
+    public class FuncLot<T> : Lot<T>
     {
         public FuncLot(IEnumerable<Func<T>> source)
         {

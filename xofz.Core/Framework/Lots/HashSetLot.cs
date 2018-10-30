@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
-    public sealed class HashSetLot<T> : Lot<T>
+    public class HashSetLot<T> : Lot<T>
     {
         public HashSetLot()
         {
@@ -17,7 +17,7 @@
             this.hashSet = hashSet;
         }
 
-        long Lot<T>.Count => this.hashSet.Count;
+        public long Count => this.hashSet.Count;
 
         public IEnumerator<T> GetEnumerator()
         {

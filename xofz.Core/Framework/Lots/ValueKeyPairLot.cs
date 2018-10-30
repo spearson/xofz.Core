@@ -5,10 +5,16 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public sealed class ValueKeyPairLot<K, V> : Lot<V>
+    public class ValueKeyPairLot<K, V> : Lot<V>
     {
         public ValueKeyPairLot(Lot<KeyValuePair<K, V>> items)
         {
+            if (items == null)
+            {
+                throw new ArgumentNullException(
+                    nameof(items));
+            }
+
             this.items = items;
         }
 
@@ -26,13 +32,18 @@
 
         public bool Contains(V value)
         {
-            return !this.items.FirstOrDefault(kvp => kvp.Value.Equals(value)).Equals(default(KeyValuePair<K, V>));
+            return EnumerableHelpers.Contains(
+                this.items.Select(kvp => kvp.Value),
+                value);
         }
 
         public void CopyTo(V[] valueArray)
         {
-            var kvps = this.items;
-            Array.Copy(kvps.Select(kvp => kvp.Value).ToArray(), valueArray, kvps.Count);
+            var lot = this.items;
+            Array.Copy(
+                lot.Select(kvp => kvp.Value).ToArray(), 
+                valueArray, 
+                lot.Count);
         }
 
         private readonly Lot<KeyValuePair<K, V>> items;

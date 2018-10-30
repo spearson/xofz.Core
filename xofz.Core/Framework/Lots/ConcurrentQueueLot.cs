@@ -4,7 +4,7 @@
     using System.Collections.Concurrent;
     using System.Collections.Generic;
 
-    public sealed class ConcurrentQueueLot<T> 
+    public class ConcurrentQueueLot<T> 
         : Lot<T>
     {
         public ConcurrentQueueLot()

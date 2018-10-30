@@ -6,7 +6,8 @@
 
     internal sealed class DispatcherSynchronizeInvoke : ISynchronizeInvoke
     {
-        public DispatcherSynchronizeInvoke(Dispatcher dispatcher)
+        public DispatcherSynchronizeInvoke(
+            Dispatcher dispatcher)
         {
             this.dispatcher = dispatcher;
         }

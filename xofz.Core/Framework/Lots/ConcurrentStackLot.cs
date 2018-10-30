@@ -4,9 +4,8 @@
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    using xofz.Framework.Lots;
 
-    public sealed class ConcurrentStackLot<T> 
+    public class ConcurrentStackLot<T> 
         : Lot<T>
     {
         public ConcurrentStackLot()

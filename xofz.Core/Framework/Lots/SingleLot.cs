@@ -3,14 +3,14 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    public sealed class SingleLot<T> : Lot<T>
+    public class SingleLot<T> : Lot<T>
     {
         public SingleLot(T item)
         {
             this.item = item;
         }
 
-        long Lot<T>.Count => 1;
+        public long Count => 1;
 
         public IEnumerator<T> GetEnumerator()
         {

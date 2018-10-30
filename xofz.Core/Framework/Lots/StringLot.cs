@@ -3,7 +3,7 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    public sealed class StringLot : Lot<char>
+    public class StringLot : Lot<char>
     {
         public StringLot(string s)
         {

@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public sealed class ActionLot<T> : Lot<T>
+    public class ActionLot<T> : Lot<T>
     {
         public ActionLot(
             IEnumerable<Action<T>> source, 
@@ -15,7 +15,7 @@
             this.items = items;
         }
 
-        long Lot<T>.Count => this.items.Count;
+        public long Count => this.items.Count;
 
         public IEnumerator<T> GetEnumerator()
         {
