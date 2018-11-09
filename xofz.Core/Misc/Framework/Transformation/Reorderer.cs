@@ -7,7 +7,7 @@
     public class Reorderer<T>
     {
         public Reorderer(
-            EnumerableRotatorV2 rotator,
+            EnumerableRotator rotator,
             EnumerableConnector connector)
         {
             this.rotator = rotator;
@@ -18,7 +18,7 @@
             IEnumerable<T> source,
             int startIndex)
         {
-            return this.rotator.RotateV2(
+            return this.rotator.Rotate(
                 source,
                 startIndex,
                 false);
@@ -47,7 +47,7 @@
                 this.connector.Connect(start, next, end));
         }
 
-        private readonly EnumerableRotatorV2 rotator;
+        private readonly EnumerableRotator rotator;
         private readonly EnumerableConnector connector;
     }
 }

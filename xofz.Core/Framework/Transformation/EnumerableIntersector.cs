@@ -7,16 +7,26 @@
     {
         public virtual Lot<T> Intersect<T>(IEnumerable<IEnumerable<T>> sources)
         {
-            var hashSet = new HashSet<T>();
+            var lot = new HashSetLot<T>();
+            if (sources == null)
+            {
+                return lot;
+            }
+            
             foreach (var source in sources)
             {
+                if (source == null)
+                {
+                    continue;
+                }
+
                 foreach (var item in source)
                 {
-                    hashSet.Add(item);
+                    lot.Add(item);
                 }
             }
 
-            return new HashSetLot<T>(hashSet);
+            return lot;
         }
     }
 }

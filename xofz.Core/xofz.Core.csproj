@@ -75,7 +75,6 @@
     <Compile Include="Framework\Computation\LcmComputer.cs" />
     <Compile Include="Framework\EventSubscriberV2.cs" />
     <Compile Include="Framework\Timers\Internal\TimerCallback.cs" />
-    <Compile Include="Framework\Transformation\EnumerableRotatorV2.cs" />
     <Compile Include="Framework\VersionReaderV2.cs" />
     <Compile Include="Misc\Framework\IOBitter.cs" />
     <Compile Include="Misc\Framework\IOBitterFactory.cs" />

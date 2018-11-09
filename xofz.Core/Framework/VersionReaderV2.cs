@@ -1,5 +1,6 @@
 ﻿namespace xofz.Framework
 {
+    using System;
     using System.Reflection;
 
     public class VersionReaderV2 : VersionReader
@@ -14,6 +15,12 @@
         {
             var ea = Assembly.GetExecutingAssembly();
             return this.readProtected(ea);
+        }
+
+        public virtual Version ReadCoreVersionAsVersionV2()
+        {
+            var ea = Assembly.GetExecutingAssembly();
+            return this.ReadAsVersion(ea);
         }
     }
 }

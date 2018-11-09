@@ -7,17 +7,18 @@
     public class Permutator
     {
         public Permutator()
-            : this(new EnumerableRotatorV2())
+            : this(new EnumerableRotator())
         {
         }
 
         public Permutator(
-            EnumerableRotatorV2 rotator)
+            EnumerableRotator rotator)
         {
             this.rotator = rotator;
         }
 
-        public IEnumerable<Lot<T>> RequestPermutations<T>(Lot<T> collection)
+        public IEnumerable<Lot<T>> RequestPermutations<T>(
+            Lot<T> collection)
         {
             var r = this.rotator;
             for (var i = 0; i < collection.Count; ++i)
@@ -34,11 +35,11 @@
 
                 for (var k = 0; k < i; ++k)
                 {
-                    yield return r.RotateV2(switched, k);
+                    yield return r.Rotate(switched, k);
                 }
             }
         }
 
-        private readonly EnumerableRotatorV2 rotator;
+        private readonly EnumerableRotator rotator;
     }
 }
