@@ -8,10 +8,10 @@
     {
         public WindowUi()
         {
-            this.root = new DispatcherSynchronizeInvoke(this.Dispatcher);
+            this.invoker = new DispatcherSynchronizeInvoke(this.Dispatcher);
         }
 
-        ISynchronizeInvoke Ui.Root => this.root;
+        ISynchronizeInvoke Ui.Root => this.invoker;
 
         bool Ui.Disabled
         {
@@ -20,6 +20,6 @@
             set => this.IsEnabled = !value;
         }
 
-        private readonly ISynchronizeInvoke root;
+        protected readonly ISynchronizeInvoke invoker;
     }
 }
