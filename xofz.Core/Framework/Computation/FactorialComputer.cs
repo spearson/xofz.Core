@@ -48,13 +48,14 @@
             return powersOf2 * nonPowersOf2;
         }
 
-        private bool numberIsPowerOfTwo(BigInteger n)
+        protected virtual bool numberIsPowerOfTwo(BigInteger n)
         {
             // stolen from stackoverflow -- thank you!!
             return (n & (n - 1)) == 0;
         }
 
-        private int computePowerOf2(BigInteger numberRaisedToPowerOf2)
+        protected virtual int computePowerOf2(
+            BigInteger numberRaisedToPowerOf2)
         {
             var powerOf2 = 0;
             while (true)

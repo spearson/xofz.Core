@@ -10,7 +10,7 @@
             this.factorialComputer = factorialComputer;
         }
 
-        public BigInteger Compute(short range)
+        public virtual BigInteger Compute(short range)
         {
             if (range < 1)
             {
@@ -44,6 +44,6 @@
             return current;
         }
 
-        private readonly FactorialComputer factorialComputer;
+        protected readonly FactorialComputer factorialComputer;
     }
 }

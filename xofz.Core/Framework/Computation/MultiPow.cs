@@ -5,23 +5,40 @@
 
     public class MultiPow
     {
-        public MultiPow(BigPow bigPow)
+        public MultiPow(
+            BigPow bigPow)
         {
             this.bigPow = bigPow;
         }
 
         public virtual BigInteger Compute(params BigInteger[] powers)
         {
-            return this.computeInternal(powers);
+            if (powers == null)
+            {
+                return 0;
+            }
+
+            return this.onCompute(powers);
         }
 
         public virtual BigInteger Compute(IEnumerable<BigInteger> powers)
         {
-            return this.computeInternal(new List<BigInteger>(powers));
+            if (powers == null)
+            {
+                return 0;
+            }
+
+            return this.onCompute(new List<BigInteger>(powers));
         }
 
-        private BigInteger computeInternal(IList<BigInteger> powers)
+        protected virtual BigInteger onCompute(
+            IList<BigInteger> powers)
         {
+            if (powers == null)
+            {
+                return 0;
+            }
+
             var bp = this.bigPow;
             BigInteger result = 1;
             for (var i = powers.Count - 1; i > 0; --i)

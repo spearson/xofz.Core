@@ -10,16 +10,27 @@
             IEnumerable<T> source,
             Lot<int> slicePoints)
         {
-            var ll = new LinkedList<T>(source);
+            if (source == null)
+            {
+                return new Lot<T>[0];
+            }
+
+            if (slicePoints == null || slicePoints.Count < 1)
+            {
+                return new Lot<T>[0];
+            }
+
+            ICollection<T> remainingItems 
+                = new LinkedList<T>(source);
             var array = new Lot<T>[slicePoints.Count];
             var counter = 0;
             foreach (var slicePoint in slicePoints)
             {
-                var sequence = ll.Take(slicePoint);
-                array[counter] =
-                    new LinkedListLot<T>(sequence);
+                var sequence = remainingItems.Take(slicePoint);
+                array[counter] = new LinkedListLot<T>(sequence);
                 ++counter;
-                ll = new LinkedList<T>(ll.Skip(slicePoint));
+                remainingItems = new LinkedList<T>(
+                    remainingItems.Skip(slicePoint));
             }
 
             return array;
