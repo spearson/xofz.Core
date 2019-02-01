@@ -5,9 +5,12 @@
 
 
   <PropertyGroup>
+<!-- TeamCity environment variable name -->
     <Version>$(BUILD_NUMBER)</Version>
     <ProjectName>xofz.Core</ProjectName>
-    <BuildDir>$(ProjectName)\bin\Release</BuildDir>
+    <BuildFolder>$(ProjectName)\bin\Release</BuildFolder>
+    <WorkingFolder>$(teamcity_build_workingDir)</WorkingFolder>
+    <!-- This folder has all of its files deleted before copying the build output to it -->
     <DeployFolder>H:\Dropbox\Libraries\$(ProjectName)</DeployFolder>
   </PropertyGroup>
 
@@ -18,15 +21,14 @@
       OutputFile="$(ProjectName)\Properties\AssemblyInfo.cs"
       AssemblyTitle="$(ProjectName)"
       AssemblyDescription="Core library for building desktop applications for Windows XP and above"
-      AssemblyConfiguration=""
       AssemblyCompany="x(z)"
       AssemblyProduct="x(z) Core"
       AssemblyCopyright="Copyright (c) x(z)"
-      AssemblyTrademark=""
       ComVisible="false"
       Guid="5143497a-fadf-4e55-9168-b5ef936e0fbd"
       AssemblyVersion="$(Version)"
-      AssemblyFileVersion="$(Version)" />
+      AssemblyFileVersion="$(Version)"
+      CLSCompliant="true" />
   </Target>
 
 
@@ -47,13 +49,14 @@
       <FilesToDelete Include="$(DeployFolder)\*.*" />
     </ItemGroup>
     <Delete Files="@(FilesToDelete)" />
-    <Move SourceFiles="$(BuildDir)\version.txt" DestinationFiles="$(BuildDir)\version-$(Version).txt" />
+    <Move SourceFiles="$(BuildFolder)\version.txt" DestinationFiles="$(BuildFolder)\version-$(Version).txt" />
     <ItemGroup>
-      <FilesToCopy Include="$(BuildDir)\$(ProjectName).dll" />
-      <FilesToCopy Include="$(BuildDir)\$(ProjectName).pdb" />
-      <FilesToCopy Include="$(BuildDir)\xofz.Core98.dll" />
-      <FilesToCopy Include="$(BuildDir)\xofz.Core98.pdb" />
-      <FilesToCopy Include="$(BuildDir)\version-$(Version).txt" />
+      <FilesToCopy Include="$(BuildFolder)\$(ProjectName).dll" />
+      <FilesToCopy Include="$(BuildFolder)\$(ProjectName).pdb" />
+      <FilesToCopy Include="$(BuildFolder)\xofz.Core98.dll" />
+      <FilesToCopy Include="$(BuildFolder)\xofz.Core98.pdb" />
+      <FilesToCopy Include="$(BuildFolder)\version-$(Version).txt" />
+      <FilesToCopy Include="$(WorkingFolder)\ms-PL.txt" />
     </ItemGroup>
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(DeployFolder)" />
   </Target>
