@@ -15,9 +15,7 @@
             var h = this.Handle;
         }
 
-        public event Do StartDateChanged;
-
-        public event Do EndDateChanged;
+        public event Do DateRangeChanged;
 
         public event Do AddKeyTapped;
 
@@ -156,24 +154,24 @@
 
         private void startDatePicker_DateSelected(object sender, DateRangeEventArgs e)
         {
-            var sdc = this.StartDateChanged;
-            if (sdc == null)
+            var drc = this.DateRangeChanged;
+            if (drc == null)
             {
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => sdc.Invoke());
+            ThreadPool.QueueUserWorkItem(o => drc.Invoke());
         }
 
         private void endDatePicker_DateSelected(object sender, DateRangeEventArgs e)
         {
-            var edc = this.EndDateChanged;
-            if (edc == null)
+            var drc = this.DateRangeChanged;
+            if (drc == null)
             {
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => edc.Invoke());
+            ThreadPool.QueueUserWorkItem(o => drc.Invoke());
         }
 
         private void downKey_Click(object sender, System.EventArgs e)
