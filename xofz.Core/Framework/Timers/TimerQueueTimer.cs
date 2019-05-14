@@ -8,7 +8,6 @@
         public TimerQueueTimer()
         {
             this.callback = this.ticked;
-            this.locker = new object();
         }
 
         public override event Do Elapsed;
@@ -68,6 +67,5 @@
 
         private IntPtr handle;
         private readonly TimerCallback callback;
-        private readonly object locker;
     }
 }
