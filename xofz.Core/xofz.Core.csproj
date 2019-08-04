@@ -188,6 +188,7 @@
     <Compile Include="UI\WPF\PageUi.cs" />
     <Compile Include="UI\WPF\UserControlUi.cs" />
     <Compile Include="UI\WPF\WindowUi.cs" />
+    <Compile Include="UI\WPF\WpfUiMessagePumper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="version.txt">
