@@ -2,13 +2,14 @@
 {
     using System.ComponentModel;
     using System.Windows;
-    using xofz.UI.WPF.Internal;
 
-    public class WindowUi : Window, Ui
+    public class WindowUi
+        : Window, Ui
     {
         public WindowUi()
         {
-            this.invoker = new DispatcherSynchronizeInvoke(this.Dispatcher);
+            this.invoker = new DispatcherSynchronizeInvoke(
+                this.Dispatcher);
         }
 
         ISynchronizeInvoke Ui.Root => this.invoker;

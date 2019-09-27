@@ -2,5 +2,7 @@
 {
     using System;
 
-    internal delegate void TimerCallback(IntPtr parameterPointer, bool unused);
+    internal delegate void TimerCallback(
+        IntPtr parameterPointer, 
+        bool unused);
 }

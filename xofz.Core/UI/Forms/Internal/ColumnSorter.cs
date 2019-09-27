@@ -11,17 +11,22 @@ namespace xofz.UI.Forms.Internal
     using System.Linq;
     using System.Windows.Forms;
 
-    // lots of code taken from http://www.codeproject.com/Articles/18440/DataGridView-Multi-column-Sort
-    internal sealed class ColumnSorter : IComparer
+    // this code was taken from http://www.codeproject.com/Articles/18440/DataGridView-Multi-column-Sort
+    internal sealed class ColumnSorter 
+        : IComparer
     {
-        public ColumnSorter(DataGridView grid)
+        public ColumnSorter(
+            DataGridView grid)
         {
             this.grid = grid;
             this.maxSortColumns = 0;
-            this.sortedColumns = new List<ColumnDefinition>(this.maxSortColumns);
+            this.sortedColumns = new List<ColumnDefinition>(
+                this.maxSortColumns);
         }
 
-        int IComparer.Compare(object x, object y)
+        int IComparer.Compare(
+            object x, 
+            object y)
         {
             var lhs = x as DataGridViewRow;
             var rhs = y as DataGridViewRow;
@@ -31,35 +36,39 @@ namespace xofz.UI.Forms.Internal
 
         public int MaxSortColumns
         {
-            get
-            {
-                return this.sortedColumns.Capacity;
-            }
+            get => this.sortedColumns.Capacity;
 
             set
             {
-                if (this.sortedColumns.Count > value)
+                var sc = this.sortedColumns;
+                if (sc.Count > value)
                 {
-                    this.sortedColumns.RemoveRange(value - 1, this.sortedColumns.Count);
+                    sc.RemoveRange(value - 1, sc.Count);
                 }
 
-                this.sortedColumns.Capacity = value;
+                sc.Capacity = value;
             }
         }
 
-        public void SetSortColumn(int columnIndex, Keys modifierKeys)
+        public void SetSortColumn(
+            int columnIndex, 
+            Keys modifierKeys)
         {
-            bool keepSamePriority = (modifierKeys & Keys.Control) == Keys.Control;
+            var keepSamePriority = (modifierKeys & Keys.Control) == Keys.Control;
             ColumnDefinition columnDefinition;
 
             if (this.sortedColumns.Count > 0 && !keepSamePriority)
             {
                 // Erase the current sort glyph.
                 columnDefinition = this.sortedColumns[0];
-                this.grid.Columns[columnDefinition.columnNumber].HeaderCell.SortGlyphDirection = SortOrder.None;
+                this
+                    .grid
+                    .Columns[columnDefinition.columnNumber]
+                    .HeaderCell.SortGlyphDirection = SortOrder.None;
             }
 
-            int sortPriority = this.sortedColumns.FindIndex(cd => cd.columnNumber == columnIndex);
+            int sortPriority = this.sortedColumns.FindIndex(
+                cd => cd.columnNumber == columnIndex);
 
             if (sortPriority != -1)
             {
@@ -93,7 +102,9 @@ namespace xofz.UI.Forms.Internal
             this.grid.Columns[columnDefinition.columnNumber].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
         }
 
-        private void ReverseSort(bool keepSamePriority, int sortPriority)
+        private void ReverseSort(
+            bool keepSamePriority, 
+            int sortPriority)
         {
             ColumnDefinition columnDefinition = this.sortedColumns[sortPriority];
 
@@ -132,13 +143,15 @@ namespace xofz.UI.Forms.Internal
                 var info =
                     this.sortedColumns.Select(
                         column =>
-                        this.grid.Columns[column.columnNumber].HeaderText + (column.ascending ? " ASC" : " DESC"));
+                        this.grid.Columns[column.columnNumber].HeaderText + (column.ascending ? @" ASC" : @" DESC"));
 
-                return "Sorted by " + string.Join(", ", info);
+                return @"Sorted by " + string.Join(@", ", info);
             }
         }
 
-        private int compare(DataGridViewCellCollection lhs, DataGridViewCellCollection rhs)
+        private int compare(
+            DataGridViewCellCollection lhs, 
+            DataGridViewCellCollection rhs)
         {
             foreach (var colDefn in this.sortedColumns)
             {

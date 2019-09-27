@@ -2,13 +2,14 @@
 {
     using System.ComponentModel;
     using System.Windows.Controls;
-    using xofz.UI.WPF.Internal;
 
-    public class PageUi : Page, Ui
+    public class PageUi 
+        : Page, Ui
     {
         public PageUi()
         {
-            this.invoker = new DispatcherSynchronizeInvoke(this.Dispatcher);
+            this.invoker = new DispatcherSynchronizeInvoke(
+                this.Dispatcher);
         }
 
         ISynchronizeInvoke Ui.Root => this.invoker;

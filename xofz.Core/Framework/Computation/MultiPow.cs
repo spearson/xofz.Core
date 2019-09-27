@@ -11,7 +11,8 @@
             this.bigPow = bigPow;
         }
 
-        public virtual BigInteger Compute(params BigInteger[] powers)
+        public virtual BigInteger Compute(
+            params BigInteger[] powers)
         {
             if (powers == null)
             {
@@ -21,14 +22,16 @@
             return this.onCompute(powers);
         }
 
-        public virtual BigInteger Compute(IEnumerable<BigInteger> powers)
+        public virtual BigInteger Compute(
+            IEnumerable<BigInteger> powers)
         {
             if (powers == null)
             {
                 return 0;
             }
 
-            return this.onCompute(new List<BigInteger>(powers));
+            return this.onCompute(
+                new List<BigInteger>(powers));
         }
 
         protected virtual BigInteger onCompute(
@@ -50,6 +53,6 @@
             return result;
         }
 
-        private readonly BigPow bigPow;
+        protected readonly BigPow bigPow;
     }
 }

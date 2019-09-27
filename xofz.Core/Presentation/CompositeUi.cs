@@ -20,9 +20,9 @@
         {
             ICollection<UiHolder> matches = new LinkedList<UiHolder>(
                 this.uiHolders.Where(ui => ui.Content is TUi));
-            if (matches.Count == 0)
+            if (matches.Count < 1)
             {
-                return default(TUi);
+                return default;
             }
 
             if (presenterName == null)
@@ -31,7 +31,7 @@
                     ui => ui.ContentName == uiName);
                 if (match == null)
                 {
-                    return default(TUi);
+                    return default;
                 }
 
                 return (TUi)match.Content;
@@ -41,16 +41,16 @@
                 matches.Where(t =>
                     t.Presenter is NamedPresenter presenter &&
                     presenter.Name == presenterName));
-            if (namedMatches.Count == 0)
+            if (namedMatches.Count < 1)
             {
-                return default(TUi);
+                return default;
             }
 
             var uiMatch = namedMatches.FirstOrDefault(
                 nm => nm.ContentName == uiName);
             if (uiMatch == null)
             {
-                return default(TUi);
+                return default;
             }
 
             return (TUi)uiMatch.Content;

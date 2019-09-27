@@ -3,14 +3,21 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    public class StringLot : Lot<char>
+    public class StringLot
+        : Lot<char>
     {
-        public StringLot(string s)
+        public StringLot(
+            string s)
         {
+            if (s == null)
+            {
+                s = string.Empty;
+            }
+
             this.s = s;
         }
 
-        public IEnumerator<char> GetEnumerator()
+        public virtual IEnumerator<char> GetEnumerator()
         {
             return this.s.GetEnumerator();
         }
@@ -20,18 +27,27 @@
             return this.GetEnumerator();
         }
 
-        public long Count => this.s.Length;
+        public virtual long Count => this.s.Length;
 
-        public void CopyTo(char[] array)
+        public virtual void CopyTo(
+            char[] array)
         {
-            this.s.CopyTo(0, array, 0, (int)this.Count);
+            this.s.CopyTo(
+                0, 
+                array, 
+                0, 
+                (int)this.Count);
         }
 
-        public bool Contains(char item)
+        public virtual bool Contains(
+            char item)
         {
-            return this.s.Contains(new string(item, 1));
+            return this.s.Contains(
+                new string(
+                    item, 
+                    1));
         }
 
-        private readonly string s;
+        protected readonly string s;
     }
 }

@@ -8,22 +8,25 @@
 
     public class LazyLot<T> : Lot<T>
     {
-        public LazyLot(IEnumerable<T> source)
-            : this(source, new LinkedListLotter())
+        public LazyLot(
+            IEnumerable<T> finiteSource)
+            : this(finiteSource, 
+                new LinkedListLotter())
         {
         }
 
         public LazyLot(
-            IEnumerable<T> source, 
+            IEnumerable<T> finiteSource, 
             Lotter lotter)
         {
-            this.source = source;
+            this.finiteSource = finiteSource;
             this.lotter = lotter;
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public virtual IEnumerator<T> GetEnumerator()
         {
             this.checkItems();
+
             return this.items.GetEnumerator();
         }
 
@@ -32,43 +35,53 @@
             return this.GetEnumerator();
         }
 
-        public long Count
+        public virtual long Count
         {
             get
             {
                 this.checkItems();
+
                 return this.items.Count;
             }
         }
 
-        public void CopyTo(T[] array)
+        public virtual void CopyTo(
+            T[] array)
         {
             this.checkItems();
-            new List<T>(this.items).CopyTo(array);
+            new List<T>(this.items)
+                .CopyTo(array);
         }
 
-        public bool Contains(T item)
+        public virtual bool Contains(
+            T item)
         {
             this.checkItems();
             return this.items.Contains(item);
         }
 
-        private void checkItems()
+        protected virtual void checkItems()
         {
-            if (Interlocked.CompareExchange(ref this.materializedIf1, 1, 0) == 0)
+            if (Interlocked.CompareExchange(
+                    ref this.materializedIf1,
+                    1,
+                    0) != 1)
             {
-                this.setItems(this.lotter.Materialize(this.source));
+                this.setItems(
+                    this.lotter.Materialize(
+                        this.finiteSource));
             }
         }
 
-        private void setItems(Lot<T> items)
+        protected virtual void setItems(
+            Lot<T> items)
         {
             this.items = items;
         }
 
-        private int materializedIf1;
-        private Lot<T> items; 
-        private readonly Lotter lotter;
-        private readonly IEnumerable<T> source;
+        protected long materializedIf1;
+        protected Lot<T> items; 
+        protected readonly Lotter lotter;
+        protected readonly IEnumerable<T> finiteSource;
     }
 }

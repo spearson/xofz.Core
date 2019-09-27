@@ -4,7 +4,8 @@
 
     public class EasterComputer
     {
-        public virtual DateTime Compute(int year)
+        public virtual DateTime Compute(
+            int year)
         {
             // thank you Matt on CodeReview!
             // https://codereview.stackexchange.com/questions/193847/find-easter-on-any-given-year

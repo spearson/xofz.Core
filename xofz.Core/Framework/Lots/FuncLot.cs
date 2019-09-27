@@ -6,18 +6,24 @@
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    public class FuncLot<T> : Lot<T>
+    public class FuncLot<T> 
+        : Lot<T>
     {
-        public FuncLot(IEnumerable<Func<T>> source)
+        public FuncLot(
+            ICollection<Func<T>> collection)
         {
-            this.source = source;
+            this.collection = collection;
         }
 
-        public long Count => this.source.Count();
+        public virtual long Count => this.collection.Count;
 
-        public IEnumerator<T> GetEnumerator()
+        public virtual IEnumerator<T> GetEnumerator()
         {
-            return this.source.Select(func => func()).GetEnumerator();
+            return this
+                .collection
+                .Select(
+                    func => func())
+                .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -25,7 +31,8 @@
             return this.GetEnumerator();
         }
 
-        public bool Contains(T item)
+        public virtual bool Contains(
+            T item)
         {
             var array = new T[this.Count];
             this.CopyTo(array);
@@ -33,16 +40,17 @@
             return new Collection<T>(array).Contains(item);
         }
 
-        public void CopyTo(T[] array)
+        public virtual void CopyTo(
+            T[] array)
         {
             long counter = 0;
-            foreach (var func in this.source)
+            foreach (var func in this.collection)
             {
                 array[counter] = func();
                 ++counter;
             }
         }
 
-        private readonly IEnumerable<Func<T>> source;
+        protected readonly ICollection<Func<T>> collection;
     }
 }

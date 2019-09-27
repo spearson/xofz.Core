@@ -4,7 +4,9 @@
 
     public class BigPow
     {
-        public virtual BigInteger Compute(BigInteger n, BigInteger exponent)
+        public virtual BigInteger Compute(
+            BigInteger n, 
+            BigInteger exponent)
         {
             BigInteger result = 1;
             for (BigInteger i = 0; i < exponent; ++i)

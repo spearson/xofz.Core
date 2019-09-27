@@ -35,12 +35,14 @@
             return this.GetEnumerator();
         }
 
-        public bool Contains(T item)
+        public virtual bool Contains(
+            T item)
         {
             return this.items.Contains(item);
         }
 
-        public void CopyTo(T[] array)
+        public virtual void CopyTo(
+            T[] array)
         {
             var enumerator = this.source.GetEnumerator();
             long counter = 0;
@@ -55,7 +57,7 @@
             enumerator.Dispose();
         }
 
-        private readonly IEnumerable<Action<T>> source;
-        private readonly Lot<T> items;
+        protected readonly IEnumerable<Action<T>> source;
+        protected readonly Lot<T> items;
     }
 }

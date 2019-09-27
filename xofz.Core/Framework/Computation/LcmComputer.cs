@@ -10,7 +10,8 @@
             this.factorialComputer = factorialComputer;
         }
 
-        public virtual BigInteger Compute(short range)
+        public virtual BigInteger Compute(
+            short range)
         {
             if (range < 1)
             {

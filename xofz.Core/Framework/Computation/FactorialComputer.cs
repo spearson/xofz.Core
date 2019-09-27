@@ -4,7 +4,8 @@
 
     public class FactorialComputer
     {
-        public virtual BigInteger Compute(BigInteger number)
+        public virtual BigInteger Compute(
+            BigInteger number)
         {
             if (number <= 1)
             {
@@ -48,7 +49,8 @@
             return powersOf2 * nonPowersOf2;
         }
 
-        protected virtual bool numberIsPowerOfTwo(BigInteger n)
+        protected virtual bool numberIsPowerOfTwo(
+            BigInteger n)
         {
             // stolen from stackoverflow -- thank you!!
             return (n & (n - 1)) == 0;

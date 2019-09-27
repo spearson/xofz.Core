@@ -9,25 +9,30 @@
         : Lot<T>
     {
         public ConcurrentStackLot()
+            : this(
+                new ConcurrentStack<T>())
         {
-            this.stack = new ConcurrentStack<T>();
         }
 
-        public ConcurrentStackLot(IEnumerable<T> source)
+        public ConcurrentStackLot(
+            IEnumerable<T> finiteSource)
+            : this(
+                new ConcurrentStack<T>(
+                    finiteSource))
         {
-            this.stack = new ConcurrentStack<T>(source);
         }
 
-        public ConcurrentStackLot(ConcurrentStack<T> stack)
+        public ConcurrentStackLot(
+            ConcurrentStack<T> stack)
         {
             this.stack = stack;
         }
 
-        public long Count => this.stack.Count;
+        public virtual long Count => this.stack.Count;
 
-        public bool IsEmpty => this.stack.IsEmpty;
+        public virtual bool IsEmpty => this.stack.IsEmpty;
 
-        public IEnumerator<T> GetEnumerator()
+        public virtual IEnumerator<T> GetEnumerator()
         {
             return this.stack.GetEnumerator();
         }
@@ -37,27 +42,37 @@
             return this.GetEnumerator();
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             this.stack.Clear();
         }
 
-        public void CopyTo(T[] array)
+        public virtual void CopyTo(
+            T[] array)
         {
             this.stack.CopyTo(array, 0);
         }
 
-        public void CopyTo(T[] array, int index)
+        public virtual void CopyTo(
+            T[] array, 
+            int index)
         {
             this.stack.CopyTo(array, index);
         }
 
-        public void Push(T item)
+        public virtual void Push(
+            T item)
         {
             this.stack.Push(item);
         }
 
-        public void PushRange(IEnumerable<T> source)
+        public virtual void PushRange(T[] items)
+        {
+            this.stack.PushRange(items);
+        }
+
+        public void PushRange(
+            IEnumerable<T> source)
         {
             Lot<T> lot = new LinkedListLot<T>(source);
             var array = new T[lot.Count];
@@ -71,7 +86,21 @@
             this.stack.PushRange(array);
         }
 
-        public void PushRange(IEnumerable<T> source, long index, long length)
+        public virtual void PushRange(
+            T[] items, 
+            int startIndex, 
+            int count)
+        {
+            this.stack.PushRange(
+                items, 
+                startIndex, 
+                count);
+        }
+
+        public virtual void PushRange(
+            IEnumerable<T> source, 
+            long index, 
+            long length)
         {
             Lot<T> lot =
                 new LinkedListLot<T>(source);
@@ -96,29 +125,37 @@
             this.stack.PushRange(array);
         }
 
-        public T[] ToArray()
+        public virtual T[] ToArray()
         {
             return this.stack.ToArray();
         }
 
-        public bool TryPeek(out T result)
+        public virtual bool TryPeek(
+            out T result)
         {
-            return this.stack.TryPeek(out result);
+            return this.stack.TryPeek(
+                out result);
         }
 
-        public bool TryPop(out T result)
+        public virtual bool TryPop(
+            out T result)
         {
-            return this.stack.TryPop(out result);
+            return this.stack.TryPop(
+                out result);
         }
 
-        public int TryPopAll(out T[] poppedItems)
+        public virtual int TryPopAll(
+            out T[] poppedItems)
         {
             var s = this.stack;
             poppedItems = new T[s.Count];
             return s.TryPopRange(poppedItems);
         }
 
-        public int TryPopRange(out T[] poppedItems, int index, int count)
+        public virtual int TryPopRange(
+            out T[] poppedItems, 
+            int index, 
+            int count)
         {
             var s1 = this.stack;
             var s2 = new ConcurrentStack<T>(
@@ -127,6 +164,6 @@
             return s2.TryPopRange(poppedItems);
         }
 
-        private readonly ConcurrentStack<T> stack;
+        protected readonly ConcurrentStack<T> stack;
     }
 }

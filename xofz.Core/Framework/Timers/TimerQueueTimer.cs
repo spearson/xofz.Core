@@ -3,7 +3,8 @@
     using System;
     using xofz.Framework.Timers.Internal;
 
-    public class TimerQueueTimer : Timer
+    public class TimerQueueTimer 
+        : Timer
     {
         public TimerQueueTimer()
         {
@@ -55,7 +56,9 @@
             this.Stop();
         }
 
-        protected virtual void ticked(IntPtr parameterPointer, bool unused)
+        protected virtual void ticked(
+            IntPtr parameterPointer, 
+            bool unused)
         {
             if (!this.AutoReset)
             {

@@ -5,21 +5,25 @@
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
-    public class HashSetLot<T> : Lot<T>
+    public class HashSetLot<T>
+        : Lot<T>
     {
         public HashSetLot()
+            : this(new HashSet<T>())
         {
-            this.hashSet = new HashSet<T>();
         }
 
-        public HashSetLot(HashSet<T> hashSet)
+        public HashSetLot(
+            HashSet<T> hashSet)
         {
-            this.hashSet = hashSet;
+            this.hashSet = hashSet ??
+                           throw new ArgumentNullException(
+                               nameof(hashSet));
         }
 
-        public long Count => this.hashSet.Count;
+        public virtual long Count => this.hashSet.Count;
 
-        public IEnumerator<T> GetEnumerator()
+        public virtual IEnumerator<T> GetEnumerator()
         {
             return this.hashSet.GetEnumerator();
         }
@@ -29,96 +33,114 @@
             return this.GetEnumerator();
         }
 
-        public bool Add(T item)
+        public virtual bool Add(
+            T item)
         {
             return this.hashSet.Add(item);
         }
 
-        public bool Remove(T item)
+        public virtual bool Remove(
+            T item)
         {
             return this.hashSet.Remove(item);
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             this.hashSet.Clear();
         }
 
-        public bool Contains(T item)
+        public virtual bool Contains(
+            T item)
         {
             return this.hashSet.Contains(item);
         }
 
-        public void CopyTo(T[] array)
+        public virtual void CopyTo(
+            T[] array)
         {
             this.hashSet.CopyTo(array);
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public virtual void GetObjectData(
+            SerializationInfo info, 
+            StreamingContext context)
         {
             this.hashSet.GetObjectData(info, context);
         }
 
-        public void OnDeserialization(object sender)
+        public virtual void OnDeserialization(
+            object sender)
         {
             this.hashSet.OnDeserialization(sender);
         }
 
-        public void IntersectWith(IEnumerable<T> other)
+        public virtual void IntersectWith(
+            IEnumerable<T> other)
         {
             this.hashSet.IntersectWith(other);
         }
 
-        public void ExceptWith(IEnumerable<T> other)
+        public virtual void ExceptWith(
+            IEnumerable<T> other)
         {
             this.hashSet.ExceptWith(other);
         }
 
-        public bool IsProperSubsetOf(IEnumerable<T> other)
+        public virtual bool IsProperSubsetOf(
+            IEnumerable<T> other)
         {
             return this.hashSet.IsProperSubsetOf(other);
         }
 
-        public bool IsProperSupersetOf(IEnumerable<T> other)
+        public virtual bool IsProperSupersetOf(
+            IEnumerable<T> other)
         {
             return this.hashSet.IsProperSupersetOf(other);
         }
 
-        public bool IsSubsetOf(IEnumerable<T> other)
+        public virtual bool IsSubsetOf(
+            IEnumerable<T> other)
         {
             return this.hashSet.IsSubsetOf(other);
         }
 
-        public bool IsSupersetOf(IEnumerable<T> other)
+        public virtual bool IsSupersetOf(
+            IEnumerable<T> other)
         {
             return this.hashSet.IsSupersetOf(other);
         }
 
-        public bool Overlaps(IEnumerable<T> other)
+        public virtual bool Overlaps(
+            IEnumerable<T> other)
         {
             return this.hashSet.Overlaps(other);
         }
 
-        public void RemoveWhere(Predicate<T> match)
+        public virtual void RemoveWhere(
+            Predicate<T> match)
         {
             this.hashSet.RemoveWhere(match);
         }
 
-        public bool SetEquals(IEnumerable<T> other)
+        public virtual bool SetEquals(
+            IEnumerable<T> other)
         {
             return this.hashSet.SetEquals(other);
         }
 
-        public void SymmetricExcepWith(IEnumerable<T> other)
+        public virtual void SymmetricExcepWith(
+            IEnumerable<T> other)
         {
             this.hashSet.SymmetricExceptWith(other);
         }
 
-        public void UnionWith(IEnumerable<T> other)
+        public virtual void UnionWith(
+            IEnumerable<T> other)
         {
             this.hashSet.UnionWith(other);
         }
 
-        private readonly HashSet<T> hashSet;
+        protected readonly HashSet<T> hashSet;
     }
 }

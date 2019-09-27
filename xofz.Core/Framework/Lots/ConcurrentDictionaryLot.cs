@@ -57,20 +57,20 @@
             this.lotter = lotter;
         }
 
-        public long Count
+        public virtual long Count
             => this.dictionary.Count;
 
-        public Lot<TKey> Keys =>
+        public virtual Lot<TKey> Keys =>
             this.lotter.Materialize(this.dictionary.Keys);
 
-        public Lot<TValue> Values =>
+        public virtual Lot<TValue> Values =>
             this.lotter.Materialize(this.dictionary.Values);
 
-        public bool IsEmpty => this.dictionary.IsEmpty;
+        public virtual bool IsEmpty => this.dictionary.IsEmpty;
 
-        public TValue this[TKey key] => this.dictionary[key];
+        public virtual TValue this[TKey key] => this.dictionary[key];
 
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        public virtual IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
             return this.dictionary.GetEnumerator();
         }
@@ -80,7 +80,7 @@
             return this.GetEnumerator();
         }
 
-        public TValue AddOrUpdate(
+        public virtual TValue AddOrUpdate(
             TKey key,
             TValue addValue,
             Func<TKey, TValue, TValue> updateValueFactory)
@@ -91,7 +91,7 @@
                 updateValueFactory);
         }
 
-        public TValue AddOrUpdate(
+        public virtual TValue AddOrUpdate(
             TKey key,
             Func<TKey, TValue> addValueFactory,
             Func<TKey, TValue, TValue> updateValueFactory)
@@ -102,52 +102,73 @@
                 updateValueFactory);
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             this.dictionary.Clear();
         }
 
-        public bool ContainsKey(TKey key)
+        public virtual bool ContainsKey(
+            TKey key)
         {
             return this.dictionary.ContainsKey(key);
         }
 
-        public TValue GetOrAdd(TKey key, TValue value)
+        public virtual TValue GetOrAdd(
+            TKey key,
+            TValue value)
         {
             return this.dictionary.GetOrAdd(key, value);
         }
 
-        public TValue GetOrAdd(TKey key, Func<TKey, TValue> valueFactory)
+        public virtual TValue GetOrAdd(
+            TKey key,
+            Func<TKey, TValue> valueFactory)
         {
             return this.dictionary.GetOrAdd(key, valueFactory);
         }
 
-        public KeyValuePair<TKey, TValue>[] ToArray()
+        public virtual KeyValuePair<TKey, TValue>[] ToArray()
         {
             return this.dictionary.ToArray();
         }
 
-        public bool TryAdd(TKey key, TValue value)
+        public virtual bool TryAdd(
+            TKey key,
+            TValue value)
         {
             return this.dictionary.TryAdd(key, value);
         }
 
-        public bool TryGetValue(TKey key, out TValue value)
+        public virtual bool TryGetValue(
+            TKey key,
+            out TValue value)
         {
-            return this.dictionary.TryGetValue(key, out value);
+            return this.dictionary.TryGetValue(
+                key,
+                out value);
         }
 
-        public bool TryRemove(TKey key, out TValue value)
+        public virtual bool TryRemove(
+            TKey key,
+            out TValue value)
         {
-            return this.dictionary.TryRemove(key, out value);
+            return this.dictionary.TryRemove(
+                key,
+                out value);
         }
 
-        public bool TryUpdate(TKey key, TValue value, TValue comparisonValue)
+        public virtual bool TryUpdate(
+            TKey key,
+            TValue value,
+            TValue comparisonValue)
         {
-            return this.dictionary.TryUpdate(key, value, comparisonValue);
+            return this.dictionary.TryUpdate(
+                key,
+                value,
+                comparisonValue);
         }
 
-        private readonly ConcurrentDictionary<TKey, TValue> dictionary;
-        private readonly Lotter lotter;
+        protected readonly ConcurrentDictionary<TKey, TValue> dictionary;
+        protected readonly Lotter lotter;
     }
 }

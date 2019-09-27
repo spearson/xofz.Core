@@ -5,12 +5,13 @@
 
     public class EnumerableIntersector
     {
-        public virtual Lot<T> Intersect<T>(IEnumerable<IEnumerable<T>> sources)
+        public virtual Lot<T> Intersect<T>(
+            IEnumerable<IEnumerable<T>> sources)
         {
-            var lot = new HashSetLot<T>();
+            var hashSet = new HashSetLot<T>();
             if (sources == null)
             {
-                return lot;
+                return hashSet;
             }
             
             foreach (var source in sources)
@@ -22,11 +23,11 @@
 
                 foreach (var item in source)
                 {
-                    lot.Add(item);
+                    hashSet.Add(item);
                 }
             }
 
-            return lot;
+            return hashSet;
         }
     }
 }

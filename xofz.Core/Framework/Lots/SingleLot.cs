@@ -3,16 +3,18 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    public class SingleLot<T> : Lot<T>
+    public class SingleLot<T>
+        : Lot<T>
     {
-        public SingleLot(T item)
+        public SingleLot(
+            T item)
         {
             this.item = item;
         }
 
-        public long Count => 1;
+        public virtual long Count => 1;
 
-        public IEnumerator<T> GetEnumerator()
+        public virtual IEnumerator<T> GetEnumerator()
         {
             yield return this.item;
         }
@@ -22,7 +24,8 @@
             return this.GetEnumerator();
         }
 
-        public void CopyTo(T[] array)
+        public virtual void CopyTo(
+            T[] array)
         {
             if (array == null)
             {
@@ -37,11 +40,12 @@
             array[0] = this.item;
         }
 
-        public bool Contains(T item)
+        public virtual bool Contains(
+            T item)
         {
             return this.item.Equals(item);
         }
 
-        private readonly T item;
+        protected readonly T item;
     }
 }

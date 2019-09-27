@@ -15,7 +15,9 @@ namespace xofz.UI.Forms.Internal
         internal readonly short columnNumber;
         internal bool ascending;
 
-        internal ColumnDefinition(int columnNumber, SortOrder sortOrder)
+        internal ColumnDefinition(
+            int columnNumber, 
+            SortOrder sortOrder)
         {
             this.columnNumber = Convert.ToInt16(columnNumber);
             this.ascending = sortOrder != SortOrder.Descending;

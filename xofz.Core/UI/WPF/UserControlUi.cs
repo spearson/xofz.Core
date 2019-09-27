@@ -2,13 +2,14 @@
 {
     using System.ComponentModel;
     using System.Windows.Controls;
-    using xofz.UI.WPF.Internal;
 
-    public class UserControlUi : UserControl, Ui
+    public class UserControlUi 
+        : UserControl, Ui
     {
         public UserControlUi()
         {
-            this.invoker = new DispatcherSynchronizeInvoke(this.Dispatcher);
+            this.invoker = new DispatcherSynchronizeInvoke(
+                this.Dispatcher);
         }
 
         ISynchronizeInvoke Ui.Root => this.invoker;
