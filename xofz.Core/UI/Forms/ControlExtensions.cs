@@ -19,8 +19,8 @@
             }
 
             var controls = container.Controls;
-            if (controls.Count == 1 && control.Equals(
-                controls[0]))
+            if (controls.Count == 1 && 
+                ReferenceEquals(control, controls[0]))
             {
                 return;
             }
