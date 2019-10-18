@@ -6,7 +6,8 @@
 
     public class IOBitterFactory
     {
-        public IOBitterFactory(MethodWeb web)
+        public IOBitterFactory(
+            MethodWeb web)
         {
             this.web = web;
         }
@@ -38,7 +39,7 @@
             return bitter;
         }
 
-        public virtual IOBitter NewMaterializedEnumerable(
+        public virtual IOBitter NewLot(
             IOBitter bitter)
         {
             return new LotIOBitter(
@@ -46,6 +47,6 @@
                 bitter);
         }
 
-        private readonly MethodWeb web;
+        protected readonly MethodWeb web;
     }
 }

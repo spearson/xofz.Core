@@ -4,14 +4,19 @@
 
     public interface Thunker
     {
-        bool[] Thunk(byte b);
+        bool[] Thunk(
+            byte b);
 
-        bool[] Thunk(short s);
+        bool[] Thunk(
+            short s);
 
-        bool[] Thunk(int i);
+        bool[] Thunk(
+            int i);
 
-        bool[] Thunk(long l);
+        bool[] Thunk(
+            long l);
 
-        bool[] Thunk(BigInteger bigNumber);
+        bool[] Thunk(
+            BigInteger bigNumber);
     }
 }

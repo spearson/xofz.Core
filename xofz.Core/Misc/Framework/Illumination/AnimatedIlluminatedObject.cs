@@ -3,16 +3,26 @@
     using System;
     using System.Collections.Generic;
 
-    public sealed class AnimatedIlluminatedObject<T> : IlluminatedObject
+    public sealed class AnimatedIlluminatedObject<T> 
+        : IlluminatedObject
     {
-        public AnimatedIlluminatedObject(IEnumerable<Action<T>> actions) : base(new object[] { actions })
+        public AnimatedIlluminatedObject(
+            IEnumerable<Action<T>> actions) 
+            : base(new object[] { actions })
         {
             this.actions = actions;
         }
 
-        public void Animate(T item)
+        public void Animate(
+            T item)
         {
-            foreach (var action in this.actions)
+            var a = this.actions;
+            if (a == null)
+            {
+                return;
+            }
+
+            foreach (var action in a)
             {
                 action(item);
             }

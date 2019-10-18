@@ -17,7 +17,7 @@
             this.rotator = rotator;
         }
 
-        public IEnumerable<Lot<T>> RequestPermutations<T>(
+        public virtual IEnumerable<Lot<T>> RequestPermutations<T>(
             Lot<T> collection)
         {
             var r = this.rotator;
@@ -40,6 +40,6 @@
             }
         }
 
-        private readonly EnumerableRotator rotator;
+        protected readonly EnumerableRotator rotator;
     }
 }

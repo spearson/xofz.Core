@@ -74,6 +74,7 @@
     <Compile Include="Framework\Computation\EasterComputer.cs" />
     <Compile Include="Framework\Computation\LcmComputer.cs" />
     <Compile Include="Framework\EventSubscriberV2.cs" />
+    <Compile Include="Framework\Lots\ConcurrentBagLot.cs" />
     <Compile Include="Framework\Timers\Internal\TimerCallback.cs" />
     <Compile Include="Framework\VersionReaderV2.cs" />
     <Compile Include="Misc\Framework\IOBitter.cs" />
@@ -108,8 +109,6 @@
     <Compile Include="Misc\Framework\Computation\Imploder.cs" />
     <Compile Include="Framework\Computation\MultiPow.cs" />
     <Compile Include="Misc\Framework\Computation\Permutator.cs" />
-    <Compile Include="Misc\Framework\Computation\Shifter.cs" />
-    <Compile Include="Misc\Framework\Computation\ShiftRegister.cs" />
     <Compile Include="Misc\Framework\Computation\VarianceComputer.cs" />
     <Compile Include="Misc\Framework\Conditionality\Evaluator.cs" />
     <Compile Include="Misc\Framework\Erudition\Darkener.cs" />
@@ -156,7 +155,7 @@
     <Compile Include="Misc\Framework\Illumination\IlluminatedObject.cs" />
     <Compile Include="Misc\Framework\Illumination\Illuminator.cs" />
     <Compile Include="Misc\Framework\Illumination\ListIlluminatedObject.cs" />
-    <Compile Include="Misc\Framework\Illumination\MaterializedEnumerableIlluminatedObject.cs" />
+    <Compile Include="Misc\Framework\Illumination\LotIlluminatedObject.cs" />
     <Compile Include="Misc\Framework\Illumination\MemberFieldIlluminatedObject.cs" />
     <Compile Include="Misc\Framework\Illumination\StringIlluminatedObject.cs" />
     <Compile Include="Misc\Random.cs" />

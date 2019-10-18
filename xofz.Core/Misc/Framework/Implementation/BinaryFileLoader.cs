@@ -5,7 +5,8 @@
 
     public sealed class BinaryFileLoader : Loader
     {
-        public T Load<T>(string location)
+        public T Load<T>(
+            string location)
         {
             var bytes = File.ReadAllBytes(location);
             return (T)new BinaryFormatter().Deserialize(new MemoryStream(bytes));

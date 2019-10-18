@@ -6,7 +6,9 @@
     {
         public virtual T Request => this.selectedItem;
 
-        public virtual void Learn(Func<T> instantiator, Action<T> learningMethod)
+        public virtual void Learn(
+            Func<T> instantiator, 
+            Action<T> learningMethod)
         {
             var one = instantiator();
             var hashCode = one.GetHashCode();
@@ -20,11 +22,12 @@
             this.setSelectedItem(instantiator());
         }
 
-        private void setSelectedItem(T selectedItem)
+        protected virtual void setSelectedItem(
+            T selectedItem)
         {
             this.selectedItem = selectedItem;
         }
 
-        private T selectedItem;
+        protected T selectedItem;
     }
 }

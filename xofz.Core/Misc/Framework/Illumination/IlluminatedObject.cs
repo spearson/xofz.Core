@@ -4,9 +4,11 @@
 
     public class IlluminatedObject
     {
-        public IlluminatedObject(object[] dependencies)
+        public IlluminatedObject(
+            object[] dependencies)
         {
-            this.dependencies = dependencies;
+            this.dependencies = dependencies 
+                                ?? new object[0];
         }
 
         public virtual int DependencyCount
@@ -18,11 +20,18 @@
                 {
                     if (dependency is IlluminatedObject)
                     {
-                        sum += ((IlluminatedObject)dependency).DependencyCount;
+                        checked
+                        {
+                            sum += ((IlluminatedObject)dependency).DependencyCount;
+                        }
+
                         continue;
                     }
 
-                    ++sum;
+                    checked
+                    {
+                        ++sum;
+                    }
                 }
 
                 return sum;
@@ -31,14 +40,17 @@
 
         public override int GetHashCode()
         {
-            return this.dependencies.Aggregate(0, (current, o) => current ^ o.GetHashCode());
+            return this.dependencies
+                .Aggregate(0, (current, o) => current ^ o.GetHashCode());
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(
+            object obj)
         {
-            return this.dependencies.All(t => t.Equals(obj));
+            return this.dependencies
+                .All(t => t.Equals(obj));
         }
 
-        private readonly object[] dependencies;
+        protected readonly object[] dependencies;
     }
 }

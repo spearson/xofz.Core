@@ -15,7 +15,8 @@
 
         public IEnumerator<T> GetEnumerator()
         {
-            return this.lot.GetEnumerator();
+            return this.lot?.GetEnumerator() 
+                   ?? EnumerableHelpers.Empty<T>().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

@@ -4,9 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public sealed class GatedIlluminatedObject<T> : IlluminatedObject
+    public sealed class GatedIlluminatedObject<T> 
+        : IlluminatedObject
     {
-        public GatedIlluminatedObject(IEnumerable<bool> gates, Func<bool, T> generator)
+        public GatedIlluminatedObject(
+            IEnumerable<bool> gates, 
+            Func<bool, T> generator)
             : base(new object[] { gates, generator })
         {
             this.gates = gates;
@@ -15,7 +18,8 @@
 
         public IEnumerable<T> Generate()
         {
-            return this.gates.Select(gate => this.generator(gate));
+            return this.gates?.Select(gate => this.generator(gate))
+                ?? EnumerableHelpers.Empty<T>();
         }
 
         private readonly IEnumerable<bool> gates;

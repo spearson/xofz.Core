@@ -5,12 +5,15 @@ namespace xofz.Misc.Framework.Computation
 
     public class VarianceComputer<T>
     {
-        public VarianceComputer(Func<T, BigInteger> magnitudeComputer)
+        public VarianceComputer(
+            Func<T, BigInteger> magnitudeComputer)
         {
             this.magnitudeComputer = magnitudeComputer;
         }
 
-        public virtual BigInteger Compute(Action<T> act, T actor)
+        public virtual BigInteger Compute(
+            Action<T> act, 
+            T actor)
         {
             var mc = this.magnitudeComputer;
             var original = mc(actor);
@@ -20,6 +23,6 @@ namespace xofz.Misc.Framework.Computation
             return BigInteger.Abs(original - altered);
         }
 
-        private readonly Func<T, BigInteger> magnitudeComputer;
+        protected readonly Func<T, BigInteger> magnitudeComputer;
     }
 }

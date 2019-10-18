@@ -10,9 +10,11 @@
         {
         }
 
-        public Emanator(IList<T> list)
+        public Emanator(
+            IList<T> list)
         {
-            this.list = list;
+            this.list = list 
+                        ?? new List<T>();
         }
 
         public virtual T Left => this.list[0];
@@ -26,17 +28,26 @@
             }
         }
 
-        public virtual void AddItem(T item, bool emanateRight)
+        public virtual void AddItem(
+            T item, 
+            bool emanateRight)
         {
             var l = this.list;
-            var index = (l.Count / 2) + (emanateRight ? 1 : 0);
+            var index = l.Count / 2 + (emanateRight ? 1 : 0);
             l.Insert(index, item);
         }
 
-        public virtual Tuple<T, T> Emanate(bool rightFirst)
+        public virtual Tuple<T, T> Emanate(
+            bool rightFirst)
         {
             var l = this.list;
-            if (l.Count == 1)
+            var lc = l.Count;
+            if (lc < 1)
+            {
+                return Tuple.Create<T, T>(default, default);
+            }
+
+            if (lc == 1)
             {
                 return Tuple.Create(l[0], l[0]);
             }
@@ -51,6 +62,6 @@
             return tuple;
         }
 
-        private readonly IList<T> list;
+        protected readonly IList<T> list;
     }
 }

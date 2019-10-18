@@ -3,14 +3,16 @@
     using System;
     using System.Numerics;
 
-    public sealed class TwoBitThunker : Thunker
+    public sealed class TwoBitThunker 
+        : Thunker
     {
         public TwoBitThunker()
         {
             this.maxValue = int.MaxValue;
         }
 
-        public bool[] Thunk(byte b)
+        public bool[] Thunk(
+            byte b)
         {
             var array = new bool[2];
 
@@ -23,7 +25,8 @@
             return array;
         }
 
-        public bool[] Thunk(short s)
+        public bool[] Thunk(
+            short s)
         {
             var array = new bool[2];
 
@@ -36,7 +39,8 @@
             return array;
         }
 
-        public bool[] Thunk(int i)
+        public bool[] Thunk(
+            int i)
         {
             var array = new bool[2];
 
@@ -49,7 +53,8 @@
             return array;
         }
 
-        public bool[] Thunk(long l)
+        public bool[] Thunk(
+            long l)
         {
             var array = new bool[2];
             var max = this.maxValue;
@@ -63,7 +68,8 @@
             return array;
         }
 
-        public bool[] Thunk(BigInteger bigNumber)
+        public bool[] Thunk(
+            BigInteger bigNumber)
         {
             var array = new bool[2];
             var bits = bigNumber.ToByteArray();
@@ -104,7 +110,9 @@
             return array;
         }
 
-        private void setThunkChunk(byte b, out bool thunkChunk)
+        private void setThunkChunk(
+            byte b, 
+            out bool thunkChunk)
         {
             thunkChunk = b % 0xFF == 0;
         }

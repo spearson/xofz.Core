@@ -14,7 +14,8 @@
             this.randomness = int.MaxValue; // todo: expand!
         }
 
-        public virtual Tuple<BigInteger, T> Act(T actee)
+        public virtual Tuple<BigInteger, T> Act(
+            T actee)
         {
             var randomNumber = this.rng.Next(this.randomness);
             this.operate(randomNumber, actee);
@@ -22,8 +23,8 @@
             return Tuple.Create(randomNumber, actee);
         }
 
-        private readonly Action<BigInteger, T> operate;
-        private readonly Random<BigInteger> rng;
-        private readonly BigInteger randomness;
+        protected readonly Action<BigInteger, T> operate;
+        protected readonly Random<BigInteger> rng;
+        protected readonly BigInteger randomness;
     }
 }

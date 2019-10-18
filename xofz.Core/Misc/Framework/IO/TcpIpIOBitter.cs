@@ -6,9 +6,9 @@
     using System.Net.Sockets;
     using System.Threading;
     using xofz.Framework;
-    using xofz.Framework.Computation;
 
-    public sealed class TcpIpIOBitter : IOBitter
+    public sealed class TcpIpIOBitter 
+        : IOBitter
     {
         public TcpIpIOBitter(
             MethodWeb web)
@@ -18,9 +18,14 @@
 
         string IOBitter.Name { get; set; }
 
-        public void Setup(string host, int port)
+        public void Setup(
+            string host, 
+            int port)
         {
-            if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
+            if (Interlocked.CompareExchange(
+                    ref this.setupIf1,
+                    1, 
+                    0) == 1)
             {
                 return;
             }
@@ -155,7 +160,7 @@
             succeeded = reallySucceeded;
         }
 
-        private int setupIf1;
+        private long setupIf1;
         private readonly MethodWeb web;
     }
 }

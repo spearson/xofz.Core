@@ -4,7 +4,8 @@
 
     public sealed class ListIlluminatedObject<T> : IlluminatedObject
     {
-        public ListIlluminatedObject(IList<T> list) : base(new object[] { list })
+        public ListIlluminatedObject(IList<T> list) 
+            : base(new object[] { list })
         {
             this.list = list;
         }

@@ -12,9 +12,10 @@ namespace xofz.Misc.Framework
         {
         }
 
-        public CollectionHolder(Lotter lotter)
+        public CollectionHolder(
+            Lotter lotter)
         {
-            this.lotter = lotter;
+            this.lotter = lotter ?? new LinkedListLotter();
             this.collections = new List<Tuple<string, object>>(0x100);
         }
 
@@ -27,7 +28,8 @@ namespace xofz.Misc.Framework
                 Tuple.Create(name, o));
         }
 
-        public virtual Lot<T> Get<T>(string name = null)
+        public virtual Lot<T> Get<T>(
+            string name = null)
         {
             var collection = this.collections.FirstOrDefault(
                 tuple => tuple.Item1 == name
@@ -44,14 +46,14 @@ namespace xofz.Misc.Framework
 
             if (collection == null)
             {
-                return default(Lot<T>);
+                return default;
             }
 
             return this.lotter.Materialize(
                 collection.Item2 as IEnumerable<T>);
         }
 
-        private readonly Lotter lotter;
-        private readonly List<Tuple<string, object>> collections;
+        protected readonly Lotter lotter;
+        protected readonly List<Tuple<string, object>> collections;
     }
 }

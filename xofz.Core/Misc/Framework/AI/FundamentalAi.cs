@@ -6,14 +6,24 @@
 
     public class FundamentalAi<T>
     {
-        public FundamentalAi(TreeOrderer<T> treeOrderer)
+        public FundamentalAi(
+            TreeOrderer<T> treeOrderer)
         {
             this.treeOrderer = treeOrderer;
         }
 
-        public virtual Lot<T> Act(Tree<T> tree, IEnumerable<Action<T>> actions)
+        public virtual Lot<T> Act(
+            Tree<T> tree, 
+            IEnumerable<Action<T>> actions)
         {
-            this.treeOrderer.Order(tree);
+            var orderer = this.treeOrderer;
+            if (actions == null)
+            {
+                orderer.Order(tree);
+                return orderer.OrderedTree;
+            }
+
+            orderer.Order(tree);
             var actionEnumerator = actions.GetEnumerator();
             var linkedList = new LinkedList<T>();
             foreach (var value in this.treeOrderer.OrderedTree)
@@ -27,6 +37,6 @@
             return new LinkedListLot<T>(linkedList);
         }
 
-        private readonly TreeOrderer<T> treeOrderer;
+        protected readonly TreeOrderer<T> treeOrderer;
     }
 }

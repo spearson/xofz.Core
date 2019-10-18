@@ -7,19 +7,30 @@ namespace xofz.Misc
 
     public class Random<T>
     {
-        public Random(Lot<T> lot)
+        public Random(
+            Lot<T> lot)
+            : this(lot, new Random())
         {
-            this.lot = lot;
-            this.random = new Random();
         }
 
-        public virtual T Next(BigInteger maxToPass)
+        public Random(
+            Lot<T> lot,
+            Random random)
+        {
+            this.lot = lot ?? Lot.Empty<T>();
+            this.random = random ?? new Random();
+        }
+
+        public virtual T Next(
+            BigInteger maxToPass)
         {
             // i'll do something better than a shave to an int later
             return this.lot.Skip(this.random.Next((int)maxToPass)).FirstOrDefault();
         }
 
-        public virtual IEnumerable<T> NextSequence(BigInteger maxToPass, BigInteger sourceSize)
+        public virtual IEnumerable<T> NextSequence(
+            BigInteger maxToPass, 
+            BigInteger sourceSize)
         {
             var c = this.lot;
             BigInteger counter = 0;
@@ -31,7 +42,7 @@ namespace xofz.Misc
             }
         }
 
-        private readonly Lot<T> lot;
-        private readonly Random random;
+        protected readonly Lot<T> lot;
+        protected readonly Random random;
     }
 }

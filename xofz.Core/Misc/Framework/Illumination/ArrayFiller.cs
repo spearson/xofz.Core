@@ -2,23 +2,28 @@
 {
     public class ArrayFiller
     {
-        public ArrayFiller(Illuminator illuminator)
+        public ArrayFiller(
+            Illuminator illuminator)
         {
-            this.illuminator = illuminator;
+            this.illuminator = illuminator
+                               ?? new Illuminator();
         }
 
-        public virtual T[] Fill<T>(T[] array, Lot<object> dependencies)
+        public virtual T[] Fill<T>(
+            T[] array, 
+            Lot<object> dependencies)
             where T : class
         {
             for (var i = 0; i < array.Length; ++i)
             {
-                var t = this.illuminator.Illumine<T>(dependencies);
+                var t = this.illuminator.Illumine<T>(
+                    dependencies);
                 array[i] = t;
             }
 
             return array;
         }
 
-        private readonly Illuminator illuminator;
+        protected readonly Illuminator illuminator;
     }
 }

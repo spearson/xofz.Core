@@ -12,6 +12,11 @@
             IEnumerable<Action<T>> acts,
             BigInteger minimum)
         {
+            if (factory == null)
+            {
+                return default;
+            }
+
             var vc = new VarianceComputer<T>(item => item.GetHashCode());
             var l = new List<Action<T>>(acts);
             var ll = new LinkedList<Action<T>>();
@@ -26,7 +31,8 @@
             }
 
             l.RemoveAll(itemToRemove => ll.Contains(itemToRemove));
-            var i2 = factory();
+
+            var i2 = factory.Invoke();
             foreach (var act in l)
             {
                 act(i2);

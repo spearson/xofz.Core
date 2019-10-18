@@ -1,8 +1,9 @@
 ﻿namespace xofz.Misc.Framework.Illumination
 {
-    public sealed class StringIlluminatedObject : IlluminatedObject
+    public sealed class StringIlluminatedObject
+        : IlluminatedObject
     {
-        public StringIlluminatedObject(string s) 
+        public StringIlluminatedObject(string s)
             : base(new object[] {s})
         {
             this.Value = s;

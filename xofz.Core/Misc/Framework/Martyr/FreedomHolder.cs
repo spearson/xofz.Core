@@ -8,7 +8,10 @@
 
     public class FreedomHolder
     {
-        public FreedomHolder(Martyr martyr, Illuminator illuminator, string name)
+        public FreedomHolder(
+            Martyr martyr, 
+            Illuminator illuminator, 
+            string name)
         {
             this.martyr = martyr;
             this.illuminator = illuminator;
@@ -17,8 +20,14 @@
 
         public virtual string Name { get; }
 
-        public virtual void Surge(Lot<IDisposable> disposables)
+        public virtual void Surge(
+            Lot<IDisposable> disposables)
         {
+            if (disposables == null)
+            {
+                return;
+            }
+
             var dependencies = new LinkedList<List<object>>();
             foreach (var disposable in disposables)
             {
@@ -45,7 +54,7 @@
             }
         }
 
-        private readonly Martyr martyr;
-        private readonly Illuminator illuminator;
+        protected readonly Martyr martyr;
+        protected readonly Illuminator illuminator;
     }
 }

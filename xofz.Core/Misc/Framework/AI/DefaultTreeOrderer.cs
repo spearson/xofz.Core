@@ -1,14 +1,17 @@
 ﻿namespace xofz.Misc.Framework.AI
 {
-    public class DefaultTreeOrderer<T> : TreeOrderer<T>
+    public class DefaultTreeOrderer<T> 
+        : TreeOrderer<T>
     {
-        public virtual Lot<T> OrderedTree => this.orderedTree;
+        public virtual Lot<T> OrderedTree 
+            => this.currentTree;
 
-        public virtual void Order(Tree<T> tree)
+        public virtual void Order(
+            Tree<T> tree)
         {
-            this.orderedTree = tree;
+            this.currentTree = tree;
         }
 
-        private Lot<T> orderedTree;
+        protected Lot<T> currentTree;
     }
 }

@@ -9,11 +9,16 @@
             Lot<T> lot, 
             Absolution<T> absolution)
         {
-            this.collection = lot;
-            this.absolution = absolution;
+            this.collection = lot 
+                              ?? Lot.Empty<T>();
+            this.absolution = absolution 
+                              ?? new Absolution<T>(
+                                  new Learner<T>(), 
+                                  new Learner<T>());
         }
 
-        public virtual IEnumerable<T> Reflect(Action<T> learn)
+        public virtual IEnumerable<T> Reflect(
+            Action<T> learn)
         {
             var enumerator = this.collection.GetEnumerator();
             while (enumerator.MoveNext())
@@ -33,7 +38,9 @@
             enumerator.Dispose();
         }
 
-        private Func<T> createFactory(T item1, T item2)
+        protected virtual Func<T> createFactory(
+            T item1, 
+            T item2)
         {
             this.currentItem = item1;
             return () =>
@@ -44,8 +51,8 @@
             };
         }
 
-        private T currentItem;
-        private readonly Lot<T> collection;
-        private readonly Absolution<T> absolution;
+        protected T currentItem;
+        protected readonly Lot<T> collection;
+        protected readonly Absolution<T> absolution;
     }
 }

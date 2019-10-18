@@ -5,29 +5,34 @@
     using System.Linq;
     using xofz.Framework.Lots;
 
-    public class Tree<T> : Lot<T>
+    public class Tree<T> 
+        : Lot<T>
     {
-        public Tree() : this(new TreeNode<T>())
+        public Tree() 
+            : this(new TreeNode<T>())
         {
         }
 
-        public Tree(TreeNode<T> node)
+        public Tree(
+            TreeNode<T> node)
         {
-            this.node = node;
+            this.treeNode = node;
         }
 
-        public virtual TreeNode<T> Node => this.node;
+        public virtual TreeNode<T> Node => this.treeNode;
 
-        public virtual long Count => this.enumerate(this.node).Count;
+        public virtual long Count => this.enumerate(this.treeNode).Count;
 
         public virtual int ComputeDepth()
         {
-            return this.deepen(this.node, 1);
+            return this.deepen(this.treeNode, 1);
         }
 
-        private int deepen(TreeNode<T> node, int currentDepth)
+        protected virtual int deepen(
+            TreeNode<T> node, 
+            int currentDepth)
         {
-            if (node.Nodes.Count == 0)
+            if (node.Nodes.Count < 1)
             {
                 return currentDepth;
             }
@@ -44,10 +49,11 @@
 
         public virtual IEnumerator<T> GetEnumerator()
         {
-            return this.enumerate(this.node).GetEnumerator();
+            return this.enumerate(this.treeNode).GetEnumerator();
         }
 
-        private List<T> enumerate(TreeNode<T> node)
+        protected virtual IList<T> enumerate(
+            TreeNode<T> node)
         {
             var list = new List<T> { node.Value };
             foreach (var n in node.Nodes)
@@ -63,17 +69,18 @@
             return this.GetEnumerator();
         }
 
-        private readonly TreeNode<T> node;
+        protected readonly TreeNode<T> treeNode;
     }
 
     public class TreeNode<T>
     {
         public TreeNode()
-            : this(default(T))
+            : this(default)
         {
         }
 
-        public TreeNode(T value)
+        public TreeNode(
+            T value)
         {
             this.value = value;
             this.nodes = new LinkedList<TreeNode<T>>();

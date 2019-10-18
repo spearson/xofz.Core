@@ -1,4 +1,4 @@
-﻿namespace xofz.Framework.Transformation
+﻿namespace xofz.Misc.Framework.Transformation
 {
     using System;
     using System.Collections.Generic;
@@ -11,10 +11,20 @@
             Lot<T>[] lots,
             Func<T, BigInteger> valueChooser)
         {
-            var enumerators = new LinkedList<IEnumerator<T>>();
-            for (var i = 0; i < lots.Length; ++i)
+            if (lots == null || lots.Length < 1)
             {
-                enumerators.AddLast(lots[i].GetEnumerator());
+                yield break;
+            }
+
+            var enumerators = new LinkedList<IEnumerator<T>>();
+            foreach (var lot in lots)
+            {
+                if (lot == null)
+                {
+                    continue;
+                }
+
+                enumerators.AddLast(lot.GetEnumerator());
             }
 
             while (enumerators.First.Value.MoveNext())

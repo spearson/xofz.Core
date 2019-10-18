@@ -5,7 +5,8 @@
 
     public class SafeInvoker
     {
-        public virtual IEnumerable<Action> SafeInvoke(IEnumerable<Action> suspiciousActions)
+        public virtual IEnumerable<Action> SafeInvoke(
+            IEnumerable<Action> suspiciousActions)
         {
             foreach (var action in suspiciousActions)
             {

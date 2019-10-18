@@ -3,9 +3,11 @@
     using System;
     using System.Numerics;
 
-    public sealed class EightBitThunker : Thunker
+    public sealed class EightBitThunker 
+        : Thunker
     {
-        public bool[] Thunk(byte b)
+        public bool[] Thunk(
+            byte b)
         {
             var array = new bool[8];
             var firstBit = b >> 7;
@@ -35,7 +37,8 @@
             return array;
         }
 
-        public bool[] Thunk(short s)
+        public bool[] Thunk(
+            short s)
         {
             var array = new bool[8];
             var first2Bits = s >> 14;
@@ -65,7 +68,8 @@
             return array;
         }
 
-        public bool[] Thunk(int i)
+        public bool[] Thunk(
+            int i)
         {
             var array = new bool[8];
             var first4Bits = (i >> 28) & 0xF;
@@ -95,7 +99,8 @@
             return array;
         }
 
-        public bool[] Thunk(long l)
+        public bool[] Thunk(
+            long l)
         {
             var array = new bool[8];
             var firstByte = (l >> 56) & 0xFF;
@@ -125,7 +130,8 @@
             return array;
         }
 
-        public bool[] Thunk(BigInteger bigNumber)
+        public bool[] Thunk(
+            BigInteger bigNumber)
         {
             var array = new bool[8];
             var bits = bigNumber.ToByteArray();
@@ -243,7 +249,9 @@
             return array;
         }
 
-        private void setThunkChunk(byte b, out bool thunkChunk)
+        private void setThunkChunk(
+            byte b, 
+            out bool thunkChunk)
         {
             thunkChunk = b % 0xFF == 0;
         }

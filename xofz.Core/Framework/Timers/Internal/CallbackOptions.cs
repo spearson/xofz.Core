@@ -3,7 +3,8 @@
     using System;
 
     [Flags]
-    internal enum CallbackOptions : uint
+    internal enum CallbackOptions 
+        : uint
     {
         QueueToWorkerThread = 0x0,
         ExecuteOnlyOnce = 0x8, // if using this, set intervalInMs to 0 also

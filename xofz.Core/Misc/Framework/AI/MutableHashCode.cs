@@ -8,11 +8,12 @@
             return this.hashCode;
         }
 
-        public virtual void SetHashCode(int hashCode)
+        public virtual void SetHashCode(
+            int hashCode)
         {
             this.hashCode = hashCode;
         }
 
-        private int hashCode;
+        protected int hashCode;
     }
 }

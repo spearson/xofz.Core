@@ -33,6 +33,6 @@
             return isKnowledge;
         }
 
-        private readonly Absolution<T> absolution;
+        protected readonly Absolution<T> absolution;
     }
 }

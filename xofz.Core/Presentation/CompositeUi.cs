@@ -8,8 +8,15 @@
     public class CompositeUi
     {
         public CompositeUi()
+            : this(new LinkedList<UiHolder>())
         {
-            this.uiHolders = new LinkedList<UiHolder>();
+        }
+
+        protected CompositeUi(
+            ICollection<UiHolder> uiHolders)
+        {
+            this.uiHolders = uiHolders 
+                             ?? new LinkedList<UiHolder>();
         }
 
         public virtual TUi ReadUi<TUi, TPresenter>(
@@ -77,7 +84,9 @@
             Func<TResult> read)
             where TUi : Ui
         {
-            return UiHelpers.Read(ui, () => read());
+            return UiHelpers.Read(
+                ui, 
+                () => read());
         }
 
         public virtual TUi Write<TUi>(
@@ -96,7 +105,9 @@
                 return default(TUi);
             }
 
-            UiHelpers.Write(matchAsUi, () => write(matchAsUi));
+            UiHelpers.Write(
+                matchAsUi, 
+                () => write(matchAsUi));
             return matchAsUi;
         }
 

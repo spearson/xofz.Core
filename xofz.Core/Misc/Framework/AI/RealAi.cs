@@ -17,7 +17,9 @@
             this.rotator = rotator;
         }
 
-        public virtual T Spin(Random<T> selector, BigInteger release)
+        public virtual T Spin(
+            Random<T> selector, 
+            BigInteger release)
         {
             var item = selector.Next(release);
             foreach (var computation in this.computations)
@@ -28,7 +30,8 @@
             return item;
         }
 
-        public Lot<Action<T>> PeekComputations(BigInteger numberToPeek)
+        public Lot<Action<T>> PeekComputations(
+            BigInteger numberToPeek)
         {
             var ll = new LinkedList<Action<T>>();
             var enumerator = this.computations.GetEnumerator();
@@ -46,7 +49,9 @@
             return new LinkedListLot<Action<T>>(ll);
         }
 
-        public virtual void DoWork(IEnumerable<T> source, Action<T> longFunction)
+        public virtual void DoWork(
+            IEnumerable<T> source, 
+            Action<T> longFunction)
         {
             var enumerator = source.GetEnumerator();
             enumerator.MoveNext();
@@ -73,7 +78,7 @@
             enumerator.Dispose();
         }
 
-        private readonly Tree<Action<T>> computations;
-        private readonly EnumerableRotator rotator;
+        protected readonly Tree<Action<T>> computations;
+        protected readonly EnumerableRotator rotator;
     }
 }

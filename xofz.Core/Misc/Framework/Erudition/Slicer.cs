@@ -5,11 +5,23 @@
 
     public class Slicer
     {
-        public virtual Tuple<LiberatedObject, LiberatedObject> Slice(LiberatedObject anObject, int slicePoint)
+        public virtual Tuple<LiberatedObject, LiberatedObject> Slice(
+            LiberatedObject anObject, 
+            int slicePoint)
         {
-            if (slicePoint > anObject.DependencyCount)
+            if (anObject == null)
             {
-                return default(Tuple<LiberatedObject, LiberatedObject>);
+                return Tuple.Create<LiberatedObject, LiberatedObject>(
+                    null,
+                    null);
+            }
+
+            var dc = anObject.DependencyCount;
+            if (slicePoint > dc)
+            {
+                return Tuple.Create<LiberatedObject, LiberatedObject>(
+                    null,
+                    null);
             }
 
             var oneDeps = new LinkedList<object>();
@@ -19,7 +31,7 @@
             }
 
             var twoDeps = new LinkedList<object>();
-            for (var i = slicePoint; i < anObject.DependencyCount; ++i)
+            for (var i = slicePoint; i < dc; ++i)
             {
                 twoDeps.AddLast(anObject[i]);
             }

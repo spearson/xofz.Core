@@ -5,13 +5,14 @@
 
     public class ReverseTreeOrderer<T> : TreeOrderer<T>
     {
-        public virtual Lot<T> OrderedTree => this.orderedTree;
+        public virtual Lot<T> OrderedTree => this.currentTree;
 
         public virtual void Order(Tree<T> tree)
         {
-            this.orderedTree = new LinkedListLot<T>(tree.Reverse());
+            this.currentTree = new LinkedListLot<T>(
+                tree.Reverse());
         }
 
-        private Lot<T> orderedTree;
+        protected Lot<T> currentTree;
     }
 }

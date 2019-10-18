@@ -4,20 +4,24 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    public class Imploder<T> : Lot<T>
+    public class Imploder<T>
+        : GetArray<T>
     {
-        public Imploder(int capacity)
+        public Imploder(
+            int capacity)
             : this(new List<T>(capacity), capacity)
         {
         }
 
-        public Imploder(IList<T> list, int capacity)
+        public Imploder(
+            IList<T> list,
+            int capacity)
         {
             this.list = list;
             this.capacity = capacity;
         }
 
-        public virtual T this[int index] => this.list[index];
+        public virtual T this[long index] => this.list[(int)index];
 
         long Lot<T>.Count => this.list.Count;
 
@@ -33,7 +37,9 @@
             return this.GetEnumerator();
         }
 
-        public virtual void AddItem(T item, bool rightOverLeft)
+        public virtual void AddItem(
+            T item, 
+            bool rightOverLeft)
         {
             var l = this.list;
             l.Insert(rightOverLeft ? l.Count - 1 : 0, item);
@@ -50,7 +56,7 @@
             }
         }
 
-        private readonly IList<T> list;
-        private readonly int capacity;
+        protected readonly IList<T> list;
+        protected readonly int capacity;
     }
 }

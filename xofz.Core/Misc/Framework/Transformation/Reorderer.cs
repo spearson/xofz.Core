@@ -1,17 +1,20 @@
-﻿namespace xofz.Framework.Transformation
+﻿namespace xofz.Misc.Framework.Transformation
 {
     using System.Collections.Generic;
     using System.Linq;
     using xofz.Framework.Lots;
-    
+    using xofz.Framework.Transformation;
+
     public class Reorderer<T>
     {
         public Reorderer(
             EnumerableRotator rotator,
             EnumerableConnector connector)
         {
-            this.rotator = rotator;
-            this.connector = connector;
+            this.rotator = rotator 
+                           ?? new EnumerableRotator();
+            this.connector = connector 
+                             ?? new EnumerableConnector();
         }
 
         public virtual Lot<T> Reorder(
@@ -47,7 +50,7 @@
                 this.connector.Connect(start, next, end));
         }
 
-        private readonly EnumerableRotator rotator;
-        private readonly EnumerableConnector connector;
+        protected readonly EnumerableRotator rotator;
+        protected readonly EnumerableConnector connector;
     }
 }

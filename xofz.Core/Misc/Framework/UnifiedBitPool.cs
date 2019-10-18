@@ -22,21 +22,22 @@
                 initialPool != default(Lot<bool>));
             this.currentPool = initialPool;
             this.lotter = lotter;
-            this.onBitCount = initialPool.Count(b => b);
+            this.noOfOnBits = initialPool.Count(b => b);
         }
 
-        public UnifiedBitPool(int onBitCount)
-            : this(onBitCount, new LinkedListLotter())
+        public UnifiedBitPool(
+            int noOfOnBits)
+            : this(noOfOnBits, new LinkedListLotter())
         {
         }
 
         public UnifiedBitPool(
-            int onBitCount, 
+            int noOfOnBits, 
             Lotter lotter)
         {
-            this.onBitCount = onBitCount;
+            this.noOfOnBits = noOfOnBits;
             this.lotter = lotter;
-            var max = onBitCount * 2;
+            var max = noOfOnBits * 2;
             var array = new bool[max];
             for (long i = 0; i < max - 1; i += 2)
             {
@@ -47,23 +48,34 @@
             this.currentPool = lotter.Materialize(array);
         }
 
-        public virtual int OnBitCount => this.onBitCount;
+        public virtual int OnBitCount => this.noOfOnBits;
 
         public virtual int PoolSize => (int)this.currentPool.Count;
 
         public virtual void Shift(
             Func<Lot<bool>, Lot<bool>> shifter)
         {
+            if (shifter == null)
+            {
+                return;
+            }
+
             this.setPool(shifter(this.currentPool));
         }
 
         public virtual void Relocate(
             Func<long, bool, long> relocator)
         {
+            if (relocator == null)
+            {
+                return;
+            }
+
             var cp = this.currentPool;
-            var array = new bool[cp.Count];
+            var cpc = cp.Count;
+            var array = new bool[cpc];
             var e = cp.GetEnumerator();
-            for (long i = 0; i < cp.Count; ++i)
+            for (long i = 0; i < cpc; ++i)
             {
                 e.MoveNext();
                 var newIndex = relocator(i, e.Current);
@@ -91,97 +103,20 @@
             }
         }
 
-        private void setPool(Lot<bool> newPool)
+        protected virtual void setPool(
+            Lot<bool> newPool)
         {
-            if (newPool.Count(b => b) != this.onBitCount)
+            if (newPool.Count(b => b) != this.noOfOnBits)
             {
                 throw new InvalidOperationException(
-                    "delegate must retain current on bit count.");
+                    @"delegate must retain current on bit count.");
             }
 
             this.currentPool = newPool;
         }
 
-        private Lot<bool> currentPool;
-        private readonly int onBitCount;
-        private readonly Lotter lotter;
-    }
-
-    public class Tester
-    {
-        public void Go()
-        {
-            var ubp = new UnifiedBitPool(10);
-            Console.WriteLine(ubp.OnBitCount);
-            Console.WriteLine();
-
-            foreach (var index in ubp.ReadOnBitIndexes())
-            {
-                Console.WriteLine(index);
-            }
-            Console.WriteLine();
-
-            ubp.Relocate((i, on) =>
-            {
-                if (i % 2 == 1 && i < ubp.OnBitCount - 1)
-                {
-                    return i + 1;
-                }
-
-                if (i % 2 == 1)
-                {
-                    return 0;
-                }
-
-                if (i % 2 == 0)
-                {
-                    return i + 1;
-                }
-
-                throw new InvalidOperationException(
-                    "Total bit count must be even for this!");
-            });
-            foreach (var index in ubp.ReadOnBitIndexes())
-            {
-                Console.WriteLine(index);
-            }
-            Console.WriteLine();
-
-            // now try to move back
-            ubp.Relocate((i, on) =>
-            {
-                if (on)
-                {
-                    return i - 1;
-                }
-
-                return i + 1;
-            });
-            foreach (var index in ubp.ReadOnBitIndexes())
-            {
-                Console.WriteLine(index);
-            }
-            Console.WriteLine();
-
-            var r = new Random();
-            var availableIndexes
-                = new List<int>(Enumerable.Range(0, ubp.PoolSize));
-            ubp.Relocate((i, on) =>
-            {
-                var newIndex = r.Next(0, ubp.PoolSize);
-                while (!availableIndexes.Contains(newIndex))
-                {
-                    newIndex = r.Next(0, ubp.PoolSize);
-                }
-
-                availableIndexes.Remove(newIndex);
-                return newIndex;
-            });
-            foreach (var index in ubp.ReadOnBitIndexes())
-            {
-                Console.WriteLine(index);
-            }
-            Console.WriteLine();
-        }
+        protected Lot<bool> currentPool;
+        protected  readonly int noOfOnBits;
+        protected readonly Lotter lotter;
     }
 }

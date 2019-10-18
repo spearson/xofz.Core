@@ -10,6 +10,11 @@
             IEnumerable<Func<bool>> conditionGenerators, 
             BigInteger numberToCheck)
         {
+            if (conditionGenerators == null)
+            {
+                return false;
+            }
+
             var enumerator = conditionGenerators.GetEnumerator();
             bool evaluation;
             BigInteger counter = 0;
@@ -36,6 +41,11 @@
             T actor, 
             BigInteger numberToCheck)
         {
+            if (conditions == null)
+            {
+                return false;
+            }
+
             var enumerator = conditions.GetEnumerator();
             bool evaluation;
             BigInteger counter = 0;

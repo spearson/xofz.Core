@@ -27,7 +27,7 @@
             return actor;
         }
 
-        private readonly Illuminator illuminator;
-        private readonly FreedomHolder freedomHolder;
+        protected readonly Illuminator illuminator;
+        protected readonly FreedomHolder freedomHolder;
     }
 }

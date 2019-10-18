@@ -22,7 +22,15 @@
             return this
                 .collection
                 .Select(
-                    func => func())
+                    func =>
+                    {
+                        if (func == null)
+                        {
+                            return default;
+                        }
+
+                        return func();
+                    })
                 .GetEnumerator();
         }
 
@@ -46,7 +54,17 @@
             long counter = 0;
             foreach (var func in this.collection)
             {
-                array[counter] = func();
+                T item;
+                if (func == null)
+                {
+                    item = default;
+                    goto setArray;
+                }
+
+                item = func();
+
+                setArray:
+                array[counter] = item;
                 ++counter;
             }
         }

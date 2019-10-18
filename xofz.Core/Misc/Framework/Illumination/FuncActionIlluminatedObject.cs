@@ -2,9 +2,12 @@
 {
     using System;
 
-    public sealed class FuncActionIlluminatedObject<T> : IlluminatedObject
+    public sealed class FuncActionIlluminatedObject<T> 
+        : IlluminatedObject
     {
-        public FuncActionIlluminatedObject(Func<T> func, Action<T> action) 
+        public FuncActionIlluminatedObject(
+            Func<T> func, 
+            Action<T> action) 
             : base(new object[] { func, action })
         {
             this.func = func;
@@ -13,7 +16,13 @@
 
         public T Create()
         {
-            var t = this.func();
+            var f = this.func;
+            if (f == null)
+            {
+                return default;
+            }
+
+            var t = f();
             this.action(t);
 
             return t;

@@ -9,14 +9,16 @@ namespace xofz.Misc
         {
         }
 
-        public Delayer(ThreadPriority priority)
+        public Delayer(
+            ThreadPriority priority)
         {
             this.priority = priority;
             this.finishedSleeping = new ManualResetEvent(true);
         }
 
         // please have one delayer per thread
-        public virtual void Delay(int milliseconds)
+        public virtual void Delay(
+            int milliseconds)
         {
             var fs = this.finishedSleeping;
             fs.Reset();
@@ -36,7 +38,7 @@ namespace xofz.Misc
             fs.WaitOne(milliseconds);
         }
 
-        private readonly ThreadPriority priority;
-        private readonly ManualResetEvent finishedSleeping;
+        protected readonly ThreadPriority priority;
+        protected readonly ManualResetEvent finishedSleeping;
     }
 }

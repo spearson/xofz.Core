@@ -11,7 +11,8 @@
             this.martyr = new Martyr.Martyr();
         }
 
-        public virtual Lot<object> Process(Lot<object> references)
+        public virtual Lot<object> Process(
+            IEnumerable<object> references)
         {
             var ll = new LinkedList<object>();
             var lld = new LinkedList<IDisposable>();
@@ -32,6 +33,6 @@
             return new LinkedListLot<object>(ll);
         }
 
-        private readonly Martyr.Martyr martyr;
+        protected readonly Martyr.Martyr martyr;
     }
 }

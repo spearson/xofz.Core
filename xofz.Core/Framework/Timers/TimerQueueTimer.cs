@@ -13,7 +13,8 @@
 
         public override event Do Elapsed;
 
-        public override void Start(long intervalMilliseconds)
+        public override void Start(
+            long intervalMilliseconds)
         {
             lock (this.locker)
             {
@@ -23,7 +24,7 @@
                 }
 
                 NativeMethods.CreateTimerQueueTimer(
-                    out this.handle,
+                    out this.currentHandle,
                     IntPtr.Zero,
                     this.callback,
                     IntPtr.Zero,
@@ -45,7 +46,7 @@
 
                 NativeMethods.DeleteTimerQueueTimer(
                     IntPtr.Zero, 
-                    this.handle, 
+                    this.currentHandle, 
                     IntPtr.Zero);
                 this.started = false;
             }
@@ -68,7 +69,7 @@
             this.Elapsed?.Invoke();
         }
 
-        private IntPtr handle;
+        protected IntPtr currentHandle;
         private readonly TimerCallback callback;
     }
 }

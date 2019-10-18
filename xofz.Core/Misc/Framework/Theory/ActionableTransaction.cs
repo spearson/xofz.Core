@@ -6,24 +6,25 @@
     public class ActionableTransaction<T>
     {
         public ActionableTransaction()
+            : this(Activator.CreateInstance<T>)
         {
-            this.factory = () => Activator.CreateInstance<T>();
         }
 
         public ActionableTransaction(
             Func<T> defaultFactory)
         {
-            this.factory = defaultFactory;
+            this.currentFactory = defaultFactory;
         }
 
         public virtual Func<T> Factory
         {
-            get => this.factory;
+            get => this.currentFactory;
 
-            set => this.factory = value;
+            set => this.currentFactory = value;
         }
 
-        public virtual T Transact(IEnumerable<Action<T>> actions)
+        public virtual T Transact(
+            IEnumerable<Action<T>> actions)
         {
             var t = this.Factory();
             foreach (var action in actions)
@@ -34,13 +35,13 @@
                 }
                 catch
                 {
-                    return this.factory();
+                    return this.Factory();
                 }
             }
 
             return t;
         }
 
-        private Func<T> factory;
+        protected Func<T> currentFactory;
     }
 }

@@ -3,9 +3,11 @@
     using System.Linq;
     using System.Reflection;
 
-    public sealed class MemberFieldIlluminatedObject : IlluminatedObject
+    public sealed class MemberFieldIlluminatedObject 
+        : IlluminatedObject
     {
-        public MemberFieldIlluminatedObject(object dependency)
+        public MemberFieldIlluminatedObject(
+            object dependency)
             : base(new[] { dependency })
         {
             this.dependency = dependency;

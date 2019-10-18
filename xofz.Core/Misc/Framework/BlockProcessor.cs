@@ -16,16 +16,20 @@ namespace xofz.Misc.Framework
                 b[i] = new List<Action>(0x1000);
             }
 
-            this.setBlocks(b);
+            this.blocks = b;
         }
 
         public virtual BlockProcessor Configure()
         {
-            Interlocked.CompareExchange(ref this.configuringIf1, 1, 0);
+            Interlocked.CompareExchange(
+                ref this.configuringIf1, 
+                1, 
+                0);
             return this;
         }
 
-        public virtual BlockProcessor AddBlock(Action block)
+        public virtual BlockProcessor AddBlock(
+            Action block)
         {
             if (block == null)
             {
@@ -52,20 +56,21 @@ namespace xofz.Misc.Framework
             return this;
         }
 
-        public virtual BlockProcessor ParallelWithLast(Action parallelBlock)
+        public virtual BlockProcessor ParallelWithLast(
+            Action parallelBlock)
         {
             if (parallelBlock == null)
             {
                 throw new InvalidOperationException(
-                    "Null actions are not supported. "
-                    + "If this was intended, please pass "
-                    + "an empty block, i.e., () => { }.");
+                    @"Null actions are not supported. "
+                    + @"If this was intended, please pass "
+                    + @"an empty block, i.e., () => { }.");
             }
 
-            if (Interlocked.Read(ref this.configuringIf1) == 0)
+            if (Interlocked.Read(ref this.configuringIf1) != 1)
             {
                 throw new InvalidOperationException(
-                    "The block processor is not currently being configured.");
+                    @"The block processor is not currently being configured.");
             }
 
             var cp = this.currentProcessor;
@@ -74,8 +79,8 @@ namespace xofz.Misc.Framework
             if (newCP >= b.Length)
             {
                 throw new InvalidOperationException(
-                    "There are not enough processors to parallelize "
-                    + "this action.");
+                    @"There are not enough processors to parallelize "
+                    + @"this action.");
             }
 
             
@@ -87,7 +92,10 @@ namespace xofz.Misc.Framework
 
         public virtual BlockProcessor Finish()
         {
-            Interlocked.CompareExchange(ref this.configuringIf1, 0, 1);
+            Interlocked.CompareExchange(
+                ref this.configuringIf1, 
+                0, 
+                1);
             return this;
         }
 
@@ -105,10 +113,11 @@ namespace xofz.Misc.Framework
 
         public virtual void Process()
         {
-            if (Interlocked.Read(ref this.configuringIf1) == 1)
+            if (Interlocked.Read(
+                    ref this.configuringIf1) == 1)
             {
                 throw new InvalidOperationException(
-                    "The block processor is currently being configured.");
+                    @"The block processor is currently being configured.");
             }
 
             var b = this.blocks;
@@ -138,18 +147,20 @@ namespace xofz.Misc.Framework
             }
         }
 
-        private void setBlocks(List<Action>[] blocks)
+        protected virtual void setBlocks(
+            IList<Action>[] blocks)
         {
             this.blocks = blocks;
         }
 
-        private void setCurrentProcessor(byte currentProcessor)
+        protected virtual void setCurrentProcessor(
+            byte currentProcessor)
         {
             this.currentProcessor = currentProcessor;
         }
 
-        private byte currentProcessor;
-        private long configuringIf1;
-        private List<Action>[] blocks;
+        protected byte currentProcessor;
+        protected long configuringIf1;
+        protected IList<Action>[] blocks;
     }
 }

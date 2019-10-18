@@ -6,14 +6,16 @@
 
     public class SkippingTreeOrderer<T> : TreeOrderer<T>
     {
-        public SkippingTreeOrderer(short numberOfSkips)
+        public SkippingTreeOrderer(
+            short numberOfSkips)
         {
             this.numberOfSkips = numberOfSkips;
         }
 
-        public virtual Lot<T> OrderedTree => this.orderedTree;
+        public virtual Lot<T> OrderedTree => this.currentTree;
 
-        public virtual void Order(Tree<T> tree)
+        public virtual void Order(
+            Tree<T> tree)
         {
             var linkedList = new LinkedList<T>();
             var iterations = (int)((tree.Count / (double)this.numberOfSkips) + 1);
@@ -29,10 +31,10 @@
                 ++subtractor;
             }
 
-            this.orderedTree = new LinkedListLot<T>(linkedList);
+            this.currentTree = new LinkedListLot<T>(linkedList);
         }
 
-        private Lot<T> orderedTree;
-        private readonly short numberOfSkips;
+        protected Lot<T> currentTree;
+        protected readonly short numberOfSkips;
     }
 }

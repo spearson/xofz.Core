@@ -4,13 +4,18 @@
 
     public class Absolution<T>
     {
-        public Absolution(Learner<T> learner1, Learner<T> learner2)
+        public Absolution(
+            Learner<T> learner1, 
+            Learner<T> learner2)
         {
-            this.learner1 = learner1;
-            this.learner2 = learner2;
+            this.learner1 = learner1 ?? new Learner<T>();
+            this.learner2 = learner2 ?? new Learner<T>();
         }
 
-        public virtual Tuple<T, T> Absolve(Func<T> factory, Action<T> safeMethod, bool oneBeforeTwo = true)
+        public virtual Tuple<T, T> Absolve(
+            Func<T> factory, 
+            Action<T> safeMethod, 
+            bool oneBeforeTwo = true)
         {
             var l1 = this.learner1;
             var l2 = this.learner2;
@@ -31,6 +36,6 @@
             return Tuple.Create(item1, item2);
         }
 
-        private readonly Learner<T> learner1, learner2;
+        protected readonly Learner<T> learner1, learner2;
     }
 }

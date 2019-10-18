@@ -7,9 +7,10 @@
 
     public class MethodInjector
     {
-        public MethodInjector(MethodWeb web)
+        public MethodInjector(
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
             this.methods = new List<Tuple<object, Type, string, string>>(
                 0x10000);
         }
@@ -31,7 +32,7 @@
             string actionName = null,
             string dependencyName = null)
         {
-            var w = this.web;
+            var w = this.runner;
             foreach (var tuple in this.methods
                 .Where(t =>
                     t.Item2.IsAssignableFrom(typeof(T)) &&
@@ -64,7 +65,7 @@
             return Tuple.Create<Action<T>, T>(t => { }, default(T));
         }
 
-        private readonly MethodWeb web;
-        private readonly List<Tuple<object, Type, string, string>> methods;
+        protected readonly MethodRunner runner;
+        protected readonly List<Tuple<object, Type, string, string>> methods;
     }
 }

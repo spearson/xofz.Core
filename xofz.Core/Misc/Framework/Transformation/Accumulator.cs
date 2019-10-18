@@ -1,4 +1,4 @@
-﻿namespace xofz.Framework.Transformation
+﻿namespace xofz.Misc.Framework.Transformation
 {
     using System;
     using System.Collections.Generic;
@@ -10,8 +10,12 @@
             Func<TIn, TIn> inFactory,
             Func<TIn, TOut> outFactory)
         {
-            this.inFactory = inFactory;
-            this.outFactory = outFactory;
+            this.inFactory = inFactory ??
+                             throw new ArgumentNullException(
+                                 nameof(inFactory));
+            this.outFactory = outFactory ??
+                              throw new ArgumentNullException(
+                                  nameof(outFactory));
         }
 
         public virtual IEnumerable<TOut> Accumulate(
@@ -39,7 +43,7 @@
             return element;
         }
 
-        private readonly Func<TIn, TIn> inFactory;
-        private readonly Func<TIn, TOut> outFactory;
+        protected readonly Func<TIn, TIn> inFactory;
+        protected readonly Func<TIn, TOut> outFactory;
     }
 }

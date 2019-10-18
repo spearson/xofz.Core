@@ -7,16 +7,16 @@
     {
         public MethodBuckle()
         {
-            this.latch = new ManualResetEvent(true);
+            this.manualLatch = new ManualResetEvent(true);
             this.syncer = new object();
         }
 
-        public virtual ManualResetEvent Latch => this.latch;
+        public virtual ManualResetEvent Latch => this.manualLatch;
 
         public virtual void Buckle(
             Action first)
         {
-            var l = this.latch;
+            var l = this.manualLatch;
             l.Reset();
             lock (this.syncer)
             {
@@ -29,7 +29,7 @@
             Action first, 
             Action second)
         {
-            var l = this.latch;
+            var l = this.manualLatch;
             l.Reset();
             lock (this.syncer)
             {
@@ -44,7 +44,7 @@
             Action second, 
             Action third)
         {
-            var l = this.latch;
+            var l = this.manualLatch;
             l.Reset();
             lock (this.syncer)
             {
@@ -61,7 +61,7 @@
             Action third,
             Action fourth)
         {
-            var l = this.latch;
+            var l = this.manualLatch;
             l.Reset();
             lock (this.syncer)
             {
@@ -73,7 +73,7 @@
             l.Set();
         }
 
-        private readonly object syncer;
-        private readonly ManualResetEvent latch;
+        protected readonly object syncer;
+        protected readonly ManualResetEvent manualLatch;
     }
 }

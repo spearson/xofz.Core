@@ -3,9 +3,12 @@
     using System.IO;
     using System.Text;
 
-    public sealed class TextFileLoader : Loader
+    public sealed class TextFileLoader 
+        : Loader
     {
-        public TextFileLoader(Encoding encoding, bool returnArray)
+        public TextFileLoader(
+            Encoding encoding, 
+            bool returnArray)
         {
             this.encoding = encoding;
             this.returnArray = returnArray;

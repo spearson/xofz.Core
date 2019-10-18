@@ -2,9 +2,12 @@
 {
     using System;
 
-    public sealed class FuncIlluminatedObject<T> : IlluminatedObject
+    public sealed class FuncIlluminatedObject<T> 
+        : IlluminatedObject
     {
-        public FuncIlluminatedObject(Func<T> generator) : base(new object[] { generator })
+        public FuncIlluminatedObject(
+            Func<T> generator) 
+            : base(new object[] { generator })
         {
             this.generator = generator;
         }

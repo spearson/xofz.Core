@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     public class StringLot
-        : Lot<char>
+        : GetArray<char>
     {
         public StringLot(
             string s)
@@ -17,6 +17,9 @@
             this.s = s;
         }
 
+        public char this[long index] =>
+            this.s[(int)index];
+
         public virtual IEnumerator<char> GetEnumerator()
         {
             return this.s.GetEnumerator();
@@ -26,6 +29,8 @@
         {
             return this.GetEnumerator();
         }
+
+        public virtual string Value => this.s;
 
         public virtual long Count => this.s.Length;
 

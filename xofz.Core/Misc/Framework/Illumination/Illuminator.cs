@@ -8,14 +8,16 @@
 
         public class Illuminator
         {
-            public virtual T Illumine<T>(params object[] dependencies)
+            public virtual T Illumine<T>(
+                params object[] dependencies)
                 where T : class
             {
                 return this.Illumine<T>(
                     new LinkedListLot<object>(dependencies));
             }
 
-            public virtual T Illumine<T>(Lot<object> dependencies)
+            public virtual T Illumine<T>(
+                Lot<object> dependencies)
                 where T : class
             {
                 var constructors = new LinkedList<ConstructorInfo>(

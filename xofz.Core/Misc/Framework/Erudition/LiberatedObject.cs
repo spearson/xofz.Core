@@ -5,15 +5,19 @@
 
     public class LiberatedObject
     {
-        public LiberatedObject(params object[] dependencies)
-            : this(new EnumerableRotator(), dependencies)
+        public LiberatedObject(
+            params object[] dependencies)
+            : this(new EnumerableRotator(), 
+                dependencies)
         {
         }
 
-        public LiberatedObject(EnumerableRotator rotator, params object[] dependencies)
+        public LiberatedObject(
+            EnumerableRotator rotator, 
+            params object[] dependencies)
         {
-            this.rotator = rotator;
-            this.dependencies = dependencies;
+            this.rotator = rotator ?? new EnumerableRotator();
+            this.dependencies = dependencies ?? new object[0];
         }
 
         public virtual int DependencyCount => this.dependencies.Length;
@@ -25,7 +29,8 @@
             return this.dependencies.OfType<T>().FirstOrDefault();
         }
 
-        public virtual void ShiftDependencies(bool shiftRight)
+        public virtual void ShiftDependencies(
+            bool shiftRight)
         {
             this.setDependencies(
                 this.rotator.Rotate(
@@ -35,12 +40,13 @@
                     .ToArray());
         }
 
-        private void setDependencies(object[] dependencies)
+        protected virtual void setDependencies(
+            object[] dependencies)
         {
             this.dependencies = dependencies;
         }
 
-        private object[] dependencies;
-        private readonly EnumerableRotator rotator;
+        protected object[] dependencies;
+        protected readonly EnumerableRotator rotator;
     }
 }
