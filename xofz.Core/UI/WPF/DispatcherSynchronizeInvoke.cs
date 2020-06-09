@@ -14,7 +14,7 @@
         }
 
         bool ISynchronizeInvoke.InvokeRequired => 
-            this.dispatcher?.CheckAccess() ?? false;
+            !this.dispatcher?.CheckAccess() ?? false;
 
         IAsyncResult ISynchronizeInvoke.BeginInvoke(
             Delegate method, 
