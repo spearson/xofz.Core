@@ -183,6 +183,7 @@
                     caption,
                     MessageBoxButton.OK,
                     icon);
+                return;
             }
 
             MessageBox.Show(
