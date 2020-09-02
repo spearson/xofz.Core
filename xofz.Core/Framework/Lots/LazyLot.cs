@@ -2,11 +2,12 @@
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading;
     using xofz.Framework.Lotters;
+    using EH = xofz.EnumerableHelpers;
 
-    public class LazyLot<T> : Lot<T>
+    public class LazyLot<T> 
+        : Lot<T>
     {
         public LazyLot(
             IEnumerable<T> finiteSource)
@@ -57,15 +58,16 @@
             T item)
         {
             this.checkItems();
-            return this.items.Contains(item);
+            return EH.Contains(
+                this.items,
+                item);
         }
 
         protected virtual void checkItems()
         {
-            if (Interlocked.CompareExchange(
-                    ref this.materializedIf1,
-                    1,
-                    0) != 1)
+            if (Interlocked.Exchange(
+                ref this.materializedIf1,
+                1) != 1)
             {
                 this.setItems(
                     this.lotter.Materialize(

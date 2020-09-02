@@ -3,7 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
+    using EH = xofz.EnumerableHelpers;
 
     public class ActionLot<T>
         : Lot<T>
@@ -41,7 +41,9 @@
         public virtual bool Contains(
             T item)
         {
-            return this.items.Contains(item);
+            return EH.Contains(
+                this.items,
+                item);
         }
 
         public virtual void CopyTo(

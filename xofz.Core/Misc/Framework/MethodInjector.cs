@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using xofz.Framework;
+    using static EnumerableHelpers;
 
     public class MethodInjector
     {
@@ -33,14 +33,14 @@
             string dependencyName = null)
         {
             var w = this.runner;
-            foreach (var tuple in this.methods
-                .Where(t =>
+            foreach (var tuple in Where(
+                this.methods,t =>
                     t.Item2.IsAssignableFrom(typeof(T)) &&
                     t.Item3 == actionName &&
                     t.Item4 == dependencyName))
             {
                 var action = tuple.Item1 as Action<T>;
-                if (action == default(Action<T>))
+                if (action == default)
                 {
                     continue;
                 }
@@ -62,7 +62,7 @@
                 return Tuple.Create(action, dependency);
             }
 
-            return Tuple.Create<Action<T>, T>(t => { }, default(T));
+            return Tuple.Create<Action<T>, T>(t => { }, default);
         }
 
         protected readonly MethodRunner runner;

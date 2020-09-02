@@ -1,6 +1,6 @@
 ﻿namespace xofz.Misc.Framework.Illumination
 {
-    using System.Linq;
+    using EH = xofz.EnumerableHelpers;
 
     public class IlluminatedObject
     {
@@ -40,15 +40,18 @@
 
         public override int GetHashCode()
         {
-            return this.dependencies
-                .Aggregate(0, (current, o) => current ^ o.GetHashCode());
+            return EH.Aggregate(
+                this.dependencies,
+                0,
+                (current, o) => current ^ o.GetHashCode());
         }
 
         public override bool Equals(
             object obj)
         {
-            return this.dependencies
-                .All(t => t.Equals(obj));
+            return EH.All(
+                this.dependencies,
+                t => t.Equals(obj));
         }
 
         protected readonly object[] dependencies;

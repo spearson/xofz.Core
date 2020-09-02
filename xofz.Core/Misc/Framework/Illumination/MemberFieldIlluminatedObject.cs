@@ -1,7 +1,7 @@
 ﻿namespace xofz.Misc.Framework.Illumination
 {
-    using System.Linq;
     using System.Reflection;
+    using static EnumerableHelpers;
 
     public sealed class MemberFieldIlluminatedObject 
         : IlluminatedObject
@@ -18,7 +18,8 @@
             // a wee bit of reflection
             var fields = this.dependency.GetType().GetFields(
                 BindingFlags.NonPublic | BindingFlags.Instance);
-            var field = fields.FirstOrDefault(
+            var field = FirstOrDefault(
+                fields,
                 fi => fi.Name == fieldName);
             return (T)field?.GetValue(this.dependency);
         }

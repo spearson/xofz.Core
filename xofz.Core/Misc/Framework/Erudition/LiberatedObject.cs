@@ -1,7 +1,7 @@
 ﻿namespace xofz.Misc.Framework.Erudition
 {
-    using System.Linq;
     using xofz.Framework.Transformation;
+    using static EnumerableHelpers;
 
     public class LiberatedObject
     {
@@ -26,18 +26,20 @@
 
         public virtual T GetDependency<T>()
         {
-            return this.dependencies.OfType<T>().FirstOrDefault();
+            return FirstOrDefault(
+                OfType<T>(
+                    this.dependencies));
         }
 
         public virtual void ShiftDependencies(
             bool shiftRight)
         {
             this.setDependencies(
-                this.rotator.Rotate(
+                ToArray(
+                    this.rotator.Rotate(
                         this.dependencies,
                         1,
-                        shiftRight)
-                    .ToArray());
+                        shiftRight)));
         }
 
         protected virtual void setDependencies(

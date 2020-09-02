@@ -2,8 +2,8 @@ namespace xofz.Misc.Framework
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using xofz.Framework.Lotters;
+    using static EnumerableHelpers;
 
     public class CollectionHolder
     {
@@ -31,16 +31,18 @@ namespace xofz.Misc.Framework
         public virtual Lot<T> Get<T>(
             string name = null)
         {
-            var collection = this.collections.FirstOrDefault(
+            var collection = FirstOrDefault(
+                this.collections,
                 tuple => tuple.Item1 == name
-                && tuple.Item2 is Lot<T>);
+                         && tuple.Item2 is Lot<T>);
 
             if (collection != null)
             {
                 return collection.Item2 as Lot<T>;
             }
 
-            collection = this.collections.FirstOrDefault(
+            collection = FirstOrDefault(
+                this.collections,
                 tuple => tuple.Item1 == name
                          && tuple.Item2 is IEnumerable<T>);
 

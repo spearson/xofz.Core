@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Numerics;
+    using static EnumerableHelpers;
 
     public class Innovator
     {
@@ -33,7 +33,8 @@
                 BigInteger maximalValue = 0;
                 var leastItem = default(T);
                 var maximalItem = default(T);
-                foreach (var enumerator in enumerators.Skip(1))
+                foreach (var enumerator in Skip(
+                    enumerators, 1))
                 {
                     enumerator.MoveNext();
                     var value = valueChooser(enumerator.Current);

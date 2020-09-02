@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
     using xofz.Framework.Lotters;
+    using static EnumerableHelpers;
 
     public class UnifiedBitPool
     {
@@ -22,7 +22,9 @@
                 initialPool != default(Lot<bool>));
             this.currentPool = initialPool;
             this.lotter = lotter;
-            this.noOfOnBits = initialPool.Count(b => b);
+            this.noOfOnBits = Count(
+                initialPool,
+                b => b);
         }
 
         public UnifiedBitPool(
@@ -106,7 +108,9 @@
         protected virtual void setPool(
             Lot<bool> newPool)
         {
-            if (newPool.Count(b => b) != this.noOfOnBits)
+            if (Count(
+                newPool,
+                b => b) != this.noOfOnBits)
             {
                 throw new InvalidOperationException(
                     @"delegate must retain current on bit count.");

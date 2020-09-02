@@ -8,8 +8,8 @@ namespace xofz.UI.Forms.Internal
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Windows.Forms;
+    using static EnumerableHelpers;
 
     // this code was taken from http://www.codeproject.com/Articles/18440/DataGridView-Multi-column-Sort
     internal sealed class ColumnSorter 
@@ -141,9 +141,11 @@ namespace xofz.UI.Forms.Internal
             get
             {
                 var info =
-                    this.sortedColumns.Select(
+                    Select(
+                        this.sortedColumns,
                         column =>
-                        this.grid.Columns[column.columnNumber].HeaderText + (column.ascending ? @" ASC" : @" DESC"));
+                            this.grid.Columns[column.columnNumber].HeaderText +
+                            (column.ascending ? @" ASC" : @" DESC"));
 
                 return @"Sorted by " + string.Join(@", ", info);
             }

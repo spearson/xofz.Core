@@ -2,9 +2,9 @@
     {
         using System;
         using System.Collections.Generic;
-        using System.Linq;
         using System.Reflection;
         using xofz.Framework.Lots;
+        using EH = xofz.EnumerableHelpers;
 
         public class Illuminator
         {
@@ -19,7 +19,9 @@
                 Lot<object> dependencies)
             {
                 var constructors = new LinkedList<ConstructorInfo>(
-                    typeof(T).GetConstructors().OrderByDescending(ci => ci.GetParameters().Length));
+                    EH.OrderByDescending(
+                        typeof(T).GetConstructors(),
+                        ci => ci.GetParameters().Length));
                 var list = new List<object>(dependencies);
                 foreach (var ctor in constructors)
                 {

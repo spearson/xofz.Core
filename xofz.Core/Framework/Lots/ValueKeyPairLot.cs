@@ -3,7 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
+    using EH = xofz.EnumerableHelpers;
 
     public class ValueKeyPairLot<K, V> 
         : Lot<V>
@@ -20,9 +20,9 @@
 
         public virtual IEnumerator<V> GetEnumerator()
         {
-            return this
-                .items
-                .Select(i => i.Value)
+            return EH.Select(
+                    this.items,
+                    i => i.Value)
                 .GetEnumerator();
         }
 
@@ -34,8 +34,10 @@
         public virtual bool Contains(
             V value)
         {
-            return EnumerableHelpers.Contains(
-                this.items.Select(kvp => kvp.Value),
+            return EH.Contains(
+                EH.Select(
+                    this.items,
+                    kvp => kvp.Value),
                 value);
         }
 
@@ -44,8 +46,11 @@
         {
             var lot = this.items;
             Array.Copy(
-                lot.Select(kvp => kvp.Value).ToArray(), 
-                valueArray, 
+                EH.ToArray(
+                    EH.Select(
+                        lot,
+                        kvp => kvp.Value)),
+                valueArray,
                 lot.Count);
         }
 

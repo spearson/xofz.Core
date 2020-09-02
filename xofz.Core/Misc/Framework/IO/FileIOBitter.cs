@@ -2,11 +2,12 @@
 {
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Threading;
     using xofz.Framework;
+    using static EnumerableHelpers;
 
-    public sealed class FileIOBitter : IOBitter
+    public sealed class FileIOBitter 
+        : IOBitter
     {
         public FileIOBitter(
             MethodWeb web)
@@ -18,7 +19,9 @@
 
         public void Setup(string startFilePath)
         {
-            if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
+            if (Interlocked.Exchange(
+                ref this.setupIf1, 
+                1) == 1)
             {
                 return;
             }
@@ -45,11 +48,11 @@
         {
             if (Interlocked.Read(ref this.setupIf1) != 1)
             {
-                return Enumerable.Empty<bool>();
+                return Empty<bool>();
             }
 
             var w = this.web;
-            IEnumerable<bool> bits = Enumerable.Empty<bool>();
+            IEnumerable<bool> bits = Empty<bool>();
             IOBitter bitter = this;
             w.Run<FileIOBitterSettings, BinaryTranslator>(
                 (settings, bt) =>
@@ -95,7 +98,7 @@
                 (settings, bt) =>
                 {
                     var bytesToWrite = bt.GetBytes(bits);
-                    var array = bytesToWrite.ToArray();
+                    var array = ToArray(bytesToWrite);
                     try
                     {
                         File.WriteAllBytes(

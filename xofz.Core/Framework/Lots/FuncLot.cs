@@ -4,7 +4,7 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
+    using static EnumerableHelpers;
 
     public class FuncLot<T> 
         : Lot<T>
@@ -19,9 +19,7 @@
 
         public virtual IEnumerator<T> GetEnumerator()
         {
-            return this
-                .collection
-                .Select(
+            return Select(this.collection,
                     func =>
                     {
                         if (func == null)

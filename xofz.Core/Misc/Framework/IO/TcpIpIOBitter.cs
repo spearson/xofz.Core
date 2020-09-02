@@ -2,10 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Net.Sockets;
     using System.Threading;
     using xofz.Framework;
+    using static EnumerableHelpers;
 
     public sealed class TcpIpIOBitter 
         : IOBitter
@@ -22,10 +22,9 @@
             string host, 
             int port)
         {
-            if (Interlocked.CompareExchange(
-                    ref this.setupIf1,
-                    1, 
-                    0) == 1)
+            if (Interlocked.Exchange(
+                ref this.setupIf1,
+                1) == 1)
             {
                 return;
             }
@@ -57,7 +56,7 @@
         {
             IOBitter bitter = this;
             var w = this.web;
-            var bits = Enumerable.Empty<bool>();
+            var bits = Empty<bool>();
             w.Run<TcpIpIOBitterSettings, BinaryTranslator>(
                 (settings, bt) =>
                 {
@@ -96,7 +95,7 @@
                         }
                         catch
                         {
-                            bits = Enumerable.Empty<bool>();
+                            bits = Empty<bool>();
                         }
                     }
                 },
@@ -134,9 +133,8 @@
                                 .AsyncWaitHandle
                                 .WaitOne(2000))
                             {
-                                var bytes = bt
-                                    .GetBytes(bits)
-                                    .ToArray();
+                                var bytes = ToArray(bt
+                                    .GetBytes(bits));
                                 using (var stream = client.GetStream())
                                 {
                                     stream.WriteTimeout =

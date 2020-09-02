@@ -1,8 +1,8 @@
 ﻿namespace xofz.Framework.Transformation
 {
     using System.Collections.Generic;
-    using System.Linq;
     using xofz.Framework.Lots;
+    using EH = xofz.EnumerableHelpers;
 
     public class EnumerableSlicer
     {
@@ -20,17 +20,20 @@
                 return new Lot<T>[0];
             }
 
-            ICollection<T> remainingItems 
+            ICollection<T> remainingItems
                 = new LinkedList<T>(source);
             var array = new Lot<T>[slicePoints.Count];
             var counter = 0;
             foreach (var slicePoint in slicePoints)
             {
-                var sequence = remainingItems.Take(slicePoint);
+                var sequence = EH.Take(
+                    remainingItems, slicePoint);
                 array[counter] = new LinkedListLot<T>(sequence);
                 ++counter;
                 remainingItems = new LinkedList<T>(
-                    remainingItems.Skip(slicePoint));
+                    EH.Skip(
+                        remainingItems,
+                        slicePoint));
             }
 
             return array;

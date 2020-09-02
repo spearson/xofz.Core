@@ -1,8 +1,8 @@
 ﻿namespace xofz.Misc.Framework.Computation
 {
     using System.Collections.Generic;
-    using System.Linq;
     using xofz.Framework.Transformation;
+    using static EnumerableHelpers;
 
     public class Permutator
     {
@@ -24,13 +24,16 @@
             for (var i = 0; i < collection.Count; ++i)
             {
                 var switched = new LinkedList<T>(
-                    collection.Skip(i));
+                    Skip(
+                        collection,
+                        i));
                 for (var j = 0; j < i; ++j)
                 {
                     switched.AddLast(
-                        collection
-                        .Skip(j)
-                        .FirstOrDefault());
+                        FirstOrDefault(
+                            Skip(
+                                collection,
+                                j)));
                 }
 
                 for (var k = 0; k < i; ++k)

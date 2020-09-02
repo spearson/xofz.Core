@@ -2,8 +2,8 @@
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
     using xofz.Framework.Lots;
+    using static EnumerableHelpers;
 
     public class Tree<T> 
         : Lot<T>
@@ -44,7 +44,7 @@
                 depths.AddLast(this.deepen(n, currentDepth));
             }
 
-            return depths.Max();
+            return Max(depths);
         }
 
         public virtual IEnumerator<T> GetEnumerator()

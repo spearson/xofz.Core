@@ -2,8 +2,8 @@ namespace xofz.Misc
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Numerics;
+    using static EnumerableHelpers;
 
     public class Random<T>
     {
@@ -25,11 +25,14 @@ namespace xofz.Misc
             BigInteger maxToPass)
         {
             // i'll do something better than a shave to an int later
-            return this.lot.Skip(this.random.Next((int)maxToPass)).FirstOrDefault();
+            return FirstOrDefault(
+                Skip(
+                    this.lot,
+                    this.random.Next((int)maxToPass)));
         }
 
         public virtual IEnumerable<T> NextSequence(
-            BigInteger maxToPass, 
+            BigInteger maxToPass,
             BigInteger sourceSize)
         {
             var c = this.lot;
@@ -38,7 +41,10 @@ namespace xofz.Misc
             {
                 var nextSkip = this.random.Next((int)maxToPass);
                 ++counter;
-                yield return c.Skip(nextSkip).FirstOrDefault();
+                yield return FirstOrDefault(
+                    Skip(
+                        c,
+                        nextSkip));
             }
         }
 

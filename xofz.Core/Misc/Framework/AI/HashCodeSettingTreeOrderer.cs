@@ -1,14 +1,13 @@
 ﻿namespace xofz.Misc.Framework.AI
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using xofz.Framework.Lots;
+    using static EnumerableHelpers;
 
     public class HashCodeSettingTreeOrderer<T>
         : TreeOrderer<T> where T : MutableHashCode
     {
-        public virtual Lot<T> OrderedTree => this.currentTree; 
+        public virtual Lot<T> OrderedTree => this.currentTree;
 
         public virtual void Order(
             Tree<T> tree)
@@ -18,7 +17,9 @@
             this.setCurrentTree(
                 new LinkedListLot<T>(
                     new LinkedList<T>(
-                        tree.OrderBy(t => t.GetHashCode()))));
+                        OrderBy(
+                            tree,
+                            t => t.GetHashCode()))));
         }
 
         protected virtual void processNodes(

@@ -2,8 +2,8 @@ namespace xofz.Misc.Framework
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading;
+    using static EnumerableHelpers;
 
     public class BlockProcessor
     {
@@ -114,7 +114,7 @@ namespace xofz.Misc.Framework
         public virtual void Process()
         {
             if (Interlocked.Read(
-                    ref this.configuringIf1) == 1)
+                ref this.configuringIf1) == 1)
             {
                 throw new InvalidOperationException(
                     @"The block processor is currently being configured.");
@@ -135,12 +135,12 @@ namespace xofz.Misc.Framework
                     }
                 }
 
-                foreach (var t in ts.Where(thread => thread != null))
+                foreach (var t in Where(ts, thread => thread != null))
                 {
                     t.Start();
                 }
 
-                foreach (var t in ts.Where(thread => thread != null))
+                foreach (var t in Where(ts, thread => thread != null))
                 {
                     t.Join();
                 }

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using EH = xofz.EnumerableHelpers;
 
     public sealed class GatedIlluminatedObject<T> 
         : IlluminatedObject
@@ -18,8 +18,10 @@
 
         public IEnumerable<T> Generate()
         {
-            return this.gates?.Select(gate => this.generator(gate))
-                ?? EnumerableHelpers.Empty<T>();
+            return EH.Select(
+                this.gates,
+                gate => this.generator(gate))
+                ?? EH.Empty<T>();
         }
 
         private readonly IEnumerable<bool> gates;

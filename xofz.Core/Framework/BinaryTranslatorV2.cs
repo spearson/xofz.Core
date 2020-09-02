@@ -1,8 +1,8 @@
 ﻿namespace xofz.Framework
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Numerics;
+    using static EnumerableHelpers;
 
     public class BinaryTranslatorV2
         : BinaryTranslator
@@ -11,7 +11,7 @@
             IEnumerable<bool> bits)
         {
             var bytes = this.GetBytes(bits);
-            return new BigInteger(bytes?.ToArray() ?? new byte[0]);
+            return new BigInteger(ToArray(bytes) ?? new byte[0]);
         }
 
         public virtual IEnumerable<bool> GetBits(

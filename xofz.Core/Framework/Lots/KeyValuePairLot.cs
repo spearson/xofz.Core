@@ -3,7 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
+    using static EnumerableHelpers;
     
     public class KeyValuePairLot<K, V> 
         : Lot<K>
@@ -20,8 +20,9 @@
 
         public virtual IEnumerator<K> GetEnumerator()
         {
-            return this.items
-                .Select(i => i.Key)
+            return Select(
+                    this.items,
+                    i => i.Key)
                 .GetEnumerator();
         }
 
@@ -33,9 +34,9 @@
         public virtual bool Contains(
             K key)
         {
-            return !this
-                .items
-                .FirstOrDefault(kvp => kvp.Key.Equals(key))
+            return !FirstOrDefault(
+                    this.items,
+                    kvp => kvp.Key.Equals(key))
                 .Equals(default(KeyValuePair<K, V>));
         }
 
@@ -44,10 +45,10 @@
         {
             var kvps = this.items;
             Array.Copy(
-                kvps
-                    .Select(
-                        kvp => kvp.Key)
-                    .ToArray(),
+                ToArray(
+                    Select(
+                        kvps,
+                        kvp => kvp.Key)),
                 keyArray,
                 kvps.Count);
         }

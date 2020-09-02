@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using xofz.UI;
+    using static EnumerableHelpers;
 
     public class CompositeUi
     {
@@ -26,7 +26,9 @@
             where TPresenter : Presenter
         {
             ICollection<UiHolder> matches = new LinkedList<UiHolder>(
-                this.uiHolders.Where(ui => ui.Content is TUi));
+                Where(
+                    this.uiHolders,
+                    ui => ui.Content is TUi));
             if (matches.Count < 1)
             {
                 return default;
@@ -34,7 +36,8 @@
 
             if (presenterName == null)
             {
-                var match = matches.FirstOrDefault(
+                var match = FirstOrDefault(
+                    matches,
                     ui => ui.ContentName == uiName);
                 if (match == null)
                 {
@@ -45,7 +48,9 @@
             }
 
             ICollection<UiHolder> namedMatches = new LinkedList<UiHolder>(
-                matches.Where(t =>
+                Where(
+                    matches,
+                    t =>
                     t.Presenter is NamedPresenter presenter &&
                     presenter.Name == presenterName));
             if (namedMatches.Count < 1)
@@ -53,7 +58,8 @@
                 return default;
             }
 
-            var uiMatch = namedMatches.FirstOrDefault(
+            var uiMatch = FirstOrDefault(
+                namedMatches,
                 nm => nm.ContentName == uiName);
             if (uiMatch == null)
             {
@@ -69,14 +75,15 @@
             string uiName = null)
             where TUi : Ui
         {
-            var match = this.uiHolders.FirstOrDefault(
+            var match = FirstOrDefault(
+                this.uiHolders,
                 tuple => ReferenceEquals(presenter, tuple.Presenter)
-                && tuple.Content is TUi
-                && tuple.ContentName == uiName);
+                         && tuple.Content is TUi
+                         && tuple.ContentName == uiName);
             var matchAsUi = (TUi)match?.Content;
-            return matchAsUi != null 
-                ? UiHelpers.Read(matchAsUi, () => read(matchAsUi)) 
-                : default(TResult);
+            return matchAsUi != null
+                ? UiHelpers.Read(matchAsUi, () => read(matchAsUi))
+                : default;
         }
 
         public virtual TResult Read<TUi, TResult>(
@@ -85,28 +92,29 @@
             where TUi : Ui
         {
             return UiHelpers.Read(
-                ui, 
+                ui,
                 () => read());
         }
 
         public virtual TUi Write<TUi>(
-            Presenter presenter, 
+            Presenter presenter,
             Action<TUi> write,
-            string uiName = null) 
+            string uiName = null)
             where TUi : Ui
         {
-            var match = this.uiHolders.FirstOrDefault(
+            var match = FirstOrDefault(
+                this.uiHolders,
                 ui => ReferenceEquals(ui.Presenter, presenter)
-                         && ui.Content is TUi
-                         && ui.ContentName == uiName);
+                      && ui.Content is TUi
+                      && ui.ContentName == uiName);
             var matchAsUi = (TUi)match?.Content;
             if (matchAsUi == null)
             {
-                return default(TUi);
+                return default;
             }
 
             UiHelpers.Write(
-                matchAsUi, 
+                matchAsUi,
                 () => write(matchAsUi));
             return matchAsUi;
         }

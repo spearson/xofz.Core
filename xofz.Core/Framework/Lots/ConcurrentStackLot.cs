@@ -3,7 +3,7 @@
     using System.Collections;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Linq;
+    using static EnumerableHelpers;
 
     public class ConcurrentStackLot<T> 
         : Lot<T>
@@ -159,7 +159,7 @@
         {
             var s1 = this.stack;
             var s2 = new ConcurrentStack<T>(
-                s1.Skip(index).Take(count));
+                Take(Skip(s1, index), count));
             poppedItems = new T[count];
             return s2.TryPopRange(poppedItems);
         }

@@ -1,9 +1,9 @@
 ﻿namespace xofz.Misc.Framework.Transformation
 {
     using System.Collections.Generic;
-    using System.Linq;
     using xofz.Framework.Lots;
     using xofz.Framework.Transformation;
+    using static EnumerableHelpers;
 
     public class Reorderer<T>
     {
@@ -38,12 +38,12 @@
                 startIndex,
                 false);
 
-            var start = rotated.Take(take);
-            var next = ll.Take(startIndex);
-            var end = Enumerable.Empty<T>();
+            var start = Take(rotated, take);
+            var next = Take(ll, startIndex);
+            var end = Empty<T>();
             if (ll.Count > startIndex + take)
             {
-                end = ll.Skip(startIndex + take);
+                end = Skip(ll, startIndex + take);
             }
 
             return new LinkedListLot<T>(

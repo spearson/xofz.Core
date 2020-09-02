@@ -1,7 +1,7 @@
 ﻿namespace xofz.Misc.Framework.AI
 {
-    using System.Linq;
     using xofz.Framework.Lots;
+    using static EnumerableHelpers;
 
     public class ReverseTreeOrderer<T> : TreeOrderer<T>
     {
@@ -10,7 +10,8 @@
         public virtual void Order(Tree<T> tree)
         {
             this.currentTree = new LinkedListLot<T>(
-                tree.Reverse());
+                Reverse(
+                    tree));
         }
 
         protected Lot<T> currentTree;

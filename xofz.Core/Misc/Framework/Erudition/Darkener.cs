@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Numerics;
     using xofz.Framework.Lots;
+    using static EnumerableHelpers;
 
     public class Darkener
     {
@@ -18,7 +18,9 @@
             foreach (var item in source)
             {
                 var hashCode = item.GetHashCode();
-                if (hashCodes.Any(hc => Math.Abs(hashCode - hc) < limiter))
+                if (Any(
+                    hashCodes,
+                    hc => Math.Abs(hashCode - hc) < limiter))
                 {
                     continue;
                 }

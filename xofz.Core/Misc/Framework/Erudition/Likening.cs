@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using xofz.Framework.Lots;
+    using static EnumerableHelpers;
 
     public class Likening
     {
@@ -12,9 +13,11 @@
             long limiter)
         {
             var actee = factory();
-            acts.First()(actee);
+            FirstOrDefault(
+                    acts)
+                ?.Invoke(actee);
             var firstHashCode = actee.GetHashCode();
-            foreach (var act in acts.Skip(1))
+            foreach (var act in Skip(acts, 1))
             {
                 act(actee);
                 if (Math.Abs(actee.GetHashCode() - firstHashCode) <= limiter)
