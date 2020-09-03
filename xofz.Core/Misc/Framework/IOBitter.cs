@@ -3,9 +3,8 @@
     using System.Collections.Generic;
 
     public interface IOBitter
+        : Nameable
     {
-        string Name { get; set; }
-
         IEnumerable<bool> Read();
 
         void Write(

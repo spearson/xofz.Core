@@ -174,8 +174,7 @@
             }
 
             Messenger messenger = this;
-            var subscriber = messenger.Subscriber as Window;
-            if (subscriber != null)
+            if (messenger.Subscriber is Window subscriber)
             {
                 MessageBox.Show(
                     subscriber,

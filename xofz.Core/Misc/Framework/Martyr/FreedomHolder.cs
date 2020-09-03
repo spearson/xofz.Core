@@ -38,7 +38,7 @@
                 {
                     var value = field.GetValue(disposable);
                     dependencies.Last.Value.Add(value);
-                    if (field.FieldType.Equals(typeof(IDisposable)))
+                    if (field.FieldType == typeof(IDisposable))
                     {
                         dToSurge.Add((IDisposable)value);
                     }

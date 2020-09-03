@@ -2,19 +2,39 @@
 {
     using System;
     using System.Collections.Generic;
+    using xofz.Framework;
     using xofz.Misc.Framework.Computation;
     using xofz.Misc.Framework.Illumination;
 
-    public struct Martyr
+    public class Martyr
     {
-        public Martyr(
-            Illuminator illuminator)
+        public Martyr()
+            : this(new Illuminator())
         {
-            this.imploder = illuminator?.Illumine<Imploder<IDisposable>>(1)
-                ?? new Imploder<IDisposable>(1);
         }
 
-        public void BringToGod(
+        public Martyr(
+            Illuminator illuminator)
+            : this(illuminator
+                ?.Illumine<Imploder<IDisposable>>(
+                    defaultCapacity))
+        {
+        }
+
+        public Martyr(
+            Factory factory)
+            : this(factory?.Create<Imploder<IDisposable>>())
+        {
+        }
+
+        public Martyr(
+            Imploder<IDisposable> imploder)
+        {
+            this.imploder = imploder ?? new Imploder<IDisposable>(
+                defaultCapacity);
+        }
+
+        public virtual void BringToGod(
             IEnumerable<IDisposable> disposables)
         {
             if (disposables == null)
@@ -30,6 +50,7 @@
             this.imploder[0].Dispose();
         }
 
-        private readonly Imploder<IDisposable> imploder;
+        protected readonly Imploder<IDisposable> imploder;
+        protected const int defaultCapacity = 1;
     }
 }

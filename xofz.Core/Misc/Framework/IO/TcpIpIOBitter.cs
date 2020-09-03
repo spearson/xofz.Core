@@ -16,7 +16,7 @@
             this.web = web;
         }
 
-        string IOBitter.Name { get; set; }
+        public string Name { get; set; }
 
         public void Setup(
             string host, 

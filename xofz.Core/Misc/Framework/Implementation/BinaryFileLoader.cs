@@ -3,7 +3,8 @@
     using System.IO;
     using System.Runtime.Serialization.Formatters.Binary;
 
-    public sealed class BinaryFileLoader : Loader
+    public sealed class BinaryFileLoader 
+        : Loader
     {
         public T Load<T>(
             string location)

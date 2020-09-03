@@ -1,11 +1,13 @@
 ﻿namespace xofz.Misc.Framework.Implementation
 {
+    using System;
     using System.IO;
     using System.Text;
 
     public sealed class TextFileLoader 
         : Loader
     {
+        [Obsolete(@"This class can only load strings.")]
         public TextFileLoader(
             Encoding encoding, 
             bool returnArray)
@@ -18,7 +20,7 @@
         {
             if (typeof(T) != typeof(string))
             {
-                return default(T);
+                return default;
             }
 
             if (this.returnArray)

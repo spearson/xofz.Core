@@ -15,9 +15,10 @@
             this.web = web;
         }
 
-        string IOBitter.Name { get; set; }
+        public string Name { get; set; }
 
-        public void Setup(string startFilePath)
+        public void Setup(
+            string startFilePath)
         {
             if (Interlocked.Exchange(
                 ref this.setupIf1, 
@@ -46,7 +47,8 @@
 
         IEnumerable<bool> IOBitter.Read()
         {
-            if (Interlocked.Read(ref this.setupIf1) != 1)
+            if (Interlocked.Read(
+                ref this.setupIf1) != 1)
             {
                 return Empty<bool>();
             }
@@ -79,7 +81,8 @@
             IEnumerable<bool> bits, 
             out bool succeeded)
         {
-            if (Interlocked.Read(ref this.setupIf1) != 1)
+            if (Interlocked.Read(
+                ref this.setupIf1) != 1)
             {
                 succeeded = false;
                 return;

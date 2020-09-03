@@ -7,10 +7,10 @@
     public class EnumerableSlicer
     {
         public virtual Lot<T>[] Slice<T>(
-            IEnumerable<T> source,
+            IEnumerable<T> finiteSource,
             Lot<int> slicePoints)
         {
-            if (source == null)
+            if (finiteSource == null)
             {
                 return new Lot<T>[0];
             }
@@ -21,7 +21,7 @@
             }
 
             ICollection<T> remainingItems
-                = new LinkedList<T>(source);
+                = new LinkedList<T>(finiteSource);
             var array = new Lot<T>[slicePoints.Count];
             var counter = 0;
             foreach (var slicePoint in slicePoints)

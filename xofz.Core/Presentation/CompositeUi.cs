@@ -14,9 +14,24 @@
 
         protected CompositeUi(
             ICollection<UiHolder> uiHolders)
+            : this(uiHolders, new object())
         {
-            this.uiHolders = uiHolders 
+        }
+
+        protected CompositeUi(
+            object locker)
+            : this(new LinkedList<UiHolder>(), locker)
+        {
+        }
+
+        protected CompositeUi(
+            ICollection<UiHolder> uiHolders,
+            object locker)
+        {
+            this.uiHolders = uiHolders
                              ?? new LinkedList<UiHolder>();
+            this.locker = locker
+                          ?? new object();
         }
 
         public virtual TUi ReadUi<TUi, TPresenter>(
@@ -25,10 +40,15 @@
             where TUi : Ui
             where TPresenter : Presenter
         {
-            ICollection<UiHolder> matches = new LinkedList<UiHolder>(
-                Where(
-                    this.uiHolders,
-                    ui => ui.Content is TUi));
+            ICollection<UiHolder> matches;
+            lock (this.locker)
+            {
+                matches = new LinkedList<UiHolder>(
+                    Where(
+                        this.uiHolders,
+                        ui => ui.Content is TUi));
+            }
+
             if (matches.Count < 1)
             {
                 return default;
@@ -75,11 +95,16 @@
             string uiName = null)
             where TUi : Ui
         {
-            var match = FirstOrDefault(
-                this.uiHolders,
-                tuple => ReferenceEquals(presenter, tuple.Presenter)
-                         && tuple.Content is TUi
-                         && tuple.ContentName == uiName);
+            UiHolder match;
+            lock (this.locker)
+            {
+                match = FirstOrDefault(
+                    this.uiHolders,
+                    holder => ReferenceEquals(presenter, holder.Presenter)
+                              && holder.Content is TUi
+                              && holder.ContentName == uiName);
+            }
+
             var matchAsUi = (TUi)match?.Content;
             return matchAsUi != null
                 ? UiHelpers.Read(matchAsUi, () => read(matchAsUi))
@@ -102,11 +127,17 @@
             string uiName = null)
             where TUi : Ui
         {
-            var match = FirstOrDefault(
-                this.uiHolders,
-                ui => ReferenceEquals(ui.Presenter, presenter)
-                      && ui.Content is TUi
-                      && ui.ContentName == uiName);
+            UiHolder match;
+
+            lock (this.locker)
+            {
+                match = FirstOrDefault(
+                    this.uiHolders,
+                    ui => ReferenceEquals(ui.Presenter, presenter)
+                          && ui.Content is TUi
+                          && ui.ContentName == uiName);
+            }
+
             var matchAsUi = (TUi)match?.Content;
             if (matchAsUi == null)
             {
@@ -127,21 +158,57 @@
             UiHelpers.Write(ui, write);
         }
 
-        public virtual void Register(
+        public virtual bool Register(
             Ui ui, 
             Presenter presenter,
             string uiName = null)
         {
-            this.uiHolders.Add(
-                new UiHolder
+            if (ui == null || presenter == null)
+            {
+                return false;
+            }
+
+            lock (this.locker)
+            {
+                this.uiHolders.Add(
+                    new UiHolder
+                    {
+                        Content = ui,
+                        Presenter = presenter,
+                        ContentName = uiName
+                    });
+            }
+
+            return true;
+        }
+
+        public virtual bool Unregister(
+            Ui ui,
+            Presenter presenter,
+            string uiName = null)
+        {
+            UiHolder match;
+            lock (this.locker)
+            {
+                var uhs = this.uiHolders;
+                match = FirstOrDefault(
+                    uhs,
+                    holder =>
+                        ReferenceEquals(holder.Content, ui) &&
+                        ReferenceEquals(holder.Presenter, presenter) &&
+                        holder.ContentName == uiName);
+                if (match != null)
                 {
-                    Content = ui,
-                    Presenter = presenter,
-                    ContentName = uiName
-                });
+                    uhs.Remove(match);
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         protected readonly ICollection<UiHolder> uiHolders;
+        protected readonly object locker;
 
         protected class UiHolder
         {

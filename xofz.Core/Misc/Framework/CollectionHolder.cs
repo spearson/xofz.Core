@@ -20,10 +20,10 @@ namespace xofz.Misc.Framework
         }
 
         public virtual void Register<T>(
-            IEnumerable<T> source,
+            IEnumerable<T> finiteSource,
             string name = null)
         {
-            object o = source;
+            object o = finiteSource;
             this.collections.Add(
                 Tuple.Create(name, o));
         }

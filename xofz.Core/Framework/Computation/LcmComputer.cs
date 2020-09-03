@@ -1,9 +1,11 @@
 ﻿namespace xofz.Framework.Computation
 {
+    using System;
     using System.Numerics;
 
     public class LcmComputer
     {
+        [Obsolete(@"This class does not actually find the least common multiple; it finds some multiple of that.")]
         public LcmComputer(
             FactorialComputer factorialComputer)
         {

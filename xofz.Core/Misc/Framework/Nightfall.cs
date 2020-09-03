@@ -7,8 +7,14 @@
     public class Nightfall
     {
         public Nightfall()
+            : this(new Martyr.Martyr())
         {
-            this.martyr = new Martyr.Martyr();
+        }
+
+        public Nightfall(
+            Martyr.Martyr martyr)
+        {
+            this.martyr = martyr;
         }
 
         public virtual Lot<object> Process(

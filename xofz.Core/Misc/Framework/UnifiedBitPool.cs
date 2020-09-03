@@ -120,7 +120,7 @@
         }
 
         protected Lot<bool> currentPool;
-        protected  readonly int noOfOnBits;
+        protected readonly int noOfOnBits;
         protected readonly Lotter lotter;
     }
 }

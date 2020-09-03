@@ -2,7 +2,8 @@
 {
     using System.Collections.Generic;
 
-    public sealed class LotIOBitter : IOBitter
+    public sealed class LotIOBitter 
+        : IOBitter
     {
         public LotIOBitter(
             Lotter lotter,
@@ -12,7 +13,7 @@
             this.bitter = bitter;
         }
 
-        string IOBitter.Name { get; set; }
+        public string Name { get; set; }
 
         IEnumerable<bool> IOBitter.Read()
         {
