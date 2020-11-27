@@ -3,8 +3,13 @@
     using System;
     using System.Reflection;
 
-    public class VersionReaderV2 : VersionReader
+    public class VersionReaderV2 
+        : VersionReader
     {
+        public VersionReaderV2()
+        {
+        }
+
         public VersionReaderV2(
             Assembly executingAssembly)
             : base(executingAssembly)
