@@ -16,7 +16,7 @@
         {
             if (powers == null)
             {
-                return 0;
+                return zero;
             }
 
             return this.onCompute(powers);
@@ -27,7 +27,7 @@
         {
             if (powers == null)
             {
-                return 0;
+                return zero;
             }
 
             return this.onCompute(
@@ -39,20 +39,28 @@
         {
             if (powers == null)
             {
-                return 0;
+                return zero;
             }
 
             var bp = this.bigPow;
-            BigInteger result = 1;
-            for (var i = powers.Count - 1; i > 0; --i)
+            if (bp == null)
             {
-                result = bp.Compute(powers[i - 1], powers[i]);
-                powers[i - 1] = result;
+                return zero;
+            }
+
+            BigInteger result = 1;
+            for (var i = powers.Count - one; i > zero; --i)
+            {
+                result = bp.Compute(
+                    powers[i - one], 
+                    powers[i]);
+                powers[i - one] = result;
             }
 
             return result;
         }
 
         protected readonly BigPow bigPow;
+        protected const byte zero = 0, one = 1;
     }
 }

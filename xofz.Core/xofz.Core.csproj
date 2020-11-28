@@ -73,7 +73,6 @@
   <ItemGroup>
     <Compile Include="Framework\BinaryTranslatorV2.cs" />
     <Compile Include="Framework\Computation\EasterComputer.cs" />
-    <Compile Include="Framework\Computation\LcmComputer.cs" />
     <Compile Include="Framework\EventSubscriberV2.cs" />
     <Compile Include="Framework\Lots\ConcurrentBagLot.cs" />
     <Compile Include="Framework\Timers\Internal\TimerCallback.cs" />
@@ -142,7 +141,6 @@
     <Compile Include="Misc\Framework\Erudition\Parser.cs" />
     <Compile Include="Misc\Framework\Erudition\Reflection.cs" />
     <Compile Include="Misc\Framework\Implementation\BinaryFileLoader.cs" />
-    <Compile Include="Misc\Framework\Implementation\TextFileLoader.cs" />
     <Compile Include="Framework\Timers\Internal\CallbackOptions.cs" />
     <Compile Include="Framework\Timers\Internal\NativeMethods.cs" />
     <Compile Include="Misc\Framework\Loader.cs" />

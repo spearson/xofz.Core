@@ -41,7 +41,7 @@
             where TPresenter : Presenter
         {
             ICollection<UiHolder> matches;
-            lock (this.locker)
+            lock (this.locker ?? new object())
             {
                 matches = new LinkedList<UiHolder>(
                     Where(
@@ -96,7 +96,7 @@
             where TUi : Ui
         {
             UiHolder match;
-            lock (this.locker)
+            lock (this.locker ?? new object())
             {
                 match = FirstOrDefault(
                     this.uiHolders,
@@ -129,7 +129,7 @@
         {
             UiHolder match;
 
-            lock (this.locker)
+            lock (this.locker ?? new object())
             {
                 match = FirstOrDefault(
                     this.uiHolders,
@@ -168,9 +168,9 @@
                 return false;
             }
 
-            lock (this.locker)
+            lock (this.locker ?? new object())
             {
-                this.uiHolders.Add(
+                this.uiHolders?.Add(
                     new UiHolder
                     {
                         Content = ui,
@@ -188,7 +188,7 @@
             string uiName = null)
         {
             UiHolder match;
-            lock (this.locker)
+            lock (this.locker ?? new object())
             {
                 var uhs = this.uiHolders;
                 match = FirstOrDefault(

@@ -10,7 +10,9 @@
             string location)
         {
             var bytes = File.ReadAllBytes(location);
-            return (T)new BinaryFormatter().Deserialize(new MemoryStream(bytes));
+            return (T)new BinaryFormatter()
+                .Deserialize(
+                    new MemoryStream(bytes));
         }
     }
 }

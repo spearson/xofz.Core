@@ -33,7 +33,7 @@
             }
         }
 
-        private TOut accumulateNext(
+        protected virtual TOut accumulateNext(
             Action<TIn, TOut> striker, 
             TIn currentSeed)
         {

@@ -22,7 +22,7 @@
         {
             if (Interlocked.Exchange(
                 ref this.setupIf1, 
-                1) == 1)
+                one) == one)
             {
                 return;
             }
@@ -48,7 +48,7 @@
         IEnumerable<bool> IOBitter.Read()
         {
             if (Interlocked.Read(
-                ref this.setupIf1) != 1)
+                ref this.setupIf1) != one)
             {
                 return Empty<bool>();
             }
@@ -82,7 +82,7 @@
             out bool succeeded)
         {
             if (Interlocked.Read(
-                ref this.setupIf1) != 1)
+                ref this.setupIf1) != one)
             {
                 succeeded = false;
                 return;
@@ -124,5 +124,6 @@
 
         private long setupIf1;
         private readonly MethodWeb web;
+        private const byte one = 1;
     }
 }
