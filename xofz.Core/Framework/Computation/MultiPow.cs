@@ -49,7 +49,7 @@
             }
 
             BigInteger result = 1;
-            for (var i = powers.Count - one; i > zero; --i)
+            for (int i = powers.Count - one; i > zero; --i)
             {
                 result = bp.Compute(
                     powers[i - one], 

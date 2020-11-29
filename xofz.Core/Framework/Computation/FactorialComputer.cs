@@ -7,25 +7,26 @@
         public virtual BigInteger Compute(
             BigInteger number)
         {
-            if (number <= 1)
+            if (number <= one)
             {
-                return 1;
+                return one;
             }
 
-            if (number == 2)
+            if (number == two)
             {
-                return 2;
+                return two;
             }
 
             BigInteger counter = number;
-            BigInteger powersOf2 = 1;
-            while (counter > 0)
+            BigInteger powersOf2 = one;
+            while (counter > zero)
             {
                 if (this.numberIsPowerOfTwo(counter))
                 {
-                    var powerOf2 = this.computePowerOf2(counter);
+                    var powerOf2 = this.computePowerOf2(
+                        counter);
                     powersOf2 <<= powerOf2;
-                    counter >>= 1;
+                    counter >>= one;
                 }
                 else
                 {
@@ -34,8 +35,8 @@
             }
 
             // all other numbers here
-            BigInteger nonPowersOf2 = 1;
-            for (var i = number; i > 2; --i)
+            BigInteger nonPowersOf2 = one;
+            for (var i = number; i > two; --i)
             {
                 // test for power of 2
                 if (this.numberIsPowerOfTwo(i))
@@ -53,23 +54,25 @@
             BigInteger n)
         {
             // stolen from stackoverflow -- thank you!!
-            return (n & (n - 1)) == 0;
+            return (n & (n - one)) == 0;
         }
 
         protected virtual int computePowerOf2(
             BigInteger numberRaisedToPowerOf2)
         {
-            var powerOf2 = 0;
+            int powerOf2 = 0;
             while (true)
             {
-                if (numberRaisedToPowerOf2 < 2)
+                if (numberRaisedToPowerOf2 < two)
                 {
                     return powerOf2;
                 }
 
                 ++powerOf2;
-                numberRaisedToPowerOf2 >>= 1;
+                numberRaisedToPowerOf2 >>= one;
             }
         }
+
+        protected const byte zero = 0, one = 1, two = 2;
     }
 }

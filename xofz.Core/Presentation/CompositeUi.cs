@@ -40,6 +40,7 @@
             where TUi : Ui
             where TPresenter : Presenter
         {
+            const byte one = 1;
             ICollection<UiHolder> matches;
             lock (this.locker ?? new object())
             {
@@ -49,7 +50,7 @@
                         ui => ui.Content is TUi));
             }
 
-            if (matches.Count < 1)
+            if (matches.Count < one)
             {
                 return default;
             }
@@ -73,7 +74,7 @@
                     t =>
                     t.Presenter is NamedPresenter presenter &&
                     presenter.Name == presenterName));
-            if (namedMatches.Count < 1)
+            if (namedMatches.Count < one)
             {
                 return default;
             }
@@ -105,9 +106,20 @@
                               && holder.ContentName == uiName);
             }
 
-            var matchAsUi = (TUi)match?.Content;
+            TUi matchAsUi;
+            try
+            {
+                matchAsUi = (TUi)match?.Content;
+            }
+            catch
+            {
+                matchAsUi = default;
+            }
+
             return matchAsUi != null
-                ? UiHelpers.Read(matchAsUi, () => read(matchAsUi))
+                ? UiHelpers.Read(
+                    matchAsUi, 
+                    () => read(matchAsUi))
                 : default;
         }
 
@@ -138,7 +150,16 @@
                           && ui.ContentName == uiName);
             }
 
-            var matchAsUi = (TUi)match?.Content;
+            TUi matchAsUi;
+            try
+            {
+                matchAsUi = (TUi)match?.Content;
+            }
+            catch
+            {
+                matchAsUi = default;
+            }
+            
             if (matchAsUi == null)
             {
                 return default;
@@ -146,7 +167,10 @@
 
             UiHelpers.Write(
                 matchAsUi,
-                () => write(matchAsUi));
+                () =>
+                {
+                    write(matchAsUi);
+                });
             return matchAsUi;
         }
 
@@ -155,7 +179,9 @@
             Do write)
             where TUi : Ui
         {
-            UiHelpers.Write(ui, write);
+            UiHelpers.Write(
+                ui, 
+                write);
         }
 
         public virtual bool Register(
@@ -194,6 +220,7 @@
                 match = FirstOrDefault(
                     uhs,
                     holder =>
+                        holder != null &&
                         ReferenceEquals(holder.Content, ui) &&
                         ReferenceEquals(holder.Presenter, presenter) &&
                         holder.ContentName == uiName);

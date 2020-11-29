@@ -27,8 +27,10 @@
             foreach (var slicePoint in slicePoints)
             {
                 var sequence = EH.Take(
-                    remainingItems, slicePoint);
-                array[counter] = new LinkedListLot<T>(sequence);
+                    remainingItems, 
+                    slicePoint);
+                array[counter] = new LinkedListLot<T>(
+                    sequence);
                 ++counter;
                 remainingItems = new LinkedList<T>(
                     EH.Skip(

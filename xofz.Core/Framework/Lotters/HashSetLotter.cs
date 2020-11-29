@@ -9,6 +9,11 @@
         Lot<T> Lotter.Materialize<T>(
             IEnumerable<T> source)
         {
+            if (source == null)
+            {
+                return new HashSetLot<T>();
+            }
+
             return new HashSetLot<T>(
                 new HashSet<T>(source));
         }

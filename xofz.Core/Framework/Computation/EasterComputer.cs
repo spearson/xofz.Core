@@ -17,7 +17,10 @@
             var month = 3 + (e + 40) / 44;
             var day = e + 28 - 31 * (month / 4);
 
-            return new DateTime(year, month, day);
+            return new DateTime(
+                year, 
+                month, 
+                day);
         }
     }
 }
