@@ -12,7 +12,7 @@
             this.item = item;
         }
 
-        public virtual long Count => 1;
+        public virtual long Count => one;
 
         public virtual IEnumerator<T> GetEnumerator()
         {
@@ -32,20 +32,37 @@
                 return;
             }
 
-            if (array.Length < 1)
+            if (array.Length < one)
             {
                 return;
             }
 
-            array[0] = this.item;
+            array[zero] = this.item;
         }
 
         public virtual bool Contains(
             T item)
         {
-            return this.item.Equals(item);
+            return this.item?.Equals(item)
+                ?? item == null;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.item?.GetHashCode()
+                   ?? zero;
+        }
+
+        public override bool Equals(
+            object obj)
+        {
+            return this.item?.Equals(obj)
+                   ?? obj == null;
         }
 
         protected readonly T item;
+        protected const byte 
+            zero = 0,
+            one = 1;
     }
 }

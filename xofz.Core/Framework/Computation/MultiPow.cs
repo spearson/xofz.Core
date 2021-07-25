@@ -42,6 +42,17 @@
                 return zero;
             }
 
+            var pc = powers.Count;
+            if (pc < one)
+            {
+                return zero;
+            }
+
+            if (pc == one)
+            {
+                return powers[zero];
+            }
+
             var bp = this.bigPow;
             if (bp == null)
             {
@@ -61,6 +72,8 @@
         }
 
         protected readonly BigPow bigPow;
-        protected const byte zero = 0, one = 1;
+        protected const byte 
+            zero = 0, 
+            one = 1;
     }
 }

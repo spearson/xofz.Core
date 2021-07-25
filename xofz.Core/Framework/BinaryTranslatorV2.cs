@@ -11,7 +11,10 @@
             IEnumerable<bool> bits)
         {
             var bytes = this.GetBytes(bits);
-            return new BigInteger(EH.ToArray(bytes) ?? new byte[0]);
+            const byte zero = 0;
+            return new BigInteger(
+                EH.ToArray(bytes) ?? 
+                new byte[zero]);
         }
 
         public virtual IEnumerable<bool> GetBits(
