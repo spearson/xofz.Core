@@ -18,7 +18,7 @@
                 new HashSet<T>(source));
         }
 
-        public ICollection<T> Collect<T>(
+        ICollection<T> LotterV2.Collect<T>(
             IEnumerable<T> source)
         {
             if (source == null)
