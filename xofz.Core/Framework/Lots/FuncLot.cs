@@ -49,7 +49,8 @@
         public virtual void CopyTo(
             T[] array)
         {
-            long counter = 0;
+            const byte zero = 0;
+            long counter = zero;
             foreach (var func in this.collection)
             {
                 T item;

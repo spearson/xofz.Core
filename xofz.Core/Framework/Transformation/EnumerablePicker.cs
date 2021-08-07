@@ -19,7 +19,8 @@
                 yield break;
             }
 
-            BigInteger counter = 0;
+            const byte zero = 0;
+            BigInteger counter = zero;
             var enumerator = source.GetEnumerator();
             if (enumerator == null)
             {

@@ -10,20 +10,23 @@
             IEnumerable<T> finiteSource,
             Lot<int> slicePoints)
         {
+            const byte 
+                zero = 0,
+                one = 1;
             if (finiteSource == null)
             {
-                return new Lot<T>[0];
+                return new Lot<T>[zero];
             }
 
-            if (slicePoints == null || slicePoints.Count < 1)
+            if (slicePoints == null || slicePoints.Count < one)
             {
-                return new Lot<T>[0];
+                return new Lot<T>[zero];
             }
 
             ICollection<T> remainingItems
                 = new LinkedList<T>(finiteSource);
             var array = new Lot<T>[slicePoints.Count];
-            var counter = 0;
+            int counter = zero;
             foreach (var slicePoint in slicePoints)
             {
                 var sequence = EH.Take(

@@ -8,25 +8,9 @@
             this Control control, 
             Control container)
         {
-            if (control == null)
-            {
-                return;
-            }
-
-            if (container == null)
-            {
-                return;
-            }
-
-            var controls = container.Controls;
-            if (controls.Count == 1 && 
-                ReferenceEquals(control, controls[0]))
-            {
-                return;
-            }
-
-            controls.Clear();
-            controls.Add(control);
+            ControlHelpers.SafeReplaceV2(
+                control,
+                container);
         }
     }
 }

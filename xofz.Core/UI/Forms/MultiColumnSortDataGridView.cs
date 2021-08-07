@@ -11,7 +11,8 @@ namespace xofz.UI.Forms
     using xofz.UI.Forms.Internal;
 
     // lots of code jacked from http://www.codeproject.com/Articles/18440/DataGridView-Multi-column-Sort
-    public class MultiColumnSortDataGridView : DataGridView
+    public class MultiColumnSortDataGridView 
+        : DataGridView
     {
         public MultiColumnSortDataGridView()
         {

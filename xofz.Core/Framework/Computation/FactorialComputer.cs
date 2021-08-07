@@ -54,13 +54,13 @@
             BigInteger n)
         {
             // stolen from stackoverflow -- thank you!!
-            return (n & (n - one)) == 0;
+            return (n & (n - one)) == zero;
         }
 
         protected virtual int computePowerOf2(
             BigInteger numberRaisedToPowerOf2)
         {
-            int powerOf2 = 0;
+            int powerOf2 = zero;
             while (true)
             {
                 if (numberRaisedToPowerOf2 < two)

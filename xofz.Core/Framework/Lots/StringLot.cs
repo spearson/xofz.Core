@@ -37,20 +37,22 @@
         public virtual void CopyTo(
             char[] array)
         {
+            const byte zero = 0;
             this.s.CopyTo(
-                0, 
+                zero, 
                 array, 
-                0, 
+                zero, 
                 (int)this.Count);
         }
 
         public virtual bool Contains(
             char item)
         {
+            const byte one = 1;
             return this.s.Contains(
                 new string(
                     item, 
-                    1));
+                    one));
         }
 
         protected readonly string s;

@@ -8,8 +8,11 @@
             BigInteger n, 
             BigInteger exponent)
         {
-            BigInteger result = 1;
-            for (BigInteger i = 0; i < exponent; ++i)
+            const byte
+                zero = 0,
+                one = 1;
+            BigInteger result = one;
+            for (BigInteger i = zero; i < exponent; ++i)
             {
                 result *= n;
             }

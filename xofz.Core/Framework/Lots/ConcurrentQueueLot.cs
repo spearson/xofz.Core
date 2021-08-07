@@ -40,7 +40,10 @@
         public virtual void CopyTo(
             T[] array)
         {
-            this.queue.CopyTo(array, 0);
+            const byte zero = 0;
+            this.queue.CopyTo(
+                array, 
+                zero);
         }
 
         public virtual void CopyTo(

@@ -50,7 +50,7 @@
         public virtual void CopyTo(
             T[] array)
         {
-            this.stack.CopyTo(array, 0);
+            this.stack.CopyTo(array, zero);
         }
 
         public virtual void CopyTo(
@@ -76,7 +76,7 @@
         {
             Lot<T> lot = new LinkedListLot<T>(source);
             var array = new T[lot.Count];
-            long counter = 0;
+            long counter = zero;
             foreach (var item in lot)
             {
                 array[counter] = item;
@@ -105,7 +105,7 @@
             Lot<T> lot =
                 new LinkedListLot<T>(source);
             var array = new T[length - index];
-            long counter = 0;
+            long counter = zero;
             foreach (var item in lot)
             {
                 if (counter < index)
@@ -165,5 +165,6 @@
         }
 
         protected readonly ConcurrentStack<T> stack;
+        protected const byte zero = 0;
     }
 }

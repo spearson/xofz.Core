@@ -42,7 +42,7 @@
         {
             const byte one = 1;
             ICollection<UiHolder> matches;
-            lock (this.locker ?? new object())
+            lock (this.locker)
             {
                 matches = new LinkedList<UiHolder>(
                     Where(
@@ -97,7 +97,7 @@
             where TUi : Ui
         {
             UiHolder match;
-            lock (this.locker ?? new object())
+            lock (this.locker)
             {
                 match = FirstOrDefault(
                     this.uiHolders,
@@ -141,7 +141,7 @@
         {
             UiHolder match;
 
-            lock (this.locker ?? new object())
+            lock (this.locker)
             {
                 match = FirstOrDefault(
                     this.uiHolders,
@@ -191,10 +191,10 @@
         {
             if (ui == null || presenter == null)
             {
-                return false;
+                return falsity;
             }
 
-            lock (this.locker ?? new object())
+            lock (this.locker)
             {
                 this.uiHolders?.Add(
                     new UiHolder
@@ -205,7 +205,7 @@
                     });
             }
 
-            return true;
+            return truth;
         }
 
         public virtual bool Unregister(
@@ -214,7 +214,7 @@
             string uiName = null)
         {
             UiHolder match;
-            lock (this.locker ?? new object())
+            lock (this.locker)
             {
                 var uhs = this.uiHolders;
                 match = FirstOrDefault(
@@ -226,16 +226,18 @@
                         holder.ContentName == uiName);
                 if (match != null)
                 {
-                    uhs.Remove(match);
-                    return true;
+                    return uhs.Remove(match);
                 }
             }
 
-            return false;
+            return falsity;
         }
 
         protected readonly ICollection<UiHolder> uiHolders;
         protected readonly object locker;
+        protected const bool 
+            truth = true,
+            falsity = false;
 
         protected class UiHolder
         {

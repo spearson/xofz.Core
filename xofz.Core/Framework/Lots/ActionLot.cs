@@ -50,7 +50,8 @@
             T[] array)
         {
             var enumerator = this.actionSource.GetEnumerator();
-            long indexer = 0;
+            const byte zero = 0;
+            long indexer = zero;
             var l = array.Length;
             foreach (var item in this.items)
             {
