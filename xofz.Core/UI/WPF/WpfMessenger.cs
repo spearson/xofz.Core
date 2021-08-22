@@ -23,9 +23,8 @@
             string question)
         {
             Messenger m = this;
-            var subscriber = m.Subscriber as Window;
             MessageBoxResult result;
-            if (subscriber != null)
+            if (m.Subscriber is Window subscriber)
             {
                 result = MessageBox.Show(
                     subscriber,
@@ -57,9 +56,8 @@
             string question)
         {
             Messenger m = this;
-            var subscriber = m.Subscriber as Window;
             MessageBoxResult result;
-            if (subscriber != null)
+            if (m.Subscriber is Window subscriber)
             {
                 result = MessageBox.Show(
                     subscriber,
@@ -95,9 +93,8 @@
             string question)
         {
             Messenger m = this;
-            var subscriber = m.Subscriber as Window;
             MessageBoxResult result;
-            if (subscriber != null)
+            if (m.Subscriber is Window subscriber)
             {
                 result = MessageBox.Show(
                     subscriber,
@@ -173,8 +170,8 @@
                     break;
             }
 
-            Messenger messenger = this;
-            if (messenger.Subscriber is Window subscriber)
+            
+            if (m.Subscriber is Window subscriber)
             {
                 MessageBox.Show(
                     subscriber,

@@ -4,14 +4,17 @@
     using System.Windows;
     using System.Windows.Threading;
 
-    public sealed class WpfUiMessagePumper 
+    public class WpfUiMessagePumper 
         : UiMessagePumper
     {
-        void UiMessagePumper.Pump()
+        public virtual void Pump()
         {
             Application.Current?.Dispatcher?.Invoke(
-                DispatcherPriority.Send,
+                this.Priority,
                 (Action) (() => { }));
         }
+
+        public virtual DispatcherPriority Priority { get; set; }
+            = DispatcherPriority.Send;
     }
 }
