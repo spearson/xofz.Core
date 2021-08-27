@@ -16,7 +16,7 @@
                 yield break;
             }
 
-            var enumerators = new LinkedList<IEnumerator<T>>();
+            var enumerators = new XLinkedList<IEnumerator<T>>();
             foreach (var lot in lots)
             {
                 if (lot == null)
@@ -24,10 +24,10 @@
                     continue;
                 }
 
-                enumerators.AddLast(lot.GetEnumerator());
+                enumerators.AddTail(lot.GetEnumerator());
             }
 
-            while (enumerators.First.Value.MoveNext())
+            while (enumerators.Head?.MoveNext() ?? false)
             {
                 BigInteger leastValue = long.MaxValue;
                 BigInteger maximalValue = 0;

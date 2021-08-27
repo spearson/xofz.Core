@@ -24,16 +24,16 @@
                     null);
             }
 
-            var oneDeps = new LinkedList<object>();
+            var oneDeps = new XLinkedList<object>();
             for (var i = 0; i < slicePoint; ++i)
             {
-                oneDeps.AddLast(anObject[i]);
+                oneDeps.AddTail(anObject[i]);
             }
 
-            var twoDeps = new LinkedList<object>();
+            var twoDeps = new XLinkedList<object>();
             for (var i = slicePoint; i < dc; ++i)
             {
-                twoDeps.AddLast(anObject[i]);
+                twoDeps.AddTail(anObject[i]);
             }
 
             return Tuple.Create(

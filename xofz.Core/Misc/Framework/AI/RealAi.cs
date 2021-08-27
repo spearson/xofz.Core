@@ -33,12 +33,12 @@
         public Lot<Action<T>> PeekComputations(
             BigInteger numberToPeek)
         {
-            var ll = new LinkedList<Action<T>>();
+            var ll = new XLinkedList<Action<T>>();
             var enumerator = this.computations.GetEnumerator();
             enumerator.MoveNext();
             for (var i = 0; i < numberToPeek; ++i)
             {
-                ll.AddLast(enumerator.Current);
+                ll.AddTail(enumerator.Current);
                 if (!enumerator.MoveNext())
                 {
                     break;
@@ -60,9 +60,9 @@
             {
                 var current = enumerator.Current;
                 computation(current);
-                var ts = new LinkedList<Thread>();
-                ts.AddLast(new Thread(() => longFunction(current)));
-                ts.First.Value.Start();
+                var ts = new XLinkedList<Thread>();
+                ts.AddTail(new Thread(() => longFunction(current)));
+                ts.Head?.Start();
                 threads = this.rotator.Rotate(ts, 1);
                 if (!enumerator.MoveNext())
                 {

@@ -25,12 +25,12 @@
 
             orderer.Order(tree);
             var actionEnumerator = actions.GetEnumerator();
-            var linkedList = new LinkedList<T>();
+            var linkedList = new XLinkedList<T>();
             foreach (var value in this.treeOrderer.OrderedTree)
             {
                 actionEnumerator.MoveNext();
                 actionEnumerator.Current?.Invoke(value);
-                linkedList.AddLast(value);
+                linkedList.AddTail(value);
             }
 
             actionEnumerator.Dispose();

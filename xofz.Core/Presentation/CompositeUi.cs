@@ -8,7 +8,7 @@
     public class CompositeUi
     {
         public CompositeUi()
-            : this(new LinkedList<UiHolder>())
+            : this(new XLinkedList<UiHolder>())
         {
         }
 
@@ -20,7 +20,9 @@
 
         protected CompositeUi(
             object locker)
-            : this(new LinkedList<UiHolder>(), locker)
+            : this(
+                new XLinkedList<UiHolder>(), 
+                locker)
         {
         }
 
@@ -29,7 +31,7 @@
             object locker)
         {
             this.uiHolders = uiHolders
-                             ?? new LinkedList<UiHolder>();
+                             ?? new XLinkedList<UiHolder>();
             this.locker = locker
                           ?? new object();
         }
@@ -44,7 +46,7 @@
             ICollection<UiHolder> matches;
             lock (this.locker)
             {
-                matches = new LinkedList<UiHolder>(
+                matches = XLinkedList<UiHolder>.Create(
                     Where(
                         this.uiHolders,
                         ui => ui.Content is TUi));
@@ -68,7 +70,7 @@
                 return (TUi)match.Content;
             }
 
-            ICollection<UiHolder> namedMatches = new LinkedList<UiHolder>(
+            ICollection<UiHolder> namedMatches = XLinkedList<UiHolder>.Create(
                 Where(
                     matches,
                     t =>

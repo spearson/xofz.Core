@@ -17,7 +17,7 @@
         public virtual void Order(
             Tree<T> tree)
         {
-            var linkedList = new LinkedList<T>();
+            var linkedList = new XLinkedList<T>();
             var iterations = (int)(tree.Count / (double)this.numberOfSkips + 1);
             var subtractor = 0;
             while (subtractor < this.numberOfSkips)
@@ -26,7 +26,7 @@
                 {
                     var amountToSkip = (this.numberOfSkips * (i + 1)) -
                                        (subtractor + 1);
-                    linkedList.AddLast(
+                    linkedList.AddTail(
                         FirstOrDefault(
                             Skip(
                                 tree,

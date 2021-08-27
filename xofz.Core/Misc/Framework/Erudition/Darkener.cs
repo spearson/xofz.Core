@@ -12,8 +12,8 @@
             IEnumerable<T> source, 
             BigInteger limiter)
         {
-            var hashCodes = new LinkedList<int>(); // hash codes should be longs
-            var darkenedCollection = new LinkedList<T>();
+            var hashCodes = new XLinkedList<int>(); // hash codes should be longs
+            var darkenedCollection = new XLinkedList<T>();
 
             foreach (var item in source)
             {
@@ -25,8 +25,8 @@
                     continue;
                 }
 
-                hashCodes.AddLast(hashCode);
-                darkenedCollection.AddLast(item);
+                hashCodes.AddTail(hashCode);
+                darkenedCollection.AddTail(item);
             }
 
             return new LinkedListLot<T>(

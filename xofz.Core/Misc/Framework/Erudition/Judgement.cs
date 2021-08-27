@@ -16,7 +16,7 @@
             Action<T> learn)
         {
             var reflection = new Reflection<T>(lot, this.absolution);
-            var hashCodes = new LinkedList<int>();
+            var hashCodes = new XLinkedList<int>();
             var isKnowledge = true;
             foreach (var item in reflection.Reflect(learn))
             {
@@ -27,7 +27,7 @@
                     break;
                 }
 
-                hashCodes.AddLast(item.GetHashCode());
+                hashCodes.AddTail(item.GetHashCode());
             }
 
             return isKnowledge;

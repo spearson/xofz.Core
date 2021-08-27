@@ -12,8 +12,8 @@
             Tree<T> tree)
         {
             // warning: not thread safe
-            this.primaryLinkedList = new LinkedList<T>();
-            this.secondaryLinkedList = new LinkedList<T>();
+            this.primaryLinkedList = new XLinkedList<T>();
+            this.secondaryLinkedList = new XLinkedList<T>();
             this.currentTreeDepth = tree.ComputeDepth();
             this.checkNode(tree.Node);
             var list = new List<T>();
@@ -27,11 +27,11 @@
         {
             if (node.Nodes.Count > this.currentTreeDepth)
             {
-                this.primaryLinkedList.AddLast(node.Value);
+                this.primaryLinkedList.AddTail(node.Value);
                 goto checkSubNodes;
             }
 
-            this.secondaryLinkedList.AddLast(node.Value);
+            this.secondaryLinkedList.AddTail(node.Value);
 
             checkSubNodes:
             foreach (var n in node.Nodes)
@@ -41,7 +41,7 @@
         }
 
         protected int currentTreeDepth;
-        protected LinkedList<T> primaryLinkedList, secondaryLinkedList;
+        protected XLinkedList<T> primaryLinkedList, secondaryLinkedList;
         protected Lot<T> currentTree;
     }
 }

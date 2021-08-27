@@ -38,10 +38,10 @@
             }
 
             ++currentDepth;
-            var depths = new LinkedList<int>();
+            var depths = new XLinkedList<int>();
             foreach (var n in node.Nodes)
             {
-                depths.AddLast(this.deepen(n, currentDepth));
+                depths.AddTail(this.deepen(n, currentDepth));
             }
 
             return Max(depths);
@@ -83,7 +83,7 @@
             T value)
         {
             this.value = value;
-            this.nodes = new LinkedList<TreeNode<T>>();
+            this.nodes = new XLinkedList<TreeNode<T>>();
         }
 
         public virtual T Value
@@ -98,15 +98,15 @@
 
         public virtual void Add(TreeNode<T> node)
         {
-            this.nodes.AddLast(node);
+            this.nodes.Add(node);
         }
 
         public virtual void Clear()
         {
-            this.nodes = new LinkedList<TreeNode<T>>();
+            this.nodes = new XLinkedList<TreeNode<T>>();
         }
 
-        private LinkedList<TreeNode<T>> nodes;
+        private ICollection<TreeNode<T>> nodes;
         private T value;
     }
 }

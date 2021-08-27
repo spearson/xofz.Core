@@ -32,7 +32,7 @@
             int startIndex,
             int take)
         {
-            var ll = new LinkedList<T>(source);
+            var ll = XLinkedList<T>.Create(source);
             var rotated = this.rotator.Rotate(
                 ll,
                 startIndex,

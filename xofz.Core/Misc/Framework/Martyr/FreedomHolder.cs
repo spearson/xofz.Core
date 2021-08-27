@@ -28,16 +28,16 @@
                 return;
             }
 
-            var dependencies = new LinkedList<List<object>>();
+            var dependencies = new XLinkedList<List<object>>();
             foreach (var disposable in disposables)
             {
-                dependencies.AddLast(new List<object>());
+                dependencies.AddTail(new List<object>());
                 var dd = disposable.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
                 var dToSurge = new List<IDisposable>();
                 foreach (var field in dd)
                 {
                     var value = field.GetValue(disposable);
-                    dependencies.Last.Value.Add(value);
+                    dependencies.Tail?.Add(value);
                     if (field.FieldType == typeof(IDisposable))
                     {
                         dToSurge.Add((IDisposable)value);

@@ -20,17 +20,17 @@
         public virtual Lot<object> Process(
             IEnumerable<object> references)
         {
-            var ll = new LinkedList<object>();
-            var lld = new LinkedList<IDisposable>();
+            var ll = new XLinkedList<object>();
+            var lld = new XLinkedList<IDisposable>();
             foreach (var reference in references)
             {
                 if (reference is IDisposable)
                 {
-                    lld.AddLast((IDisposable)reference);
+                    lld.AddTail((IDisposable)reference);
                     continue;
                 }
 
-                ll.AddLast(reference);
+                ll.AddTail(reference);
             }
 
             // ReSharper disable once ImpureMethodCallOnReadonlyValueField

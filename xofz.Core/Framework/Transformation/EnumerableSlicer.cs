@@ -24,7 +24,7 @@
             }
 
             ICollection<T> remainingItems
-                = new LinkedList<T>(finiteSource);
+                = XLinkedList<T>.Create(finiteSource);
             var array = new Lot<T>[slicePoints.Count];
             int counter = zero;
             foreach (var slicePoint in slicePoints)
@@ -35,7 +35,7 @@
                 array[counter] = new LinkedListLot<T>(
                     sequence);
                 ++counter;
-                remainingItems = new LinkedList<T>(
+                remainingItems = XLinkedList<T>.Create(
                     EH.Skip(
                         remainingItems,
                         slicePoint));

@@ -23,13 +23,13 @@
             var r = this.rotator;
             for (var i = 0; i < collection.Count; ++i)
             {
-                var switched = new LinkedList<T>(
+                var switched = XLinkedList<T>.Create(
                     Skip(
                         collection,
                         i));
                 for (var j = 0; j < i; ++j)
                 {
-                    switched.AddLast(
+                    switched.AddTail(
                         FirstOrDefault(
                             Skip(
                                 collection,

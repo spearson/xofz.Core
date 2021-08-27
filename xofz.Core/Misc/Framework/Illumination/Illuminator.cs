@@ -18,7 +18,7 @@
             public virtual T Illumine<T>(
                 Lot<object> dependencies)
             {
-                var constructors = new LinkedList<ConstructorInfo>(
+                var constructors = XLinkedList<ConstructorInfo>.Create(
                     EH.OrderByDescending(
                         typeof(T).GetConstructors(),
                         ci => ci.GetParameters().Length));

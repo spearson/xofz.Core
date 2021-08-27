@@ -19,14 +19,14 @@
 
             var vc = new VarianceComputer<T>(item => item.GetHashCode());
             var l = new List<Action<T>>(acts);
-            var ll = new LinkedList<Action<T>>();
+            var ll = new XLinkedList<Action<T>>();
             var i = factory();
             var original = vc.Compute(actor => { }, i);
             foreach (var act in l)
             {
                 if (BigInteger.Abs(original - vc.Compute(act, i)) < minimum)
                 {
-                    ll.AddLast(act);
+                    ll.AddTail(act);
                 }
             }
 
