@@ -1,6 +1,5 @@
 ﻿namespace xofz.Misc.Framework.AI
 {
-    using System.Collections.Generic;
     using xofz.Framework.Lots;
     using static EnumerableHelpers;
 
@@ -15,8 +14,8 @@
             this.processNodes(tree.Node);
 
             this.setCurrentTree(
-                new LinkedListLot<T>(
-                    new LinkedList<T>(
+                new XLinkedListLot<T>(
+                    XLinkedList<T>.Create(
                         OrderBy(
                             tree,
                             t => t.GetHashCode()))));
