@@ -94,9 +94,11 @@
         }
 
         public virtual Lot<TreeNode<T>> Nodes
-            => new LinkedListLot<TreeNode<T>>(this.nodes);
+            => new XLinkedListLot<TreeNode<T>>(
+                this.nodes as XLinkedList<TreeNode<T>>);
 
-        public virtual void Add(TreeNode<T> node)
+        public virtual void Add(
+            TreeNode<T> node)
         {
             this.nodes.Add(node);
         }

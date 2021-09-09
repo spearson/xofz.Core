@@ -1,7 +1,6 @@
 ﻿namespace xofz.Misc.Framework.Erudition
 {
     using System;
-    using System.Linq;
     using xofz.Framework.Lots;
     using static EnumerableHelpers;
 
@@ -27,8 +26,11 @@
 
                 return this.Liken(
                     factory,
-                    new LinkedListLot<Action<T>>(
-                        acts.Except(new[] { act })),
+                    new XLinkedListLot<Action<T>>(
+                        XLinkedList<Action<T>>.Create(
+                            Except(
+                                acts,
+                                new[] { act }))),
                     limiter);
             }
 

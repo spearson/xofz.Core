@@ -22,8 +22,9 @@
             var actor = this.illuminator.Illumine<T>(dependencies);
             act(actor);
             this.freedomHolder.Surge(
-                new LinkedListLot<IDisposable>(
-                    new IDisposable[] { actor }));
+                new XLinkedListLot<IDisposable>(
+                    XLinkedList<IDisposable>.Create(
+                        new IDisposable[] { actor })));
             return actor;
         }
 

@@ -46,8 +46,7 @@
                 end = Skip(ll, startIndex + take);
             }
 
-            return new LinkedListLot<T>(
-                this.connector.Connect(start, next, end));
+            return this.connector.Connect(start, next, end);
         }
 
         protected readonly EnumerableRotator rotator;

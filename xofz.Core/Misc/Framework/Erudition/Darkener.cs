@@ -29,7 +29,7 @@
                 darkenedCollection.AddTail(item);
             }
 
-            return new LinkedListLot<T>(
+            return new XLinkedListLot<T>(
                 darkenedCollection);
         }
     }

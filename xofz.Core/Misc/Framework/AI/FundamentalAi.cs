@@ -34,7 +34,8 @@
             }
 
             actionEnumerator.Dispose();
-            return new LinkedListLot<T>(linkedList);
+            return new XLinkedListLot<T>(
+                linkedList);
         }
 
         protected readonly TreeOrderer<T> treeOrderer;

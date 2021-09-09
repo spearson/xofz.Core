@@ -36,7 +36,7 @@
                 ++subtractor;
             }
 
-            this.currentTree = new LinkedListLot<T>(linkedList);
+            this.currentTree = new XLinkedListLot<T>(linkedList);
         }
 
         protected Lot<T> currentTree;

@@ -34,9 +34,9 @@
             }
 
             // ReSharper disable once ImpureMethodCallOnReadonlyValueField
-            this.martyr.BringToGod(new LinkedListLot<IDisposable>(lld));
+            this.martyr.BringToGod(new XLinkedListLot<IDisposable>(lld));
 
-            return new LinkedListLot<object>(ll);
+            return new XLinkedListLot<object>(ll);
         }
 
         protected readonly Martyr.Martyr martyr;

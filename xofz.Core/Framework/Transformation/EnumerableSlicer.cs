@@ -32,8 +32,9 @@
                 var sequence = EH.Take(
                     remainingItems, 
                     slicePoint);
-                array[counter] = new LinkedListLot<T>(
-                    sequence);
+                array[counter] = new XLinkedListLot<T>(
+                    XLinkedList<T>.Create(
+                        sequence));
                 ++counter;
                 remainingItems = XLinkedList<T>.Create(
                     EH.Skip(

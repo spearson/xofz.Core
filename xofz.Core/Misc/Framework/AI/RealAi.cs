@@ -46,7 +46,7 @@
             }
 
             enumerator.Dispose();
-            return new LinkedListLot<Action<T>>(ll);
+            return new XLinkedListLot<Action<T>>(ll);
         }
 
         public virtual void DoWork(
@@ -55,7 +55,7 @@
         {
             var enumerator = source.GetEnumerator();
             enumerator.MoveNext();
-            Lot<Thread> threads = new LinkedListLot<Thread>();
+            Lot<Thread> threads = new XLinkedListLot<Thread>();
             foreach (var computation in this.computations)
             {
                 var current = enumerator.Current;

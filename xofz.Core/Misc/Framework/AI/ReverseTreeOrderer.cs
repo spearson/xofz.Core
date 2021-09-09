@@ -9,9 +9,9 @@
 
         public virtual void Order(Tree<T> tree)
         {
-            this.currentTree = new LinkedListLot<T>(
-                Reverse(
-                    tree));
+            this.currentTree = new XLinkedListLot<T>(
+                XLinkedList<T>.Create(Reverse(
+                    tree)));
         }
 
         protected Lot<T> currentTree;

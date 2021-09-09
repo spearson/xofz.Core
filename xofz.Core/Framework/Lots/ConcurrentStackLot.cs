@@ -74,7 +74,9 @@
         public void PushRange(
             IEnumerable<T> source)
         {
-            Lot<T> lot = new LinkedListLot<T>(source);
+            Lot<T> lot = new XLinkedListLot<T>(
+                XLinkedList<T>.Create(
+                source));
             var array = new T[lot.Count];
             long counter = zero;
             foreach (var item in lot)
@@ -103,7 +105,9 @@
             long length)
         {
             Lot<T> lot =
-                new LinkedListLot<T>(source);
+                new XLinkedListLot<T>(
+                    XLinkedList<T>.Create(
+                        source));
             var array = new T[length - index];
             long counter = zero;
             foreach (var item in lot)

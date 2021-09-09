@@ -12,7 +12,9 @@
                 params object[] dependencies)
             {
                 return this.Illumine<T>(
-                    new LinkedListLot<object>(dependencies));
+                    new XLinkedListLot<object>(
+                       XLinkedList<object>.Create(
+                           dependencies)));
             }
 
             public virtual T Illumine<T>(
