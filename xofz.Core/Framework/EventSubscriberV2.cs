@@ -10,6 +10,11 @@
             string eventName,
             Action handler)
         {
+            if (handler == null)
+            {
+                return;
+            }
+
             publisher
                 ?.GetType()
                 .GetEvent(eventName)
@@ -23,6 +28,11 @@
             string eventName,
             Action<T> handler)
         {
+            if (handler == null)
+            {
+                return;
+            }
+
             publisher
                 ?.GetType()
                 .GetEvent(eventName)
@@ -36,6 +46,11 @@
             string eventName,
             Action<T, U> handler)
         {
+            if (handler == null)
+            {
+                return;
+            }
+
             publisher
                 ?.GetType()
                 .GetEvent(eventName)
@@ -49,6 +64,11 @@
             string eventName,
             Action<T, U, V> handler)
         {
+            if (handler == null)
+            {
+                return;
+            }
+
             publisher
                 ?.GetType()
                 .GetEvent(eventName)
@@ -62,6 +82,11 @@
             string eventName,
             Action<T, U, V, W> handler)
         {
+            if (handler == null)
+            {
+                return;
+            }
+
             publisher
                 ?.GetType()
                 .GetEvent(eventName)
@@ -75,6 +100,11 @@
             string eventName,
             Action handler)
         {
+            if (handler == null)
+            {
+                return;
+            }
+
             publisher
                 ?.GetType()
                 .GetEvent(eventName)
@@ -88,6 +118,11 @@
             string eventName,
             Action<T> handler)
         {
+            if (handler == null)
+            {
+                return;
+            }
+
             publisher
                 ?.GetType()
                 .GetEvent(eventName)
@@ -101,6 +136,11 @@
             string eventName,
             Action<T, U> handler)
         {
+            if (handler == null)
+            {
+                return;
+            }
+
             publisher
                 ?.GetType()
                 .GetEvent(eventName)
@@ -114,6 +154,11 @@
             string eventName,
             Action<T, U, V> handler)
         {
+            if (handler == null)
+            {
+                return;
+            }
+
             publisher
                 ?.GetType()
                 .GetEvent(eventName)
@@ -127,6 +172,11 @@
             string eventName,
             Action<T, U, V, W> handler)
         {
+            if (handler == null)
+            {
+                return;
+            }
+
             publisher
                 ?.GetType()
                 .GetEvent(eventName)

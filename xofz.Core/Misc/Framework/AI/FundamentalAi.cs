@@ -17,6 +17,11 @@
             IEnumerable<Action<T>> actions)
         {
             var orderer = this.treeOrderer;
+            if (orderer == null)
+            {
+                return tree;
+            }
+
             if (actions == null)
             {
                 orderer.Order(tree);
@@ -26,7 +31,7 @@
             orderer.Order(tree);
             var actionEnumerator = actions.GetEnumerator();
             var linkedList = new XLinkedList<T>();
-            foreach (var value in this.treeOrderer.OrderedTree)
+            foreach (var value in orderer.OrderedTree)
             {
                 actionEnumerator.MoveNext();
                 actionEnumerator.Current?.Invoke(value);
