@@ -1,9 +1,10 @@
-﻿namespace xofz.UI.Forms
+﻿namespace xofz.UI.Forms.Log
 {
     using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Windows.Forms;
+    using xofz.UI.Log;
 
     public partial class UserControlMultiSortLogUi 
         : UserControlUi, LogUiV2

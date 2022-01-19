@@ -182,10 +182,10 @@
     <Compile Include="UI\Forms\MultiColumnSortDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Forms\UserControlMultiSortLogUi.cs">
+    <Compile Include="UI\Forms\Log\UserControlMultiSortLogUi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\UserControlMultiSortLogUi.designer.cs">
+    <Compile Include="UI\Forms\Log\UserControlMultiSortLogUi.designer.cs">
       <DependentUpon>UserControlMultiSortLogUi.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\WPF\DispatcherSynchronizeInvoke.cs" />
@@ -204,12 +204,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UI\Forms\UserControlMultiSortLogUi.resx">
+    <EmbeddedResource Include="UI\Forms\Log\UserControlMultiSortLogUi.resx">
       <DependentUpon>UserControlMultiSortLogUi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="core.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
