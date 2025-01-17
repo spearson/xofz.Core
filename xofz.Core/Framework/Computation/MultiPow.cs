@@ -59,7 +59,7 @@
                 return zero;
             }
 
-            BigInteger result = 1;
+            BigInteger result = one;
             for (int i = powers.Count - one; i > zero; --i)
             {
                 result = bp.Compute(
