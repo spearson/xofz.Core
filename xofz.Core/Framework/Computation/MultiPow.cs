@@ -14,12 +14,9 @@
         public virtual BigInteger Compute(
             params BigInteger[] powers)
         {
-            if (powers == null)
-            {
-                return zero;
-            }
-
-            return this.onCompute(powers);
+            return powers == null 
+                ? zero
+                : this.onCompute(powers);
         }
 
         public virtual BigInteger Compute(

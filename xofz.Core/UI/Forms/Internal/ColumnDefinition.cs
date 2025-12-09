@@ -1,10 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------------------------------
-// <copyright file="ColumnDefinition.cs" company="Care Controls">
-//   Copyright (c) Care Controls Inc. All rights reserved.
-// </copyright>
-// ---------------------------------------------------------------------------------------------------------------------
-
-namespace xofz.UI.Forms.Internal
+﻿namespace xofz.UI.Forms.Internal
 {
     using System;
     using System.Windows.Forms;

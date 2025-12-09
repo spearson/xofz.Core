@@ -1,9 +1,3 @@
-// ---------------------------------------------------------------------------------------------------------------------
-// <copyright file="MultiColumnSortDataGridView.cs" company="Care Controls">
-//   Copyright (c) Care Controls Inc. All rights reserved.
-// </copyright>
-// ---------------------------------------------------------------------------------------------------------------------
-
 namespace xofz.UI.Forms
 {
     using System;
